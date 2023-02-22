@@ -1,0 +1,7 @@
+@import "../variables";
+
+@each $name, $size in $icon-size {
+    .d-icon__#{$name} {
+        font-size: $size;
+    }
+}

@@ -1,0 +1,147 @@
+@import "../mixins/buttons";
+@import "../variables";
+@import "../functions";
+
+$button-variant: ("outline", "standard", "trans");
+
+//base
+.d-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    // border: none;
+    min-width: $btn-min-width;
+    // border-radius: $btn-border-radius;
+    i {
+        text-decoration: none !important;
+    }
+}
+
+//size
+.d-button__large {
+    @include btn-large();
+}
+.d-button__medium {
+    @include btn-medium();
+}
+.d-button__small {
+    @include btn-small();
+}
+.d-button__x-small {
+    @include btn-x-small();
+}
+.d-button__auto {
+    @include btn-auto();
+}
+.d-button__fit-content {
+    @include btn-fit-content();
+}
+//variant
+
+@each $var in $button-variant {
+    @each $name, $color in $basic-color {
+        .d-button__#{$var}-#{$name} {
+            @if ($var == "trans") {
+                background-color: $btn-trans-bg-color;
+                color: $color;
+                // border: none;
+                outline: none;
+                &:active {
+                    outline: none !important;
+                    background-color: $btn-trans-active-bg-color !important;
+                    color: $btn-trans-active-font-color;
+                }
+                &:focus {
+                    outline: none !important;
+                }
+                &:hover {
+                    background-color: $light-gray-color;
+                }
+                &:disabled {
+                    color: rgba($color, 0.6);
+                }
+            }
+            @if ($var == "outline") {
+                border: 1px solid $color;
+                background-color: $btn-outline-bg-color;
+                color: $color;
+                &:active {
+                    outline: none !important;
+                    background-color: darken($color, 10%) !important;
+                    color: $light-color !important;
+                }
+                &:focus {
+                    outline: none !important;
+                }
+                &:hover {
+                    // background-color: $btn-outline-hover-color;
+                    background-color: rgba($color, 0.05);
+                    color: darken($color, 5%);
+                    // color: $light-color;
+                }
+                &:disabled {
+                    border: 1px solid rgba($color, 0.6);
+                    color: rgba($color, 0.6);
+                    background-color: $light-color;
+                }
+            }
+            @if ($var == "standard") {
+                background-color: $color !important;
+                color: set-text-color($color);
+                &:active {
+                    outline: none !important;
+                    border: none !important;
+                    background-color: darken($color, 10%) !important;
+                }
+                &:focus {
+                    border: none !important;
+                    outline: none !important;
+                }
+                &:hover {
+                    background-color: rgba($color, 0.9);
+                }
+                &:disabled {
+                    border: 1px solid rgba($accent-color, 0.3);
+                    background-color: $disabled-color !important;
+                    color: set-text-color($disabled-color);
+                }
+            }
+        }
+    }
+}
+
+.d-button__icon {
+    min-width: auto;
+    padding: 0px 12px;
+}
+
+// button icon
+
+.d-button__icon-large {
+    min-width: auto;
+    padding: 0px 12px;
+}
+
+.d-button__icon-medium {
+    min-width: auto;
+    padding: 0px 10px;
+}
+
+.d-button__icon-small {
+    min-width: auto;
+    padding: 0px 8px;
+}
+
+.d-button__icon-x-small {
+    min-width: auto;
+    padding: 0px 4px;
+}
+
+.d-button__icon-fit-content {
+    min-width: auto;
+}
+
+.d-button__icon-auto {
+    min-width: auto;
+}

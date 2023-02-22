@@ -1,0 +1,16 @@
+/*
+// .card
+*/
+@import "../variables";
+@import "../functions";
+
+.card-container {
+    background-color: $light-color;
+    box-shadow: $card-container-box-shadow;
+}
+
+@media (min-width: breakpoint(md-start)) and (max-width: breakpoint(md-end)) {
+}
+
+@media (max-width: breakpoint(sm-end)) {
+}

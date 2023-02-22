@@ -1,0 +1,121 @@
+@import "../variables";
+@import "../common/text";
+
+@mixin btn-xl() {
+    font-size: 1.375rem;
+    height: calc(3.625rem + 2px);
+    padding: 1.125rem 3rem;
+    line-height: 1;
+    font-weight: $font-weight-medium;
+
+    &.btn-svg-icon {
+        width: calc(3.625rem + 2px);
+    }
+}
+@mixin btn-large() {
+    height: $btn-base-height + 4px;
+    padding: 0 16px;
+    &.btn-svg-icon {
+        width: calc(2.75rem + 2px);
+    }
+}
+@mixin btn-medium() {
+    height: $btn-base-height;
+    padding: 0 16px;
+
+    &.btn-svg-icon {
+        width: calc(2.25rem + 2px);
+    }
+}
+@mixin btn-small() {
+    height: $btn-base-height - 4px;
+    padding: 0px 12px;
+    &.btn-svg-icon {
+        width: calc(1.875rem + 2px);
+    }
+}
+@mixin btn-x-small() {
+    height: $btn-base-height - 12px;
+    padding: 0px 12px;
+
+    &.btn-svg-icon {
+        width: calc(1.5rem + 2px);
+    }
+}
+
+@mixin btn-auto() {
+    height: auto;
+    width: auto;
+}
+
+@mixin btn-fit-content() {
+    height: fit-content;
+    width: fit-content;
+}
+
+@mixin button-variant-color(
+    $bg,
+    $font,
+    $icon,
+    $hover-bg,
+    $hover-font,
+    $hover-icon,
+    $active-bg,
+    $active-font,
+    $active-icon
+) {
+    &.focus,
+    &:focus,
+    &:hover {
+        border-color: $hover-bg;
+        background: $hover-bg;
+        color: $hover-font;
+        fill: $hover-icon;
+
+        .fake-svg-icon {
+            color: $hover-icon;
+        }
+    }
+
+    &.focus,
+    &:focus {
+        box-shadow: none;
+    }
+
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+        border-color: $active-bg;
+        background: $active-bg;
+        color: $active-font;
+        fill: $active-icon;
+
+        .fake-svg-icon {
+            color: $active-icon;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    &,
+    &.disabled,
+    &:disabled {
+        border-color: $bg;
+        background: $bg;
+        color: $font;
+        fill: $icon;
+
+        .fake-svg-icon {
+            color: $icon;
+        }
+    }
+
+    &.btn-loading:not(:disabled):not(.disabled),
+    &.btn-loading:not(:disabled):not(.disabled):active,
+    &.btn-loading:not(:disabled):not(.disabled).active {
+        cursor: default;
+        border-color: $bg;
+        background: $bg;
+    }
+}

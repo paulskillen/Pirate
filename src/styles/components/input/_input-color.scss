@@ -1,0 +1,22 @@
+@import "../../variables";
+
+.d-input-color__container {
+    display: flex;
+    flex-direction: column;
+}
+.d-input-color__input-container {
+    min-height: $input-height;
+    padding: $input-padding-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.d-input-color__input {
+    border-radius: $border-radius !important;
+    outline: none !important;
+    width: $input-width-color;
+    height: $input-height-color;
+    border: none !important;
+    padding: 0px !important;
+    background-color: transparent !important;
+}

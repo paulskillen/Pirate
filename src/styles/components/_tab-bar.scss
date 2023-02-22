@@ -1,0 +1,145 @@
+@import "../variables";
+@import "../functions";
+
+.d-tab-bar {
+    background-color: $tab-bg;
+    .d-tab-bar__item {
+        font-weight: $font-weight-normal !important;
+        // border: $tab-border-width solid $tab-border-color;
+    }
+    .d-tab-bar__item-active {
+        // border: 0px solid $tab-border-color;
+        background-color: $tab-active-bg;
+        font-weight: $font-weight-semi-bold !important;
+        color: $tab-active-text-color;
+    }
+
+    .d-tab-bar__item-inactive {
+        // background-color: $tab-inactive-bg;
+        color: set-text-color($tab-inactive-bg);
+        &:hover {
+            background-color: $tab-hover-bg;
+            color: set-text-color($tab-hover-bg);
+            // border: $tab-border-width solid $tab-border-color;
+        }
+    }
+
+    .d-tab-bar__item-active-indicator-top {
+        border-top: 3px solid $tab-border-active-color;
+    }
+
+    .d-tab-bar__item-active-indicator-bottom {
+        border-bottom: 3px solid $tab-border-active-color;
+    }
+    .d-tab-bar__item-active-indicator-left {
+        border-left: 3px solid $tab-border-active-color;
+    }
+    .d-tab-bar__item-active-indicator-right {
+        border-right: 3px solid $tab-border-active-color;
+    }
+}
+
+.d-tab-bar__horizontal {
+    .d-tab-bar__item {
+    }
+    .d-tab-bar__item-active {
+        // border-radius: 0px;
+        // border: 0px solid $tab-border-color;
+        // border-top: $tab-border-width solid $tab-border-color;
+        &:last-child {
+            // border-right: $tab-border-width solid $tab-border-color;
+        }
+        &:first-child {
+            // border-left: $tab-border-width solid $tab-border-color;
+        }
+    }
+    .d-tab-bar__item-inactive {
+        // border-radius: 0px;
+        // border: $tab-border-width solid $tab-border-color;
+    }
+    .d-tab-bar__item-active-right {
+        // border-radius: 0px 0px 0px $border-radius;
+    }
+    .d-tab-bar__item-active-left {
+        // border-radius: 0px 0px $border-radius 0px;
+    }
+    .d-tab-bar__item-active-indicator-fill {
+        background-color: $primary;
+        color: set-text-color($primary);
+    }
+}
+
+.d-tab-bar__vertical {
+    border-radius: $border-radius;
+    .d-button__large {
+        height: auto !important;
+    }
+    .d-tab-bar__item {
+        width: 100%;
+        border-radius: 0px;
+        border-bottom: $tab-border-width solid $tab-border-color;
+        padding: 16px 0px;
+    }
+
+    .d-tab-bar__item-active {
+        border-bottom: 0px solid $accent-color;
+    }
+
+    .d-tab-bar__item-inactive {
+        border-radius: 0px;
+    }
+
+    .d-tab-bar__item-active-left {
+        border-radius: 0px 0px $border-radius 0px;
+    }
+
+    .d-tab-bar__item-active-right {
+        border-top: 1px solid $tab-border-color;
+        border-radius: 0px $border-radius 0px 0px;
+    }
+
+    .d-tab-bar__item:first-child {
+        border-radius: $border-radius $border-radius 0px 0px;
+    }
+    .d-tab-bar__item:last-child {
+        border-radius: 0px 0px $border-radius $border-radius;
+    }
+
+    .d-tab-bar__item-active-left:first-child {
+        border-radius: $border-radius $border-radius $border-radius 0px;
+    }
+
+    .d-tab-bar__item-active-right:last-child {
+        border-radius: 0px $border-radius $border-radius $border-radius;
+    }
+
+    .d-tab-bar__item-active-indicator-fill {
+        background-color: $primary;
+        color: set-text-color($primary);
+    }
+}
+
+.d-tab-bar__hide-scroll-bar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.d-tab-bar__hide-scroll-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.d-tab-bar {
+    .d-tab-bar__item-active-indicator-top {
+        border-top: 3px solid $tab-border-active-color;
+    }
+
+    .d-tab-bar__item-active-indicator-bottom {
+        border-bottom: 3px solid $tab-border-active-color;
+    }
+    .d-tab-bar__item-active-indicator-left {
+        border-left: 3px solid $tab-border-active-color;
+    }
+    .d-tab-bar__item-active-indicator-right {
+        border-right: 3px solid $tab-border-active-color;
+    }
+}

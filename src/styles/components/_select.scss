@@ -1,0 +1,112 @@
+@import "../variables";
+@import "../common/base";
+
+@mixin disabled {
+    // color: $input-color-disabled !important;
+    background-color: $input-bg-color-disabled !important;
+    border: none !important;
+}
+
+@mixin outline {
+    border: $input-border !important;
+    outline: none;
+}
+
+@mixin standard {
+    border: none !important;
+    outline: none;
+    border-bottom: $input-border !important;
+}
+/********************************************LABEL & CONTAINER********************************************/
+.d-select__container {
+    display: flex;
+    flex-direction: column;
+    .d-select__select {
+        border-radius: $border-radius;
+    }
+    .ant-select-selector {
+        border-radius: $border-radius !important;
+    }
+}
+
+.d-select__container-standard {
+    .ant-select-focused {
+        outline: none !important;
+        border-bottom: $input-border-focus !important;
+    }
+
+    .ant-select-selector {
+        padding-left: 0px !important;
+    }
+}
+
+.d-select__container-outline {
+    .ant-select-focused {
+        outline: none !important;
+        border: $input-border-focus !important;
+        border-radius: $border-radius;
+    }
+
+    .ant-select-selector {
+        padding-left: 16px !important;
+    }
+}
+
+/********************************************INPUT TEXT********************************************/
+.d-select__select {
+    .ant-select-selector {
+        border: 1px solid $gray-light-color;
+        min-height: $input-height !important;
+        min-width: $input-min-width;
+        box-shadow: none !important;
+        background-color: $input-bg-color !important;
+    }
+
+    .ant-select-selection-item {
+        @extend .text-x-small;
+        @extend .flex-center-y;
+        .ant-select-selection-item-remove {
+            display: flex;
+        }
+    }
+    .ant-select-selection-search {
+        @extend .text-x-small;
+    }
+    .ant-select-selection-placeholder {
+        @extend .text-x-small;
+        @extend .flex-center-y;
+        left: 16px;
+        flex-wrap: nowrap;
+        word-break: break-all;
+        white-space: nowrap;
+    }
+    .ant-select-selection-item-content {
+        @extend .flex-center-y;
+    }
+    input {
+        border-radius: $border-radius !important;
+        outline: none !important;
+        background-color: $input-bg-color;
+        @extend .text-x-small;
+    }
+}
+
+.ant-select-item-option {
+    @extend .text-small;
+}
+
+.d-select__select-outline {
+    @include outline();
+}
+
+.d-select__select-standard {
+    @include standard();
+}
+
+.d-select__error {
+    border: $input-border-error !important;
+}
+
+.d-select__select-disabled {
+    @include disabled();
+}

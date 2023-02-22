@@ -1,0 +1,427 @@
+/*
+// base
+*/
+@import "../variables";
+@import "../mixins/direction";
+
+html {
+    height: 100%;
+    font-size: 14px;
+}
+
+body {
+    height: 100%;
+    font-family: $body-font-family;
+    font-size: $body-font-size;
+    font-weight: $body-font-weight;
+    line-height: $body-line-height;
+    background: $body-bg;
+    color: $body-font-color;
+    backface-visibility: hidden;
+    overflow-y: scroll;
+
+    @include direction {
+        text-align: $inline-start;
+        direction: $direction;
+    }
+}
+
+#root {
+    height: 100%;
+}
+
+// ----------------------------------------
+// -- CARD
+// ----------------------------------------
+
+.card-container {
+    background-color: $light-color;
+    border-radius: $border-radius;
+    box-shadow: $card-container-box-shadow;
+    width: -moz-available; /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;
+}
+
+// ----------------------------------------
+// -- BACKGROUND
+// ----------------------------------------
+
+.bg-primary {
+    background-color: $primary-color !important;
+}
+
+.bg-secondary {
+    background-color: $secondary-color !important;
+}
+
+.bg-muted {
+    background-color: $bg-muted-color !important;
+}
+
+.bg-success {
+    background-color: $success-color !important;
+}
+
+.bg-green {
+    background-color: $green-color !important;
+}
+
+.bg-red {
+    background-color: $red-color !important;
+}
+
+.bg-gray {
+    background-color: $gray-color !important;
+}
+
+.bg-light-gray,
+.bg-gray-light {
+    background-color: $light-gray-color !important;
+}
+
+.bg-yellow-light {
+    background-color: $yellow-light-color !important;
+}
+
+@each $opacityName, $opacity in $opacity-range {
+    @each $name, $color in $basic-color {
+        .bg-#{$name}-#{$opacityName} {
+            background-color: rgba($color: $color, $alpha: $opacity);
+        }
+    }
+}
+
+// ----------------------------------------
+// -- BORDER
+// ----------------------------------------
+
+.border {
+    border: 1px solid $border-color;
+}
+
+.border-end {
+    border-right: 1px solid $border-color !important;
+}
+
+.border-start {
+    border-left: 1px solid $border-color !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid $border-color !important;
+}
+
+.border-top {
+    border-top: 1px solid $border-color !important;
+}
+
+.border-primary {
+    border-color: $primary-color !important;
+}
+
+.border-selected {
+    border: solid 3px $primary-color;
+}
+
+.border-dashed {
+    border: 1px dashed $border-color;
+}
+
+.border-top-dashed {
+    border-top: 1px dashed $border-color;
+}
+
+.border-line {
+    border: 1px solid $line-color !important;
+}
+
+.border-line-start {
+    border-left: 1px solid $line-color !important;
+}
+
+.border-line-top {
+    border-top: 1px solid $line-color !important;
+}
+
+.border-line-end {
+    border-left: 1px solid $line-color !important;
+}
+
+.border-line-bottom {
+    border-bottom: 1px solid $line-color !important;
+}
+
+.border-error {
+    border: 1px solid $error-color !important;
+}
+
+// ----------------------------------------
+// -- IMAGE
+// ----------------------------------------
+
+.image-reg-xx-small {
+    height: $image-size-xx-small;
+    object-fit: contain;
+}
+
+.image-reg-x-small {
+    height: $image-size-x-small;
+    object-fit: contain;
+}
+
+.image-reg-small {
+    height: $image-size-small;
+    object-fit: contain;
+}
+
+.image-reg-medium {
+    height: $image-size-medium;
+    object-fit: contain;
+}
+
+.image-reg-large {
+    height: $image-size-large;
+    object-fit: contain;
+}
+
+.image-reg-x-large {
+    height: $image-size-x-large;
+    object-fit: contain;
+}
+
+.image-square-xx-small {
+    width: $image-size-xx-small;
+    height: $image-size-xx-small;
+    object-fit: cover;
+}
+
+.image-square-x-small {
+    width: $image-size-x-small;
+    height: $image-size-x-small;
+    object-fit: cover;
+}
+.image-square-small {
+    width: $image-size-small;
+    height: $image-size-small;
+    object-fit: cover;
+}
+.image-square-medium {
+    width: $image-size-medium;
+    height: $image-size-medium;
+    object-fit: cover;
+}
+.image-square-large {
+    width: $image-size-large;
+    height: $image-size-large;
+    object-fit: cover;
+}
+.image-square-x-large {
+    width: $image-size-x-large;
+    height: $image-size-x-large;
+    object-fit: cover;
+}
+
+// ----------------------------------------
+// -- POINTER
+// ----------------------------------------
+
+.hover-pointer {
+    cursor: pointer;
+}
+
+.event-none {
+    pointer-events: none;
+}
+
+// ----------------------------------------
+// -- FLEX
+// ----------------------------------------
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center-y {
+    display: flex;
+    align-items: center;
+}
+
+.flex-center-x {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column-center-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-column-center-x {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-column-space-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// ----------------------------------------
+// -- SCROLL BAR
+// ----------------------------------------
+
+.hide-scroll-bar-y {
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.hide-scroll-bar-y::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.hide-scroll-bar-x {
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.hide-scroll-bar-x::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.hide-scroll-bar {
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.hide-scroll-bar::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.overflow-x {
+    overflow-x: scroll;
+}
+
+.overflow-y {
+    overflow-y: scroll;
+}
+
+// ----------------------------------------
+// -- OPACITY
+// ----------------------------------------
+
+.opacity-3 {
+    opacity: 30%;
+}
+
+.opacity-5 {
+    opacity: 50%;
+}
+
+.opacity-7 {
+    opacity: 70%;
+}
+
+// ----------------------------------------
+// -- SIZING
+// ----------------------------------------
+
+.w-fit-content {
+    width: fit-content;
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.h-fit-content {
+    height: fit-content;
+}
+
+.height-fit-content {
+    height: fit-content;
+}
+
+.divider {
+    width: 100%;
+    border-bottom: 1px solid $light-divider-color;
+}
+
+// ----------------------------------------
+// -- PADDING & MARGIN
+// ----------------------------------------
+
+.px-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.py-0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.mx-0 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.my-0 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+// ----------------------------------------
+// -- POSITION
+// ----------------------------------------
+
+.top-0 {
+    top: 0px;
+}
+
+.bottom-0 {
+    bottom: 0px;
+}
+
+.start-0 {
+    left: 0px;
+}
+
+.end-0 {
+    right: 0px;
+}
+
+// ----------------------------------------
+// -- LINK
+// ----------------------------------------
+
+a,
+.a,
+.link {
+    color: $link-color !important;
+    &:hover {
+        color: $link-hover-color !important;
+    }
+}

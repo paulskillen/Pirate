@@ -1,0 +1,244 @@
+/*
+// text
+*/
+@import "../variables";
+@import "../mixins/direction";
+
+// ----------------------------------------
+// -- TEXT
+// ----------------------------------------
+
+.text-large {
+    font-family: $text-large-family;
+    font-size: $text-large-size;
+    line-height: $text-large-height;
+    font-weight: $text-large-weight;
+    font-style: $text-large-style;
+
+    &-bold {
+        @extend .text-large;
+        font-weight: $text-large-weight-bold;
+    }
+}
+
+.text-medium {
+    font-family: $text-medium-family;
+    font-size: $text-medium-size;
+    line-height: $text-medium-height;
+    font-weight: $text-medium-weight;
+    font-style: $text-medium-style;
+
+    &-bold {
+        @extend .text-medium;
+        font-weight: $text-medium-weight-bold;
+    }
+}
+
+text,
+.text,
+.text-small {
+    font-family: $text-small-family;
+    font-size: $text-small-size;
+    line-height: $text-small-height;
+    font-weight: $text-small-weight;
+    font-style: $text-small-style;
+
+    &-bold {
+        @extend .text-small;
+        font-weight: $text-small-weight-bold;
+    }
+}
+
+.text-x-small {
+    font-family: $text-x-small-family;
+    font-size: $text-x-small-size;
+    line-height: $text-x-small-height !important;
+    font-weight: $text-x-small-weight;
+    font-style: $text-x-small-style;
+
+    &-bold {
+        @extend .text-x-small;
+        font-weight: $text-x-small-weight-bold;
+    }
+}
+
+.text-xx-small {
+    font-family: $text-xx-small-family;
+    font-size: $text-xx-small-size;
+    line-height: $text-xx-small-height !important;
+    font-weight: $text-xx-small-weight;
+    font-style: $text-xx-small-style;
+
+    &-bold {
+        @extend .text-xx-small;
+        font-weight: $text-xx-small-weight-bold;
+    }
+}
+
+label,
+.label,
+.text-label {
+    @extend .text-x-small-bold;
+    color: $input-color-label;
+}
+
+.text-label-required {
+    &::after {
+        content: "*";
+        color: $error-color;
+        margin-left: 3px;
+    }
+}
+
+.text-nowrap {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.text-primary {
+    color: $accent-color !important;
+}
+
+.text-secondary {
+    color: $secondary-color !important;
+}
+
+.text-gray {
+    color: $placeholder-color !important;
+}
+
+.text-link {
+    color: $link-color;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-start {
+    text-align: start;
+}
+
+.text-end {
+    text-align: end;
+}
+
+.text-underline {
+    text-decoration: underline !important;
+}
+
+.text-error {
+    color: $error-color !important;
+}
+
+// ----------------------------------------
+// -- FONT
+// ----------------------------------------
+
+.font-weight-bold {
+    font-weight: 600 !important;
+}
+
+.font-weight-normal {
+    font-weight: 400 !important;
+}
+
+// ----------------------------------------
+// -- PARAGRAPH
+// ----------------------------------------
+
+.p-large {
+    font-family: $p-large-family;
+    font-size: $p-large-size;
+    line-height: $p-large-height;
+    font-weight: $p-large-weight;
+    font-style: $p-large-style;
+}
+
+p,
+.p,
+.p-medium {
+    font-family: $p-medium-family;
+    font-size: $p-medium-size;
+    line-height: $p-medium-height;
+    font-weight: $p-medium-weight;
+    font-style: $p-medium-style;
+}
+
+.p-small {
+    font-family: $p-small-family;
+    font-size: $p-small-size;
+    line-height: $p-small-height;
+    font-weight: $p-small-weight;
+    font-style: $p-small-style;
+}
+
+// ----------------------------------------
+// -- HEADER
+// ----------------------------------------
+
+h0,
+.h0 {
+    font-family: $h0-font-family;
+    font-size: $h0-font-size;
+    line-height: $h0-line-height;
+    font-weight: $h0-font-weight;
+    font-style: $h0-font-style;
+    margin-bottom: 0rem !important;
+}
+
+h1,
+.h1 {
+    font-family: $h1-font-family;
+    font-size: $h1-font-size;
+    line-height: $h1-line-height;
+    font-weight: $h1-font-weight;
+    font-style: $h1-font-style;
+    margin-bottom: 0rem !important;
+}
+h2,
+.h2 {
+    font-family: $h2-font-family;
+    font-size: $h2-font-size;
+    line-height: $h2-line-height;
+    font-weight: $h2-font-weight;
+    font-style: $h2-font-style;
+    margin-bottom: 0rem !important;
+}
+h3,
+.h3 {
+    font-family: $h3-font-family;
+    font-size: $h3-font-size;
+    line-height: $h3-line-height;
+    font-weight: $h3-font-weight;
+    font-style: $h3-font-style;
+    margin-bottom: 0rem !important;
+}
+h4,
+.h4 {
+    font-family: $h4-font-family;
+    font-size: $h4-font-size;
+    line-height: $h4-line-height;
+    font-weight: $h4-font-weight;
+    font-style: $h4-font-style;
+    margin-bottom: 0rem !important;
+}
+h5,
+.h5 {
+    font-family: $h5-font-family;
+    font-size: $h5-font-size;
+    line-height: $h5-line-height;
+    font-weight: $h5-font-weight;
+    font-style: $h5-font-style;
+    margin-bottom: 0rem !important;
+}
+h6,
+.h6 {
+    font-family: $h6-font-family;
+    font-size: $h6-font-size;
+    line-height: $h6-line-height;
+    font-weight: $h6-font-weight;
+    font-style: $h6-font-style;
+    margin-bottom: 0rem !important;
+}

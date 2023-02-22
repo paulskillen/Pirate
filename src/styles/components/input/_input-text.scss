@@ -1,0 +1,161 @@
+@import "../../variables";
+
+@mixin input {
+    border-radius: $border-radius !important;
+    outline: none !important;
+    border: none !important;
+    color: $input-color-content;
+    width: 100%;
+    padding: $input-padding;
+    background-color: $input-bg-color;
+}
+
+@mixin input-container {
+    display: flex !important;
+    flex-direction: row !important;
+    border-radius: $border-radius;
+    outline: none !important;
+    color: $input-color-content;
+    min-height: $input-height;
+    background-color: $input-bg-color;
+    border:1px solid $gray-light-color
+}
+
+@mixin disabled {
+    // padding: $input-padding !important;
+    background-color: $input-bg-color-disabled !important;
+    border: none !important;
+    > textarea,
+    input {
+        color: $input-color-disabled !important;
+    }
+}
+
+@mixin outline {
+    // border: $input-border !important;
+    outline: none;
+
+    &:focus-within {
+        outline: none !important;
+        border: $input-border-focus !important;
+    }
+}
+
+@mixin standard {
+    border: none !important;
+    border-bottom: $input-border !important;
+    outline: none;
+    padding-left: 0px;
+    border-radius: 0px;
+
+    &:focus-within {
+        outline: none !important;
+        border: none !important;
+        border-bottom: $input-border-focus !important;
+    }
+    .d-input-text__suffix-container {
+        border-left: 0px;
+        background-color: transparent;
+    }
+    .d-input-text__prefix-container {
+        border-right: 0px;
+        background-color: transparent;
+    }
+}
+
+@mixin prefix {
+    // padding: $input-padding;
+    // background-color: $bg-muted-color;
+    // border-radius: $border-radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/********************************************LABEL & CONTAINER********************************************/
+.d-input-text__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.d-input-text__input-container {
+    @include input-container();
+}
+
+.d-input-text__input-container-outline {
+    @include outline();
+}
+
+.d-input-text__input-container-standard {
+    @include standard();
+}
+
+.d-input-text__error {
+    border: $input-border-error !important;
+}
+
+.d-input-text__input-container-disabled {
+    @include disabled();
+}
+
+.d-input-text__prefix-container {
+    @include prefix();
+    border-right: $input-border;
+}
+
+.d-input-text__suffix-container {
+    @include prefix();
+    border-left: $input-border;
+}
+
+/********************************************INPUT TEXT********************************************/
+.d-input-text__input {
+    @include input();
+    &::placeholder {
+        opacity: 0.4;
+    }
+}
+
+.d-input-text__input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.d-input-text__input::-webkit-outer-spin-button,
+.d-input-text__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/********************************************INPUT AREA********************************************/
+.d-input-area__input {
+    @include input();
+    &::placeholder {
+        opacity: 0.4;
+    }
+}
+
+/********************************************INPUT SEARCH********************************************/
+
+.d-input-search {
+    @extend .flex-center-y;
+    min-height: $input-height;
+    @include input();
+    > input {
+        width: 100%;
+        @extend .text-x-small;
+        border: none !important;
+        outline: none !important;
+        background-color: transparent !important;
+    }
+}
+
+.d-input-search__outline {
+    @include outline();
+}
+
+.d-input-search__standard {
+    @include standard();
+}
+
+.d-input-search__disabled {
+    @include disabled();
+}

@@ -1,0 +1,50 @@
+.ant-modal-content {
+    padding: 0px !important;
+    border-radius: 20px !important;
+}
+
+.d-modal {
+    .d-modal__children {
+        padding: 24px;
+        max-height: 800px;
+        overflow-y: scroll;
+    }
+    .ant-modal-body {
+        padding: 0px !important;
+    }
+}
+
+.d-modal__header-close-icon {
+    padding: 24px !important;
+}
+
+.d-modal__small {
+    width: 40% !important;
+}
+.d-modal__medium {
+    width: 50% !important;
+}
+.d-modal__large {
+    width: 85% !important;
+}
+
+@media screen and (max-width: 576px) {
+    .d-modal__small {
+        width: 100% !important;
+    }
+    .d-modal__medium {
+        width: 100% !important;
+    }
+    .d-modal__large {
+        width: 100% !important;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    .d-modal__small {
+        width: 60% !important;
+    }
+    .d-modal__medium {
+        width: 85% !important;
+    }
+}
