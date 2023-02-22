@@ -5,11 +5,15 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                blueReact: "rgb(103,219,249)",
-                redNest: "rgb(232,44,73)",
-                blackNext: "rgb(17,17,17)",
-                greenMongo: "rgb(38,233,106)",
-                purpleGraphql: "rgb(64,42,183)",
+                primary: "#28425F",
+                "page-bg": "#BEC8DC",
+                "com-bg": "#D9E1F0",
+                "secondary-com-bg": "#D9E5FA",
+                "input-bg": "#EBF1FC",
+                "primary-text": "#2C3035",
+                "secondary-text": "#707B86",
+                "hover-color": "#3F5871",
+                "gray-light": "rgba(#152331,0.2)",
             },
             fontFamily: {
                 sans: ["Poppins"],

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export interface IHomePageProps {
@@ -5,7 +6,17 @@ export interface IHomePageProps {
 }
 
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
-    return <div className="flex flex-col items-center bg-red-500">Home Page</div>;
+    return (
+        <div className="flex flex-col items-center bg-primary">
+            Home Page
+            <Image
+                alt="logo"
+                src="/images/logo/logo.webp"
+                width={100}
+                height={100}
+            />
+        </div>
+    );
 };
 
 export default HomePage;
