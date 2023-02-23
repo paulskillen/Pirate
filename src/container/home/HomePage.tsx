@@ -1,4 +1,7 @@
+import Select from "@/components/icon/select/Select";
 import { InputText, Button } from "d-react-components";
+// import {Select } from "antd";
+import { useFormik } from "formik";
 import { isEmpty } from "lodash";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -10,31 +13,88 @@ export interface IHomePageProps {
 const IMG_MOBILE = 250;
 const IMG_DESKTOP = 600;
 
+enum TypeOfData {
+    HIGH = "HIGH",
+    MEDIUM = "MEDIUM",
+    LOW = "LOW",
+}
+const TYPE_OF_DATA = [
+    {
+        id: TypeOfData.HIGH,
+        label: "High",
+    },
+    {
+        id: TypeOfData.MEDIUM,
+        label: "Medium",
+    },
+    {
+        id: TypeOfData.LOW,
+        label: "Low",
+    },
+];
+
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
-    const [userEmail, setUserEmail] = useState<string>();
     const [isSubscribed, setIsSubscribed] = useState(false);
+    const { values, errors, handleChange, handleSubmit, setFieldValue } =
+        useFormik<any>({
+            initialValues: {},
+            onSubmit: () => {},
+        });
     const renderSubscribeForm = () => {
         return (
             <section className="h-auto w-full px-3 bg-primary flex flex-col justify-start items-center">
                 <h3 className="block text-2xl  text-center text-white mt-6">
                     Get Your eSim: Our Customer Team will assist you all the way
                 </h3>
-                <div className="w-full mt-6 flex flex-col justify-center md:flex-row  md:items-end">
+                <div className="w-full md:w-auto mt-6 flex flex-col justify-center">
                     <InputText
-                        classNameLabel="text-white"
+                        name="email"
                         label="Your Email"
                         placeholder="e.g., email@example.com"
-                        classNameInput="border-2 border-red-500"
-                        value={userEmail}
-                        onChange={(e) => setUserEmail(e?.target?.value)}
+                        classNameLabel="text-white"
+                        classNameInput=""
+                        value={values?.email}
+                        error={errors?.email as any}
+                        onChange={handleChange}
                     />
-                    <div className="flex-center w-full mt-6 md:w-auto md:mt-0">
+                    <InputText
+                        name="where"
+                        label="Where are you travelling to ?"
+                        placeholder="e.g., Bangkok"
+                        classNameLabel="text-white"
+                        classNameInput=""
+                        className="mt-6"
+                        value={values?.where}
+                        error={errors?.where as any}
+                        onChange={handleChange}
+                    />
+                    <InputText
+                        name="period"
+                        label="How many days will you stay there ?"
+                        placeholder="e.g., 10"
+                        classNameLabel="text-white"
+                        classNameInput=""
+                        className="mt-6"
+                        value={values?.period}
+                        error={errors?.period as any}
+                        onChange={handleChange}
+                    />
+                    <Select
+                        label="Please select type of data usage that fits to you !"
+                        placeholder="Please select"
+                        classNameLabel="text-white"
+                        className="mt-6"
+                        dataSource={TYPE_OF_DATA as any}
+                        value={values?.dataType}
+                        error={errors?.dataType as any}
+                        getLabel={(item) => item?.label}
+                        onChange={(v) => setFieldValue("dataType", v)}
+                    />
+                    <div className="flex-center w-full mt-6">
                         <Button
                             color="light"
                             onClick={() => {
-                                if (isEmpty(userEmail)) return;
-                                setUserEmail("");
-                                setIsSubscribed(true);
+                                handleSubmit();
                             }}
                         >
                             Join

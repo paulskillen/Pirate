@@ -7,7 +7,7 @@ import iconSetElegant from "./collection/elegant.json";
 export interface IconProps extends IcoMoonProps {}
 
 const Icon = ({
-    size = 24,
+    size = 20,
     className,
     color,
     style = {},

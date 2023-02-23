@@ -432,3 +432,14 @@ a,
         color: $link-hover-color !important;
     }
 }
+
+// ----------------------------------------
+// -- INPUT
+// ----------------------------------------
+
+.d-input-text__input-container-outline {
+    background-color:$input-bg-color ;
+    input{
+        background-color: transparent;
+    }
+}

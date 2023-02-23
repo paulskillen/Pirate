@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import HomePage from "../content/home/HomePage";
+import HomePage from "../container/home/HomePage";
 
 declare const VALID_LAYOUT_VALUES: readonly [
     "fill",
