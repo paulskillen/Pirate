@@ -8,7 +8,7 @@ export interface IHomePageProps {
 
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     return (
-        <div className="flex flex-col w-screen h-screen bg-primary text-white overflow-y-scroll">
+        <main className="flex flex-col w-screen h-screen bg-primary text-white overflow-y-scroll">
             <section className=" bg-black flex-col lg:flex-row flex justify-center items-center">
                 <Image
                     alt="logo"
@@ -68,7 +68,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                 </div>
                 <div className="text-base">Thanks for subscribing!</div>
             </section>
-        </div>
+        </main>
     );
 };
 
