@@ -12,3 +12,13 @@ body {
     background-color: #cad3e5;
     height: 100% !important;
 }
+
+
+button {
+    background-color: unset;
+}
+
+.none {
+    display: none;
+}
+
