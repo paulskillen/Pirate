@@ -134,16 +134,16 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 
     return (
         <main className="home-page_container w-screen h-screen bg-black text-white overflow-y-scroll">
-            <section className="h-screen w-full px-3 flex-col lg:flex-row flex justify-center items-center ">
+            <section className="h-screen w-full px-3 flex-col lg:flex-row flex justify-center items-center overflow-hidden ">
                 <Image
-                    className="none md:block"
+                    className="none lg:block"
                     alt="logo"
                     src="/images/logo/logo.png"
                     width={IMG_DESKTOP}
                     height={IMG_DESKTOP}
                 />
                 <Image
-                    className="block md:hidden"
+                    className="block lg:hidden"
                     alt="logo"
                     src="/images/logo/logo.png"
                     width={IMG_MOBILE}
@@ -164,16 +164,16 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                     </p>
                 </div>
             </section>
-            <section className="h-screen w-full px-3 flex-col  flex justify-center items-center">
+            <section className="h-screen w-full px-3 flex-col  flex justify-center items-center overflow-hidden">
                 <Image
-                    className="none md:block"
+                    className="none lg:block"
                     alt="logo"
                     src="/images/logo/logo.png"
                     width={IMG_DESKTOP}
                     height={IMG_DESKTOP}
                 />
                 <Image
-                    className="block md:hidden"
+                    className="block lg:hidden"
                     alt="logo"
                     src="/images/logo/logo.png"
                     width={IMG_MOBILE}
