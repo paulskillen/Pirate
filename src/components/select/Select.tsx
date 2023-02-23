@@ -3,8 +3,9 @@
 import { Select as SelectAnt } from "antd";
 import { SelectProps as SelectAntProps } from "antd/es/select";
 import ClassName from "classnames";
+import { ViewTextError } from "d-react-components";
 import React, { useImperativeHandle, useMemo, useRef } from "react";
-import Icon from "../Icon";
+import Icon from "../icon/Icon";
 
 export interface SelectProps extends SelectAntProps<any> {
     classNameSelect?: string;
@@ -183,7 +184,7 @@ const Select: React.ForwardRefRenderFunction<SelectMethod, SelectProps> = (
                 {selectAll && selectAllOption}
                 {children}
             </SelectAnt>
-            {/* <ViewTextError error={error} /> */}
+            <ViewTextError error={error} />
         </div>
     );
 };

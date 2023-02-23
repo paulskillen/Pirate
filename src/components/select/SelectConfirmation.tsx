@@ -1,5 +1,5 @@
+import { Button } from "d-react-components";
 import React, { useState, useEffect } from "react";
-import Button from "../button/Button";
 import Select, { SelectProps } from "./Select";
 
 export interface SelectConfirmationProps extends SelectProps {

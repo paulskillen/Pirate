@@ -1,10 +1,10 @@
-import Select from "@/components/icon/select/Select";
-import { InputText, Button } from "d-react-components";
-// import {Select } from "antd";
+import Select from "@/components/select/Select";
+import { writeUserData } from "@/firebase/Firebase";
+import { Button, InputText, StringUtils } from "d-react-components";
 import { useFormik } from "formik";
-import { isEmpty } from "lodash";
 import Image from "next/image";
 import React, { useState } from "react";
+import * as Yup from "yup";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -33,13 +33,36 @@ const TYPE_OF_DATA = [
     },
 ];
 
+const validationSchema = Yup.object().shape({
+    dataType: Yup.string().required("Required field!"),
+    location: Yup.string().required("Required field!"),
+    email: Yup.string()
+        .email("Email must be a valid email!")
+        .required("Required field!"),
+});
+
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const [isSubscribed, setIsSubscribed] = useState(false);
     const { values, errors, handleChange, handleSubmit, setFieldValue } =
         useFormik<any>({
             initialValues: {},
-            onSubmit: () => {},
+            onSubmit: () => {
+                onSubmitHandler();
+            },
+            validateOnChange: false,
+            enableReinitialize: true,
+            validationSchema,
         });
+
+    const onSubmitHandler = async () => {
+        const { email, location, period, dataType } = values;
+        const submitted = await writeUserData(
+            StringUtils.getUniqueID(),
+            values
+        );
+        setIsSubscribed(true);
+    };
+
     const renderSubscribeForm = () => {
         return (
             <section className="h-auto w-full px-3 bg-primary flex flex-col justify-start items-center">
@@ -58,14 +81,14 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         onChange={handleChange}
                     />
                     <InputText
-                        name="where"
+                        name="location"
                         label="Where are you travelling to ?"
                         placeholder="e.g., Bangkok"
                         classNameLabel="text-white"
                         classNameInput=""
                         className="mt-6"
-                        value={values?.where}
-                        error={errors?.where as any}
+                        value={values?.location}
+                        error={errors?.location as any}
                         onChange={handleChange}
                     />
                     <InputText
