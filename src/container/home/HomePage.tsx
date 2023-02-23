@@ -188,7 +188,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         important for you, we understand you, therefor we offer
                         you different possibilities to stay connected in the
                         place you travel to, weather it is for business or
-                        leisure. we're here to help you. we work transparent, we
+                        leisure. we are here to help you. we work transparent, we
                         have a costumer support 24/7 and easy guiding for your
                         convenience.
                     </p>
