@@ -8,7 +8,7 @@ export interface IHomePageProps {
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     return (
         <div className="flex flex-col items-center bg-primary">
-            Home Page
+            Home Page TEst
             <Image
                 alt="logo"
                 src="/images/logo/logo.webp"
