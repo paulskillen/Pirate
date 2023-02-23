@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-    --primary-color: #041b47;
-    --primary-color-hover: rgba(4, 27, 27, 0.9);
-    --body-font-family: "Poppins", "sans-serif";
+    --body-font-family: "Raleway", "sans-serif";
     height: 100% !important;
 }
 
@@ -15,8 +12,3 @@ body {
     background-color: #cad3e5;
     height: 100% !important;
 }
-
-button {
-    background-color: unset;
-}
-

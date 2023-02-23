@@ -1,0 +1,255 @@
+// -------------------------
+// --- You can add your custom CSS here and it will overwrite template styles.
+// -------------------------
+@import "./variables";
+
+svg {
+    display: block;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+label {
+    margin-bottom: 0.25rem;
+}
+
+//set color
+
+.bg-hover {
+    background-color: $hover-color !important;
+}
+.bg-gray {
+    background-color: rgb(247, 247, 247) !important ;
+}
+.bg-hover-light {
+    background-color: rgb(253, 243, 243) !important;
+}
+
+.bg-primary-trans {
+    background-color: $primary-color-50 !important;
+}
+
+.bg-primary-trans-15 {
+    background-color: $primary-color-15 !important;
+}
+
+.bg-note {
+    background-color: #fffbeb;
+}
+
+//set size util
+.w-fit-content {
+    width: fit-content;
+}
+
+.w-fill-available {
+    width: -webkit-fill-available !important;
+}
+
+//button
+
+.btn-disabled {
+    // background: $accent-color 0.3;
+    background: $disabled-color !important;
+    cursor: auto;
+    border: none !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.cursor-default {
+    cursor: default !important;
+}
+
+//flex
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row-between-center {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+}
+
+//text
+.text-disabled {
+    color: $text-disabled-color !important;
+}
+
+.text-no-wrap {
+    white-space: nowrap;
+}
+
+// app layout
+.app-layout__sidebar-header {
+    background-color: white !important;
+    border-right: 1px solid $line-color !important;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+//border
+.border-left {
+    &-5 {
+        border-left: 5px solid $line-color !important;
+    }
+    &-5-primary {
+        border-left: 5px solid $primary !important;
+    }
+}
+
+.border {
+    border: 1px solid $border-color !important;
+}
+
+.border-bottom-dashed {
+    border-bottom: 1px dashed #bdbdbd !important;
+}
+
+//hide iframe right below the body tag
+body > iframe {
+    display: none !important;
+}
+
+//input text
+.input-text-quantity__container {
+    max-width: 150px;
+    .d-input-text__input-container {
+        min-height: 30px !important;
+    }
+    input {
+        min-width: 50px;
+        text-align: center;
+    }
+    .d-input-text__prefix-container,
+    .d-input-text__suffix-container {
+        padding: 8px !important;
+    }
+    .d-input-text__input {
+        padding: 8px !important;
+    }
+}
+
+//radio antd design
+.ant-radio-inner::after {
+    top: 11px;
+    left: 11px;
+}
+
+.ant-tree-checkbox {
+    margin: 8px !important;
+}
+
+.ant-drawer-body {
+    padding: 0px !important;
+}
+
+//over flow
+.overflow-normal {
+    overflow-wrap: normal;
+}
+
+.overflow-scroll {
+    overflow: scroll;
+}
+
+.scroll-hide-indicator::-webkit-scrollbar {
+    display: none;
+}
+
+.overflow-initial {
+    overflow: initial;
+}
+
+//table antd
+.ant-table-cell {
+    overflow-wrap: normal !important;
+}
+
+.dot-view {
+    background-color: #de0d0c;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+// view absolute
+.absolute-right {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+}
+
+.page-header__breadcrumb {
+    font-size: 12px;
+    .text {
+        color: $gray-color;
+        font-size: 12px;
+    }
+    a.text {
+        font-weight: 600;
+    }
+}
+
+.d-common-header {
+    padding: 0.5rem 1.5rem;
+    height: 56px;
+    .page-header__container {
+        h4 {
+            font-size: 14px;
+        }
+    }
+    .d-common-header__button-group {
+        .d-button {
+            height: 34px;
+            font-size: 12px;
+        }
+    }
+}
+
+.d-tab-bar__vertical {
+    .d-tab-bar__item-active {
+        border: 1px solid $border-color !important;
+        background-color: $primary-color !important;
+        color: #fff !important;
+    }
+}
+
+.row-dragging {
+    border: 1px solid #dadada;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.row-dragging td {
+    padding: 6px 20px;
+}
+
+.row-dragging .drag-visible {
+    visibility: visible;
+}
+
+.object-fit-contain {
+    object-fit: contain;
+}
+
+.button-action {
+    background-color: #f5f5f5 !important;
+}
+
+//modal image
+.react-images__positioner {
+    z-index: 10000 !important;
+}
+
+.d-date-input__button {
+    z-index: 10 !important;
+}
