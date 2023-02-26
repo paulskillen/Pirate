@@ -164,7 +164,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                     </p>
                 </div>
             </section>
-            <section className="h-screen w-full px-3 flex-col  flex justify-center items-center overflow-hidden">
+            {/* <section className="h-screen w-full px-3 flex-col  flex justify-center items-center overflow-hidden">
                 <Image
                     className="none lg:block"
                     alt="logo"
@@ -193,7 +193,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         convenience.
                     </p>
                 </div>
-            </section>
+            </section> */}
             {renderSubscribeForm()}
         </main>
     );
