@@ -134,7 +134,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 
     return (
         <main className="home-page_container w-screen h-screen bg-black text-white overflow-y-scroll">
-            <section className="h-screen w-full px-3 flex-col lg:flex-row flex justify-center items-center overflow-hidden ">
+            <section className="min-h-screen w-full px-3 flex-col lg:flex-row flex justify-center items-center">
                 <Image
                     className="none lg:block"
                     alt="logo"
@@ -164,7 +164,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                     </p>
                 </div>
             </section>
-            {/* <section className="h-screen w-full px-3 flex-col  flex justify-center items-center overflow-hidden">
+            {/* <section className="min-h-screen w-full px-3 flex-col  flex justify-center items-center">
                 <Image
                     className="none lg:block"
                     alt="logo"
@@ -188,9 +188,9 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         important for you, we understand you, therefor we offer
                         you different possibilities to stay connected in the
                         place you travel to, weather it is for business or
-                        leisure. we are here to help you. we work transparent, we
-                        have a costumer support 24/7 and easy guiding for your
-                        convenience.
+                        leisure. we are here to help you. we work transparent,
+                        we have a costumer support 24/7 and easy guiding for
+                        your convenience.
                     </p>
                 </div>
             </section> */}
