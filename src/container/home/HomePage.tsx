@@ -1,9 +1,10 @@
+import BundleApi from "@/apis/bundle/BundleApi";
 import Select from "@/components/select/Select";
 import { writeUserData } from "@/firebase/Firebase";
 import { Button, InputText, StringUtils } from "d-react-components";
 import { useFormik } from "formik";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 
 export interface IHomePageProps {
@@ -53,6 +54,14 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             enableReinitialize: true,
             validationSchema,
         });
+
+    useEffect(() => {
+        // loadData();
+    }, []);
+
+    const loadData = async () => {
+        const data = await BundleApi.listBundleFromCountry("BO");
+    };
 
     const onSubmitHandler = async () => {
         const { email, location, period, dataType } = values;
