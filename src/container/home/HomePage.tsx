@@ -1,11 +1,12 @@
 import BundleApi from "@/apis/bundle/BundleApi";
+import Path from "@/common/constant/navigation/path";
 import { AppStateContext } from "@/common/context/app/app-context";
 import Select from "@/components/select/Select";
 import { writeUserData } from "@/firebase/Firebase";
 import Messages from "@/languages/Messages";
 import { Button, InputText, StringUtils } from "d-react-components";
 import { useFormik } from "formik";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import * as Yup from "yup";
 
@@ -45,6 +46,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
+    const router = useRouter();
     const { countryList } = useContext(AppStateContext);
 
     console.log(
@@ -59,7 +61,9 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                 <Button
                     iconName="search"
                     className="rounded px-3"
-                    onClick={() => {}}
+                    onClick={() => {
+                        router.push({ pathname: Path.listCountry() });
+                    }}
                 />
             </section>
         </main>

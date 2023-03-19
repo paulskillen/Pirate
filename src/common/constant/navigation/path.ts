@@ -1,12 +1,23 @@
 import { ILinkProps } from "@/common/interface/navigation/link";
 import { join } from "lodash";
 
-const url = {
+const Path = {
     home: (): ILinkProps => ({
         href: "/",
     }),
 
-    coutryList: () => "/country-list",
+    listCountry: () => "/list-country",
+
+    // ----------------------------------------
+    // -- BUNDLE
+    // ----------------------------------------
+
+    bundleByCountry: (countryCode: string): ILinkProps => {
+        return {
+            href: "/bundle/by-country/[countrySlug]",
+            as: `/bundle/by-country/${countryCode}`,
+        };
+    },
 
     // ----------------------------------------
     // -- CART AND CHECK OUT
@@ -46,4 +57,4 @@ const url = {
     // }),
 };
 
-export default url;
+export default Path;

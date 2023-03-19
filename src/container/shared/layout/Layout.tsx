@@ -3,7 +3,6 @@ import { TAB_BOTTOM_HEIGHT } from "@/common/constant/app";
 import { AppStateContext } from "@/common/context/app/app-context";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import TabBottom from "../tab/TabBottom";
-
 export interface ILayoutProps extends PropsWithChildren<{}> {
     [key: string]: any;
 }
@@ -24,7 +23,6 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
         <AppStateContext.Provider value={{ countryList } as any}>
             <div>
                 {children}
-                <div style={{ height: `${TAB_BOTTOM_HEIGHT}px` }} />
                 <TabBottom />
             </div>
         </AppStateContext.Provider>
