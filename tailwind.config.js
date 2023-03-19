@@ -14,6 +14,7 @@ module.exports = {
                 "secondary-text": "#707B86",
                 "hover-color": "#3F5871",
                 "gray-light": "rgba(#152331,0.2)",
+                "gold": "rgba(192,157,94,1)",
             },
             fontFamily: {
                 sans: ["Poppins"],
