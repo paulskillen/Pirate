@@ -2,7 +2,7 @@ import { TAB_BOTTOM_HEIGHT } from "@/common/constant/app";
 import Icon from "@/components/icon/Icon";
 import AppLink from "@/components/link/AppLink";
 import React from "react";
-import Path from "../../../common/constant/navigation/path";
+import Path from "../../../common/constant/path";
 
 export interface ITabBottomProps {
     [key: string]: any;

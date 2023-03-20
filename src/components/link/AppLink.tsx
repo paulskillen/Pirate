@@ -1,6 +1,6 @@
 // third-party
 import { useLocale } from "@/common/hooks/localeHooks";
-import { ILinkProps } from "@/common/interface/navigation/link";
+import { ILinkProps } from "@/common/interface/link";
 import Link, { LinkProps } from "next/link";
 import { AnchorHTMLAttributes, HTMLAttributes, PropsWithChildren } from "react";
 

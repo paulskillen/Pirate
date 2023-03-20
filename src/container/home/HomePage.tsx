@@ -1,5 +1,5 @@
 import BundleApi from "@/apis/bundle/BundleApi";
-import Path from "@/common/constant/navigation/path";
+import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
 import Select from "@/components/select/Select";
 import { writeUserData } from "@/firebase/Firebase";
