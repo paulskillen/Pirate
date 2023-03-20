@@ -52,7 +52,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                     {Messages.cancel}
                 </Button>
             </div>
-            <div className="overflow-y-auto h-full mt-3">
+            <div className="overflow-y-auto h-screen mt-3">
                 {map(countryList, (item) => {
                     if (textSearch) {
                         const checked = searchCountry(textSearch, item);
