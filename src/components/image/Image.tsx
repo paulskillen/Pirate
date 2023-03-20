@@ -19,7 +19,7 @@ const Image: React.FC<IImageProps> = (props) => {
         useNextImg = true,
         className,
     } = props;
-    const imgClass = ClassNames({}, className);
+    const imgClass = ClassNames("w-24 h-auto", {}, className);
     if (!useNextImg) {
         return <img {...props} alt={alt} className={imgClass} />;
     }
@@ -29,6 +29,8 @@ const Image: React.FC<IImageProps> = (props) => {
             src={src}
             alt={alt}
             className={imgClass}
+            width={24}
+            height={24}
         />
     );
 };

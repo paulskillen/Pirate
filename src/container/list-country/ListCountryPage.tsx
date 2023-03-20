@@ -1,5 +1,6 @@
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
+import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
 import { Button, InputTextSearch } from "d-react-components";
@@ -70,10 +71,11 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
 export default ListCountryPage;
 
 const CountryItem = ({ country }: any) => {
-    const { name } = country || {};
+    const { name, flag } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.isoAlpha2)}>
             <div className="flex flex-row items-center text-white">
+                {/* <Image src={flag} /> */}
                 <div>{name}</div>
             </div>
         </AppLink>
