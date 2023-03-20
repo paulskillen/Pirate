@@ -38,10 +38,6 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                 <InputTextSearch
                     className="bg-light"
                     onChange={(e: any) => {
-                        console.log(
-                            "🚀 >>>>>> file: ListCountryPage.tsx:63 >>>>>> e:",
-                            e
-                        );
                         setTextSearch(e?.target?.value);
                     }}
                 />
@@ -74,9 +70,14 @@ const CountryItem = ({ country }: any) => {
     const { name, flag } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.isoAlpha2)}>
-            <div className="flex flex-row items-center text-white">
-                {/* <Image src={flag} /> */}
-                <div>{name}</div>
+            <div className="flex flex-row items-center text-white w-full mt-6">
+                <Image
+                    className="w-12 rounded"
+                    useNextImg={false}
+                    alt="flag"
+                    src={`data:image/png;base64, ${flag}`}
+                />
+                <div className = "text-xl ml-3">{name}</div>
             </div>
         </AppLink>
     );

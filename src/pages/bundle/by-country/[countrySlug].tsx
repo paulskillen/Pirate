@@ -16,13 +16,17 @@ export const getServerSideProps: any = async (context: any) => {
         return {
             props: {
                 bundles: bundles?.data?.data?.data ?? [],
+                countryCode,
             },
         };
     }
 };
 
-const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({ bundles }) => {
-    return <BundleByCountryPage bundles={bundles} />;
+const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
+    bundles,
+    countryCode,
+}) => {
+    return <BundleByCountryPage bundles={bundles} countryCode={countryCode} />;
 };
 
 export default BundlesByCountry;

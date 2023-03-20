@@ -1,13 +1,15 @@
-import { map } from "lodash";
+import { find, map } from "lodash";
 import ClassNames from "classnames";
-import React from "react";
+import React, { useContext } from "react";
 import { IBundle } from "@/common/interface/bundle";
 import { Checkbox } from "d-react-components";
 import ProviderNameItem from "../provider/shared/ProviderNameItem";
 import Messages from "@/languages/Messages";
+import { AppStateContext } from "@/common/context/app/app-context";
 
 export interface IBundleByCountryPageProps {
     bundles: IBundle[];
+    countryCode: string;
     [key: string]: any;
 }
 
@@ -18,12 +20,22 @@ export interface IBundleItemProps {
 
 const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     bundles = [],
+    countryCode,
 }) => {
+    const { countryList } = useContext(AppStateContext);
+    const currentCountry = find(
+        countryList,
+        (item) => item?.isoAlpha2 === countryCode
+    );
+
     return (
         <div>
-            {map(bundles, (item, index) => {
-                return <BundleItem bundle={item} />;
-            })}
+            <div>{currentCountry?.name}</div>
+            <div>
+                {map(bundles, (item, index) => {
+                    return <BundleItem bundle={item} />;
+                })}
+            </div>
         </div>
     );
 };
