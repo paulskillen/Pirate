@@ -48,12 +48,7 @@ const validationSchema = Yup.object().shape({
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
     const { countryList } = useContext(AppStateContext);
-
-    console.log(
-        "🚀 >>>>>> file: HomePage.tsx >>>>>> line 50 >>>>>> countryList",
-        countryList
-    );
-
+    
     return (
         <main className="home-page_container w-screen h-screen bg-black text-white overflow-y-scroll px-4">
             <section className="flex flex-row justify-between items-center mt-4">
