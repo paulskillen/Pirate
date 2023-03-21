@@ -1,6 +1,7 @@
 import MetaDataApi from "@/apis/meta-data/MetaDataApi";
 import { TAB_BOTTOM_HEIGHT } from "@/common/constant/app";
 import { AppStateContext } from "@/common/context/app/app-context";
+import { useRouter } from "next/router";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import TabBottom from "../tab/TabBottom";
 export interface ILayoutProps extends PropsWithChildren<{}> {
@@ -8,6 +9,7 @@ export interface ILayoutProps extends PropsWithChildren<{}> {
 }
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => {
+    const router = useRouter();
     const [countryList, setCountryList] = useState([]);
 
     useEffect(() => {
@@ -21,7 +23,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
 
     return (
         <AppStateContext.Provider value={{ countryList } as any}>
-            <div>
+            <div className="layout_container">
                 {children}
                 <TabBottom />
             </div>
