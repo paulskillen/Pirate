@@ -15,7 +15,8 @@ export interface IListCountryPageProps {
 const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
     const router = useRouter();
     const [textSearch, setTextSearch] = useState("");
-    const { countryList } = useContext(AppStateContext);
+    const { metaData } = useContext(AppStateContext);
+    const { countryList = [] } = metaData || {};
 
     const searchCountry = (text: string, coutry: any): boolean => {
         const keyToSearch = ["name"];

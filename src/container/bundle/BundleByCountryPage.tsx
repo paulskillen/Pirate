@@ -1,6 +1,6 @@
-import { find, map } from "lodash";
+import { find, isEmpty, map } from "lodash";
 import ClassNames from "classnames";
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { IBundle } from "@/common/interface/bundle";
 import { Button, Checkbox } from "d-react-components";
 import ProviderNameItem from "../provider/shared/ProviderNameItem";
@@ -10,6 +10,8 @@ import Image from "@/components/image/Image";
 import { convertBase64ToImgSource } from "@/common/utils/image";
 import { useRouter } from "next/router";
 import { ProviderName } from "@/common/interface/provider";
+import PriceTag from "../shared/items/PriceTag";
+import Path from "@/common/constant/path";
 
 export interface IBundleByCountryPageProps {
     bundles: IBundle[];
@@ -20,6 +22,8 @@ export interface IBundleByCountryPageProps {
 export interface IBundleItemProps {
     bundle: IBundle;
     showRadio?: boolean;
+    onClick?: any;
+    selected?: boolean;
 }
 
 const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
@@ -27,11 +31,33 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     countryCode,
 }) => {
     const router = useRouter();
-    const { countryList } = useContext(AppStateContext);
+    const { metaData, setUserCart } = useContext(AppStateContext);
+    const { countryList = [] } = metaData ?? {};
+    const [selectedBundle, setSelectedBundle] = useState<IBundle>();
     const currentCountry = find(
         countryList,
         (item) => item?.isoAlpha2 === countryCode
     );
+
+    const renderCheckout = () => {
+        return (
+            <div className="absolute bottom-5 w-full px-3">
+                <Button
+                    className="w-full font-bold"
+                    style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
+                    onClick={() => {
+                        if (selectedBundle) {
+                            setUserCart([selectedBundle]);
+                            router.push(Path.checkout().href);
+                        }
+                    }}
+                >
+                    {`${Messages.checkout}\b \b`}
+                    <PriceTag price={selectedBundle?.price} />
+                </Button>
+            </div>
+        );
+    };
 
     return (
         <div>
@@ -43,25 +69,44 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     className="px-0"
                     color="light"
                 />
-                <div>{currentCountry?.name}</div>
+                <div className="text-xl">{currentCountry?.name}</div>
                 <Image
                     alt="flag"
                     className="w-12 h-auto rounded"
                     src={convertBase64ToImgSource(currentCountry?.flag)}
                 />
             </div>
-            <div className="h-screen overflow-scroll px-4">
+            <div className="h-screen overflow-y-scroll px-4">
                 {map(bundles, (item, index) => {
-                    return <BundleItem bundle={item} />;
+                    console.log(
+                        "🚀 >>>>>> file: BundleByCountryPage.tsx:59 >>>>>> {map >>>>>> item:",
+                        item
+                    );
+                    const isSelected =
+                        !!selectedBundle?.name &&
+                        selectedBundle?.name === item?.name;
+                    return (
+                        <BundleItem
+                            selected={isSelected}
+                            bundle={item}
+                            onClick={() => setSelectedBundle(item)}
+                        />
+                    );
                 })}
+                <div className="h-96" />
             </div>
+            {!isEmpty(selectedBundle) && renderCheckout()}
         </div>
     );
 };
 
 export default BundleByCountryPage;
 
-export const BundleItem: React.FC<IBundleItemProps> = ({ bundle }) => {
+export const BundleItem: React.FC<IBundleItemProps> = ({
+    bundle,
+    onClick,
+    selected,
+}) => {
     const { provider, name, dataAmount, duration, description, price, id } =
         bundle || {};
     const rowClass = ClassNames("flex flex-row items-center text-xl");
@@ -73,9 +118,16 @@ export const BundleItem: React.FC<IBundleItemProps> = ({ bundle }) => {
     }, [dataAmount, provider]);
 
     return (
-        <div className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-4 text-xl">
-            <Checkbox variant="radio" className="h-fit" />
-            <div className="w-full">
+        <div
+            className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-3 text-xl"
+            onClick={onClick}
+        >
+            <Checkbox
+                checked={selected}
+                variant="radio"
+                className="h-fit text-white border-white mt-1"
+            />
+            <div className="w-full ml-3">
                 <div className={rowClass}>
                     <div>{dataDisplay}</div>
                 </div>
@@ -83,11 +135,14 @@ export const BundleItem: React.FC<IBundleItemProps> = ({ bundle }) => {
                     {duration}
                     {Messages.days}
                 </div>
-                <div className={rowClass}>
+                <div className={`${rowClass} text opacity-75`}>
                     <div>{Messages.provider}</div>
                     <ProviderNameItem providerId={provider} />
                 </div>
-                <div className="w-full flex justify-end">{price}</div>
+                <div className="w-full flex justify-end">
+                    <div>{`${Messages.price} \b \b`}</div>
+                    <PriceTag price={price} />
+                </div>
             </div>
         </div>
     );

@@ -24,7 +24,7 @@ const Path = {
     // ----------------------------------------
 
     checkout: (): ILinkProps => ({
-        href: "/checkout/payment",
+        href: "/checkout",
     }),
 
     checkoutPayment: (
