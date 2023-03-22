@@ -4,7 +4,7 @@ import ClassNames from "classnames";
 import ImageNext, { ImageProps } from "next/image";
 
 export interface IImageProps {
-    nextImageProps?: ImageProps;
+    nextImageProps?: Partial<ImageProps>;
     src: string;
     alt?: string;
     useNextImg?: boolean;
@@ -19,18 +19,18 @@ const Image: React.FC<IImageProps> = (props) => {
         useNextImg = true,
         className,
     } = props;
-    const imgClass = ClassNames("w-24 h-auto", {}, className);
+    const imgClass = ClassNames({}, className);
     if (!useNextImg) {
         return <img {...props} alt={alt} className={imgClass} />;
     }
     return (
         <ImageNext
+            width={20}
+            height={20}
             {...nextImageProps}
             src={src}
             alt={alt}
             className={imgClass}
-            width={24}
-            height={24}
         />
     );
 };

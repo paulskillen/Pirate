@@ -73,11 +73,10 @@ const CountryItem = ({ country }: any) => {
             <div className="flex flex-row items-center text-white w-full mt-6">
                 <Image
                     className="w-12 rounded"
-                    useNextImg={false}
                     alt="flag"
                     src={`data:image/png;base64, ${flag}`}
                 />
-                <div className = "text-xl ml-3">{name}</div>
+                <div className="text-xl ml-3">{name}</div>
             </div>
         </AppLink>
     );

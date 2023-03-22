@@ -1,6 +1,6 @@
 import { find, map } from "lodash";
 import ClassNames from "classnames";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { IBundle } from "@/common/interface/bundle";
 import { Button, Checkbox } from "d-react-components";
 import ProviderNameItem from "../provider/shared/ProviderNameItem";
@@ -9,6 +9,7 @@ import { AppStateContext } from "@/common/context/app/app-context";
 import Image from "@/components/image/Image";
 import { convertBase64ToImgSource } from "@/common/utils/image";
 import { useRouter } from "next/router";
+import { ProviderName } from "@/common/interface/provider";
 
 export interface IBundleByCountryPageProps {
     bundles: IBundle[];
@@ -18,7 +19,7 @@ export interface IBundleByCountryPageProps {
 
 export interface IBundleItemProps {
     bundle: IBundle;
-    [key: string]: any;
+    showRadio?: boolean;
 }
 
 const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
@@ -34,12 +35,13 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 
     return (
         <div>
-            <div className="flex flex-row items-center justify-between py-3 px-3">
+            <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
                 <Button
                     onClick={() => router.back()}
                     variant="trans"
                     iconName="arrow_back_ios_new"
                     className="px-0"
+                    color="light"
                 />
                 <div>{currentCountry?.name}</div>
                 <Image
@@ -48,7 +50,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     src={convertBase64ToImgSource(currentCountry?.flag)}
                 />
             </div>
-            <div className="h-screen overflow-scroll">
+            <div className="h-screen overflow-scroll px-4">
                 {map(bundles, (item, index) => {
                     return <BundleItem bundle={item} />;
                 })}
@@ -62,25 +64,30 @@ export default BundleByCountryPage;
 export const BundleItem: React.FC<IBundleItemProps> = ({ bundle }) => {
     const { provider, name, dataAmount, duration, description, price, id } =
         bundle || {};
-
-    const rowClass = ClassNames("flex flex-row items-center");
+    const rowClass = ClassNames("flex flex-row items-center text-xl");
+    const dataDisplay = useMemo(() => {
+        if (provider === ProviderName.ESIM_GO) {
+            return `${Math.floor(dataAmount / 1000)}GB`;
+        }
+        return null;
+    }, [dataAmount, provider]);
 
     return (
-        <div className="flex flex-row">
-            <Checkbox variant="radio" />
-            <div>
+        <div className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-4 text-xl">
+            <Checkbox variant="radio" className="h-fit" />
+            <div className="w-full">
                 <div className={rowClass}>
-                    <div>{dataAmount}</div>
-                    <div>{price}</div>
+                    <div>{dataDisplay}</div>
                 </div>
                 <div className={rowClass}>
-                    <label>{duration}</label>
-                    <div>{parseInt(Math.floor(price / dataAmount) as any)}</div>
+                    {duration}
+                    {Messages.days}
                 </div>
                 <div className={rowClass}>
                     <div>{Messages.provider}</div>
                     <ProviderNameItem providerId={provider} />
                 </div>
+                <div className="w-full flex justify-end">{price}</div>
             </div>
         </div>
     );
