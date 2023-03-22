@@ -34,7 +34,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
     };
 
     return (
-        <div className="bg-primary px-4 pt-4 ">
+        <div className="bg-transparent z-10 px-4 pt-4 relative ">
             <div className="flex flex-row items-center">
                 <InputTextSearch
                     className="bg-light"
@@ -71,7 +71,7 @@ const CountryItem = ({ country }: any) => {
     const { name, flag } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.isoAlpha2)}>
-            <div className="flex flex-row items-center text-white w-full mt-6">
+            <div className="flex flex-row items-center text-white w-full mt-4">
                 <Image
                     className="w-12 rounded"
                     alt="flag"

@@ -6,7 +6,11 @@ const Path = {
         href: "/",
     }),
 
-    listCountry: () => "/list-country",
+    listCountry: (): ILinkProps => {
+        return {
+            href: "/list-country",
+        };
+    },
 
     // ----------------------------------------
     // -- BUNDLE

@@ -47,17 +47,16 @@ const validationSchema = Yup.object().shape({
 
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
-    const { countryList } = useContext(AppStateContext);
-    
+
     return (
-        <main className="home-page_container w-screen h-screen bg-black text-white overflow-y-scroll px-4">
+        <main className="home-page_container w-screen h-screen bg-transparent text-white overflow-y-scroll px-4">
             <section className="flex flex-row justify-between items-center mt-4">
                 <div className="text h4">{Messages.dataPlan}</div>
                 <Button
                     iconName="search"
                     className="rounded px-3"
                     onClick={() => {
-                        router.push({ pathname: Path.listCountry() });
+                        router.push({ pathname: Path.listCountry().href });
                     }}
                 />
             </section>

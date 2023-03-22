@@ -60,8 +60,8 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     };
 
     return (
-        <div>
-            <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
+        <div className="bg-transparent text-white z-10 relative">
+            <div className="flex flex-row items-center justify-between py-2 px-4  rounded-b-3xl">
                 <Button
                     onClick={() => router.back()}
                     variant="trans"
@@ -119,7 +119,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
 
     return (
         <div
-            className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-3 text-xl"
+            className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-3 text-xl z-10 relative"
             onClick={onClick}
         >
             <Checkbox
