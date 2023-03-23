@@ -28,7 +28,7 @@ const LogoView = () => {
                     nextImageProps={{ width: IMG_DESKTOP, height: IMG_DESKTOP }}
                 />
             </div>
-            <div className="lg:hidden absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center pointer-events-none">
+            <div className="absolute top-0 bottom-0 left-0 right-0 flex lg:hidden flex-col justify-center items-center pointer-events-none">
                 <Image
                     className={ClassNames("z-0", { "opacity-50": dimLogo })}
                     alt="logo"

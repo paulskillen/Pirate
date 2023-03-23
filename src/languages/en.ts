@@ -8,6 +8,7 @@ const translations = {
     price: "Price",
     checkout: "Checkout",
     yourOrder: "Your Order",
+    selectPaymentMethod: "Select Payment Method",
 };
 
 export default translations;

@@ -1,0 +1,57 @@
+import { PAYMENT_METHODS } from "@/common/constant/payment";
+import Icon from "@/components/icon/Icon";
+import Messages from "@/languages/Messages";
+import { Modal } from "d-react-components";
+import { map } from "lodash";
+import React, { useState } from "react";
+
+export interface ISelectPaymentButtonProps {
+    [key: string]: any;
+}
+
+const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({ id }) => {
+    const [openPaymentsModal, setOpenPaymentsModal] = useState<{
+        open: boolean;
+    }>({ open: false });
+
+    return (
+        <React.Fragment>
+            <div
+                className="bg-gold text-white flex items-center justify-between px-4 py-3 rounded-3xl mt-4"
+                onClick={() => {
+                    setOpenPaymentsModal({ open: true });
+                }}
+            >
+                <div className="flex items-center">
+                    <div className="bg-primary p-2 rounded-full mr-2">
+                        <Icon icon="credit-card" />
+                    </div>
+                    <div>{Messages.selectPaymentMethod}</div>
+                </div>
+                <Icon icon="arrow-right" />
+            </div>
+            {openPaymentsModal.open && (
+                <Modal
+                    showFooter={false}
+                    // bodyStyle={{ bottom: 0 }}
+                    open={openPaymentsModal.open}
+                    onClose={() => {
+                        setOpenPaymentsModal({ open: false });
+                    }}
+                >
+                    {map(PAYMENT_METHODS, (item) => {
+                        const { icon, id, label } = item || {};
+                        return (
+                            <div className="flex items-center">
+                                <Icon icon={icon} />
+                                <div>{label}</div>
+                            </div>
+                        );
+                    })}
+                </Modal>
+            )}
+        </React.Fragment>
+    );
+};
+
+export default SelectPaymentButton;

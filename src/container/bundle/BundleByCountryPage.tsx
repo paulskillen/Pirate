@@ -106,6 +106,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     bundle,
     onClick,
     selected,
+    showRadio = true,
 }) => {
     const { provider, name, dataAmount, duration, description, price, id } =
         bundle || {};
@@ -122,11 +123,13 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
             className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-3 text-xl z-10 relative"
             onClick={onClick}
         >
-            <Checkbox
-                checked={selected}
-                variant="radio"
-                className="h-fit text-white border-white mt-1"
-            />
+            {showRadio && (
+                <Checkbox
+                    checked={selected}
+                    variant="radio"
+                    className="h-fit text-white border-white mt-1"
+                />
+            )}
             <div className="w-full ml-3">
                 <div className={rowClass}>
                     <div>{dataDisplay}</div>
