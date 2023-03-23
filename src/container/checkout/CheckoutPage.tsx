@@ -1,5 +1,4 @@
 import { AppStateContext } from "@/common/context/app/app-context";
-import Icon from "@/components/icon/Icon";
 import Messages from "@/languages/Messages";
 import { Button } from "d-react-components";
 import { map } from "lodash";
