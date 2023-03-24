@@ -1,18 +1,31 @@
 import type { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import "../styles/global.css";
 import "../styles/style.scss";
 import DefaultLayout from "@/container/shared/layout/Layout";
 import API from "@/apis/API";
 import { ComponentType, useEffect, useState } from "react";
-import { AppStateContext } from "@/common/context/app/app-context";
+import {
+    AppStateContext,
+    loadStateContext,
+    saveStateContext,
+} from "@/common/context/app/app-context";
 import LoadMetaComponent from "@/container/app/LoadMetaComponent";
 import { NextComponentType, NextPageContext } from "next";
+import { isEmpty } from "lodash";
 
 export type MattressAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
         Layout: ComponentType;
     };
+};
+
+const initialOptions = {
+    "client-id": "test",
+    currency: "USD",
+    intent: "capture",
+    "data-client-token": "abc123xyz==",
 };
 
 export default function App({ Component, pageProps }: MattressAppProps) {
@@ -50,17 +63,33 @@ export default function App({ Component, pageProps }: MattressAppProps) {
         }, 100);
     }, []);
 
+    useEffect(() => {
+        const appStateContext = loadStateContext();
+        if (appStateContext && !isEmpty(appStateContext?.cart)) {
+            setUserCart({ ...(appStateContext?.cart ?? {}) });
+        }
+    }, []);
+
+    useEffect(() => {
+        const appStateContext = loadStateContext();
+        saveStateContext({ ...appStateContext, cart: userCart });
+    }, [userCart]);
+
     return (
-        <ApolloProvider client={API.instance}>
-            <AppStateContext.Provider
-                value={{ metaData, setMetaData, userCart, setUserCart } as any}
-            >
-                <LoadMetaComponent />
-                {/* @ts-ignore */}
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </AppStateContext.Provider>
-        </ApolloProvider>
+        <PayPalScriptProvider options={initialOptions}>
+            <ApolloProvider client={API.instance}>
+                <AppStateContext.Provider
+                    value={
+                        { metaData, setMetaData, userCart, setUserCart } as any
+                    }
+                >
+                    <LoadMetaComponent />
+                    {/* @ts-ignore */}
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </AppStateContext.Provider>
+            </ApolloProvider>
+        </PayPalScriptProvider>
     );
 }
