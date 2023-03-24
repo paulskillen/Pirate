@@ -15,6 +15,25 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const router = useRouter();
     const { userCart } = useContext(AppStateContext);
 
+    const renderButton = () => {
+        return (
+            <div className="absolute bottom-5 w-full px-3 z-30">
+                <Button
+                    className="w-full font-bold z-30"
+                    style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
+                    onClick={() => {
+                        // if (selectedBundle) {
+                        //     setUserCart([selectedBundle]);
+                        //     router.push(Path.checkout().href);
+                        // }
+                    }}
+                >
+                    {`${Messages.completePurchase}`}
+                </Button>
+            </div>
+        );
+    };
+
     return (
         <div>
             <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
@@ -35,7 +54,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 <SelectPaymentButton />
                 <div className="h-96" />
             </div>
-            {/* {!isEmpty(selectedBundle) && renderCheckout()} */}
+            {renderButton()}
         </div>
     );
 };

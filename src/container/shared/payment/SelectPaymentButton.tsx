@@ -1,4 +1,5 @@
-import { PAYMENT_METHODS } from "@/common/constant/payment";
+import { PaymentMethod, PAYMENT_METHODS } from "@/common/constant/payment";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 import Icon from "@/components/icon/Icon";
 import Messages from "@/languages/Messages";
 import { Modal } from "d-react-components";
@@ -41,6 +42,9 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({ id }) => {
                 >
                     {map(PAYMENT_METHODS, (item) => {
                         const { icon, id, label } = item || {};
+                        // if (id === PaymentMethod.PAY_PAL) {
+                        //     return <PayPalButtons />;
+                        // }
                         return (
                             <div className="flex items-center">
                                 <Icon icon={icon} />
