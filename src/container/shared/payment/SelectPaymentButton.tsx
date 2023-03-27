@@ -34,7 +34,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({ id }) => {
             {openPaymentsModal.open && (
                 <Modal
                     showFooter={false}
-                    // bodyStyle={{ bottom: 0 }}
+                    title={Messages.selectPaymentMethod}
                     open={openPaymentsModal.open}
                     onClose={() => {
                         setOpenPaymentsModal({ open: false });
@@ -42,9 +42,9 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({ id }) => {
                 >
                     {map(PAYMENT_METHODS, (item) => {
                         const { icon, id, label } = item || {};
-                        // if (id === PaymentMethod.PAY_PAL) {
-                        //     return <PayPalButtons />;
-                        // }
+                        if (id === PaymentMethod.PAY_PAL) {
+                            return <PayPalButtons />;
+                        }
                         return (
                             <div className="flex items-center">
                                 <Icon icon={icon} />

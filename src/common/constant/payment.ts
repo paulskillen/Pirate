@@ -4,11 +4,11 @@ export enum PaymentMethod {
 }
 
 export const PAYMENT_METHODS = [
-    {
-        id: PaymentMethod.BANK_TRANSFER,
-        label: "bankTransfer",
-        icon: "credit-card",
-    },
+    // {
+    //     id: PaymentMethod.BANK_TRANSFER,
+    //     label: "bankTransfer",
+    //     icon: "credit-card",
+    // },
     {
         id: PaymentMethod.PAY_PAL,
         label: "PayPal",

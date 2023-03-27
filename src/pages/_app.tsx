@@ -22,10 +22,10 @@ export type MattressAppProps = AppProps & {
 };
 
 const initialOptions = {
-    "client-id": "test",
+    "client-id": "AZAkLax018bh39V5n1Vbp3QTsOIspCBQ8pvEU5OeNUA0k28EGj63lB9697sTlwbyTLI-T35Mfpya3Fm0",
     currency: "USD",
     intent: "capture",
-    "data-client-token": "abc123xyz==",
+    // "data-client-token": "EIRtY98U_vi2XBwZJxGU9n4-f0cu-xOqVaTjsqwouFCJAsh9lgQoySt1BNMRX-hdGUOE3h0ftHoxz_ex",
 };
 
 export default function App({ Component, pageProps }: MattressAppProps) {
