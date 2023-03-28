@@ -1,11 +1,13 @@
 import { AppStateContext } from "@/common/context/app/app-context";
 import Messages from "@/languages/Messages";
 import { Button } from "d-react-components";
-import { map } from "lodash";
+import { map, reduce } from "lodash";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { BundleItem } from "../bundle/BundleByCountryPage";
-import SelectPaymentButton from "../shared/payment/SelectPaymentButton";
+import SelectPaymentButton, {
+    IPayPalOrderResponse,
+} from "../shared/payment/SelectPaymentButton";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -14,6 +16,18 @@ export interface ICheckoutPageProps {
 const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const router = useRouter();
     const { userCart } = useContext(AppStateContext);
+    const totalAmount = useMemo(() => {
+        return reduce(
+            userCart,
+            (res, item, index) => {
+                const { price } = item;
+                return res + price;
+            },
+            0
+        );
+    }, [userCart]);
+
+    const onSuccessPaymentHandler = (resOrder: IPayPalOrderResponse) => {};
 
     const renderButton = () => {
         return (
@@ -51,10 +65,22 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
-                <SelectPaymentButton />
+                {totalAmount > 0 && (
+                    <SelectPaymentButton
+                        totalAmount={totalAmount}
+                        onSuccess={(orderRes) => {
+                            if (orderRes?.status === "APPROVED") {
+                                onSuccessPaymentHandler(orderRes);
+                            }
+                        }}
+                        onError={(error: any) => {}}
+                        customerId="123"
+                        purchasingItems={userCart}
+                    />
+                )}
                 <div className="h-96" />
             </div>
-            {renderButton()}
+            {/* {renderButton()} */}
         </div>
     );
 };

@@ -78,10 +78,6 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
             </div>
             <div className="h-screen overflow-y-scroll px-4">
                 {map(bundles, (item, index) => {
-                    console.log(
-                        "🚀 >>>>>> file: BundleByCountryPage.tsx:59 >>>>>> {map >>>>>> item:",
-                        item
-                    );
                     const isSelected =
                         !!selectedBundle?.name &&
                         selectedBundle?.name === item?.name;
