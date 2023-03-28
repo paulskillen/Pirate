@@ -22,7 +22,7 @@ export type MattressAppProps = AppProps & {
 };
 
 const initialOptions = {
-    "client-id": "AZAkLax018bh39V5n1Vbp3QTsOIspCBQ8pvEU5OeNUA0k28EGj63lB9697sTlwbyTLI-T35Mfpya3Fm0",
+    "client-id": "AXcQh-HAlPuWKMa-1jIB5b-IVs5Qs_dl5MmBHKQEJTQYKh-K9w-tipJ2I9YOXTGG_SVQSCfqdfY2Zpjs",
     currency: "USD",
     intent: "capture",
     // "data-client-token": "EIRtY98U_vi2XBwZJxGU9n4-f0cu-xOqVaTjsqwouFCJAsh9lgQoySt1BNMRX-hdGUOE3h0ftHoxz_ex",

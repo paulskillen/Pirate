@@ -43,7 +43,36 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({ id }) => {
                     {map(PAYMENT_METHODS, (item) => {
                         const { icon, id, label } = item || {};
                         if (id === PaymentMethod.PAY_PAL) {
-                            return <PayPalButtons />;
+                            return (
+                                <PayPalButtons
+                                    createOrder={(data, actions) => {
+                                        return actions.order.create({
+                                            purchase_units: [
+                                                {
+                                                    amount: {
+                                                        value: "1.99",
+                                                    },
+                                                },
+                                            ],
+                                        });
+                                    }}
+                                    onApprove={(data, actions) => {
+                                        if (!actions?.order) {
+                                            return Promise.reject();
+                                        }
+                                        return actions.order
+                                            .capture()
+                                            .then((details) => {
+                                                const name =
+                                                    details?.payer?.name
+                                                        ?.given_name;
+                                                alert(
+                                                    `Transaction completed by ${name}`
+                                                );
+                                            });
+                                    }}
+                                />
+                            );
                         }
                         return (
                             <div className="flex items-center">
