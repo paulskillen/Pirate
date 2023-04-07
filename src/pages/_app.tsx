@@ -14,6 +14,7 @@ import {
 import LoadMetaComponent from "@/container/app/LoadMetaComponent";
 import { NextComponentType, NextPageContext } from "next";
 import { isEmpty } from "lodash";
+import InitComponent from "@/container/app/InitComponent";
 
 export type MattressAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
@@ -22,7 +23,8 @@ export type MattressAppProps = AppProps & {
 };
 
 const initialOptions = {
-    "client-id": "AXcQh-HAlPuWKMa-1jIB5b-IVs5Qs_dl5MmBHKQEJTQYKh-K9w-tipJ2I9YOXTGG_SVQSCfqdfY2Zpjs",
+    "client-id":
+        "AXcQh-HAlPuWKMa-1jIB5b-IVs5Qs_dl5MmBHKQEJTQYKh-K9w-tipJ2I9YOXTGG_SVQSCfqdfY2Zpjs",
     currency: "USD",
     intent: "capture",
     // "data-client-token": "EIRtY98U_vi2XBwZJxGU9n4-f0cu-xOqVaTjsqwouFCJAsh9lgQoySt1BNMRX-hdGUOE3h0ftHoxz_ex",
@@ -31,7 +33,8 @@ const initialOptions = {
 export default function App({ Component, pageProps }: MattressAppProps) {
     const Layout: ComponentType = Component.Layout || DefaultLayout;
     const [metaData, setMetaData] = useState([]);
-    const [userCart, setUserCart] = useState([]);
+    const [userCart, setUserCart] = useState({});
+    const [activeOrder, setActiveOrder] = useState({});
 
     useEffect(() => {
         const preloader = document.querySelector(".site-preloader");
@@ -80,10 +83,18 @@ export default function App({ Component, pageProps }: MattressAppProps) {
             <ApolloProvider client={API.instance}>
                 <AppStateContext.Provider
                     value={
-                        { metaData, setMetaData, userCart, setUserCart } as any
+                        {
+                            metaData,
+                            setMetaData,
+                            userCart,
+                            setUserCart,
+                            activeOrder,
+                            setActiveOrder,
+                        } as any
                     }
                 >
                     <LoadMetaComponent />
+                    <InitComponent />
                     {/* @ts-ignore */}
                     <Layout>
                         <Component {...pageProps} />

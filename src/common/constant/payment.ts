@@ -3,6 +3,12 @@ export enum PaymentMethod {
     BANK_TRANSFER = "BANK_TRANSFER",
 }
 
+export enum OrderPaymentStatus {
+    PENDING = "PENDING",
+    COMPLETED = "COMPLETED",
+    ERROR = "ERROR",
+}
+
 export const PAYMENT_METHODS = [
     // {
     //     id: PaymentMethod.BANK_TRANSFER,

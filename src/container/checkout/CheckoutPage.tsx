@@ -1,6 +1,8 @@
+import OrderApi from "@/apis/order/OrderApi";
 import { AppStateContext } from "@/common/context/app/app-context";
+import { IOrder } from "@/common/interface/order";
 import Messages from "@/languages/Messages";
-import { Button } from "d-react-components";
+import { Button, Progress } from "d-react-components";
 import { map, reduce } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useMemo } from "react";
@@ -15,7 +17,8 @@ export interface ICheckoutPageProps {
 
 const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const router = useRouter();
-    const { userCart } = useContext(AppStateContext);
+    const { userCart, activeOrder } = useContext(AppStateContext);
+
     const totalAmount = useMemo(() => {
         return reduce(
             userCart,
@@ -27,7 +30,38 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         );
     }, [userCart]);
 
-    const onSuccessPaymentHandler = (resOrder: IPayPalOrderResponse) => {};
+    console.log(
+        "🚀 >>>>>> file: CheckoutPage.tsx:22 >>>>>> activeOrder:",
+        activeOrder
+    );
+
+    const onSuccessPaymentHandler = (
+        resOrder: IPayPalOrderResponse,
+        orderSer: IOrder
+    ) => {
+        console.log(
+            "🚀 >>>>>> file: CheckoutPage.tsx:37 >>>>>> activeOrder:",
+            activeOrder
+        );
+        console.log(
+            "🚀 >>>>>> file: CheckoutPage.tsx:33 >>>>>> onSuccessPaymentHandler >>>>>> resOrder:",
+            resOrder
+        );
+        const payload = {};
+        // return Progress.show(
+        //     { method: OrderApi.create, params: {} },
+        //     (res: any) => {}
+        // );
+    };
+
+    const fetchData = async () => {
+        const res = await OrderApi.detail("642ce285a1d74c9d0e4be5bb");
+
+        console.log(
+            "🚀 >>>>>> file: CheckoutPage.tsx:36 >>>>>> fetchData >>>>>> res:",
+            res
+        );
+    };
 
     const renderButton = () => {
         return (
@@ -36,13 +70,11 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                     className="w-full font-bold z-30"
                     style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
-                        // if (selectedBundle) {
-                        //     setUserCart([selectedBundle]);
-                        //     router.push(Path.checkout().href);
-                        // }
+                        fetchData();
                     }}
                 >
-                    {`${Messages.completePurchase}`}
+                    Fetch Data
+                    {/* {`${Messages.completePurchase}`} */}
                 </Button>
             </div>
         );
@@ -68,19 +100,29 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 {totalAmount > 0 && (
                     <SelectPaymentButton
                         totalAmount={totalAmount}
-                        onSuccess={(orderRes) => {
-                            if (orderRes?.status === "APPROVED") {
-                                onSuccessPaymentHandler(orderRes);
+                        onSuccess={(orderRes, orderSer) => {
+                            console.log(
+                                "🚀 >>>>>> file: CheckoutPage.tsx:99 >>>>>> orderSer:",
+                                orderSer
+                            );
+                            console.log(
+                                "🚀 >>>>>> file: CheckoutPage.tsx:108 >>>>>> orderRes:",
+                                orderRes
+                            );
+
+                            if (orderRes?.status === "COMPLETED") {
+                                onSuccessPaymentHandler(orderRes, orderSer);
                             }
                         }}
                         onError={(error: any) => {}}
-                        customerId="123"
+                        customerId="638589e5ab563e9641d7ccfc"
                         purchasingItems={userCart}
                     />
                 )}
+
                 <div className="h-96" />
             </div>
-            {/* {renderButton()} */}
+            {renderButton()}
         </div>
     );
 };
