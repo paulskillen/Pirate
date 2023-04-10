@@ -35,13 +35,13 @@ const OrderApi = {
             fetchPolicy: "no-cache",
         }),
 
-    process: (orderId: string, input: any) =>
+    process: (payload: any) =>
         API.instance.mutate({
             mutation: gql`
                 ${F_ORDER}
                 mutation processOrder(
                     $orderId: String!
-                    $input: OrderCreateInput!
+                    $input: OrderProcessInput!
                 ) {
                     data: processOrderForCustomer(
                         orderId: $orderId
@@ -53,7 +53,7 @@ const OrderApi = {
                     }
                 }
             `,
-            variables: { orderId, input },
+            variables: { ...payload },
             fetchPolicy: "no-cache",
         }),
     // update: (id: string, input: any) =>

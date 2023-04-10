@@ -159,7 +159,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
                 >
                     {map(PAYMENT_METHODS, (item) => {
                         const { icon, id, label } = item || {};
-                        if (id === PaymentMethod.PAY_PAL) {
+                        if (id === PaymentMethod.PAYPAL) {
                             return renderPayPal();
                         }
                         return (

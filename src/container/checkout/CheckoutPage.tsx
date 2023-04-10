@@ -1,11 +1,13 @@
 import OrderApi from "@/apis/order/OrderApi";
+import { PaymentMethod, PAYMENT_METHODS } from "@/common/constant/payment";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { IOrder } from "@/common/interface/order";
+import { convertBase64ToImgSource } from "@/common/utils/image";
 import Messages from "@/languages/Messages";
 import { Button, Progress } from "d-react-components";
 import { map, reduce } from "lodash";
 import { useRouter } from "next/router";
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { BundleItem } from "../bundle/BundleByCountryPage";
 import SelectPaymentButton, {
     IPayPalOrderResponse,
@@ -15,9 +17,25 @@ export interface ICheckoutPageProps {
     [key: string]: any;
 }
 
+const TEST_CUSTOMER = "638589e5ab563e9641d7ccfc";
+
 const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const router = useRouter();
-    const { userCart, activeOrder } = useContext(AppStateContext);
+    const { userCart, activeOrder, setActiveOrder } =
+        useContext(AppStateContext);
+    const [paymentOrder, setPaymentOrder] = useState<IPayPalOrderResponse>();
+    const [fetchOrder, setFetchOrder] = useState<any>();
+    const qrCode = fetchOrder?.eSimData?.qrCode;
+
+    const base64 = useMemo(() => {
+        if (!qrCode) {
+            return "";
+        }
+        if (!process.browser) {
+            return "";
+        }
+        return btoa(unescape(encodeURIComponent(qrCode)));
+    }, [qrCode]);
 
     const totalAmount = useMemo(() => {
         return reduce(
@@ -30,37 +48,51 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         );
     }, [userCart]);
 
-    console.log(
-        "🚀 >>>>>> file: CheckoutPage.tsx:22 >>>>>> activeOrder:",
-        activeOrder
-    );
+    useEffect(() => {
+        if (paymentOrder?.id) {
+            onSuccessPaymentHandler(paymentOrder);
+        }
+    }, [paymentOrder?.id]);
 
-    const onSuccessPaymentHandler = (
-        resOrder: IPayPalOrderResponse,
-        orderSer: IOrder
-    ) => {
-        console.log(
-            "🚀 >>>>>> file: CheckoutPage.tsx:37 >>>>>> activeOrder:",
-            activeOrder
+    const onSuccessPaymentHandler = (paymentRes: IPayPalOrderResponse) => {
+        const { purchase_units } = paymentRes;
+        const totalPayment = reduce(
+            purchase_units,
+            (res, item, index) => {
+                const total = parseFloat(item?.amount?.value ?? 0);
+                return res + total;
+            },
+            0
         );
-        console.log(
-            "🚀 >>>>>> file: CheckoutPage.tsx:33 >>>>>> onSuccessPaymentHandler >>>>>> resOrder:",
-            resOrder
+        const payload = {
+            orderId: activeOrder?.id,
+            input: {
+                payment: [
+                    {
+                        method: PaymentMethod.PAYPAL,
+                        total: totalPayment,
+                        paymentData: paymentRes,
+                    },
+                ],
+                customer: TEST_CUSTOMER,
+            },
+        };
+        return Progress.show(
+            { method: OrderApi.process, params: [payload] },
+            (res: any) => {
+                setActiveOrder(undefined as any);
+                setPaymentOrder(undefined as any);
+                console.log(
+                    "🚀 >>>>>> file: CheckoutPage.tsx:78 >>>>>> onSuccessPaymentHandler >>>>>> res:",
+                    res
+                );
+            }
         );
-        const payload = {};
-        // return Progress.show(
-        //     { method: OrderApi.create, params: {} },
-        //     (res: any) => {}
-        // );
     };
 
     const fetchData = async () => {
-        const res = await OrderApi.detail("642ce285a1d74c9d0e4be5bb");
-
-        console.log(
-            "🚀 >>>>>> file: CheckoutPage.tsx:36 >>>>>> fetchData >>>>>> res:",
-            res
-        );
+        const res = await OrderApi.detail("64323aa0d7feb0c46cf53b42");
+        setFetchOrder(res?.data?.data?.data ?? {});
     };
 
     const renderButton = () => {
@@ -111,16 +143,18 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                             );
 
                             if (orderRes?.status === "COMPLETED") {
-                                onSuccessPaymentHandler(orderRes, orderSer);
+                                // onSuccessPaymentHandler(orderRes, orderSer);
+                                setPaymentOrder(orderRes);
                             }
                         }}
                         onError={(error: any) => {}}
-                        customerId="638589e5ab563e9641d7ccfc"
+                        customerId={TEST_CUSTOMER}
                         purchasingItems={userCart}
                     />
                 )}
+                {/* <img src={convertBase64ToImgSource(base64)} /> */}
 
-                <div className="h-96" />
+                {/* <div className="h-96" /> */}
             </div>
             {renderButton()}
         </div>
