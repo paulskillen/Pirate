@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { API_GOOGLE_KEY } from "@/common/constant/app";
+import { GOOGLE_API_KEY } from "@/common/constant/app";
 import {
     ApolloClient,
     from,
@@ -105,7 +105,7 @@ const API = {
     //     }),
     getLocationFromAddress: (address: string) => {
         return axios.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_GOOGLE_KEY}`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_API_KEY}`
         );
     },
 };
