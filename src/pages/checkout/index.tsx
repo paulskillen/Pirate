@@ -1,5 +1,5 @@
 import CheckoutPage from "@/container/checkout/CheckoutPage";
-import { LayoutSecure } from "@/container/shared/layout/Layout";
+import { LayoutClean } from "@/container/shared/layout/Layout";
 import React from "react";
 
 export interface ICheckoutProps {
@@ -14,4 +14,4 @@ export default Checkout;
 
 
 //@ts-ignore
-Checkout.Layout = LayoutSecure;
+Checkout.Layout = LayoutClean;

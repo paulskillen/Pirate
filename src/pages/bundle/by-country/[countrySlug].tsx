@@ -1,7 +1,7 @@
 import BundleApi from "@/apis/bundle/BundleApi";
 import BundleByCountryPage from "@/container/bundle/BundleByCountryPage";
 import ListCountryPage from "@/container/list-country/ListCountryPage";
-import { LayoutSecure } from "@/container/shared/layout/Layout";
+import { LayoutClean } from "@/container/shared/layout/Layout";
 import Messages from "@/languages/Messages";
 import { Button, InputTextSearch } from "d-react-components";
 import React from "react";
@@ -34,4 +34,4 @@ export default BundlesByCountry;
 
 
 //@ts-ignore
-BundlesByCountry.Layout = LayoutSecure;
+BundlesByCountry.Layout = LayoutClean;

@@ -52,7 +52,16 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
 
 export default Layout;
 
-export const LayoutSecure: React.FC<ILayoutProps> = ({ children }) => {
+export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
+    return (
+        <div className="layout_container bg-black">
+            {children}
+            <LogoView />
+        </div>
+    );
+};
+
+export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     return (
         <div className="layout_container bg-black">
             {children}

@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import {Provider} from "next-auth/client";
 import { ApolloProvider } from "@apollo/client";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import "../styles/global.css";
