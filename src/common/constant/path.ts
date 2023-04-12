@@ -55,10 +55,21 @@ const Path = {
     //     throw Error("Undefined category type");
     // },
 
-    // shopCategory: (category: any): ILinkProps => ({
-    //     href: "/[...slug]",
-    //     as: `/${category?.slug}/c${category?.categories_id}.html`,
-    // }),
+    // ----------------------------------------
+    // -- USER
+    // ----------------------------------------
+
+    profile: (): ILinkProps => ({
+        href: "/profile",
+    }),
+
+    // ----------------------------------------
+    // -- AUTH
+    // ----------------------------------------
+
+    singUp: (): ILinkProps => ({
+        href: "login/sign-up",
+    }),
 };
 
 export default Path;

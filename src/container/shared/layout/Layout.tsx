@@ -1,6 +1,9 @@
 import Path from "@/common/constant/path";
+import LocalStorage, { get } from "@/common/storage/LocalStorage";
 import Image from "@/components/image/Image";
+import AuthSignInView from "@/container/auth/shared/AuthSignInView";
 import ClassNames from "classnames";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { PropsWithChildren, useMemo } from "react";
 import TabBottom from "../tab/TabBottom";
@@ -62,9 +65,17 @@ export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
 };
 
 export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
+    const accessToken = get("accessToken");
+    const { data } = useSession();
+
+    if (!data) {
+        return <AuthSignInView />;
+    }
+
     return (
         <div className="layout_container bg-black">
             {children}
+            <TabBottom />
             <LogoView />
         </div>
     );

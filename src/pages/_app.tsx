@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
-import {Provider} from "next-auth/client";
 import { ApolloProvider } from "@apollo/client";
+import { SessionProvider } from "next-auth/react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import "../styles/global.css";
 import "../styles/style.scss";
@@ -80,28 +80,30 @@ export default function App({ Component, pageProps }: MattressAppProps) {
     }, [userCart]);
 
     return (
-        <PayPalScriptProvider options={initialOptions}>
-            <ApolloProvider client={API.instance}>
-                <AppStateContext.Provider
-                    value={
-                        {
-                            metaData,
-                            setMetaData,
-                            userCart,
-                            setUserCart,
-                            activeOrder,
-                            setActiveOrder,
-                        } as any
-                    }
-                >
-                    <LoadMetaComponent />
-                    <InitComponent />
-                    {/* @ts-ignore */}
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-                </AppStateContext.Provider>
-            </ApolloProvider>
-        </PayPalScriptProvider>
+        <SessionProvider session={pageProps?.session}>
+            <PayPalScriptProvider options={initialOptions}>
+                <ApolloProvider client={API.instance}>
+                    <AppStateContext.Provider
+                        value={
+                            {
+                                metaData,
+                                setMetaData,
+                                userCart,
+                                setUserCart,
+                                activeOrder,
+                                setActiveOrder,
+                            } as any
+                        }
+                    >
+                        <LoadMetaComponent />
+                        <InitComponent />
+                        {/* @ts-ignore */}
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
+                    </AppStateContext.Provider>
+                </ApolloProvider>
+            </PayPalScriptProvider>
+        </SessionProvider>
     );
 }

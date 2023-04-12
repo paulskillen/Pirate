@@ -253,3 +253,16 @@ body > iframe {
 .d-date-input__button {
     z-index: 10 !important;
 }
+
+.login__button_social {
+    height: 40px;
+    // width: 30%;
+    // flex-grow: 1;
+    margin-top: 1rem;
+    box-shadow: 0px 16px 60px rgba(78, 79, 114, 0.1);
+    > img {
+        object-fit: contain;
+        height: 40px;
+        width: 100%;
+    }
+}
