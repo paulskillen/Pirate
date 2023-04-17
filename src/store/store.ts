@@ -1,13 +1,14 @@
 // third-party
 import { applyMiddleware, compose, createStore } from "redux";
 // import thunk from "redux-thunk";
+import { MakeStore, createWrapper } from "next-redux-wrapper";
 // reducer
 import rootReducer from "./root/rootReducer";
 import version from "./version";
 
 export const APP_STORE = "APP_STORE";
 
-function load() {
+export function load() {
     if (!process.browser) {
         return undefined;
     }
@@ -32,7 +33,16 @@ function load() {
     return state || undefined;
 }
 
-const store = createStore(
+export const save = (state: any) => {
+    try {
+        localStorage.setItem(APP_STORE, JSON.stringify(state));
+    } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+    }
+};
+
+export const store = createStore(
     rootReducer,
     load(),
     compose()
@@ -40,15 +50,6 @@ const store = createStore(
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-function save() {
-    try {
-        localStorage.setItem(APP_STORE, JSON.stringify(store.getState()));
-    } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
-    }
-}
+const makeStore: MakeStore<any> = () => store;
 
-store.subscribe(() => save());
-
-export default store;
+export const wrapper = createWrapper<any>(makeStore);

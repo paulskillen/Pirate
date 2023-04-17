@@ -1,4 +1,6 @@
 import Messages from "@/languages/Messages";
+import { applyClientState } from "@/store/client";
+import { load, save, store } from "@/store/store";
 import {
     DialogComponent,
     DialogManager,
@@ -26,6 +28,21 @@ class InitComponent extends Component<any> {
     componentDidMount() {
         Progress.initialProgress(this.progressRef);
         DialogManager.initialDialog(this.dialogRef);
+        this.loadStore();
+    }
+
+    loadStore() {
+        const state = load();
+
+        if (state) {
+            applyClientState(state);
+        }
+
+        if (process.browser) {
+            store.subscribe(() => {
+                save(store.getState());
+            });
+        }
     }
 
     onInitialLanguage = () => {

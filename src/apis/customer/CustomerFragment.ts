@@ -15,3 +15,23 @@ export const F_CUSTOMER_BASIC = gql`
         email
     }
 `;
+
+export const F_CUSTOMER = gql`
+    fragment F_CUSTOMER on CustomerDto {
+        id
+        customerNo
+        avatar
+        firstName
+        lastName
+        fullName
+        nickname
+        gender
+        phoneCode
+        phone
+        email
+        lineId
+        instagram
+        facebook
+        socialId
+    }
+`;

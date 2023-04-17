@@ -15,7 +15,7 @@ interface IButtonLoginSocial {
 const AuthSignInSocial: React.FC<IAuthSignInSocialProps> = ({ id }) => {
     return (
         <div>
-            <ButtonSignSocial provider="google" className="col-sm-4" />
+            <ButtonSignSocial provider="google" className="" />
         </div>
     );
 };
@@ -89,12 +89,8 @@ const ButtonSignSocial = (props: IButtonLoginSocial) => {
 
     return (
         <div
-            className={`login__button_social ${className} `}
-            onClick={() =>
-                signIn(provider, {
-                    callbackUrl: document.URL + "?provider=" + provider,
-                })
-            }
+            className={`login__button_social shadow-sm border rounded-lg mt-3 flex justify-center items-center ${className} `}
+            onClick={() => signIn(provider)}
         >
             <img src={providerData.imgSource} />
         </div>

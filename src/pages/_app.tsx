@@ -15,7 +15,8 @@ import {
 import LoadMetaComponent from "@/container/app/LoadMetaComponent";
 import { NextComponentType, NextPageContext } from "next";
 import { isEmpty } from "lodash";
-import InitComponent from "@/container/app/InitComponent";
+import { wrapper } from "@/store/store";
+import InitComponent from "@/container/app/content/InitComponent";
 
 export type MattressAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
@@ -31,7 +32,7 @@ const initialOptions = {
     // "data-client-token": "EIRtY98U_vi2XBwZJxGU9n4-f0cu-xOqVaTjsqwouFCJAsh9lgQoySt1BNMRX-hdGUOE3h0ftHoxz_ex",
 };
 
-export default function App({ Component, pageProps }: MattressAppProps) {
+function App({ Component, pageProps }: MattressAppProps) {
     const Layout: ComponentType = Component.Layout || DefaultLayout;
     const [metaData, setMetaData] = useState([]);
     const [userCart, setUserCart] = useState({});
@@ -107,3 +108,5 @@ export default function App({ Component, pageProps }: MattressAppProps) {
         </SessionProvider>
     );
 }
+
+export default wrapper.withRedux(App);

@@ -17,4 +17,5 @@ export interface ICustomer {
     lineId: string;
     instagram: string;
     facebook: string;
+    socialId: string;
 }

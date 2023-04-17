@@ -1,3 +1,4 @@
+import { store } from "@/store/store";
 import { ApolloLink } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { message } from "antd";
@@ -5,14 +6,13 @@ import { Notifications } from "d-react-components";
 import { includes, map, some } from "lodash";
 import Messages from "../languages/Messages";
 import { signOut } from "../store/auth/authActions";
-import store from "../store/store";
 
 const UNAUTHORIZE = 401;
 const DATA_ERROR = 400;
 
 export const AuthMiddleware = new ApolloLink((operation, forward) => {
     try {
-        const accessToken = store.getState().auth?.accessToken;
+        const accessToken = (store.getState().auth as any)?.accessToken;
         operation.setContext(({ headers = {} }) => ({
             headers: {
                 ...headers,
