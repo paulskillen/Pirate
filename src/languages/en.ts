@@ -13,6 +13,8 @@ const translations = {
     signIn: "Sign In",
     signOut: "Sign Out",
     username: "Username",
+    firstName: "First Name",
+    lastName: "Last Name",
     password: "Password",
     checkout: "Checkout",
     yourOrder: "Your Order",

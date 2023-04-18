@@ -29,47 +29,19 @@ export default NextAuth({
     },
     callbacks: {
         signIn: async ({ user, credentials, account, email, profile }) => {
-            console.log(
-                "🚀 >>>>>> file: [...nextauth].ts:27 >>>>>> signIn: >>>>>> user:",
-                user
-            );
-            console.log(
-                "🚀 >>>>>> file: [...nextauth].ts:27 >>>>>> signIn: >>>>>> credentials:",
-                credentials
-            );
-            console.log(
-                "🚀 >>>>>> file: [...nextauth].ts:27 >>>>>> signIn: >>>>>> account:",
-                account
-            );
-            console.log(
-                "🚀 >>>>>> file: [...nextauth].ts:27 >>>>>> signIn: >>>>>> email:",
-                email
-            );
-            console.log(
-                "🚀 >>>>>> file: [...nextauth].ts:27 >>>>>> signIn: >>>>>> profile:",
-                profile
-            );
             try {
                 const resLogin = await AuthApi.loginSocial(
                     SocialProvider.GOOGLE,
                     account?.id_token ?? ""
-                );
-                console.log(
-                    "🚀 >>>>>> file: [...nextauth].ts:52 >>>>>> signIn: >>>>>> resLogin:",
-                    resLogin
                 );
                 const { accessToken, isRegistered, profile } =
                     resLogin?.data?.data ?? {};
                 if (isRegistered) {
                     return true;
                 }
-                console.log(
-                    "🚀 >>>>>> file: [...nextauth].ts:68 >>>>>> signIn: >>>>>> profile:",
-                    profile
-                );
-                store.dispatch(saveRegister(profile));
-
-                return `${CONFIG.DOMAIN}/${Path.singUp().href}`;
+                return `${CONFIG.DOMAIN}/${
+                    Path.singUp().href
+                }?profile=${JSON.stringify(profile)}`;
             } catch (error: any) {
                 console.error("Error call apis:", JSON.stringify(error));
             }

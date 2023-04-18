@@ -1,5 +1,6 @@
 // application
 import AuthSignUpPage from "@/container/auth/AuthSignUpPage";
+import { LayoutClean } from "@/container/shared/layout/Layout";
 
 function AuthSignUp() {
     // const accountInfo = useAccountInfo();
@@ -12,3 +13,5 @@ function AuthSignUp() {
 }
 
 export default AuthSignUp;
+
+AuthSignUp.Layout = LayoutClean;

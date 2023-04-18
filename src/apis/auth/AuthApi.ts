@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import API from "../API";
-import { F_LOGIN_SOCIAL } from "./AuthFragment";
+import { F_LOGIN, F_LOGIN_SOCIAL } from "./AuthFragment";
 
 const AuthApi = {
     loginSocial: (provider: string, token: string) =>
@@ -30,18 +30,18 @@ const AuthApi = {
     //         variables: { id },
     //     }),
 
-    // create: (input: any) =>
-    //     API.withConverter(detailConvertor).mutate({
-    //         mutation: gql`
-    //             ${F_BANNER}
-    //             mutation createBanner($input: BannerInput) {
-    //                 banner: createBanner(input: $input) {
-    //                     ...F_BANNER
-    //                 }
-    //             }
-    //         `,
-    //         variables: { input },
-    //     }),
+    register: (input: any) =>
+        API.instance.mutate({
+            mutation: gql`
+                ${F_LOGIN}
+                mutation register($input: CustomerRegisterInput) {
+                    data: register(input: $input) {
+                        ...F_LOGIN
+                    }
+                }
+            `,
+            variables: { input },
+        }),
 
     // update: (id: string, input: any) =>
     //     API.withConverter(detailConvertor).mutate({

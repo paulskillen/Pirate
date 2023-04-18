@@ -1,5 +1,6 @@
 // third-party
 import { applyMiddleware, compose, createStore } from "redux";
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 // import thunk from "redux-thunk";
 import { MakeStore, createWrapper } from "next-redux-wrapper";
 // reducer
@@ -42,14 +43,11 @@ export const save = (state: any) => {
     }
 };
 
-export const store = createStore(
-    rootReducer,
-    load(),
-    compose()
-    // applyMiddleware(thunk)
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+export const store = configureStore({ reducer: rootReducer, devTools: true });
 
 const makeStore: MakeStore<any> = () => store;
 
-export const wrapper = createWrapper<any>(makeStore);
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppState = ReturnType<AppStore["getState"]>;
+
+export const wrapper = createWrapper<AppStore>(makeStore);

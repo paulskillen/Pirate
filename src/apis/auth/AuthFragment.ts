@@ -27,3 +27,13 @@ export const F_LOGIN_SOCIAL = gql`
         }
     }
 `;
+
+export const F_LOGIN = gql`
+    ${F_CUSTOMER}
+    fragment F_LOGIN on LoginResponseDto {
+        accessToken
+        profile {
+            ...F_CUSTOMER
+        }
+    }
+`;
