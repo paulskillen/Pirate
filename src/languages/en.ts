@@ -1,5 +1,6 @@
 const translations = {
     back: "Back",
+    backToHome: "Back to home",
     provider: "Provider",
     dataPlan: "Data Plan",
     cancel: "Cancel",
@@ -16,6 +17,8 @@ const translations = {
     firstName: "First Name",
     lastName: "Last Name",
     password: "Password",
+    title: "Title",
+    confirmPassword: "Confirm Password",
     checkout: "Checkout",
     yourOrder: "Your Order",
     bankTransfer: "Bank Transfer",

@@ -1,10 +1,17 @@
+export enum CustomerTitle {
+    Mr = "Mr",
+    Mrs = "Mrs",
+    Miss = "Miss",
+    Ms = "Ms",
+}
+
 export interface ICustomer {
     id: string;
     updatedAt: Date;
     createdAt: Date;
     avatar: string;
     customerNo: string;
-    title: string;
+    title: CustomerTitle;
     fullName: string;
     firstName: string;
     lastName: string;

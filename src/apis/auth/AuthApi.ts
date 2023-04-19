@@ -34,7 +34,7 @@ const AuthApi = {
         API.instance.mutate({
             mutation: gql`
                 ${F_LOGIN}
-                mutation register($input: CustomerRegisterInput) {
+                mutation register($input: CustomerRegisterInput!) {
                     data: register(input: $input) {
                         ...F_LOGIN
                     }
