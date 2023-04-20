@@ -48,5 +48,23 @@ export default NextAuth({
 
             return false;
         },
+
+        jwt: async ({ token, user, account, profile, isNewUser }) => {
+            console.log(
+                "🚀 >>>>>> file: [...nextauth].ts:54 >>>>>> jwt: >>>>>> account:",
+                account
+            );
+            // Add access_token to the token right after signin
+            if (account?.accessToken) {
+                token.accessToken = account.accessToken;
+            }
+            return token;
+        },
+
+        session: ({ session, token, user }) => {
+            //@ts-ignore
+            session.accessToken = token.accessToken;
+            return session;
+        },
     },
 });
