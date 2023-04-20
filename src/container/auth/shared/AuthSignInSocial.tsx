@@ -1,7 +1,13 @@
+import AuthApi from "@/apis/auth/AuthApi";
+import { SocialProvider } from "@/common/constant/app";
+import Path from "@/common/constant/path";
+import { signInAction } from "@/store/auth/authActions";
+import { Progress } from "d-react-components";
+import moment from "moment";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
-import Path from "@/common/constant/path";
+import { useDispatch } from "react-redux";
 
 export interface IAuthSignInSocialProps {
     [key: string]: any;
@@ -24,16 +30,10 @@ export default AuthSignInSocial;
 
 const ButtonSignSocial = (props: IButtonLoginSocial) => {
     const router = useRouter();
+    const dispatch = useDispatch();
     const { provider, className } = props;
-    const { data } = useSession();
-
-    console.log(
-        "🚀 >>>>>> file: AuthSignInSocial.tsx:30 >>>>>> ButtonSignSocial >>>>>> data:",
-        data
-    );
+    const { data: session } = useSession();
     // const signInAction = useSignIn();
-    // const { query } = queryString.parseUrl(router.asPath);
-    // const queryProvider = query?.provider;
     // const lastRouteLogin = useSelector(
     //     (state: any) => state?.metadata?.lastRouteLogin
     // );
@@ -43,7 +43,7 @@ const ButtonSignSocial = (props: IButtonLoginSocial) => {
             case "google":
                 return {
                     imgSource: "/images/btnGoogle.png",
-                    // signUpUrl: Path.accountSignUpGoogle().href,
+                    signUpUrl: Path.singUp().href,
                 };
             // case "facebook":
             //     return {
@@ -55,42 +55,50 @@ const ButtonSignSocial = (props: IButtonLoginSocial) => {
         }
     }, [provider]);
 
-    // useEffect(() => {
-    //     if (!queryProvider || !session || provider !== queryProvider) return;
+    useEffect(() => {
+        if (!session) return;
+        console.log("GET IN CALL API");
 
-    //     const { expires, accessToken } = session;
-    //     const expiresTime = moment(expires).valueOf();
-    //     if (expiresTime < new Date().getTime()) {
-    //         return;
-    //     }
+        const { expires, user, idToken } = session as any;
+        if (!session) return;
+        const expiresTime = moment(expires).valueOf();
+        if (expiresTime < new Date().getTime()) {
+            return;
+        }
 
-    //     const body = {
-    //         access_token: accessToken,
-    //         provider,
-    //     };
-    //     const APISocial = [
-    //         { method: API.authenticateSocialAccount, params: [body] },
-    //     ];
-    //     Progress.show(APISocial, ([res]: any[]) => {
-    //         const socialRes = res?.data?.data ?? {};
-    //         const { access_token, profile, social } = socialRes;
-
-    //         if (socialRes.is_login) {
-    //             signInAction({ token: access_token, profile });
-    //             router.push(lastRouteLogin);
-    //         } else {
-    //             router.push({
-    //                 pathname: providerData.signUpUrl,
-    //                 query: { id: social?.id, token: social.token },
-    //             });
-    //         }
-    //     });
-    // }, [session]);
+        const body = {
+            access_token: idToken,
+            provider,
+        };
+        const APISocial = [
+            {
+                method: AuthApi.loginSocial,
+                params: [SocialProvider.GOOGLE, idToken],
+            },
+        ];
+        Progress.show(APISocial, ([res]: any) => {
+            const { accessToken, isRegistered, profile } =
+                res?.data?.data ?? {};
+            if (isRegistered) {
+                dispatch(signInAction(accessToken));
+                return true;
+            } else {
+                router.push({
+                    pathname: providerData.signUpUrl,
+                    query: { profile: JSON.stringify(profile) },
+                });
+            }
+        });
+    }, [session]);
 
     return (
         <div
             className={`login__button_social shadow-sm border rounded-lg mt-3 flex justify-center items-center ${className} `}
-            onClick={() => signIn(provider)}
+            onClick={() =>
+                signIn(provider, {
+                    callbackUrl: document.URL + "?provider=" + provider,
+                })
+            }
         >
             <img src={providerData.imgSource} />
         </div>

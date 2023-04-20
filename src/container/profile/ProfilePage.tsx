@@ -1,8 +1,10 @@
 import Messages from "@/languages/Messages";
+import { signOutAction } from "@/store/auth/authActions";
 import { Avatar, Button } from "d-react-components";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 export interface IProfilePageProps {
     [key: string]: any;
@@ -10,6 +12,7 @@ export interface IProfilePageProps {
 
 const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
     const router = useRouter();
+    const dispatch = useDispatch();
     const { data } = useSession();
 
     return (
@@ -17,7 +20,14 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
             <Avatar src={data?.user?.image ?? ""} className="mt-5" />
             <div className="mt-3">{data?.user?.email}</div>
             <div className="mt-3">{data?.user?.name}</div>
-            <Button onClick={() => signOut()} color="secondary" variant="trans">
+            <Button
+                onClick={() => {
+                    signOut();
+                    dispatch(signOutAction());
+                }}
+                color="secondary"
+                variant="trans"
+            >
                 {Messages.signOut}
             </Button>
         </div>

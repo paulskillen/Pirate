@@ -68,7 +68,11 @@ const Path = {
     // ----------------------------------------
 
     singUp: (): ILinkProps => ({
-        href: "login/sign-up",
+        href: "/login/sign-up",
+    }),
+
+    signUpGoogle: (): ILinkProps => ({
+        href: "/login/sign-up/google",
     }),
 };
 

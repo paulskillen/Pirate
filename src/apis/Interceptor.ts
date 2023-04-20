@@ -5,7 +5,7 @@ import { message } from "antd";
 import { Notifications } from "d-react-components";
 import { includes, map, some } from "lodash";
 import Messages from "../languages/Messages";
-import { signOut } from "../store/auth/authActions";
+import { signOutAction } from "../store/auth/authActions";
 
 const UNAUTHORIZE = 401;
 const DATA_ERROR = 400;
@@ -70,7 +70,7 @@ export const UnauthorizeMiddleware = onError((error: any) => {
     );
     if (isUnauthorized && store.getState()?.auth.accessToken) {
         Notifications.showError(Messages.tokenIsExpire);
-        store.dispatch(signOut());
+        store.dispatch(signOutAction());
         // window.open(Path.AUTH, "_self");
     }
 });

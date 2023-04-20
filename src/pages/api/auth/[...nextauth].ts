@@ -28,35 +28,33 @@ export default NextAuth({
         },
     },
     callbacks: {
-        signIn: async ({ user, credentials, account, email, profile }) => {
-            try {
-                const resLogin = await AuthApi.loginSocial(
-                    SocialProvider.GOOGLE,
-                    account?.id_token ?? ""
-                );
-                const { accessToken, isRegistered, profile } =
-                    resLogin?.data?.data ?? {};
-                if (isRegistered) {
-                    return true;
-                }
-                return `${CONFIG.DOMAIN}/${
-                    Path.singUp().href
-                }?profile=${JSON.stringify(profile)}`;
-            } catch (error: any) {
-                console.error("Error call apis:", JSON.stringify(error));
-            }
+        // signIn: async ({ user, credentials, account, email, profile }) => {
+        //     try {
+        //         const resLogin = await AuthApi.loginSocial(
+        //             SocialProvider.GOOGLE,
+        //             account?.id_token ?? ""
+        //         );
+        //         const { accessToken, isRegistered, profile } =
+        //             resLogin?.data?.data ?? {};
+        //         if (isRegistered) {
+        //             return true;
+        //         }
+        //         return `${CONFIG.DOMAIN}/${
+        //             Path.singUp().href
+        //         }?profile=${JSON.stringify(profile)}`;
+        //     } catch (error: any) {
+        //         console.error("Error call apis:", JSON.stringify(error));
+        //     }
 
-            return false;
-        },
+        //     return false;
+        // },
 
         jwt: async ({ token, user, account, profile, isNewUser }) => {
-            console.log(
-                "🚀 >>>>>> file: [...nextauth].ts:54 >>>>>> jwt: >>>>>> account:",
-                account
-            );
-            // Add access_token to the token right after signin
-            if (account?.accessToken) {
-                token.accessToken = account.accessToken;
+            if (account?.access_token) {
+                token.accessToken = account.access_token;
+            }
+            if (account?.id_token) {
+                token.idToken = account.id_token;
             }
             return token;
         },
@@ -64,6 +62,8 @@ export default NextAuth({
         session: ({ session, token, user }) => {
             //@ts-ignore
             session.accessToken = token.accessToken;
+            //@ts-ignore
+            session.idToken = token.idToken;
             return session;
         },
     },

@@ -4,14 +4,14 @@ import {
     AUTH_SAVE_REGISTER,
 } from "./authActionTypes";
 
-export function signIn(accessToken: string) {
+export function signInAction(accessToken: string) {
     return {
         type: AUTH_SIGN_IN,
         data: accessToken,
     };
 }
 
-export function signOut() {
+export function signOutAction() {
     return {
         type: AUTH_SIGN_OUT,
     };
