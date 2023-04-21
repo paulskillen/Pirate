@@ -57,10 +57,9 @@ const ButtonSignSocial = (props: IButtonLoginSocial) => {
 
     useEffect(() => {
         if (!session) return;
-        console.log("GET IN CALL API");
-
         const { expires, user, idToken } = session as any;
-        if (!session) return;
+        if (!idToken) return;
+
         const expiresTime = moment(expires).valueOf();
         if (expiresTime < new Date().getTime()) {
             return;

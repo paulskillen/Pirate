@@ -3,6 +3,18 @@ import API from "../API";
 import { F_ORDER, F_ORDERS } from "./OrderFragment";
 
 const OrderApi = {
+    history: () =>
+        API.instance.query({
+            query: gql`
+                ${F_ORDERS}
+                query historyOrder {
+                    data: historyOrderForCustomer {
+                        ...F_ORDERS
+                    }
+                }
+            `,
+            fetchPolicy: "no-cache",
+        }),
     detail: (id: string) =>
         API.instance.query({
             query: gql`

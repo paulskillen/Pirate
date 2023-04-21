@@ -4,6 +4,7 @@ import { onError } from "@apollo/client/link/error";
 import { message } from "antd";
 import { Notifications } from "d-react-components";
 import { includes, map, some } from "lodash";
+import { signOut } from "next-auth/react";
 import Messages from "../languages/Messages";
 import { signOutAction } from "../store/auth/authActions";
 
@@ -12,6 +13,12 @@ const DATA_ERROR = 400;
 
 export const AuthMiddleware = new ApolloLink((operation, forward) => {
     try {
+        const authState = store.getState().auth;
+
+        console.log(
+            "🚀 >>>>>> file: Interceptor.ts:18 >>>>>> AuthMiddleware >>>>>> authState:",
+            authState
+        );
         const accessToken = (store.getState().auth as any)?.accessToken;
         operation.setContext(({ headers = {} }) => ({
             headers: {
@@ -68,9 +75,9 @@ export const UnauthorizeMiddleware = onError((error: any) => {
     const isUnauthorized = some(messageErrors, (message) =>
         [UNAUTHORIZED, UNAUTHORIZE_MESSAGE, TOKEN_INVALID].includes(message)
     );
-    if (isUnauthorized && store.getState()?.auth.accessToken) {
+    if (isUnauthorized && (store.getState() as any)?.auth?.accessToken) {
         Notifications.showError(Messages.tokenIsExpire);
         store.dispatch(signOutAction());
-        // window.open(Path.AUTH, "_self");
+        signOut();
     }
 });

@@ -40,7 +40,7 @@ export const F_ORDER = gql`
 export const F_ORDERS = gql`
     ${F_ORDER}
     ${F_PAGINATE}
-    fragment F_ORDERS on OrderPaginateResponse {
+    fragment F_ORDERS on CustomerOrderPaginateResponse {
         data {
             ...F_ORDER
         }

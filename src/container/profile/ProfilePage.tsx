@@ -1,3 +1,5 @@
+import Path from "@/common/constant/path";
+import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
 import { signOutAction } from "@/store/auth/authActions";
 import { Avatar, Button } from "d-react-components";
@@ -20,6 +22,11 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
             <Avatar src={data?.user?.image ?? ""} className="mt-5" />
             <div className="mt-3">{data?.user?.email}</div>
             <div className="mt-3">{data?.user?.name}</div>
+            <AppLink href={Path.orderHistory().href}>
+                <div className="bg-gold p-2 rounded-full">
+                    {Messages.orderHistory}
+                </div>
+            </AppLink>
             <Button
                 onClick={() => {
                     signOut();

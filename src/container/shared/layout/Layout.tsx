@@ -66,6 +66,11 @@ export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
 
 export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     const accessToken = useAuthAccessToken();
+
+    console.log(
+        "🚀 >>>>>> file: Layout.tsx:70 >>>>>> accessToken:",
+        accessToken
+    );
     const { data, status } = useSession();
 
     if (!accessToken) {

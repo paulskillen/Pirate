@@ -22,9 +22,11 @@ const translations = {
     checkout: "Checkout",
     yourOrder: "Your Order",
     bankTransfer: "Bank Transfer",
+    orderHistory: "Order History",
     selectPaymentMethod: "Select Payment Method",
     completePurchase: "Complete Purchase",
     dontHaveAnAccount: "Don't have an account?",
+    tokenIsExpire: "Token is expired !",
 };
 
 export default translations;
