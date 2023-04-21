@@ -1,4 +1,5 @@
 import OrderApi from "@/apis/order/OrderApi";
+import Path from "@/common/constant/path";
 import { PaymentMethod, PAYMENT_METHODS } from "@/common/constant/payment";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { IOrder } from "@/common/interface/order";
@@ -17,7 +18,7 @@ export interface ICheckoutPageProps {
     [key: string]: any;
 }
 
-const TEST_CUSTOMER = "638589e5ab563e9641d7ccfc";
+const TEST_CUSTOMER = "643f548bab6d359facb8881e";
 
 const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const router = useRouter();
@@ -86,6 +87,10 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                     "🚀 >>>>>> file: CheckoutPage.tsx:78 >>>>>> onSuccessPaymentHandler >>>>>> res:",
                     res
                 );
+                const order = res?.data?.data?.data;
+                if (order) {
+                    router.push(Path.orderDetail(order).as || "");
+                }
             }
         );
     };
