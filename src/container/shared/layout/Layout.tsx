@@ -3,7 +3,6 @@ import Image from "@/components/image/Image";
 import AuthSignInView from "@/container/auth/shared/AuthSignInView";
 import { useAuthAccessToken } from "@/store/auth/authHook";
 import ClassNames from "classnames";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { PropsWithChildren, useMemo } from "react";
 import TabBottom from "../tab/TabBottom";
@@ -67,12 +66,6 @@ export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
 export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     const accessToken = useAuthAccessToken();
 
-    console.log(
-        "🚀 >>>>>> file: Layout.tsx:70 >>>>>> accessToken:",
-        accessToken
-    );
-    const { data, status } = useSession();
-
     if (!accessToken) {
         return <AuthSignInView />;
     }
@@ -80,7 +73,6 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     return (
         <div className="layout_container bg-black">
             {children}
-            <TabBottom />
             <LogoView />
         </div>
     );

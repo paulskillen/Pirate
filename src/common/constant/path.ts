@@ -71,6 +71,11 @@ const Path = {
         href: "/order/history",
     }),
 
+    orderDetail: (order: any): ILinkProps => ({
+        href: "/order/detail/[orderSlug]",
+        as: `/order/detail/${order?.id}`,
+    }),
+
     // ----------------------------------------
     // -- AUTH
     // ----------------------------------------

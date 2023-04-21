@@ -38,7 +38,7 @@ function AppLink(props: AppLinkProps) {
         const linkProps: LinkProps = typeof href === "string" ? { href } : href;
 
         link = (
-            <Link locale={locale} {...linkProps}>
+            <Link locale={locale} {...linkProps} {...anchorProps}>
                 {children}
             </Link>
         );

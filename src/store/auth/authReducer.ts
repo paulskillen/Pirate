@@ -32,11 +32,11 @@ const resetUserInfo = () => initialState;
 function authBaseReducer(state = initialState, action: any) {
     switch (action.type) {
         case AUTH_SIGN_IN:
+            console.log("GET IN AUTH_SIGN_IN", { action });
             return saveAccessToken(state, action.data);
         case AUTH_SIGN_OUT:
             return resetUserInfo();
         case AUTH_SAVE_REGISTER:
-            console.log("GET IN AUTH_SAVE_REGISTER", { action });
             return {
                 ...state,
                 registerData: action?.data,

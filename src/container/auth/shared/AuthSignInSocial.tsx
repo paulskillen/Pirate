@@ -64,11 +64,6 @@ const ButtonSignSocial = (props: IButtonLoginSocial) => {
         if (expiresTime < new Date().getTime()) {
             return;
         }
-
-        const body = {
-            access_token: idToken,
-            provider,
-        };
         const APISocial = [
             {
                 method: AuthApi.loginSocial,
