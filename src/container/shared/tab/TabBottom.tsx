@@ -19,8 +19,12 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                     <Icon icon="house" color="white" size={32} />
                 </div>
             </AppLink>
+            <AppLink href={Path.esimsHistory()}>
+                <div className="p-2 rounded-full">
+                    <Icon icon="sim" className="text-gold" size={36} />
+                </div>
+            </AppLink>
 
-            <Icon icon="sim" className="text-gold" size={36} />
             <AppLink href={Path.profile()}>
                 <Icon icon="person-circle" className="text-gold" size={36} />
             </AppLink>

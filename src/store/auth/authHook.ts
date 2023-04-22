@@ -16,3 +16,8 @@ export const useAuthAccessToken = (): AuthState["accessToken"] =>
     useAppSelector((state) => {
         return state?.[AUTH_NAMESPACE]?.accessToken;
     }) as any;
+
+export const useAuthProfile = (): AuthState["profile"] =>
+    useAppSelector((state) => {
+        return state?.[AUTH_NAMESPACE]?.profile;
+    }) as any;
