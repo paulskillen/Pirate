@@ -33,6 +33,7 @@ const translations = {
     helpCenter: "Help Center",
     promos: "Promos",
     about: "About",
+    selectDestination: "Select Destination",
 };
 
 export default translations;

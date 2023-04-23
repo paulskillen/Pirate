@@ -51,7 +51,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     return (
         <main className="home-page_container w-screen h-screen bg-transparent text-white overflow-y-scroll px-4">
             <section className="flex flex-row justify-between items-center mt-4">
-                <div className="text h4">{Messages.dataPlan}</div>
+                <div className="text h4">{Messages.selectDestination}</div>
                 <Button
                     iconName="search"
                     className="rounded px-3"
