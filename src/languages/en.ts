@@ -34,6 +34,7 @@ const translations = {
     promos: "Promos",
     about: "About",
     selectDestination: "Select Destination",
+    yourOrders: "Your Orders",
 };
 
 export default translations;

@@ -1,5 +1,6 @@
 import Path from "@/common/constant/path";
 import AppLink from "@/components/link/AppLink";
+import LayoutHeader from "@/container/shared/layout/LayoutHeader";
 import Messages from "@/languages/Messages";
 import { Button, InputText } from "d-react-components";
 import { useFormik } from "formik";
@@ -50,33 +51,34 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
     };
 
     return (
-        <div className="card-body">
-            <h6 className="card-title">{Messages.signIn}</h6>
-            <div>
-                {renderLoginInputs()}
+        <div className="">
+            <LayoutHeader title={Messages.signIn} bgColor="transparent" />
+            <div className="px-4 mt-4">
+                <div>
+                    {renderLoginInputs()}
+                    <Button
+                        type="submit"
+                        className="btn btn-primary mt-3 w-100"
+                        // onClick={() => loginForm.handleSubmit()}
+                        // disabled={timeLeft > 0}
+                    >
+                        {Messages.login}
+                    </Button>
+                    <div className="d-flex mt-4 align-items-center">
+                        <div className="divider " />
+                        <small className="mx-3">{Messages.or}</small>
+                        <div className="divider " />
+                    </div>
+                    <AuthSignInSocial />
 
-                <Button
-                    type="submit"
-                    className="btn btn-primary mt-3 w-100"
-                    // onClick={() => loginForm.handleSubmit()}
-                    // disabled={timeLeft > 0}
-                >
-                    {Messages.login}
-                </Button>
-                <div className="d-flex mt-4 align-items-center">
-                    <div className="divider " />
-                    <small className="mx-3">{Messages.or}</small>
-                    <div className="divider " />
-                </div>
-                <AuthSignInSocial />
-
-                <div className="mt-5 flex-center">
-                    <small>{Messages.dontHaveAnAccount}</small>
-                    <AppLink href={Path.singUp()?.href}>
-                        <small className="text-primary ml-1">
-                            {Messages.signUp}
-                        </small>
-                    </AppLink>
+                    <div className="mt-5 flex-center">
+                        <small>{Messages.dontHaveAnAccount}</small>
+                        <AppLink href={Path.singUp()?.href}>
+                            <small className="text-primary ml-1">
+                                {Messages.signUp}
+                            </small>
+                        </AppLink>
+                    </div>
                 </div>
             </div>
         </div>

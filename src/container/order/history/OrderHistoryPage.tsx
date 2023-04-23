@@ -23,7 +23,7 @@ export interface IOrderItemProps {
 const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
     const router = useRouter();
     const orderLocals = useOrderHistory();
-    const { id: customerId } = useAuthProfile() || {};
+    const { id: customerId, email } = useAuthProfile() || {};
     const [orderList, setOrderList] = useState<Array<any>>([]);
     const isGuest = !customerId;
 
@@ -36,7 +36,11 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
             setOrderList(orderLocals || []);
         } else {
             const res = await OrderApi.history();
-            setOrderList(res?.data?.data?.data ?? []);
+            const allOrders = [
+                ...(res?.data?.data?.data ?? []),
+                ...(orderLocals || []),
+            ];
+            setOrderList(allOrders);
         }
     };
     if (!(orderList?.length > 0)) {
@@ -49,10 +53,7 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
 
     return (
         <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white ">
-            <LayoutHeader
-                title={Messages.orderHistory}
-                onBackClick={() => router.push(Path.home().href || "")}
-            />
+            <LayoutHeader title={Messages.orderHistory} />
             <div className="overflow-y-scroll px-4 w-full pb-40">
                 {map(orderList, (orderItem) => {
                     return <OrderItem order={orderItem} />;
