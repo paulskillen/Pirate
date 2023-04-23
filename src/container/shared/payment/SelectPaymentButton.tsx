@@ -24,7 +24,7 @@ export type PayPalOrderStatusType = OrderResponseBodyMinimal["status"];
 
 export interface ISelectPaymentButtonProps {
     totalAmount: number;
-    customerId: string;
+    customerId?: string;
     purchasingItems?: Array<IBundle>;
     onSuccess?: (orderPayment: IPayPalOrderResponse, orderSer?: IOrder) => any;
     onError?: (error: any) => any;
@@ -64,13 +64,13 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
     const [openPaymentsModal, setOpenPaymentsModal] = useState<{
         open: boolean;
     }>({ open: false });
-    
+
     const onCreateOrder = async (actions: CreateOrderActions) => {
         const payload = {
             products: purchasingItems
                 ? mapBundleToOrderProduct(purchasingItems)
                 : [],
-            customer: customerId,
+            customer: customerId || null,
         };
         const createdOrderSer = await OrderApi.create(payload);
         const orderSer = createdOrderSer?.data?.data?.data;

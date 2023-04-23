@@ -12,6 +12,7 @@ export const F_BUNDLE = gql`
         dataAmount
         duration
         price
+        salePrice
         bundleData
     }
 `;

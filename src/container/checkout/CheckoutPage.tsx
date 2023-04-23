@@ -5,10 +5,13 @@ import { AppStateContext } from "@/common/context/app/app-context";
 import { IOrder } from "@/common/interface/order";
 import { convertBase64ToImgSource } from "@/common/utils/image";
 import Messages from "@/languages/Messages";
+import { useAuthProfile } from "@/store/auth/authHook";
+import { addOrderAction } from "@/store/order-history/orderHistoryActions";
 import { Button, Progress } from "d-react-components";
 import { map, reduce } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 import { BundleItem } from "../bundle/BundleByCountryPage";
 import SelectPaymentButton, {
     IPayPalOrderResponse,
@@ -22,21 +25,13 @@ const TEST_CUSTOMER = "643f548bab6d359facb8881e";
 
 const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const router = useRouter();
+    const dispatch = useDispatch();
+    const { id: customerId } = useAuthProfile() || {};
     const { userCart, activeOrder, setActiveOrder } =
         useContext(AppStateContext);
     const [paymentOrder, setPaymentOrder] = useState<IPayPalOrderResponse>();
     const [fetchOrder, setFetchOrder] = useState<any>();
-    const qrCode = fetchOrder?.eSimData?.qrCode;
-
-    const base64 = useMemo(() => {
-        if (!qrCode) {
-            return "";
-        }
-        if (!process.browser) {
-            return "";
-        }
-        return btoa(unescape(encodeURIComponent(qrCode)));
-    }, [qrCode]);
+    const isGuest = !customerId;
 
     const totalAmount = useMemo(() => {
         return reduce(
@@ -75,7 +70,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                         paymentData: paymentRes,
                     },
                 ],
-                customer: TEST_CUSTOMER,
+                customer: customerId || null,
             },
         };
         return Progress.show(
@@ -83,13 +78,14 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
             (res: any) => {
                 setActiveOrder(undefined as any);
                 setPaymentOrder(undefined as any);
-                console.log(
-                    "🚀 >>>>>> file: CheckoutPage.tsx:78 >>>>>> onSuccessPaymentHandler >>>>>> res:",
-                    res
-                );
                 const order = res?.data?.data?.data;
                 if (order) {
-                    router.push(Path.orderDetail(order).as || "");
+                    if (isGuest) {
+                        dispatch(addOrderAction(order));
+                        router.push(Path.esimsHistory().href || "");
+                    } else {
+                        router.push(Path.orderDetail(order).as || "");
+                    }
                 }
             }
         );
@@ -153,7 +149,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                             }
                         }}
                         onError={(error: any) => {}}
-                        customerId={TEST_CUSTOMER}
+                        customerId={customerId}
                         purchasingItems={userCart}
                     />
                 )}
@@ -161,7 +157,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
                 {/* <div className="h-96" /> */}
             </div>
-            {renderButton()}
+            {/* {renderButton()} */}
         </div>
     );
 };

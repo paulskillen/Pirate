@@ -15,6 +15,7 @@ const OrderApi = {
             `,
             fetchPolicy: "no-cache",
         }),
+
     detail: (id: string) =>
         API.instance.query({
             query: gql`
@@ -68,6 +69,7 @@ const OrderApi = {
             variables: { ...payload },
             fetchPolicy: "no-cache",
         }),
+
     // update: (id: string, input: any) =>
     //     API.withConverter(detailConvertor).mutate({
     //         mutation: gql`

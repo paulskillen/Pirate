@@ -77,6 +77,19 @@ const Path = {
     }),
 
     // ----------------------------------------
+    // -- ESIMS
+    // ----------------------------------------
+
+    esimsHistory: (): ILinkProps => ({
+        href: "/esims/history",
+    }),
+
+    esimsDetail: (order: any): ILinkProps => ({
+        href: "/esims/detail/[esimSlug]",
+        as: `/esims/detail/${order?.id}`,
+    }),
+
+    // ----------------------------------------
     // -- AUTH
     // ----------------------------------------
 

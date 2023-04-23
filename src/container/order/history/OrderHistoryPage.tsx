@@ -9,6 +9,8 @@ import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
 import { useRouter } from "next/router";
 import Path from "@/common/constant/path";
 import LayoutHeader from "@/container/shared/layout/LayoutHeader";
+import { useAuthProfile } from "@/store/auth/authHook";
+import { useOrderHistory } from "@/store/order-history/orderHistoryHook";
 
 export interface IOrderHistoryPageProps {
     [key: string]: any;
@@ -20,15 +22,22 @@ export interface IOrderItemProps {
 
 const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
     const router = useRouter();
+    const orderLocals = useOrderHistory();
+    const { id: customerId } = useAuthProfile() || {};
     const [orderList, setOrderList] = useState<Array<any>>([]);
+    const isGuest = !customerId;
 
     useEffect(() => {
         loadOrderHistory();
     }, []);
 
     const loadOrderHistory = async () => {
-        const res = await OrderApi.history();
-        setOrderList(res?.data?.data?.data ?? []);
+        if (isGuest) {
+            setOrderList(orderLocals || []);
+        } else {
+            const res = await OrderApi.history();
+            setOrderList(res?.data?.data?.data ?? []);
+        }
     };
     if (!(orderList?.length > 0)) {
         return (

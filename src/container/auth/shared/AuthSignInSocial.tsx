@@ -74,7 +74,7 @@ const ButtonSignSocial = (props: IButtonLoginSocial) => {
             const { accessToken, isRegistered, profile } =
                 res?.data?.data ?? {};
             if (isRegistered) {
-                dispatch(signInAction(accessToken));
+                dispatch(signInAction({ profile, accessToken }));
                 return true;
             } else {
                 router.push({
