@@ -9,3 +9,8 @@ export enum SocialProvider {
     LINE = "LINE",
     APPLE = "APPLE",
 }
+
+const ESIM_GO_API_URL = "https://api.esim-go.com/v2.2";
+
+export const ESIM_GO_GET_ESIM_QR_CODE_IMG = (code: string) =>
+    `${ESIM_GO_API_URL}/esims/${code}/qr`;

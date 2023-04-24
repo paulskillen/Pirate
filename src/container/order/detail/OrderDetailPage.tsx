@@ -1,9 +1,11 @@
 import EsimApi from "@/apis/esim/EsimApi";
+import axios from "axios";
 import OrderApi from "@/apis/order/OrderApi";
 import LayoutHeader from "@/container/shared/layout/LayoutHeader";
 import { Buffer } from "buffer";
 import { isEmpty } from "lodash";
 import React, { useEffect, useState } from "react";
+import { ESIM_GO_GET_ESIM_QR_CODE_IMG } from "@/common/constant/app";
 
 export interface IOrderDetailPageProps {
     [key: string]: any;
@@ -32,13 +34,18 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
     }, [eSimId]);
 
     const loadQrCode = async () => {
-        const res = await EsimApi.getQrCode(eSimId);
-        const qrCode = res?.data?.data?.data ?? "";
-        setEsimQrCode(qrCode);
-        console.log(
-            "🚀 >>>>>> file: OrderDetailPage.tsx:37 >>>>>> loadQrCode >>>>>> qrCode:",
-            qrCode
-        );
+        const qr = await axios.get(ESIM_GO_GET_ESIM_QR_CODE_IMG(eSimId), {
+            headers: {
+                "X-API-Key": "Q6vYZShNTl8icvrRIuYuUeYHDHEL1uh55Jv2BHeA",
+            },
+        });
+        // const res = await EsimApi.getQrCode(eSimId);
+        // const qrCode = res?.data?.data?.data ?? "";
+        setEsimQrCode(qr?.data);
+        // console.log(
+        //     "🚀 >>>>>> file: OrderDetailPage.tsx:37 >>>>>> loadQrCode >>>>>> qrCode:",
+        //     qrCode
+        // );
     };
 
     const loadOrderDetail = async () => {
@@ -51,12 +58,12 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
         );
     }
     if (!esimQrCode) {
-        return <div />;
+        return (
+            <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white" />
+        );
     }
 
     const blob = new Blob([esimQrCode], { type: "image/png" });
-
-    console.log("🚀 >>>>>> file: OrderDetailPage.tsx:47 >>>>>> blob:", blob);
     const url = URL.createObjectURL(blob);
     const base64Data = Buffer.from(esimQrCode).toString("base64");
 
