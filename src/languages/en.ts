@@ -35,6 +35,7 @@ const translations = {
     about: "About",
     selectDestination: "Select Destination",
     yourOrders: "Your Orders",
+    qrCode: "Qr Code",
 };
 
 export default translations;
