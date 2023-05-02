@@ -128,6 +128,9 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
             )}
             <div className="w-full ml-3">
                 <div className={rowClass}>
+                    <div>{id}</div>
+                </div>
+                <div className={rowClass}>
                     <div>{dataDisplay}</div>
                 </div>
                 <div className={rowClass}>
