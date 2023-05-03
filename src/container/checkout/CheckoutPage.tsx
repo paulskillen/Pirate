@@ -114,7 +114,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     };
 
     return (
-        <div>
+        <div className="">
             <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
                 <Button
                     onClick={() => router.back()}
@@ -126,7 +126,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 <div className="text-xl">{Messages.yourOrder}</div>
                 <div />
             </div>
-            <div className="h-screen overflow-y-scroll px-4">
+            <div className="h-screen overflow-y-scroll px-4 z-10 relative">
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
