@@ -2,8 +2,10 @@ import Path from "@/common/constant/path";
 import AppLink from "@/components/link/AppLink";
 import LayoutHeader from "@/container/shared/layout/LayoutHeader";
 import Messages from "@/languages/Messages";
+import { useAuthAccessToken } from "@/store/auth/authHook";
 import { Button, InputText } from "d-react-components";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import React from "react";
 import AuthSignInSocial from "./AuthSignInSocial";
 
@@ -12,6 +14,8 @@ export interface IAuthSignInViewProps {
 }
 
 const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
+    const accessToken = useAuthAccessToken();
+    const router = useRouter();
     const loginForm = useFormik({
         initialValues: {
             username: "",
@@ -52,7 +56,14 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
 
     return (
         <div className="">
-            <LayoutHeader title={Messages.signIn} bgColor="transparent" />
+            <LayoutHeader
+                textColor="black"
+                title={Messages.signIn}
+                bgColor="transparent"
+                onBackClick={() => {
+                    router.push(Path.home().href);
+                }}
+            />
             <div className="px-4 mt-4">
                 <div>
                     {renderLoginInputs()}

@@ -36,6 +36,8 @@ const translations = {
     selectDestination: "Select Destination",
     yourOrders: "Your Orders",
     qrCode: "Qr Code",
+    hideEsimQrCode: "Hide ESim Qr Code",
+    showEsimQrCode: "Show ESim Qr Code",
 };
 
 export default translations;

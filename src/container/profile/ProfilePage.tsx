@@ -56,7 +56,7 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
 
     return (
         <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white">
-            <LayoutHeader />
+            <LayoutHeader onBackClick={() => router.push(Path.home().href)} />
             <Avatar src={avatar ?? ""} className="mt-5" text={firstName} />
             <div className="mt-3">{email}</div>
             <div className="mt-3">{`${firstName} ${lastName}`}</div>

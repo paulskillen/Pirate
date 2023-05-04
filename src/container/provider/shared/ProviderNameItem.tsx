@@ -5,14 +5,18 @@ import React, { useMemo } from "react";
 
 export interface IProviderNameItemProps {
     providerId: string;
+    className?: string;
 }
 
-const ProviderNameItem: React.FC<IProviderNameItemProps> = ({ providerId }) => {
+const ProviderNameItem: React.FC<IProviderNameItemProps> = ({
+    providerId,
+    className,
+}) => {
     const foundProvider = useMemo(() => {
         return find(PROVIDERS, (item) => item?.id === providerId);
     }, [providerId]);
     return (
-        <div>
+        <div className={className}>
             {Messages?.[foundProvider?.label as keyof typeof Messages] as any}
         </div>
     );

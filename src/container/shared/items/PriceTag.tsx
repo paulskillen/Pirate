@@ -2,13 +2,14 @@ import React, { useMemo } from "react";
 
 export interface IPriceTagProps {
     price: string;
+    className?: string;
 }
 
-const PriceTag: React.FC<IPriceTagProps> = ({ price }) => {
+const PriceTag: React.FC<IPriceTagProps> = ({ price, className }) => {
     const displayPrice = useMemo(() => {
         return price?.toLocaleString?.();
     }, [price]);
-    return <div>${displayPrice}</div>;
+    return <div className={className}>${displayPrice}</div>;
 };
 
 export default PriceTag;
