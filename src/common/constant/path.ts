@@ -100,6 +100,22 @@ const Path = {
     signUpGoogle: (): ILinkProps => ({
         href: "/login/sign-up/google",
     }),
+
+    // ----------------------------------------
+    // -- SETTING
+    // ----------------------------------------
+
+    setting: (): ILinkProps => ({
+        href: "/setting",
+    }),
+
+    aboutUs: (): ILinkProps => ({
+        href: "/about-us",
+    }),
+
+    helpCenter: (): ILinkProps => ({
+        href: "/help-center",
+    }),
 };
 
 export default Path;

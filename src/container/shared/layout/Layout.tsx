@@ -2,6 +2,7 @@ import Path from "@/common/constant/path";
 import Image from "@/components/image/Image";
 import AuthSignInView from "@/container/auth/shared/AuthSignInView";
 import { useAuthAccessToken } from "@/store/auth/authHook";
+import styled from "@emotion/styled";
 import ClassNames from "classnames";
 import { useRouter } from "next/router";
 import React, { PropsWithChildren, useMemo } from "react";
@@ -44,11 +45,14 @@ const LogoView = () => {
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => {
     return (
-        <div className="layout_container bg-black">
+        <LayoutStyled
+            className="layout_container bg-black"
+            style={{ backgroundImage: "" }}
+        >
             {children}
             <TabBottom />
             <LogoView />
-        </div>
+        </LayoutStyled>
     );
 };
 
@@ -57,7 +61,9 @@ export default Layout;
 export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
     return (
         <div className="layout_container bg-black">
-            {children}
+            <div className="relative" style={{ zIndex: 999 }}>
+                {children}
+            </div>
             <LogoView />
         </div>
     );
@@ -77,3 +83,10 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
         </div>
     );
 };
+
+const LayoutStyled = styled.div`
+    /* background-image: url("/images/logo/logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+`;

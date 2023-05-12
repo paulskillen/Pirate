@@ -26,25 +26,25 @@ const MENUS = [
         id: "setting",
         label: "setting",
         icon: "settings",
-        path: Path.orderHistory().href,
+        path: Path.setting().href,
     },
     {
         id: "helpCenter",
         label: "helpCenter",
         icon: "settings_phone",
-        path: Path.orderHistory().href,
+        path: Path.helpCenter().href,
     },
     {
         id: "promos",
         label: "promos",
         icon: "query_stats",
-        path: Path.orderHistory().href,
+        path: Path.aboutUs().href,
     },
     {
         id: "about",
         label: "about",
         icon: "info",
-        path: Path.orderHistory().href,
+        path: Path.aboutUs().href,
     },
 ];
 
