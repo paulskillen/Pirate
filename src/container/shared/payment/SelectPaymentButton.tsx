@@ -32,11 +32,11 @@ export interface ISelectPaymentButtonProps {
 
 const mapBundleToPayPalItems = (items: IBundle[]): PurchaseItem[] => {
     return items.map((item) => {
-        const { name, price } = item;
+        const { name, salePrice } = item;
         return {
             name,
             quantity: "1",
-            unit_amount: { currency_code: "USD", value: price + "" },
+            unit_amount: { currency_code: "USD", value: salePrice + "" },
             category: "DIGITAL_GOODS",
         };
     });
@@ -73,9 +73,10 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
             customer: customerId || null,
         };
         const createdOrderSer = await OrderApi.create(payload);
+
         const orderSer = createdOrderSer?.data?.data?.data;
         setActiveOrder(orderSer);
-        return actions.order.create({
+        const payPalOrderPayload = {
             purchase_units: [
                 {
                     amount: {
@@ -94,7 +95,8 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
                     custom_id: customerId,
                 },
             ],
-        });
+        };
+        return actions.order.create(payPalOrderPayload);
     };
 
     const onApproveOrder = (actions: OnApproveActions) => {
@@ -123,7 +125,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
         return (
             <PayPalButtons
                 createOrder={(data, actions) => {
-                    return onCreateOrder(actions);
+                    return onCreateOrder(actions) as any;
                 }}
                 onApprove={(data, actions) => {
                     return onApproveOrder(actions);

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
 export interface IPriceTagProps {
-    price: string;
+    price: any;
     className?: string;
 }
 

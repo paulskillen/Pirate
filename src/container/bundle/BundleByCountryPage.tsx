@@ -53,7 +53,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     }}
                 >
                     {`${Messages.checkout}\b \b`}
-                    <PriceTag price={selectedBundle?.price} />
+                    <PriceTag price={selectedBundle?.salePrice} />
                 </Button>
             </div>
         );
@@ -104,7 +104,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     selected,
     showRadio = true,
 }) => {
-    const { provider, name, dataAmount, duration, description, price, id } =
+    const { provider, name, dataAmount, duration, description, salePrice, id } =
         bundle || {};
     const rowClass = ClassNames("flex flex-row items-center text-xl");
     const dataDisplay = useMemo(() => {
@@ -143,7 +143,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                 </div>
                 <div className="w-full flex justify-end">
                     <div>{`${Messages.price} \b \b`}</div>
-                    <PriceTag price={price} />
+                    <PriceTag price={salePrice} />
                 </div>
             </div>
         </div>

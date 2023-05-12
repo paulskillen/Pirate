@@ -37,8 +37,8 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         return reduce(
             userCart,
             (res, item, index) => {
-                const { price } = item;
-                return res + price;
+                const { salePrice } = item;
+                return res + (salePrice || 0);
             },
             0
         );

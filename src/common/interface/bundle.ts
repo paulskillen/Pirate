@@ -8,6 +8,7 @@ export interface IBundle {
     dataAmount: any;
     duration: any;
     price: any;
+    salePrice: number | null;
     bundleData?: any;
     updatedAt?: Date;
     createdAt?: Date;
