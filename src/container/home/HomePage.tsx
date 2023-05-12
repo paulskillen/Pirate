@@ -1,13 +1,9 @@
-import BundleApi from "@/apis/bundle/BundleApi";
 import Path from "@/common/constant/path";
-import { AppStateContext } from "@/common/context/app/app-context";
-import Select from "@/components/select/Select";
-import { writeUserData } from "@/firebase/Firebase";
 import Messages from "@/languages/Messages";
-import { Button, InputText, StringUtils } from "d-react-components";
-import { useFormik } from "formik";
+import styled from "@emotion/styled";
+import { Button } from "d-react-components";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import * as Yup from "yup";
 
 export interface IHomePageProps {
@@ -49,7 +45,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
 
     return (
-        <main className="home-page_container w-screen h-screen bg-transparent text-white overflow-y-scroll px-4">
+        <MainStyled className="home-page_container w-screen h-screen bg-transparent text-white overflow-y-scroll px-4">
             <section className="flex flex-row justify-between items-center mt-4">
                 <div className="text h4">{Messages.selectDestination}</div>
                 <Button
@@ -60,8 +56,10 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                     }}
                 />
             </section>
-        </main>
+        </MainStyled>
     );
 };
 
 export default HomePage;
+
+const MainStyled = styled.main``;

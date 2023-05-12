@@ -5,7 +5,7 @@ import { useAuthAccessToken } from "@/store/auth/authHook";
 import ClassNames from "classnames";
 import { useRouter } from "next/router";
 import React, { PropsWithChildren, useMemo } from "react";
-import TabBottom from "../tab/TabBottom";
+import TabBottom from "../navigation/TabBottom";
 
 const IMG_MOBILE = 250;
 const IMG_DESKTOP = 600;
