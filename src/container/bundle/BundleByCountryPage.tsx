@@ -41,7 +41,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 
     const renderCheckout = () => {
         return (
-            <div className="absolute bottom-5 w-full px-3 z-30">
+            <div className="fixed bottom-5 w-full px-3 z-30">
                 <Button
                     className="w-full font-bold z-30"
                     style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
@@ -60,7 +60,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     };
 
     return (
-        <div className="bg-transparent text-white">
+        <div className="bg-transparent text-white relative">
             <div className="flex flex-row items-center justify-between py-2 px-4  rounded-b-3xl">
                 <Button
                     onClick={() => router.back()}

@@ -4,10 +4,11 @@ import { PaymentMethod, PAYMENT_METHODS } from "@/common/constant/payment";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { IOrder } from "@/common/interface/order";
 import { convertBase64ToImgSource } from "@/common/utils/image";
+import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
 import { useAuthProfile } from "@/store/auth/authHook";
 import { addOrderAction } from "@/store/order-history/orderHistoryActions";
-import { Button, Progress } from "d-react-components";
+import { Button, Checkbox, Progress } from "d-react-components";
 import { map, reduce } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo, useState } from "react";
@@ -31,6 +32,10 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         useContext(AppStateContext);
     const [paymentOrder, setPaymentOrder] = useState<IPayPalOrderResponse>();
     const [fetchOrder, setFetchOrder] = useState<any>();
+    const [userAgreement, setUserAgreement] = useState<{
+        policy?: boolean;
+        compatible?: boolean;
+    }>({});
     const isGuest = !customerId;
 
     const totalAmount = useMemo(() => {
@@ -113,6 +118,53 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         );
     };
 
+    const renderAgreement = () => {
+        return (
+            <div className="bg-gold mt-4 p-4 rounded-3xl">
+                <div className="flex-center-y">
+                    <Checkbox
+                        onChange={() =>
+                            setUserAgreement({
+                                ...userAgreement,
+                                policy: !userAgreement?.policy,
+                            })
+                        }
+                        checked={userAgreement?.policy}
+                    />
+                    <label className="ml-3 text-white">
+                        {Messages.readAndAgreeWith}
+                        <AppLink
+                            className="inline ml-1 underline italic text-white"
+                            href={Path.policy().href}
+                        >
+                            <span>{Messages.termAndCondition}</span>
+                        </AppLink>
+                    </label>
+                </div>
+                <div className="flex-center-y mt-3">
+                    <Checkbox
+                        onChange={() =>
+                            setUserAgreement({
+                                ...userAgreement,
+                                compatible: !userAgreement?.compatible,
+                            })
+                        }
+                        checked={userAgreement?.compatible}
+                    />
+                    <label className="ml-3 text-white">
+                        {Messages.myDeviceIsCompatibleWithEsim}
+                        <AppLink
+                            className="inline ml-1 underline italic text-white"
+                            href={Path.compatibleDevice().href}
+                        >
+                            <span>{Messages.seeCompatibleDeviceList}</span>
+                        </AppLink>
+                    </label>
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div className="">
             <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
@@ -130,34 +182,33 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
-                {totalAmount > 0 && (
-                    <SelectPaymentButton
-                        totalAmount={totalAmount}
-                        onSuccess={(orderRes, orderSer) => {
-                            console.log(
-                                "🚀 >>>>>> file: CheckoutPage.tsx:99 >>>>>> orderSer:",
-                                orderSer
-                            );
-                            console.log(
-                                "🚀 >>>>>> file: CheckoutPage.tsx:108 >>>>>> orderRes:",
-                                orderRes
-                            );
+                {renderAgreement()}
+                {totalAmount > 0 &&
+                    userAgreement?.policy &&
+                    userAgreement?.compatible && (
+                        <SelectPaymentButton
+                            totalAmount={totalAmount}
+                            onSuccess={(orderRes, orderSer) => {
+                                console.log(
+                                    "🚀 >>>>>> file: CheckoutPage.tsx:99 >>>>>> orderSer:",
+                                    orderSer
+                                );
+                                console.log(
+                                    "🚀 >>>>>> file: CheckoutPage.tsx:108 >>>>>> orderRes:",
+                                    orderRes
+                                );
 
-                            if (orderRes?.status === "COMPLETED") {
-                                // onSuccessPaymentHandler(orderRes, orderSer);
-                                setPaymentOrder(orderRes);
-                            }
-                        }}
-                        onError={(error: any) => {}}
-                        customerId={customerId}
-                        purchasingItems={userCart}
-                    />
-                )}
-                {/* <img src={convertBase64ToImgSource(base64)} /> */}
-
-                {/* <div className="h-96" /> */}
+                                if (orderRes?.status === "COMPLETED") {
+                                    // onSuccessPaymentHandler(orderRes, orderSer);
+                                    setPaymentOrder(orderRes);
+                                }
+                            }}
+                            onError={(error: any) => {}}
+                            customerId={customerId}
+                            purchasingItems={userCart}
+                        />
+                    )}
             </div>
-            {/* {renderButton()} */}
         </div>
     );
 };

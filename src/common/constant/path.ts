@@ -102,7 +102,7 @@ const Path = {
     }),
 
     // ----------------------------------------
-    // -- SETTING
+    // -- STATIC PAGES
     // ----------------------------------------
 
     setting: (): ILinkProps => ({
@@ -111,6 +111,14 @@ const Path = {
 
     aboutUs: (): ILinkProps => ({
         href: "/about-us",
+    }),
+
+    policy: (): ILinkProps => ({
+        href: "/policy",
+    }),
+
+    compatibleDevice: (): ILinkProps => ({
+        href: "/compatible-device",
     }),
 
     helpCenter: (): ILinkProps => ({

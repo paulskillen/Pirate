@@ -36,8 +36,14 @@ const translations = {
     selectDestination: "Select Destination",
     yourOrders: "Your Orders",
     qrCode: "Qr Code",
+    policy: "Policy",
+    compatibleDevices: "Compatible Devices",
     hideEsimQrCode: "Hide ESim Qr Code",
     showEsimQrCode: "Show ESim Qr Code",
+    readAndAgreeWith: "I've read and agreed with",
+    termAndCondition: "the term and conditions",
+    myDeviceIsCompatibleWithEsim: "My device is compatible with the eSim",
+    seeCompatibleDeviceList: "see compatible device list",
 };
 
 export default translations;
