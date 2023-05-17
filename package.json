@@ -4,8 +4,10 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
+        "dev:pro": "REACT_APP_ENV=production next dev",
         "dev-turbo": "next dev --turbo",
         "build": "next build",
+        "build:pro": "REACT_APP_ENV=production next build",
         "start": "REACT_APP_ENV=production next start",
         "lint": "next lint",
         "addD": "yarn add d-react-components"
