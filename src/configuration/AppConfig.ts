@@ -8,10 +8,10 @@ const ENV = {
 
 const getConfig = () => {
     switch (process.env.REACT_APP_ENV) {
-        case ENV.PRO:
-            return ProConfig;
-        default:
+        case ENV.DEV:
             return DevConfig;
+        default:
+            return ProConfig;
     }
 };
 
