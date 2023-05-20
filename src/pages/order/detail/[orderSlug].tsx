@@ -1,7 +1,6 @@
 // application
 import OrderDetailPage from "@/container/order/detail/OrderDetailPage";
-import OrderHistoryPage from "@/container/order/history/OrderHistoryPage";
-import { LayoutAuth } from "@/container/shared/layout/Layout";
+import { LayoutClean } from "@/container/shared/layout/Layout";
 import { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps<any> = async (context) => {
@@ -19,4 +18,4 @@ function OrderDetail({ orderSlug }: any) {
 
 export default OrderDetail;
 
-OrderDetail.Layout = LayoutAuth;
+OrderDetail.Layout = LayoutClean;

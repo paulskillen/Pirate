@@ -45,13 +45,9 @@ const LogoView = () => {
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => {
     return (
-        <LayoutStyled
-            className="layout_container bg-black"
-            style={{ backgroundImage: "" }}
-        >
-            {children}
+        <LayoutStyled className="layout-container bg-black">
+            <div className="flex-grow w-100">{children}</div>
             <TabBottom />
-            <LogoView />
         </LayoutStyled>
     );
 };
@@ -60,12 +56,9 @@ export default Layout;
 
 export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
     return (
-        <div className="layout_container bg-black">
-            <div className="relative" style={{ zIndex: 999 }}>
-                {children}
-            </div>
-            <LogoView />
-        </div>
+        <LayoutStyled className="layout-container bg-black">
+            <div className="flex-grow w-100">{children}</div>
+        </LayoutStyled>
     );
 };
 
@@ -77,16 +70,14 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     }
 
     return (
-        <div className="layout_container bg-black">
+        <LayoutStyled className="layout_container bg-black">
             {children}
-            <LogoView />
-        </div>
+        </LayoutStyled>
     );
 };
 
 const LayoutStyled = styled.div`
-    /* background-image: url("/images/logo/logo.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
+    position: relative;
+    display: flex;
+    min-height: 100vh;
 `;

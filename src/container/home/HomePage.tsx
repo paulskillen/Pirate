@@ -45,7 +45,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
 
     return (
-        <MainStyled className="home-page_container w-screen h-screen bg-transparent text-white overflow-y-scroll px-4">
+        <MainStyled className="home-page_container w-screen bg-transparent z-10 relative text-white overflow-y-scroll px-4">
             <section className="flex flex-row justify-between items-center mt-4">
                 <div className="text h4">{Messages.selectDestination}</div>
                 <Button

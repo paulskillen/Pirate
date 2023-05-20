@@ -1,5 +1,4 @@
 import Path from "@/common/constant/path";
-import { useScroll, useSessionStorage, useWindowScroll } from "react-use";
 import { AppStateContext } from "@/common/context/app/app-context";
 import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
@@ -7,7 +6,8 @@ import Messages from "@/languages/Messages";
 import { Button, InputTextSearch } from "d-react-components";
 import { forEach, map } from "lodash";
 import { useRouter } from "next/router";
-import React, { ElementRef, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useScroll, useSessionStorage } from "react-use";
 
 export interface IListCountryPageProps {
     [key: string]: any;
@@ -57,6 +57,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                     onChange={(e: any) => {
                         setTextSearch(e?.target?.value);
                     }}
+                    placeholder={Messages.search}
                 />
                 <Button
                     variant="trans"
@@ -87,13 +88,13 @@ const CountryItem = ({ country }: any) => {
     const { name, flag } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.isoAlpha2)}>
-            <div className="flex flex-row items-center text-white w-full mt-4">
+            <div className="flex flex-row items-center text-white w-full mt-4 pb-3">
                 <Image
-                    className="w-12 rounded"
+                    className="w-12 rounded border"
                     alt="flag"
                     src={`data:image/png;base64, ${flag}`}
                 />
-                <div className="text-xl ml-3">{name}</div>
+                <div className="text-xl font-semibold ml-3 ">{name}</div>
             </div>
         </AppLink>
     );

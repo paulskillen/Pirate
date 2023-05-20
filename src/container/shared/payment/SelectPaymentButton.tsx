@@ -137,18 +137,18 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
     return (
         <React.Fragment>
             <div
-                className="bg-gold text-white flex items-center justify-between px-4 py-3 rounded-3xl mt-4"
+                className="bg-black border text-white flex items-center justify-between px-4 py-3 rounded-2xl mt-4"
                 onClick={() => {
                     setOpenPaymentsModal({ open: true });
                 }}
             >
                 <div className="flex items-center">
-                    <div className="bg-primary p-2 rounded-full mr-2">
-                        <Icon icon="credit-card" />
+                    <div className="bg-black border-2 border-gold p-2 rounded-full mr-2">
+                        <Icon icon="credit-card" className="text-gold" />
                     </div>
                     <div>{Messages.selectPaymentMethod}</div>
                 </div>
-                <Icon icon="arrow-right" />
+                <Icon icon="arrow-right" className="text-gold" />
             </div>
             {openPaymentsModal.open && (
                 <Modal

@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import { ProviderName } from "@/common/interface/provider";
 import PriceTag from "../shared/items/PriceTag";
 import Path from "@/common/constant/path";
+import PageHeader from "../shared/header/PageHeader";
+import Icon from "@/components/icon/Icon";
 
 export interface IBundleByCountryPageProps {
     bundles: IBundle[];
@@ -61,21 +63,16 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 
     return (
         <div className="bg-transparent text-white relative">
-            <div className="flex flex-row items-center justify-between py-2 px-4  rounded-b-3xl">
-                <Button
-                    onClick={() => router.back()}
-                    variant="trans"
-                    iconName="arrow_back_ios_new"
-                    className="px-0"
-                    color="light"
-                />
-                <div className="text-xl">{currentCountry?.name}</div>
-                <Image
-                    alt="flag"
-                    className="w-12 h-auto rounded"
-                    src={convertBase64ToImgSource(currentCountry?.flag)}
-                />
-            </div>
+            <PageHeader
+                title={currentCountry?.name}
+                customerRight={
+                    <Image
+                        alt="flag"
+                        className="w-12 h-auto rounded border"
+                        src={convertBase64ToImgSource(currentCountry?.flag)}
+                    />
+                }
+            />
             <div className="h-screen overflow-y-scroll px-4">
                 {map(bundles, (item, index) => {
                     const isSelected =
@@ -107,7 +104,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
 }) => {
     const { provider, name, dataAmount, duration, description, salePrice, id } =
         bundle || {};
-    const rowClass = ClassNames("flex flex-row items-center text-xl");
+    const rowClass = ClassNames("flex flex-row items-center text-xl mt-3");
     const dataDisplay = useMemo(() => {
         if (provider === ProviderName.ESIM_GO) {
             return `${Math.floor(dataAmount / 1000)}GB`;
@@ -117,7 +114,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
 
     return (
         <div
-            className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-3 text-xl z-10 relative"
+            className="flex flex-row mt-4 text-white bg-black rounded-2xl p-3 text-xl z-10 relative border"
             onClick={onClick}
         >
             {showRadio && (
@@ -129,25 +126,28 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                 />
             )}
             <div className="w-full ml-3">
-                <div className={rowClass}>
-                    <div>{id}</div>
+                <div className="flex-center-y">
+                    <div>#</div>
+                    <div className="ml-1">{id}</div>
                 </div>
                 <div className={rowClass}>
                     <div>{dataDisplay}</div>
                 </div>
                 <div className={rowClass}>
-                    {duration}
-                    {Messages.days}
+                    {`${duration}  ${Messages.days}`}
                 </div>
-                <div className={`${rowClass} text opacity-75`}>
-                    <div>{Messages.provider}</div>
+                <div className={`${rowClass} text `}>
+                    <span className="font-semibold mr-1 opacity-75">
+                        {Messages.provider} :{" "}
+                    </span>
                     <ProviderNameItem providerId={provider} />
                 </div>
-                <div className="w-full flex justify-end">
-                    <div>{`${Messages.price} \b \b`}</div>
+                <div className="w-full flex justify-end ">
+                    <div className="text-xl">{`${Messages.price} \b \b`}</div>
                     <PriceTag price={salePrice} />
                 </div>
             </div>
+            <Icon icon="sim" className="text-gold" size={36} />
         </div>
     );
 };

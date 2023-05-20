@@ -1,16 +1,15 @@
 import OrderApi from "@/apis/order/OrderApi";
-import ClassNames from "classnames";
-import Messages from "@/languages/Messages";
-import { map } from "lodash";
-import React, { useEffect, useMemo, useState } from "react";
-import { ProviderName } from "@/common/interface/provider";
-import PriceTag from "@/container/shared/items/PriceTag";
-import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
-import { useRouter } from "next/router";
 import Path from "@/common/constant/path";
+import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
+import PriceTag from "@/container/shared/items/PriceTag";
 import LayoutHeader from "@/container/shared/layout/LayoutHeader";
+import Messages from "@/languages/Messages";
 import { useAuthProfile } from "@/store/auth/authHook";
 import { useOrderHistory } from "@/store/order-history/orderHistoryHook";
+import ClassNames from "classnames";
+import { map } from "lodash";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 export interface IOrderHistoryPageProps {
     [key: string]: any;

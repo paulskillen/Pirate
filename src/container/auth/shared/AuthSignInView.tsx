@@ -77,15 +77,15 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                     </Button>
                     <div className="d-flex mt-4 align-items-center">
                         <div className="divider " />
-                        <small className="mx-3">{Messages.or}</small>
+                        <small className="mx-3 text">{Messages.or}</small>
                         <div className="divider " />
                     </div>
                     <AuthSignInSocial />
 
-                    <div className="mt-5 flex-center">
-                        <small>{Messages.dontHaveAnAccount}</small>
+                    <div className="mt-4 flex-center">
+                        <small className="text">{Messages.dontHaveAnAccount}</small>
                         <AppLink href={Path.singUp()?.href}>
-                            <small className="text-primary ml-1">
+                            <small className="text-primary font-semibold ml-1 text text-underline">
                                 {Messages.signUp}
                             </small>
                         </AppLink>

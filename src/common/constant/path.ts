@@ -1,5 +1,4 @@
 import { ILinkProps } from "@/common/interface/link";
-import { join } from "lodash";
 
 const Path = {
     home: (): ILinkProps => ({

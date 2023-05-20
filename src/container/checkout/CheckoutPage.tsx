@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BundleItem } from "../bundle/BundleByCountryPage";
+import PageHeader from "../shared/header/PageHeader";
 import SelectPaymentButton, {
     IPayPalOrderResponse,
 } from "../shared/payment/SelectPaymentButton";
@@ -120,7 +121,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
     const renderAgreement = () => {
         return (
-            <div className="bg-gold mt-4 p-4 rounded-3xl">
+            <div className="bg-black mt-4 p-4 rounded-2xl border">
                 <div className="flex-center-y">
                     <Checkbox
                         onChange={() =>
@@ -131,15 +132,15 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                         }
                         checked={userAgreement?.policy}
                     />
-                    <label className="ml-3 text-white">
+                    <div className="ml-3 text text-white">
                         {Messages.readAndAgreeWith}
                         <AppLink
-                            className="inline ml-1 underline italic text-white"
+                            className="inline ml-1 underline font-semibold italic text-white"
                             href={Path.policy().href}
                         >
                             <span>{Messages.termAndCondition}</span>
                         </AppLink>
-                    </label>
+                    </div>
                 </div>
                 <div className="flex-center-y mt-3">
                     <Checkbox
@@ -151,15 +152,15 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                         }
                         checked={userAgreement?.compatible}
                     />
-                    <label className="ml-3 text-white">
+                    <div className="ml-3 text text-white">
                         {Messages.myDeviceIsCompatibleWithEsim}
                         <AppLink
-                            className="inline ml-1 underline italic text-white"
+                            className="inline ml-1 underline font-semibold italic text-white"
                             href={Path.compatibleDevice().href}
                         >
                             <span>{Messages.seeCompatibleDeviceList}</span>
                         </AppLink>
-                    </label>
+                    </div>
                 </div>
             </div>
         );
@@ -167,17 +168,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
     return (
         <div className="">
-            <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
-                <Button
-                    onClick={() => router.back()}
-                    variant="trans"
-                    iconName="arrow_back_ios_new"
-                    className="px-0"
-                    color="light"
-                />
-                <div className="text-xl">{Messages.yourOrder}</div>
-                <div />
-            </div>
+            <PageHeader title={Messages.yourOrder} />
             <div className="h-screen overflow-y-scroll px-4 z-10 relative">
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
