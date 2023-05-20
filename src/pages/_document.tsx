@@ -89,10 +89,10 @@ export default function Document() {
                 {renderPreLoader()}
                 <Main />
                 <NextScript />
-                <script
+                {/* <script
                     src="//code.tidio.co/n5kpnrwrwg6fivrwgopiu0ypr7df8noh.js"
                     async
-                ></script>
+                ></script> */}
             </body>
         </Html>
     );

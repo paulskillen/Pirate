@@ -83,6 +83,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         selectedBundle?.name === item?.name;
                     return (
                         <BundleItem
+                            key={item?.id}
                             selected={isSelected}
                             bundle={item}
                             onClick={() => setSelectedBundle(item)}
@@ -121,6 +122,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
         >
             {showRadio && (
                 <Checkbox
+                    onChange={() => {}}
                     checked={selected}
                     variant="radio"
                     className="h-fit text-white border-white mt-1"

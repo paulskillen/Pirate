@@ -1,4 +1,5 @@
 import Path from "@/common/constant/path";
+import { useScroll, useSessionStorage, useWindowScroll } from "react-use";
 import { AppStateContext } from "@/common/context/app/app-context";
 import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
@@ -6,23 +7,28 @@ import Messages from "@/languages/Messages";
 import { Button, InputTextSearch } from "d-react-components";
 import { forEach, map } from "lodash";
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { ElementRef, useContext, useEffect, useState } from "react";
 
 export interface IListCountryPageProps {
     [key: string]: any;
 }
 
+const scrollKey = "scrollKey";
+
 const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
+    const scrollRef = React.useRef<HTMLDivElement>(null);
+    const { x, y } = useScroll(scrollRef);
+    const [value, setValue] = useSessionStorage(scrollKey, 0);
     const router = useRouter();
     const [textSearch, setTextSearch] = useState("");
     const { metaData } = useContext(AppStateContext);
     const { countryList = [] } = metaData || {};
 
-    const searchCountry = (text: string, coutry: any): boolean => {
+    const searchCountry = (text: string, country: any): boolean => {
         const keyToSearch = ["name"];
         let found = false;
         forEach(keyToSearch, (key) => {
-            const value = coutry?.[key];
+            const value = country?.[key];
             if (
                 value &&
                 value?.toUpperCase?.()?.indexOf(text?.toUpperCase()) !== -1
@@ -32,6 +38,16 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
         });
         return found;
     };
+
+    useEffect(() => {
+        if (value && value > 0) {
+            scrollRef.current && scrollRef.current.scroll(0, value);
+        }
+    }, []);
+
+    useEffect(() => {
+        setValue(y);
+    }, [y]);
 
     return (
         <div className="bg-transparent z-10 px-4 pt-4 relative ">
@@ -50,7 +66,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                     {Messages.cancel}
                 </Button>
             </div>
-            <div className="overflow-y-auto h-screen mt-3">
+            <div className="overflow-y-auto h-screen mt-3" ref={scrollRef}>
                 {map(countryList, (item) => {
                     if (textSearch) {
                         const checked = searchCountry(textSearch, item);
@@ -58,7 +74,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                             return null;
                         }
                     }
-                    return <CountryItem country={item} />;
+                    return <CountryItem key={item?.id} country={item} />;
                 })}
             </div>
         </div>
