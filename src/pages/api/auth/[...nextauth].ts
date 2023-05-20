@@ -71,4 +71,8 @@ export default NextAuth({
             return session;
         },
     },
+    secret: "PIRATE_MOBILE",
+    pages: {
+        signIn: "/login",
+    },
 });
