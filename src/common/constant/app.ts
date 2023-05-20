@@ -1,4 +1,4 @@
-export const TAB_BOTTOM_HEIGHT = "75";
+export const TAB_BOTTOM_HEIGHT = "85";
 
 // KEY
 export const GOOGLE_API_KEY = "API_GOOGLE_KEY";

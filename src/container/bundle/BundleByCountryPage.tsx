@@ -45,7 +45,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         return (
             <div className="fixed bottom-5 w-full px-3 z-30">
                 <Button
-                    className="w-full font-bold z-30"
+                    className="w-full font-bold z-30 border border-slate-500"
                     style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         if (selectedBundle) {
