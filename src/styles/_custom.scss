@@ -245,16 +245,3 @@ body > iframe {
 .d-date-input__button {
     z-index: 10 !important;
 }
-
-.login__button_social {
-    height: 50px;
-    > img {
-        object-fit: contain;
-        height: 40px;
-        width: 100%;
-    }
-}
-
-.checkbox__check-mark {
-    border-color: #f5f5f5 !important;
-}

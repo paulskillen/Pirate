@@ -3,7 +3,7 @@
 // @import "antd/dist/antd.css";
 // @import "./custom-antd";
 @import "./variables";
-@import "./custom";
+
 
 /* ----------------------------------------
 // Components
@@ -11,6 +11,7 @@
 
 @import "./components/layout/app-layout";
 @import "./components/icon";
+@import "./components/chatbot/chatbot";
 
 /* ----------------------------------------
 // Pages
@@ -41,3 +42,6 @@
 // @import "./components/input/input-color";
 // @import "./components/input/input-drop";
 // @import "./components/input/input-text";
+
+@import "./custom";
+@import "./app-style";
