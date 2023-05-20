@@ -1,6 +1,6 @@
 // application
 import OrderHistoryPage from "@/container/order/history/OrderHistoryPage";
-import { LayoutAuth } from "@/container/shared/layout/Layout";
+import { LayoutAuth, LayoutClean } from "@/container/shared/layout/Layout";
 
 function OrderHistory() {
     return <OrderHistoryPage />;
@@ -8,4 +8,4 @@ function OrderHistory() {
 
 export default OrderHistory;
 
-OrderHistory.Layout = LayoutAuth;
+OrderHistory.Layout = LayoutClean;
