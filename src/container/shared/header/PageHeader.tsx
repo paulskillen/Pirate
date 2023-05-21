@@ -75,7 +75,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
 
     return (
         <PageHeaderStyled
-            className={`flex flex-row items-center justify-between py-2 px-4 bg-primary border-b border-b-slate-500  rounded-b-3xl ${className}`}
+            className={`w-full flex flex-row items-center justify-between py-2 px-4 bg-primary border-b border-b-slate-500  rounded-b-3xl ${className}`}
         >
             {renderLeft()}
             {renderCenter()}

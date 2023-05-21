@@ -1,14 +1,14 @@
 import OrderApi from "@/apis/order/OrderApi";
-import ClassNames from "classnames";
 import { ESIM_GO_GET_ESIM_QR_CODE_IMG } from "@/common/constant/app";
-import LayoutHeader from "@/container/shared/layout/LayoutHeader";
+import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
+import PageHeader from "@/container/shared/header/PageHeader";
+import PriceTag from "@/container/shared/items/PriceTag";
 import Messages from "@/languages/Messages";
 import axios from "axios";
+import ClassNames from "classnames";
 import { Button } from "d-react-components";
 import { isEmpty } from "lodash";
 import React, { useEffect, useState } from "react";
-import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
-import PriceTag from "@/container/shared/items/PriceTag";
 
 export interface IOrderDetailPageProps {
     [key: string]: any;
@@ -78,7 +78,7 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
 
     return (
         <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white overflow-y-scrollpb-40">
-            <LayoutHeader title={`# ${orderNo}`} />
+            <PageHeader title={`# ${orderNo}`} />
             <div className="z-30 w-100 px-4 max-w-2xl">
                 <div className={`${rowClass} text`}>
                     <div className="text-gray-300">{Messages.provider} </div>

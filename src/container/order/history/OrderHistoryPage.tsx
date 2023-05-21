@@ -1,6 +1,7 @@
 import OrderApi from "@/apis/order/OrderApi";
 import Path from "@/common/constant/path";
 import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
+import PageHeader from "@/container/shared/header/PageHeader";
 import PriceTag from "@/container/shared/items/PriceTag";
 import LayoutHeader from "@/container/shared/layout/LayoutHeader";
 import Messages from "@/languages/Messages";
@@ -52,7 +53,7 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
 
     return (
         <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white ">
-            <LayoutHeader title={Messages.orderHistory} />
+            <PageHeader title={Messages.orderHistory} />
             <div className="overflow-y-scroll px-4 w-full pb-40">
                 {map(orderList, (orderItem) => {
                     return <OrderItem order={orderItem} />;
