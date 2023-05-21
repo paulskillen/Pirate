@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import LandingPage from "@/container/home/LandingPage";
+import PageHeader from "@/container/shared/header/PageHeader";
 import { LayoutClean, LayoutAuth } from "@/container/shared/layout/Layout";
 import Messages from "@/languages/Messages";
 import { Button } from "d-react-components";
@@ -9,20 +10,10 @@ import { useRouter } from "next/router";
 const CompatibleDevice: NextPage = () => {
     const router = useRouter();
     return (
-        <div className="bg-white">
-            <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
-                <Button
-                    onClick={() => router.back()}
-                    variant="trans"
-                    iconName="arrow_back_ios_new"
-                    className="px-0"
-                    color="light"
-                />
-                <div className="text-xl">{Messages.compatibleDevices}</div>
-                <div />
-            </div>
-            <p className="bg-white h-screen px-4 pt-4 pb-20 overflow-y-scroll">
-                <h5 className="font-semibold mb-3">
+        <div className="">
+            <PageHeader title={Messages.compatibleDevices} />
+            <p className="bg-black h-screen text-white relative z-20 px-4 pt-4 pb-20 overflow-y-scroll">
+                <h5 className="font-semibold mb-3 text-white">
                     Below is a list of some of the most popular eSIM compatible
                     smartphones:
                 </h5>

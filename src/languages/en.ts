@@ -41,6 +41,7 @@ const translations = {
     code: "Code",
     profile: "Profile",
     duration: "Duration",
+    purchasedAt: "Purchased at",
     compatibleDevices: "Compatible Devices",
     hideEsimQrCode: "Hide ESim Qr Code",
     showEsimQrCode: "Show ESim Qr Code",

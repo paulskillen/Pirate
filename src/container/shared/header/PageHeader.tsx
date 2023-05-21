@@ -63,7 +63,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
     };
 
     const renderRight = () => {
-        let right: any = <div />;
+        let right: any = <div className="w-5" />;
         if (customerRight) {
             right =
                 typeof customerRight === "function"

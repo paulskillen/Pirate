@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import LandingPage from "@/container/home/LandingPage";
+import PageHeader from "@/container/shared/header/PageHeader";
 import { LayoutClean, LayoutAuth } from "@/container/shared/layout/Layout";
 import Messages from "@/languages/Messages";
 import { Button } from "d-react-components";
@@ -9,20 +10,10 @@ import { useRouter } from "next/router";
 const Policy: NextPage = () => {
     const router = useRouter();
     return (
-        <div className="bg-white">
-            <div className="flex flex-row items-center justify-between py-2 px-4 bg-primary text-white rounded-b-3xl">
-                <Button
-                    onClick={() => router.back()}
-                    variant="trans"
-                    iconName="arrow_back_ios_new"
-                    className="px-0"
-                    color="light"
-                />
-                <div className="text-xl">{Messages.policy}</div>
-                <div />
-            </div>
-            <p className="bg-white h-screen px-4 pt-4 pb-20 overflow-y-scroll">
-                <h3 className="font-bold mb-3">
+        <div className="bg-black">
+            <PageHeader title={Messages.policy} />
+            <p className="h-screen px-4 pt-4 pb-20 overflow-y-scroll z-50 bg-black relative text-white">
+                <h3 className="font-bold mb-3 text-white">
                     Terms and Conditions for Sale of Non-Refundable Product:
                 </h3>
                 <section>
@@ -97,6 +88,7 @@ const Policy: NextPage = () => {
                     these terms and conditions, the buyer should not purchase
                     the non-refundable product.
                 </section>
+                <div className="h-20"/>
             </p>
         </div>
     );

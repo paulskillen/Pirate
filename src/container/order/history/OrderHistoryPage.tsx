@@ -1,14 +1,15 @@
 import OrderApi from "@/apis/order/OrderApi";
 import Path from "@/common/constant/path";
+import { IOrder } from "@/common/interface/order";
+import Icon from "@/components/icon/Icon";
 import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
 import PageHeader from "@/container/shared/header/PageHeader";
 import PriceTag from "@/container/shared/items/PriceTag";
-import LayoutHeader from "@/container/shared/layout/LayoutHeader";
 import Messages from "@/languages/Messages";
 import { useAuthProfile } from "@/store/auth/authHook";
 import { useOrderHistory } from "@/store/order-history/orderHistoryHook";
 import ClassNames from "classnames";
-import { Progress } from "d-react-components";
+import { Progress, TimeUtils } from "d-react-components";
 import { map } from "lodash";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ export interface IOrderHistoryPageProps {
 }
 
 export interface IOrderItemProps {
+    order: IOrder;
     [key: string]: any;
 }
 
@@ -78,25 +80,37 @@ export default OrderHistoryPage;
 
 export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
     const router = useRouter();
-    const { provider, dataAmount, subTotal, total, orderNo } = order || {};
-    const rowClass = ClassNames("flex flex-row items-center text-xl");
+    const { provider, subTotal, total, orderNo, createdAt } = order || {};
+    const rowClass = ClassNames("flex flex-row items-center text-xl mt-2");
 
     return (
         <div
-            className="flex flex-row mt-4 text-white bg-gold rounded-3xl p-3 text-xl z-10 relative w-full"
+            className="flex flex-row mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full"
             onClick={() => router.push(Path.orderDetail(order).as || "")}
         >
-            <div className="w-full ml-3">
-                <div className={rowClass}>
-                    <div>#{orderNo}</div>
+            <div className="w-full">
+                <div className="flex flex-row">
+                    <div className="flex flex-col w-full">
+                        <div className={rowClass}>
+                            <div className="h5 text-gold">#{orderNo}</div>
+                        </div>
+                        <div className={`${rowClass} text opacity-75`}>
+                            <div className="mr-2">{Messages.provider} : </div>
+                            <ProviderNameItem providerId={provider} />
+                        </div>
+                        <div className={`${rowClass} text opacity-75`}>
+                            <div className="">{Messages.purchasedAt} :</div>
+                            <div className="ml-2">
+                                {TimeUtils.convertMiliToDateTime(createdAt)}
+                            </div>
+                        </div>
+                    </div>
+                    <Icon icon="cart" color="" className="text-gold" />
                 </div>
-                <div className={`${rowClass} text opacity-75`}>
-                    <div className="mr-2">{Messages.provider} : </div>
-                    <ProviderNameItem providerId={provider} />
-                </div>
-                <div className="w-full flex justify-end">
-                    <div>{`${Messages.subTotal} \b \b`}</div>
-                    <PriceTag price={subTotal} />
+
+                <div className="w-full flex justify-end text mt-3">
+                    <div className="">{`${Messages.subTotal} \b \b`}</div>
+                    <PriceTag price={subTotal} className="font-semibold" />
                 </div>
             </div>
         </div>
