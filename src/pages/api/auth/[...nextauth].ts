@@ -11,12 +11,8 @@ export default NextAuth({
     // Configure one or more authentication providers
     providers: [
         GoogleProvider({
-            clientId:
-                (process.env.GOOGLE_CLIENT_ID as string) ||
-                "1060585065695-kl1dpg1pv18kq6vvuqsjos19laptjc9g.apps.googleusercontent.com",
-            clientSecret:
-                (process.env.GOOGLE_CLIENT_SECRET as string) ||
-                "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",
+            clientId: CONFIG?.GOOGLE_CLIENT_ID,
+            clientSecret: CONFIG?.GOOGLE_CLIENT_SECRET,
         }),
         // ...add more providers here
     ],
@@ -71,8 +67,6 @@ export default NextAuth({
             return session;
         },
     },
+
     secret: "PIRATE_MOBILE",
-    pages: {
-        signIn: "/login",
-    },
 });
