@@ -6,7 +6,7 @@ import PriceTag from "@/container/shared/items/PriceTag";
 import Messages from "@/languages/Messages";
 import axios from "axios";
 import ClassNames from "classnames";
-import { Button } from "d-react-components";
+import { Button, Progress } from "d-react-components";
 import { isEmpty } from "lodash";
 import React, { useEffect, useState } from "react";
 
@@ -62,23 +62,22 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
     };
 
     const loadOrderDetail = async () => {
-        const res = await OrderApi.detail(orderId);
-        setOrderDetail(res?.data?.data?.data ?? []);
+        return Progress.show(
+            { method: OrderApi.detail, params: [orderId] },
+            (res: any) => {
+                setOrderDetail(res?.data?.data?.data ?? []);
+            }
+        );
     };
-    if (isEmpty(orderDetail)) {
-        return (
-            <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white" />
-        );
-    }
-    if (!esimQrCode) {
-        return (
-            <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white" />
-        );
-    }
 
-    return (
-        <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white overflow-y-scrollpb-40">
-            <PageHeader title={`# ${orderNo}`} />
+    const renderContent = () => {
+        if (isEmpty(orderDetail)) {
+            return (
+                <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white" />
+            );
+        }
+
+        return (
             <div className="z-30 w-100 px-4 max-w-2xl">
                 <div className={`${rowClass} text`}>
                     <div className="text-gray-300">{Messages.provider} </div>
@@ -108,7 +107,7 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
                     </Button>
                 </div>
 
-                {showQrCode && (
+                {esimQrCode && showQrCode && (
                     <div className="flex justify-center mt-5">
                         <img src={`data:image/png;base64,${esimQrCode}`} />
                     </div>
@@ -116,6 +115,13 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
 
                 <div style={{ height: "500px" }} />
             </div>
+        );
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white overflow-y-scrollpb-40">
+            <PageHeader title={`# ${orderNo}`} />
+            {renderContent()}
         </div>
     );
 };

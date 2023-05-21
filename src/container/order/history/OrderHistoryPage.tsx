@@ -8,6 +8,7 @@ import Messages from "@/languages/Messages";
 import { useAuthProfile } from "@/store/auth/authHook";
 import { useOrderHistory } from "@/store/order-history/orderHistoryHook";
 import ClassNames from "classnames";
+import { Progress } from "d-react-components";
 import { map } from "lodash";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -35,30 +36,40 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
         if (isGuest) {
             setOrderList(orderLocals || []);
         } else {
-            const res = await OrderApi.history();
-            const allOrders = [
-                ...(res?.data?.data?.data ?? []),
-                ...(orderLocals || []),
-            ];
-            setOrderList(allOrders);
+            Progress.show(
+                { method: OrderApi.history, params: [] },
+                (res: any) => {
+                    const allOrders = [
+                        ...(res?.data?.data?.data ?? []),
+                        ...(orderLocals || []),
+                    ];
+                    setOrderList(allOrders);
+                }
+            );
         }
     };
-    if (!(orderList?.length > 0)) {
-        return (
-            <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white">
-                {Messages.listOrderEmpty}
-            </div>
-        );
-    }
 
-    return (
-        <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white ">
-            <PageHeader title={Messages.orderHistory} />
+    const renderContent = () => {
+        if (!(orderList?.length > 0)) {
+            return (
+                <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white">
+                    {Messages.listOrderEmpty}
+                </div>
+            );
+        }
+        return (
             <div className="overflow-y-scroll px-4 w-full pb-40">
                 {map(orderList, (orderItem) => {
                     return <OrderItem order={orderItem} />;
                 })}
             </div>
+        );
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white ">
+            <PageHeader title={Messages.orderHistory} />
+            {renderContent()}
         </div>
     );
 };

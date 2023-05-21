@@ -21,7 +21,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ menu }) => {
 
     return (
         <AppLink href={path} className="w-full" style={{ width: "100%" }}>
-            <div className="flex flex-row items-center mt-4 w-full bg-slate-900 p-3 rounded-xl">
+            <div className="flex flex-row items-center mt-4 w-full bg-primary p-3 rounded-xl">
                 <Icon name={icon} className="text-gold" size="x-large" />
                 <div className="text-xl text-white ml-3">
                     {(Messages as any)[label]}

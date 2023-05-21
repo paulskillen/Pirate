@@ -39,6 +39,7 @@ const translations = {
     policy: "Policy",
     search: "Search...",
     code: "Code",
+    profile: "Profile",
     duration: "Duration",
     compatibleDevices: "Compatible Devices",
     hideEsimQrCode: "Hide ESim Qr Code",
