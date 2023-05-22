@@ -4,7 +4,6 @@
 // @import "./custom-antd";
 @import "./variables";
 
-
 /* ----------------------------------------
 // Components
 // ---------------------------------------- */
@@ -12,6 +11,7 @@
 @import "./components/layout/app-layout";
 @import "./components/icon";
 @import "./components/chatbot/chatbot";
+@import "./components/slider/slick-slider";
 
 /* ----------------------------------------
 // Pages
@@ -30,10 +30,8 @@
 // Common
 // ---------------------------------------- */
 
-
 @import "./common/base";
 @import "./common/text";
-
 
 // @import "./components/button";
 // @import "./components/tab-bar";

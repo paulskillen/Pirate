@@ -1,51 +1,63 @@
 import Path from "@/common/constant/path";
+import Slick, { Settings } from "react-slick";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { Button } from "d-react-components";
 import { useRouter } from "next/router";
 import React from "react";
-import * as Yup from "yup";
+import SlickSlider from "@/components/slider/SlickSlider";
 
 export interface IHomePageProps {
     [key: string]: any;
 }
 
-const IMG_MOBILE = 250;
-const IMG_DESKTOP = 600;
+const slickSettings: Settings = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    speed: 400,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+};
 
-enum TypeOfData {
-    HIGH = "HIGH",
-    MEDIUM = "MEDIUM",
-    LOW = "LOW",
-}
-const TYPE_OF_DATA = [
+const HOMEPAGE_BLOCK = [
     {
-        id: TypeOfData.HIGH,
+        id: "1",
         label: "High",
     },
     {
-        id: TypeOfData.MEDIUM,
+        id: "2",
         label: "Medium",
     },
     {
-        id: TypeOfData.LOW,
+        id: "3",
         label: "Low",
     },
+    {
+        id: "4",
+        label: "test",
+    },
+    {
+        id: "5",
+        label: "test-2",
+    },
 ];
-
-const validationSchema = Yup.object().shape({
-    dataType: Yup.string().required("Required field!"),
-    location: Yup.string().required("Required field!"),
-    email: Yup.string()
-        .email("Email must be a valid email!")
-        .required("Required field!"),
-});
 
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
 
+    const renderContent = () => {
+        return (
+            <SlickSlider setting={slickSettings}>
+                {HOMEPAGE_BLOCK.map((item) => {
+                    return <div key={item?.id}>{item?.label}</div>;
+                })}
+            </SlickSlider>
+        );
+    };
+
     return (
-        <MainStyled className="home-page_container w-screen bg-transparent z-10 relative text-white overflow-y-scroll px-4">
+        <MainStyled className="home-page_container bg-transparent z-10 relative text-white overflow-y-scroll px-4">
             <section className="flex flex-row justify-between items-center mt-4">
                 <div className="text h4">{Messages.selectDestination}</div>
                 <Button
@@ -56,6 +68,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                     }}
                 />
             </section>
+            {/* {renderContent()} */}
         </MainStyled>
     );
 };
