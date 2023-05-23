@@ -77,6 +77,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                     }
                     return <CountryItem key={item?.id} country={item} />;
                 })}
+                <div className="h-32 w-100"/>
             </div>
         </div>
     );

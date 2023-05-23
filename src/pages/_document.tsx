@@ -94,6 +94,11 @@ export default function Document() {
                     src="//code.tidio.co/n5kpnrwrwg6fivrwgopiu0ypr7df8noh.js"
                     async
                 ></script> */}
+                <script
+                    src="/static/pwa.js"
+                    type="text/javascript"
+                    defer
+                ></script>
             </body>
         </Html>
     );

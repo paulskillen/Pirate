@@ -3,7 +3,7 @@ import Messages from "@/languages/Messages";
 import { signOutAction } from "@/store/auth/authActions";
 import { useAuthProfile } from "@/store/auth/authHook";
 import styled from "@emotion/styled";
-import { Avatar, Button } from "d-react-components";
+import { Avatar, Button, Icon } from "d-react-components";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -87,6 +87,16 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
                     {MENUS.map((item, index) => {
                         return <MenuItem key={item?.id} menu={item} />;
                     })}
+                    <div className="flex flex-row items-center mt-4 w-full bg-primary p-3 rounded-xl">
+                        <Icon
+                            name="cloud_download"
+                            className="text-gold"
+                            size="x-large"
+                        />
+                        <div className="text-xl text-white ml-3">
+                            {Messages.installApp}
+                        </div>
+                    </div>
                 </div>
 
                 <Button
