@@ -8,8 +8,9 @@ const { Option } = SelectAnt;
 export interface SelectProps {
     onChange?: (props: any) => void;
     dataSource?: any[];
-    getLabel?: any;
-    getKey?: any;
+    getLabel?: (item: any) => any;
+    getKey?: (item: any) => any;
+    getValue?: (item: any) => any;
     defaultValue?: string[];
     placeholder?: string;
     name?: string;
@@ -20,7 +21,6 @@ export interface SelectProps {
     value?: string[] | any;
     error?: any;
     disabled?: boolean;
-    getValue?: any;
     [key: string]: any;
 }
 
