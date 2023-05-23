@@ -8,6 +8,7 @@ import axios from "axios";
 import ClassNames from "classnames";
 import { Button, Progress } from "d-react-components";
 import { isEmpty } from "lodash";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 export interface IOrderDetailPageProps {
@@ -129,7 +130,12 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
                 {renderButton()}
                 {qrCode && showQrCode && (
                     <div className="flex justify-center mt-5">
-                        <img src={`data:image/png;base64,${qrCode}`} />
+                        <Image
+                            alt="qrCode"
+                            width={250}
+                            height={250}
+                            src={`data:image/png;base64,${qrCode}`}
+                        />
                     </div>
                 )}
 
