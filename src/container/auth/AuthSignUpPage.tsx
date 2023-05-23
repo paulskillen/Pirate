@@ -1,4 +1,5 @@
 import AuthApi from "@/apis/auth/AuthApi";
+import * as Yup from "yup";
 import { CUSTOMER_TITLES } from "@/common/constant/customer";
 import Path from "@/common/constant/path";
 import Select from "@/components/select/Select";
@@ -13,6 +14,7 @@ import React from "react";
 export interface IAuthSignUpPageProps {
     [key: string]: any;
 }
+const AuthSignUpSchema = Yup.object().shape({});
 
 const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
     const registerData = useAuthRegister();
@@ -24,6 +26,7 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
     const signUpForm = useFormik<any>({
         initialValues: { ...profile },
         enableReinitialize: true,
+        validationSchema: AuthSignUpSchema,
         onSubmit: (values: any) => {
             const payload = {
                 ...pick(values, [

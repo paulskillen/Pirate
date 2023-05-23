@@ -3,6 +3,7 @@ import classNames from "classnames";
 import React, { useMemo, useState } from "react";
 import Icon from "../icon/Icon";
 import { isEmpty } from "lodash";
+import { ViewTextError } from "d-react-components";
 
 const { Option } = SelectAnt;
 export interface SelectProps {
@@ -91,12 +92,7 @@ function Select(props: SelectProps) {
                     className="custom-select__arrow-icon"
                 />
             </div>
-            {error && (
-                <small className="text-danger form-error-message">
-                    <span>*</span>
-                    {error}
-                </small>
-            )}
+            {error && <ViewTextError error={error} />}
         </>
     );
 }
