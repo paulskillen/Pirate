@@ -51,7 +51,7 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
         signUpForm;
 
     return (
-        <div className="relative w-screen h-screen bg-transparent text-white overflow-y-scroll z-20 px-4 pt-4">
+        <div className="relative bg-transparent text-white overflow-y-scroll z-20 px-4 pt-4">
             <Button
                 variant="trans"
                 iconName="arrow_back_ios"
@@ -123,7 +123,7 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
                 }
             />
             <Button
-                className="absolute bottom-4 w-auto left-3 right-3"
+                className="fixed bottom-5 w-auto left-3 right-3"
                 onClick={handleSubmit as any}
             >
                 {Messages.signUp}
