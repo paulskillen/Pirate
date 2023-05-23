@@ -43,6 +43,7 @@ const translations = {
     duration: "Duration",
     purchasedAt: "Purchased at",
     installApp: "Install App",
+    loadQrCode: "Load Qr Code",
     compatibleDevices: "Compatible Devices",
     hideEsimQrCode: "Hide ESim Qr Code",
     showEsimQrCode: "Show ESim Qr Code",
