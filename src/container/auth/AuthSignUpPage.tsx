@@ -1,9 +1,10 @@
 import AuthApi from "@/apis/auth/AuthApi";
 import { CUSTOMER_TITLES } from "@/common/constant/customer";
 import Path from "@/common/constant/path";
+import Select from "@/components/select/Select";
 import Messages from "@/languages/Messages";
 import { useAuthRegister } from "@/store/auth/authHook";
-import { Button, InputText, Progress, Select } from "d-react-components";
+import { Button, InputText, Progress } from "d-react-components";
 import { useFormik } from "formik";
 import { pick } from "lodash";
 import { useRouter } from "next/router";
@@ -24,7 +25,6 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
         initialValues: { ...profile },
         enableReinitialize: true,
         onSubmit: (values: any) => {
-
             const payload = {
                 ...pick(values, [
                     "title",
@@ -64,7 +64,6 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
                 {Messages.backToHome}
             </Button>
             <Select
-                className="mt-3"
                 dataSource={CUSTOMER_TITLES}
                 classNameLabel="text-white"
                 placeholder={Messages.title}
