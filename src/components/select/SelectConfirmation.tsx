@@ -42,7 +42,7 @@ const SelectConfirmation = (props: SelectConfirmationProps) => {
             onChange={(val) => setValue(val)}
             filterOption={() => true}
             showSearch
-            dropdownRender={(menu) => (
+            dropdownRender={(menu: any) => (
                 <React.Fragment>
                     {menu}
                     <div className={footerClassName}>
