@@ -20,11 +20,10 @@ export interface IOrderItemProps {
 
 const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
     const [orderDetail, setOrderDetail] = useState<any>();
-    const [esimQrCode, setEsimQrCode] = useState<any>();
-    const [base64Converted, setBase64Converted] = useState<any>();
     const { provider, subTotal, total, orderNo, eSimData } = orderDetail || {};
     const [showQrCode, setShowQrCode] = useState(false);
     const { qrCode, eSimId } = eSimData || {};
+
     const rowClass = ClassNames(
         "flex flex-row items-center justify-between text-xl mt-3"
     );
@@ -37,35 +36,36 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
 
     useEffect(() => {
         if (eSimId) {
-            loadQrCode();
+            // loadQrCode();
         }
     }, [eSimId]);
 
-    const loadQrCode = async () => {
-        const res = await axios.get(ESIM_GO_GET_ESIM_QR_CODE_IMG(eSimId), {
-            headers: {
-                "X-API-Key": "Q6vYZShNTl8icvrRIuYuUeYHDHEL1uh55Jv2BHeA",
-            },
-            responseType: "arraybuffer",
-        });
+    // const loadQrCode = async () => {
+    //     const res = await axios.get(ESIM_GO_GET_ESIM_QR_CODE_IMG(eSimId), {
+    //         headers: {
+    //             "X-API-Key": "Q6vYZShNTl8icvrRIuYuUeYHDHEL1uh55Jv2BHeA",
+    //         },
+    //         responseType: "arraybuffer",
+    //     });
 
-        const arrayBufferData = res?.data;
+    //     const arrayBufferData = res?.data;
 
-        if (!process.browser) {
-            return;
-        }
+    //     if (!process.browser) {
+    //         return;
+    //     }
 
-        const u8 = new Uint8Array(arrayBufferData);
-        const b64encoded = btoa(String.fromCharCode.apply(null, u8 as any));
-        setEsimQrCode(b64encoded);
-        setBase64Converted(b64encoded);
-    };
+    //     const u8 = new Uint8Array(arrayBufferData);
+    //     const b64encoded = btoa(String.fromCharCode.apply(null, u8 as any));
+    //     setEsimQrCode(b64encoded);
+    //     setBase64Converted(b64encoded);
+    // };
 
     const loadOrderDetail = async () => {
         return Progress.show(
             { method: OrderApi.detail, params: [orderId] },
             (res: any) => {
-                setOrderDetail(res?.data?.data?.data ?? []);
+                const orderData = res?.data?.data?.data;
+                setOrderDetail(orderData);
             }
         );
     };
@@ -76,6 +76,39 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
                 <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white" />
             );
         }
+
+        const renderButton = () => {
+            if (!qrCode) {
+                return (
+                    <div className="flex justify-center">
+                        <Button
+                            className="mt-5"
+                            onClick={() => {
+                                loadOrderDetail();
+                            }}
+                            iconName="refresh"
+                        >
+                            {Messages.loadQrCode}
+                        </Button>
+                    </div>
+                );
+            }
+            return (
+                <div className="flex justify-center">
+                    <Button
+                        className="mt-5"
+                        onClick={() => {
+                            setShowQrCode(!showQrCode);
+                        }}
+                        iconName={"qr_code_2"}
+                    >
+                        {showQrCode
+                            ? Messages.hideEsimQrCode
+                            : Messages.showEsimQrCode}
+                    </Button>
+                </div>
+            );
+        };
 
         return (
             <div className="z-30 w-100 px-4 max-w-2xl">
@@ -93,23 +126,10 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
                         className="font-semibold text-gold"
                     />
                 </div>
-                <div className="flex justify-center">
-                    <Button
-                        className="mt-5"
-                        onClick={() => {
-                            setShowQrCode(!showQrCode);
-                        }}
-                        iconName={"qr_code_2"}
-                    >
-                        {showQrCode
-                            ? Messages.hideEsimQrCode
-                            : Messages.showEsimQrCode}
-                    </Button>
-                </div>
-
-                {esimQrCode && showQrCode && (
+                {renderButton()}
+                {qrCode && showQrCode && (
                     <div className="flex justify-center mt-5">
-                        <img src={`data:image/png;base64,${esimQrCode}`} />
+                        <img src={`data:image/png;base64,${qrCode}`} />
                     </div>
                 )}
 
