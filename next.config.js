@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 const withPWA = require("next-pwa")({
-    pwa: {
-        dest: "public",
-        register: true,
-        disable: process.env.REACT_APP_ENV === "dev",
-        skipWaiting: true,
-    },
+    dest: "public",
+    register: true,
+    disable: process.env.REACT_APP_ENV === "dev",
+    skipWaiting: true,
 });
 const nextConfig = withPWA({
     reactStrictMode: true,
