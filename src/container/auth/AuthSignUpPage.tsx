@@ -51,7 +51,7 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
         signUpForm;
 
     return (
-        <div className="relative w-screen h-screen bg-transparent text-white overflow-y-scroll z-10 px-4 pt-4 relative">
+        <div className="relative w-screen h-screen bg-transparent text-white overflow-y-scroll z-20 px-4 pt-4">
             <Button
                 variant="trans"
                 iconName="arrow_back_ios"
