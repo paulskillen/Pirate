@@ -55,16 +55,16 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
     };
 
     return (
-        <div className="">
+        <div className="bg-black">
             <LayoutHeader
-                textColor="black"
+                textColor="white"
                 title={Messages.signIn}
                 bgColor="transparent"
                 onBackClick={() => {
                     router.push(Path.home().href);
                 }}
             />
-            <div className="px-4 mt-4">
+            <div className="px-4 mt-4 h-screen">
                 <div>
                     {renderLoginInputs()}
                     <Button
@@ -77,15 +77,17 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                     </Button>
                     <div className="d-flex mt-4 align-items-center">
                         <div className="divider " />
-                        <small className="mx-3 text">{Messages.or}</small>
+                        <small className="mx-3 text text-white">{Messages.or}</small>
                         <div className="divider " />
                     </div>
                     <AuthSignInSocial />
 
                     <div className="mt-4 flex-center">
-                        <small className="text">{Messages.dontHaveAnAccount}</small>
+                        <small className="text text-white">
+                            {Messages.dontHaveAnAccount}
+                        </small>
                         <AppLink href={Path.singUp()?.href}>
-                            <small className="text-primary font-semibold ml-1 text text-underline">
+                            <small className="text-gold font-semibold ml-1 text text-underline">
                                 {Messages.signUp}
                             </small>
                         </AppLink>

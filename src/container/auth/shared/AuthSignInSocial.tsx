@@ -87,7 +87,7 @@ const ButtonSignSocial = (props: IButtonLoginSocial) => {
 
     return (
         <div
-            className={`login__button_social shadow-sm border rounded-lg mt-3 flex justify-center items-center ${className} `}
+            className={`login__button_social bg-white shadow-sm border rounded-lg mt-3 flex justify-center items-center ${className} `}
             onClick={() =>
                 signIn(provider, {
                     callbackUrl: document.URL + "?provider=" + provider,

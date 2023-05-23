@@ -87,16 +87,6 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
                     {MENUS.map((item, index) => {
                         return <MenuItem key={item?.id} menu={item} />;
                     })}
-                    <div className="flex flex-row items-center mt-4 w-full bg-primary p-3 rounded-xl">
-                        <Icon
-                            name="cloud_download"
-                            className="text-gold"
-                            size="x-large"
-                        />
-                        <div className="text-xl text-white ml-3">
-                            {Messages.installApp}
-                        </div>
-                    </div>
                 </div>
 
                 <Button
