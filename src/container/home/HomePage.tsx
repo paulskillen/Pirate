@@ -48,12 +48,15 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         <MainStyled className="home-page_container w-screen bg-transparent z-10 relative text-white overflow-y-scroll px-4">
             <section className="flex flex-row justify-between items-center mt-4">
                 <div className="flex-center-y w-100">
-                    <Icon
-                        id="installApp"
-                        name="cloud_download"
-                        className="text-gold mr-3"
-                        size="x-large"
-                    />
+                    <div className="mr-3 hover:cursor-pointer">
+                        <Icon
+                            id="installApp"
+                            name="cloud_download"
+                            className="text-gold "
+                            size="x-large"
+                        />
+                    </div>
+
                     <div className="text h4 mb-0">
                         {Messages.selectDestination}
                     </div>
