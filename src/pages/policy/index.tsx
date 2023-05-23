@@ -1,9 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import LandingPage from "@/container/home/LandingPage";
 import PageHeader from "@/container/shared/header/PageHeader";
-import { LayoutClean, LayoutAuth } from "@/container/shared/layout/Layout";
+import { LayoutClean } from "@/container/shared/layout/Layout";
 import Messages from "@/languages/Messages";
-import { Button } from "d-react-components";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -88,7 +86,7 @@ const Policy: NextPage = () => {
                     these terms and conditions, the buyer should not purchase
                     the non-refundable product.
                 </section>
-                <div className="h-20"/>
+                <div className="h-20" />
             </p>
         </div>
     );
