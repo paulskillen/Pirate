@@ -90,10 +90,12 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                             key={item?.id}
                             className="home-page__slider-image-wrapper"
                         >
-                            <img
+                            <Image
                                 alt="slider-homepage"
                                 src={item?.src}
                                 className="home-page__slider-image"
+                                layout="fill"
+                                style={{ objectFit: "cover" }}
                             />
                         </div>
                     );
@@ -107,7 +109,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             {renderHeader()}
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
                 {renderHomepageSlider()}
-                <section className=" mt-4">
+                <section className="mt-4 bg-black p-3">
                     <label className="text-gold text-center w-100 mb-2">
                         {Messages.introduction}
                     </label>
@@ -120,8 +122,8 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         right from your device.
                     </ViewShowMore>
                 </section>
-                <section className=" mt-4">
-                    <label className="text-gold text-center w-100 mb-2">
+                <section className="mt-4 bg-black p-3">
+                    <label className="text-gold text-center w-100 mb-2 ">
                         {Messages.whatIsPirateMobile}
                     </label>
                     <ViewShowMore className="text-gold" limitLength={100}>
@@ -133,7 +135,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         convenience and flexibility like never before.
                     </ViewShowMore>
                 </section>
-                <section className=" mt-4">
+                <section className="mt-4 bg-black p-3">
                     <label className="text-gold text-center w-100 mb-2">
                         {Messages.keyFeatures}
                     </label>
@@ -169,6 +171,9 @@ const MainStyled = styled.main`
         margin-bottom: 5px;
         i {
             font-size: 24px;
+        }
+        &:active {
+            background-color: transparent !important;
         }
     }
     .home-page__slider-image-wrapper {
