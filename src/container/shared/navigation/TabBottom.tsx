@@ -16,17 +16,17 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
         >
             <AppLink href={Path.home()}>
                 <div className="bg-gold p-2 rounded-full">
-                    <Icon icon="house" color="white" size={32} />
+                    <Icon icon="house" color="white" size={24} />
                 </div>
             </AppLink>
             <AppLink href={Path.esimsHistory()}>
                 <div className="p-2 rounded-full">
-                    <Icon icon="sim" className="text-gold" size={36} />
+                    <Icon icon="sim" className="text-gold" size={32} />
                 </div>
             </AppLink>
 
             <AppLink href={Path.profile()}>
-                <Icon icon="person-circle" className="text-gold" size={36} />
+                <Icon icon="person-circle" className="text-gold" size={28} />
             </AppLink>
         </div>
     );

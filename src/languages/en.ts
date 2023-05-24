@@ -41,9 +41,11 @@ const translations = {
     code: "Code",
     profile: "Profile",
     duration: "Duration",
+    introduction: "Introduction",
     purchasedAt: "Purchased at",
     installApp: "Install App",
     loadQrCode: "Load Qr Code",
+    whatIsPirateMobile: "What is Pirate Mobile eSim?",
     compatibleDevices: "Compatible Devices",
     hideEsimQrCode: "Hide ESim Qr Code",
     showEsimQrCode: "Show ESim Qr Code",
@@ -51,6 +53,7 @@ const translations = {
     termAndCondition: "the term and conditions",
     myDeviceIsCompatibleWithEsim: "My device is compatible with the eSim",
     seeCompatibleDeviceList: "see compatible device list",
+    keyFeatures: "Key Features",
 };
 
 export default translations;
