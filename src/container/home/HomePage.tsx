@@ -83,7 +83,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 
     const renderHomepageSlider = () => {
         return (
-            <SlickSlider setting={{ autoplay: true, autoplaySpeed: 1000 }}>
+            <SlickSlider setting={{ autoplay: true, autoplaySpeed: 5000 }}>
                 {HOME_PAGE_COVERS.map((item) => {
                     return (
                         <div
@@ -176,6 +176,12 @@ const MainStyled = styled.main`
         position: relative;
         .home-page__slider-image {
             position: absolute;
+            width: 100%;
+            height: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
         }
     }
 `;
