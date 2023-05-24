@@ -31,7 +31,7 @@ const HOME_PAGE_COVERS = [
     {
         id: TypeOfData.MEDIUM,
         label: "Medium",
-        src: "/images/home-page-cover.jpeg",
+        src: "/images/home-page-cover-1.jpeg",
     },
     {
         id: TypeOfData.LOW,

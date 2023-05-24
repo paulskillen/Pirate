@@ -36,14 +36,19 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
         return (
             <div>
                 <InputText
+                    classNameLabel="text-white"
                     label={Messages.username}
+                    placeholder={Messages.username}
                     name="username"
                     value={loginForm.values.username}
                     error={loginForm.errors.username}
                     onChange={loginForm.handleChange}
                 />
                 <InputText
+                    className="mt-3"
+                    classNameLabel="text-white"
                     label={Messages.password}
+                    placeholder={Messages.password}
                     name="password"
                     value={loginForm.values.password}
                     error={loginForm.errors.password}
@@ -77,7 +82,9 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                     </Button>
                     <div className="d-flex mt-4 align-items-center">
                         <div className="divider " />
-                        <small className="mx-3 text text-white">{Messages.or}</small>
+                        <small className="mx-3 text text-white">
+                            {Messages.or}
+                        </small>
                         <div className="divider " />
                     </div>
                     <AuthSignInSocial />
