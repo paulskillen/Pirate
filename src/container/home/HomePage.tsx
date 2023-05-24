@@ -36,7 +36,7 @@ const HOME_PAGE_COVERS = [
     {
         id: TypeOfData.LOW,
         label: "Low",
-        src: "/images/home-page-cover.jpeg",
+        src: "/images/home-page-cover-2.jpeg",
     },
 ];
 
@@ -83,7 +83,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 
     const renderHomepageSlider = () => {
         return (
-            <SlickSlider>
+            <SlickSlider setting={{ autoplay: true, autoplaySpeed: 1000 }}>
                 {HOME_PAGE_COVERS.map((item) => {
                     return (
                         <div
