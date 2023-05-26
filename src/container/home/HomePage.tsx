@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import * as Yup from "yup";
+import HomePageSliderBlock from "./content/HomePageSliderBlock";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -108,7 +109,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         <MainStyled className="home-page__container container bg-transparent z-10 relative text-white px-3 ">
             {renderHeader()}
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                {renderHomepageSlider()}
+                <HomePageSliderBlock />
                 <section className="mt-4 bg-black p-3">
                     <label className="text-gold text-center w-100 mb-2">
                         {Messages.introduction}
