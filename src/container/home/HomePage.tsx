@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 import { Button, Icon, ViewTextarea } from "d-react-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { Fragment } from "react";
 import * as Yup from "yup";
 import HomePageSliderBlock from "./content/HomePageSliderBlock";
 
@@ -55,7 +55,20 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const renderHeader = () => {
         return (
             <section className="flex flex-row justify-between items-center mt-2">
-                <div className="flex-center-y ">
+                <div className="flex-center-y py-4">
+                    <Image
+                        alt="logo"
+                        src="/images/logo/logo.png"
+                        // layout="fill"
+                        style={{ objectFit: "cover" }}
+                        width={50}
+                        height={50}
+                    />
+                    <div className="text-gold text font-bold ml-2">
+                        Pirate Mobile
+                    </div>
+                </div>
+                {/* <div className="flex-center-y ">
                     <div className="mr-3 hover:cursor-pointer p-0 m-0">
                         <Icon
                             id="installApp"
@@ -64,20 +77,22 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                             size="x-large"
                         />
                     </div>
+                </div> */}
+                <div className="flex-center-y w-100">
+                    <div className="text-xl text-gold font-semibold w-100 text-end mb-2">
+                        {Messages.selectDestination}
+                    </div>
+                    <Button
+                        iconName="search"
+                        className="rounded px-0 home-page__button-search ml-3"
+                        classNameIcon="text-gold"
+                        size="large"
+                        variant="trans"
+                        onClick={() => {
+                            router.push({ pathname: Path.listCountry().href });
+                        }}
+                    />
                 </div>
-                <div className="text-xl text-gold font-semibold w-100 text-center mb-2">
-                    {Messages.selectDestination}
-                </div>
-                <Button
-                    iconName="search"
-                    className="rounded px-0 home-page__button-search ml-3"
-                    classNameIcon="text-gold"
-                    size="large"
-                    variant="trans"
-                    onClick={() => {
-                        router.push({ pathname: Path.listCountry().href });
-                    }}
-                />
             </section>
         );
     };
@@ -105,11 +120,9 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         );
     };
 
-    return (
-        <MainStyled className="home-page__container container bg-transparent z-10 relative text-white px-3 ">
-            {renderHeader()}
-            <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                <HomePageSliderBlock />
+    const renderText = () => {
+        return (
+            <Fragment>
                 <section className="mt-4 bg-black p-3">
                     <label className="text-gold text-center w-100 mb-2">
                         {Messages.introduction}
@@ -159,6 +172,16 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         without any long-term obligations.
                     </ViewShowMore>
                 </section>
+            </Fragment>
+        );
+    };
+
+    return (
+        <MainStyled className="home-page__container container bg-transparent z-10 relative text-white px-3 ">
+            {renderHeader()}
+            <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
+                <HomePageSliderBlock />
+                {/* {renderText()} */}
                 <div className="h-52" />
             </div>
         </MainStyled>
@@ -171,9 +194,10 @@ const MainStyled = styled.main`
     .home-page__button-search {
         margin-bottom: 5px;
         i {
-            font-size: 24px;
+            font-size: 28px;
         }
-        &:active {
+        &:active,
+        &:hover {
             background-color: transparent !important;
         }
     }
