@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import  { Autoplay, Navigation, Pagination } from 'swiper';
+import { Autoplay, Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -52,17 +52,16 @@ const HomePageSliderBlock: React.FC<IHomePageSliderBlockProps> = ({ id }) => {
             >
                 {HOME_PAGE_COVERS.map((item) => {
                     return (
-                        <SwiperSlide
-                            key={item?.id}
-                            className="home-page__slider-image-wrapper"
-                        >
-                            <Image
-                                alt="slider-homepage"
-                                src={item?.src}
-                                className="home-page__slider-image"
-                                layout="fill"
-                                style={{ objectFit: "cover" }}
-                            />
+                        <SwiperSlide key={item?.id}>
+                            <div className="home-page__slider-image-wrapper rounded-2xl">
+                                <Image
+                                    alt="slider-homepage"
+                                    src={item?.src}
+                                    className="home-page__slider-image rounded-2xl"
+                                    layout="fill"
+                                    style={{ objectFit: "cover" }}
+                                />
+                            </div>
                         </SwiperSlide>
                     );
                 })}
@@ -75,14 +74,16 @@ export default HomePageSliderBlock;
 
 const HomePageSliderBlockStyled = styled.div`
     .home-page__slider-image-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
         .home-page__slider-image {
-            /* position: absolute;
+            position: absolute;
             width: 100%;
             height: auto;
             top: 0;
             left: 0;
             bottom: 0;
-            right: 0; */
+            right: 0;
         }
     }
 `;
