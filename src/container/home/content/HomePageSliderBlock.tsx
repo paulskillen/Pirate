@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import styled from "@emotion/styled";
+import { Button } from "d-react-components";
 
 export interface IHomePageSliderBlockProps {
     [key: string]: any;
@@ -35,17 +36,17 @@ const HomePageSliderBlock: React.FC<IHomePageSliderBlockProps> = ({ id }) => {
         <HomePageSliderBlockStyled>
             <Swiper
                 loop
-                spaceBetween={50}
+                spaceBetween={20}
                 slidesPerView={1}
                 pagination={{
                     clickable: true,
                 }}
                 autoplay={{
-                    delay: 1000,
+                    delay: 3000,
                     disableOnInteraction: false,
                 }}
-                speed={2000}
-                scrollbar={{ draggable: true }}
+                speed={3000}
+                
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Autoplay, Pagination, Navigation]}
