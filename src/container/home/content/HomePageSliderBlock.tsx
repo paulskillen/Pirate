@@ -20,14 +20,14 @@ const HOME_PAGE_COVERS = [
         src: "/images/home-page-cover.jpeg",
     },
     {
-        id: "2",
-        label: "Medium",
-        src: "/images/home-page-cover-1.jpeg",
-    },
-    {
         id: "3",
         label: "Low",
-        src: "/images/home-page-cover-2.jpeg",
+        src: "/images/home-page-cover-1.jpg",
+    },
+    {
+        id: "4",
+        label: "Low",
+        src: "/images/home-page-cover-2.png",
     },
 ];
 
