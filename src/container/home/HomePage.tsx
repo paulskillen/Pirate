@@ -64,8 +64,8 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         width={50}
                         height={50}
                     />
-                    <div className="text-gold text font-bold ml-2">
-                        Pirate Mobile
+                    <div className="text-white  font-semibold ml-3">
+                        Pirate <span className="text-gold">Mobile</span>
                     </div>
                 </div>
                 {/* <div className="flex-center-y ">
@@ -78,10 +78,10 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         />
                     </div>
                 </div> */}
-                <div className="flex-center-y w-100">
-                    <div className="text-xl text-gold font-semibold w-100 text-end mb-2">
+                <div className="flex-center-y w-">
+                    {/* <div className="text-xl text-gold font-semibold w-100 text-end mb-2">
                         {Messages.selectDestination}
-                    </div>
+                    </div> */}
                     <Button
                         iconName="search"
                         className="rounded px-0 home-page__button-search ml-3"
