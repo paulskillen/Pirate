@@ -9,9 +9,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import * as Yup from "yup";
-import HomePageSliderBlock from "./content/HomePageSliderBlock";
+import InformationSliderBlock from "./content/InformationSliderBlock";
 
-export interface IHomePageProps {
+export interface IInformationPageProps {
     [key: string]: any;
 }
 
@@ -49,7 +49,7 @@ const validationSchema = Yup.object().shape({
         .required("Required field!"),
 });
 
-const HomePage: React.FC<IHomePageProps> = ({ id }) => {
+const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
     const router = useRouter();
 
     const renderHeader = () => {
@@ -64,10 +64,20 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         width={50}
                         height={50}
                     />
-                    <div className="text-gold  h4  font-semibold ml-3">
-                        {Messages.selectDestination}
+                    <div className="text-white  font-semibold ml-3">
+                        Pirate <span className="text-gold">Mobile</span>
                     </div>
                 </div>
+                {/* <div className="flex-center-y ">
+                    <div className="mr-3 hover:cursor-pointer p-0 m-0">
+                        <Icon
+                            id="installApp"
+                            name="cloud_download"
+                            className="text-gold "
+                            size="x-large"
+                        />
+                    </div>
+                </div> */}
                 <div className="flex-center-y w-">
                     {/* <div className="text-xl text-gold font-semibold w-100 text-end mb-2">
                         {Messages.selectDestination}
@@ -170,7 +180,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         <MainStyled className="home-page__container container bg-transparent z-10 relative text-white px-3 ">
             {renderHeader()}
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                {/* <HomePageSliderBlock /> */}
+                <InformationSliderBlock />
                 {/* {renderText()} */}
                 <div className="h-52" />
             </div>
@@ -178,7 +188,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     );
 };
 
-export default HomePage;
+export default InformationPage;
 
 const MainStyled = styled.main`
     .home-page__button-search {
