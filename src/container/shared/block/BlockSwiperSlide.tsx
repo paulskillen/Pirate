@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import styled from "@emotion/styled";
 
-export interface IInformationSliderBlockProps {
+export interface IBlockSwiperSlideProps {
     [key: string]: any;
 }
 
@@ -30,11 +30,9 @@ const HOME_PAGE_COVERS = [
     },
 ];
 
-const InformationSliderBlock: React.FC<IInformationSliderBlockProps> = ({
-    id,
-}) => {
+const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({ id }) => {
     return (
-        <InformationSliderBlockStyled>
+        <BlockSwiperSlideStyled>
             <Swiper
                 loop
                 spaceBetween={20}
@@ -67,13 +65,13 @@ const InformationSliderBlock: React.FC<IInformationSliderBlockProps> = ({
                     );
                 })}
             </Swiper>
-        </InformationSliderBlockStyled>
+        </BlockSwiperSlideStyled>
     );
 };
 
-export default InformationSliderBlock;
+export default BlockSwiperSlide;
 
-const InformationSliderBlockStyled = styled.div`
+const BlockSwiperSlideStyled = styled.div`
     .home-page__slider-image-wrapper {
         position: relative;
         padding-bottom: 56.25%;
