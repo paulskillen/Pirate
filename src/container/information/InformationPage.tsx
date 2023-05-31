@@ -86,62 +86,6 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
         );
     };
 
-    const renderText = () => {
-        return (
-            <Fragment>
-                <section className="mt-4 bg-black p-3">
-                    <label className="text-gold text-center w-100 mb-2">
-                        {Messages.introduction}
-                    </label>
-                    <ViewShowMore className="text-gold" limitLength={100}>
-                        At Pirate Mobile, we understand the importance of
-                        staying connected wherever you go. Introducing Pirate
-                        Mobile eSim, your passport to hassle-free global
-                        connectivity. Say goodbye to physical SIM cards and
-                        unlock a world of seamless communication and data access
-                        right from your device.
-                    </ViewShowMore>
-                </section>
-                <section className="mt-4 bg-black p-3">
-                    <label className="text-gold text-center w-100 mb-2 ">
-                        {Messages.whatIsPirateMobile}
-                    </label>
-                    <ViewShowMore className="text-gold" limitLength={100}>
-                        Pirate Mobile eSim is a revolutionary technology that
-                        allows you to activate a mobile connection without the
-                        need for a physical SIM card. With a simple download and
-                        activation process, you can enjoy the benefits of a
-                        local mobile network wherever you travel. Say hello to
-                        convenience and flexibility like never before.
-                    </ViewShowMore>
-                </section>
-                <section className="mt-4 bg-black p-3">
-                    <label className="text-gold text-center w-100 mb-2">
-                        {Messages.keyFeatures}
-                    </label>
-                    <ViewShowMore className="text-gold" limitLength={150}>
-                        Global Coverage: Enjoy coverage in over 180 countries,
-                        ensuring you're always connected, no matter where your
-                        adventures take you. Easy Activation: Activate your eSim
-                        with a few simple steps, eliminating the need to visit a
-                        physical store or wait for a SIM card to be shipped to
-                        you. Dual SIM Support: Seamlessly switch between your
-                        eSim and physical SIM card for ultimate convenience and
-                        flexibility. Cost-Effective: Say goodbye to expensive
-                        international roaming charges. Pirate Mobile eSim offers
-                        affordable plans that help you stay connected without
-                        breaking the bank. Data Plans: Choose from a range of
-                        data plans tailored to your specific needs, whether
-                        you're a frequent traveler or an occasional explorer. No
-                        Contract Required: Enjoy the freedom of a no-contract
-                        commitment. Activate and deactivate your eSim as needed
-                        without any long-term obligations.
-                    </ViewShowMore>
-                </section>
-            </Fragment>
-        );
-    };
-
     const renderInformationBlocks = () => {
         return (
             <Fragment>
@@ -165,7 +109,8 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
                 <BlockSwiperSlide />
                 <div className="px-3">{renderInformationBlocks()}</div>
 
-                <div className="h-52" />
+                <div className="h-96" />
+                <div className="h-96" />
             </div>
         </MainStyled>
     );
