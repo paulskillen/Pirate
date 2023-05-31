@@ -9,7 +9,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import * as Yup from "yup";
-import HomePageSliderBlock from "./content/HomePageSliderBlock";
 
 export interface IHomePageProps {
     [key: string]: any;
