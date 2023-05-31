@@ -1,4 +1,5 @@
 import ViewShowMore from "@/components/view/ViewShowMore";
+import ClassNames from "classnames";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import React from "react";
@@ -20,7 +21,7 @@ const BlockInformation: React.FC<IBlockInformationProps> = ({
                     className="block-information__image"
                     alt="block-information"
                     src={image}
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: "fill" }}
                     fill
                 />
             </div>
@@ -30,7 +31,14 @@ const BlockInformation: React.FC<IBlockInformationProps> = ({
         <BlockInformationStyled className="grid grid-cols-12 mt-4 border p-3 rounded-2xl bg-black">
             {position === "left" && renderImage()}
             <div className="col-span-9">
-                <div className="d-flex flex-column justify-content-center align-items-center pl-3 py-2">
+                <div
+                    className={`d-flex flex-column justify-content-center align-items-center  py-2 ${ClassNames(
+                        {
+                            "pl-3": position === "left",
+                            "pr-3": position === "right",
+                        }
+                    )}`}
+                >
                     <h5 className="title font-weight-bold text-white">
                         {title}
                     </h5>
