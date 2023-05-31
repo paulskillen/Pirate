@@ -43,7 +43,7 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
 
     const renderHeader = () => {
         return (
-            <section className="flex flex-row justify-between items-center mt-2">
+            <section className="flex flex-row justify-between items-center px-3">
                 <div className="flex-center-y py-4">
                     <Image
                         alt="logo"
@@ -109,7 +109,6 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
                 <BlockSwiperSlide />
                 <div className="px-3">{renderInformationBlocks()}</div>
 
-                <div className="h-96" />
                 <div className="h-96" />
             </div>
         </MainStyled>

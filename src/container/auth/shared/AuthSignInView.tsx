@@ -1,6 +1,6 @@
 import Path from "@/common/constant/path";
 import AppLink from "@/components/link/AppLink";
-import LayoutHeader from "@/container/shared/layout/LayoutHeader";
+import PageHeader from "@/container/shared/header/PageHeader";
 import Messages from "@/languages/Messages";
 import { useAuthAccessToken } from "@/store/auth/authHook";
 import { Button, InputText } from "d-react-components";
@@ -61,15 +61,13 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
 
     return (
         <div className="bg-black">
-            <LayoutHeader
-                textColor="white"
+            <PageHeader
                 title={Messages.signIn}
-                bgColor="transparent"
-                onBackClick={() => {
+                onLeftClick={() => {
                     router.push(Path.home().href);
                 }}
             />
-            <div className="px-4 mt-4 h-screen">
+            <div className="px-4 mt-5 h-screen">
                 <div>
                     {renderLoginInputs()}
                     <Button
@@ -94,7 +92,7 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                             {Messages.dontHaveAnAccount}
                         </small>
                         <AppLink href={Path.singUp()?.href}>
-                            <small className="text-gold font-semibold ml-1 text text-underline">
+                            <small className="text-gold text font-semibold ml-2 text-underline">
                                 {Messages.signUp}
                             </small>
                         </AppLink>

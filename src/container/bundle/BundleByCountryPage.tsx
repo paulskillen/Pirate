@@ -14,6 +14,7 @@ import PriceTag from "../shared/items/PriceTag";
 import Path from "@/common/constant/path";
 import PageHeader from "../shared/header/PageHeader";
 import Icon from "@/components/icon/Icon";
+import styled from "@emotion/styled";
 
 export interface IBundleByCountryPageProps {
     bundles: IBundle[];
@@ -45,7 +46,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         return (
             <div className="fixed bottom-5 w-full px-3 z-30">
                 <Button
-                    className="w-full font-bold z-30 border border-slate-500"
+                    className="w-full font-bold z-30 border bundle-by-country-page__button-checkout"
                     style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         if (selectedBundle) {
@@ -62,13 +63,13 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     };
 
     return (
-        <div className="bg-transparent text-white relative">
+        <BundleByCountryPageStyled className="bg-transparent text-white relative">
             <PageHeader
                 title={currentCountry?.name}
                 customerRight={
                     <Image
                         alt="flag"
-                        className="w-12 h-auto rounded border"
+                        className="w-12 h-auto rounded border bundle-by-country-page__flag"
                         src={convertBase64ToImgSource(currentCountry?.flag)}
                     />
                 }
@@ -90,7 +91,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                 <div className="h-96" />
             </div>
             {!isEmpty(selectedBundle) && renderCheckout()}
-        </div>
+        </BundleByCountryPageStyled>
     );
 };
 
@@ -113,7 +114,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     }, [dataAmount, provider]);
 
     return (
-        <div
+        <BundleItemStyled
             className="flex flex-row mt-4 text-white bg-black rounded-2xl p-3 text-xl z-10 relative border"
             onClick={onClick}
         >
@@ -126,7 +127,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                 />
             )}
             <div className="w-full ml-3">
-                <div className="flex-center-y">
+                <div className="flex-center-y text-gold font-semibold">
                     <div>#</div>
                     <div className="ml-1">{id}</div>
                 </div>
@@ -148,6 +149,20 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                 </div>
             </div>
             <Icon icon="sim" className="text-gold" size={36} />
-        </div>
+        </BundleItemStyled>
     );
 };
+
+const BundleItemStyled = styled.div`
+    border-color: var(--color-gold) !important;
+`;
+
+const BundleByCountryPageStyled = styled.div`
+    .bundle-by-country-page__button-checkout {
+        color: var(--color-gold) !important;
+        border-color: var(--color-gold) !important;
+    }
+    .bundle-by-country-page__flag {
+        border-color: var(--color-gold) !important;
+    }
+`;

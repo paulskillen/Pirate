@@ -8,6 +8,7 @@ import PriceTag from "@/container/shared/items/PriceTag";
 import Messages from "@/languages/Messages";
 import { useAuthProfile } from "@/store/auth/authHook";
 import { useOrderHistory } from "@/store/order-history/orderHistoryHook";
+import styled from "@emotion/styled";
 import ClassNames from "classnames";
 import { Progress, TimeUtils } from "d-react-components";
 import { map } from "lodash";
@@ -84,7 +85,7 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
     const rowClass = ClassNames("flex flex-row items-center text-xl mt-2");
 
     return (
-        <div
+        <OrderItemStyled
             className="flex flex-row mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full"
             onClick={() => router.push(Path.orderDetail(order).as || "")}
         >
@@ -113,6 +114,10 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
                     <PriceTag price={subTotal} className="font-semibold" />
                 </div>
             </div>
-        </div>
+        </OrderItemStyled>
     );
 };
+
+const OrderItemStyled = styled.div`
+    border-color: var(--color-gold) !important;
+`;
