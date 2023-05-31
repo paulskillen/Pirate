@@ -8,6 +8,7 @@ export interface IPageHeaderProps {
     className?: string;
     leftButtonProps?: ButtonProps;
     showLeftButton?: boolean;
+    onLeftClick?: () => void;
     customerCenter?: (() => React.ReactNode) | React.ReactNode | Element;
     customerLeft?: (() => React.ReactNode) | React.ReactElement | Element;
     customerRight?: (() => React.ReactNode) | React.ReactElement | Element;
@@ -18,6 +19,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
     className,
     leftButtonProps = {},
     showLeftButton = true,
+    onLeftClick,
     customerCenter,
     customerLeft,
     customerRight,
@@ -27,10 +29,15 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
     const renderLeft = () => {
         let left: any = (
             <Button
-                onClick={() => router.back()}
+                onClick={() => {
+                    if (onLeftClick) {
+                        return onLeftClick();
+                    }
+                    return router.back();
+                }}
                 variant="trans"
                 iconName="arrow_back_ios_new"
-                className="px-0"
+                className="px-0 page-header__left-button"
                 color="light"
                 {...leftButtonProps}
             />
@@ -54,7 +61,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
         }
         if (title) {
             return (
-                <div className="text-xl text-white flex-1 text-center">
+                <div className="text-xl text-gold flex-1 text-center">
                     {title}
                 </div>
             );
@@ -75,7 +82,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
 
     return (
         <PageHeaderStyled
-            className={`w-full flex flex-row items-center justify-between py-2 px-4 bg-primary border-b border-b-slate-500  rounded-b-3xl ${className}`}
+            className={`w-full flex flex-row items-center justify-between py-2 px-4 bg-black ${className}`}
         >
             {renderLeft()}
             {renderCenter()}
@@ -89,4 +96,7 @@ export default PageHeader;
 const PageHeaderStyled = styled.div`
     position: relative;
     z-index: 10;
+    .page-header__left-button {
+        color: var(--color-gold) !important;
+    }
 `;

@@ -20,7 +20,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
         return ClassNames({ "rounded-full bg-primary-dark": isActive });
     };
     const iconClass = (isActive?: boolean) => {
-        return ClassNames({ "text-gold": !isActive, "text-white": isActive });
+        return ClassNames({ "text-gold": !isActive, "text-gold-light": isActive });
     };
 
     return (

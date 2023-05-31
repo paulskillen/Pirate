@@ -1,4 +1,5 @@
 import ListCountryPage from "@/container/list-country/ListCountryPage";
+import { LayoutClean } from "@/container/shared/layout/Layout";
 import React from "react";
 
 export interface IListCountryProps {
@@ -10,3 +11,6 @@ const ListCountry: React.FC<IListCountryProps> = ({ id }) => {
 };
 
 export default ListCountry;
+
+//@ts-ignore
+ListCountry.Layout = LayoutClean;
