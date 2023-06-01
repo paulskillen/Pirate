@@ -55,14 +55,14 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         return (
             <section className="flex flex-row justify-between items-center mt-2">
                 <div className="flex-center-y py-4">
-                    <Image
+                    {/* <Image
                         alt="logo"
                         src="/images/logo/logo.png"
                         // layout="fill"
                         style={{ objectFit: "cover" }}
                         width={50}
                         height={50}
-                    />
+                    /> */}
                     <div className="text-gold  h4  font-semibold ml-3">
                         {Messages.selectDestination}
                     </div>
