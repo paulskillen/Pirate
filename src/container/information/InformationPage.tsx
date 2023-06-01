@@ -37,6 +37,7 @@ const BLOCK_INFORMATION = [
         image: "/images/logo/logo.png",
     },
     {
+<<<<<<< HEAD
         id: "3",
         title: Messages.keyFeatures,
         description:
@@ -48,6 +49,33 @@ const BLOCK_INFORMATION = [
         title: Messages.howItWorks,
         description:
             "",
+=======
+        id: "4",
+        title: Messages.howItWorks,
+        description:
+            "1. Download the Pirate Mobile eSim app from your device's app store. \n 2. Follow the simple setup process to create your Pirate Mobile account. \n 3. Choose your desired data plan and complete the activation process. \n 4. Voila! You're now connected to a local mobile network wherever you are.",
+        image: "/images/logo/logo.png",
+    },
+    {
+        id: "5",
+        title: Messages.whyChoosePirateMobileEsims,
+        description:
+            "* Convenience: No more dealing with physical SIM cards, swapping or losing them while on the go. Pirate Mobile eSim provides a hassle-free and convenient solution. \n * Flexibility: Seamlessly switch between your eSim and physical SIM card based on your needs and preferences. \n * Reliability: Count on Pirate Mobile's extensive global network coverage and reliable connections for uninterrupted communication. \n * Cost Savings: Avoid expensive international roaming charges and enjoy affordable data plans tailored to your usage patterns. \n * Peace of Mind: Stay connected to your loved ones, access important information, and navigate with ease, knowing you have reliable connectivity wherever you travel.",
+        image: "/images/logo/logo.png",
+    },
+    // {
+    //     id: "6",
+    //     title: Messages.testimonials,
+    //     description: "",
+    //     image: "/images/logo/logo.png",
+    // },
+    {
+        id: "7",
+        title: Messages.getStartedToday,
+        subTitle:
+            "Get started with Pirate Mobile eSim today and experience the freedom of seamless global connectivity. Activate your eSim now and unlock a world of possibilities.",
+        description: "",
+>>>>>>> development
         image: "/images/logo/logo.png",
     },
 ];
