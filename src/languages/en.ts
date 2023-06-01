@@ -54,6 +54,7 @@ const translations = {
     myDeviceIsCompatibleWithEsim: "My device is compatible with the eSim",
     seeCompatibleDeviceList: "see compatible device list",
     keyFeatures: "Key Features",
+    supplierPrice: "Supplier Price",
 };
 
 export default translations;
