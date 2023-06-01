@@ -121,7 +121,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
     const renderAgreement = () => {
         return (
-            <div className="bg-black mt-4 p-4 rounded-2xl border">
+            <div className="bg-black mt-4 p-4 rounded-2xl border border-gold">
                 <div className="flex-center-y">
                     <Checkbox
                         onChange={() =>

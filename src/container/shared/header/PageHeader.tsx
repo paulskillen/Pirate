@@ -96,6 +96,7 @@ export default PageHeader;
 const PageHeaderStyled = styled.div`
     position: relative;
     z-index: 10;
+    /* border-bottom: 0.1px solid var(--color-gold); */
     .page-header__left-button {
         color: var(--color-gold) !important;
     }

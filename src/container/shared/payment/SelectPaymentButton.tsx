@@ -137,7 +137,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
     return (
         <React.Fragment>
             <div
-                className="bg-black border text-white flex items-center justify-between px-4 py-3 rounded-2xl mt-4"
+                className="bg-black border border-gold text-white flex items-center justify-between px-4 py-3 rounded-2xl mt-4"
                 onClick={() => {
                     setOpenPaymentsModal({ open: true });
                 }}

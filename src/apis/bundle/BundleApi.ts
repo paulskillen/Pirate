@@ -14,7 +14,7 @@ const BundleApi = {
                 }
             `,
             variables: { country },
-            // fetchPolicy: "no-cache",
+            fetchPolicy: "no-cache",
         }),
 
     // detail: (id: string) =>

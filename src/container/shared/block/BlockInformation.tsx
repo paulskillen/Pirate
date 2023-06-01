@@ -29,8 +29,8 @@ const BlockInformation: React.FC<IBlockInformationProps> = ({
     };
     return (
         <BlockInformationStyled className="grid grid-cols-12 mt-4 border p-3 rounded-2xl bg-black">
-            {position === "left" && renderImage()}
-            <div className="col-span-9">
+            {/* {position === "left" && renderImage()} */}
+            <div className="col-span-12">
                 <div
                     className={`d-flex flex-column justify-content-center align-items-center  py-2 ${ClassNames(
                         {
@@ -54,7 +54,7 @@ const BlockInformation: React.FC<IBlockInformationProps> = ({
                     )}
                 </div>
             </div>
-            {position === "right" && renderImage()}
+            {/* {position === "right" && renderImage()} */}
         </BlockInformationStyled>
     );
 };
