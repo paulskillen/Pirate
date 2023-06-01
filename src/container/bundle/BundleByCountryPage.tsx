@@ -103,8 +103,16 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     selected,
     showRadio = true,
 }) => {
-    const { provider, name, dataAmount, duration, description, salePrice, id } =
-        bundle || {};
+    const {
+        provider,
+        name,
+        dataAmount,
+        duration,
+        description,
+        price,
+        salePrice,
+        id,
+    } = bundle || {};
     const rowClass = ClassNames("flex flex-row items-center text-xl mt-3");
     const dataDisplay = useMemo(() => {
         if (provider === ProviderName.ESIM_GO) {
@@ -142,6 +150,10 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         {Messages.provider} :{" "}
                     </span>
                     <ProviderNameItem providerId={provider} />
+                </div>
+                <div className="w-full flex justify-end ">
+                    <div className="text-xl">{`${Messages.supplierPrice} \b \b`}</div>
+                    <PriceTag price={price} />
                 </div>
                 <div className="w-full flex justify-end ">
                     <div className="text-xl">{`${Messages.price} \b \b`}</div>
