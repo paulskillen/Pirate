@@ -55,6 +55,10 @@ const translations = {
     seeCompatibleDeviceList: "see compatible device list",
     keyFeatures: "Key Features",
     supplierPrice: "Supplier Price",
+    howItWorks: "How It Works",
+    whyChoosePirateMobileEsims: "Why Choose Pirate Mobile eSim ?",
+    testimonials: "Testimonials",
+    getStartedToday: "Get Started Today",
 };
 
 export default translations;

@@ -18,6 +18,8 @@ import { NextComponentType, NextPageContext } from "next";
 import { isEmpty } from "lodash";
 import { wrapper } from "@/store/store";
 import InitComponent from "@/container/app/content/InitComponent";
+import AppSeo from "@/container/seo/app-seo/AppSeo";
+import SocialSeo from "@/container/seo/social-seo/SocialSeo";
 
 export type MattressAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
@@ -107,6 +109,8 @@ function App({ Component, pageProps }: MattressAppProps) {
                                     content="width=device-width, initial-scale=1, maximum-scale=1"
                                 />
                             </Head>
+                            <AppSeo />
+                            <SocialSeo />
                             <Component {...pageProps} />
                         </Layout>
                     </AppStateContext.Provider>
