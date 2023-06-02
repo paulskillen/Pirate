@@ -11,7 +11,7 @@ import { useOrderHistory } from "@/store/order-history/orderHistoryHook";
 import styled from "@emotion/styled";
 import ClassNames from "classnames";
 import { Progress, TimeUtils } from "d-react-components";
-import { map } from "lodash";
+import { forEach, join, map, unionBy } from "lodash";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -80,10 +80,37 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
 
 export default OrderHistoryPage;
 
+const getCountriesFromProducts = (pros: Array<any>) => {
+    const countries: Array<any> = [];
+    forEach(pros, (itemPro) => {
+        const countryItems = itemPro?.product?.bundleData?.countries;
+        if (countryItems && countryItems?.length > 0) {
+            forEach(countryItems, (i) => {
+                countries.push(i);
+            });
+        }
+    });
+    let res;
+    if (countries?.length > 0) {
+        res = unionBy(countries, (i) => i?.iso);
+    }
+    return res;
+};
+
 export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
     const router = useRouter();
-    const { provider, subTotal, total, orderNo, createdAt } = order || {};
+    const { provider, subTotal, total, orderNo, createdAt, products } =
+        order || {};
     const rowClass = ClassNames("flex flex-row items-center text-xl mt-2");
+    const orderCountries = getCountriesFromProducts(products || []);
+    const countryView = (
+        <div className="text">
+            {join(
+                map(orderCountries, (i) => i?.name),
+                ","
+            )}
+        </div>
+    );
 
     return (
         <OrderItemStyled
@@ -109,7 +136,7 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
                     </div>
                     <Icon icon="cart" color="" className="text-gold" />
                 </div>
-
+                {countryView}
                 <div className="w-full flex justify-end text mt-3">
                     <div className="">{`${Messages.subTotal} \b \b`}</div>
                     <PriceTag price={subTotal} className="font-semibold" />
