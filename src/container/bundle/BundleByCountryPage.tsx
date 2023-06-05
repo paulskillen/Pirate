@@ -1,8 +1,8 @@
 import { find, isEmpty, map } from "lodash";
 import ClassNames from "classnames";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { IBundle } from "@/common/interface/bundle";
-import { Button, Checkbox } from "d-react-components";
+import { Button, Checkbox, Progress } from "d-react-components";
 import ProviderNameItem from "../provider/shared/ProviderNameItem";
 import Messages from "@/languages/Messages";
 import { AppStateContext } from "@/common/context/app/app-context";
@@ -15,9 +15,9 @@ import Path from "@/common/constant/path";
 import PageHeader from "../shared/header/PageHeader";
 import Icon from "@/components/icon/Icon";
 import styled from "@emotion/styled";
+import BundleApi from "@/apis/bundle/BundleApi";
 
 export interface IBundleByCountryPageProps {
-    bundles: IBundle[];
     countryCode: string;
     [key: string]: any;
 }
@@ -30,17 +30,36 @@ export interface IBundleItemProps {
 }
 
 const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
-    bundles = [],
     countryCode,
 }) => {
     const router = useRouter();
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
+    const [bundles, setBundles] = useState<IBundle[]>();
     const currentCountry = find(
         countryList,
         (item) => item?.isoAlpha2 === countryCode
     );
+
+    useEffect(() => {
+        if (countryCode) {
+            loadBundles();
+        }
+    }, [countryCode]);
+
+    const loadBundles = () => {
+        return Progress.show(
+            {
+                method: BundleApi.listBundleFromCountry,
+                params: [countryCode],
+            },
+            (res: any) => {
+                const resBundles = res?.data?.data?.data ?? [];
+                setBundles(resBundles);
+            }
+        );
+    };
 
     const renderCheckout = () => {
         return (
