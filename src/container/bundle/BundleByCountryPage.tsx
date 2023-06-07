@@ -142,44 +142,59 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
 
     return (
         <BundleItemStyled
-            className="flex flex-row mt-4 text-white bg-black rounded-2xl p-3 text-xl z-10 relative border"
+            className={ClassNames(
+                "mt-4 text-white bg-black rounded-2xl p-3 text-xl z-10 relative",
+                { "border-2": selected, border: !selected }
+            )}
             onClick={onClick}
         >
-            {showRadio && (
-                <Checkbox
-                    onChange={() => {}}
-                    checked={selected}
-                    variant="radio"
-                    className="h-fit text-white border-white mt-1"
-                />
-            )}
-            <div className="w-full ml-3">
-                <div className="flex-center-y text-gold font-semibold">
-                    <div>#</div>
-                    <div className="ml-1">{id}</div>
-                </div>
-                <div className={rowClass}>
-                    <div>{dataDisplay}</div>
-                </div>
-                <div className={rowClass}>
-                    {`${duration}  ${Messages.days}`}
-                </div>
-                <div className={`${rowClass} text `}>
+            <div className="flex flex-row">
+                {showRadio && (
+                    <Checkbox
+                        onChange={() => {}}
+                        checked={selected}
+                        variant="radio"
+                        className="h-fit text-white border-white mt-1"
+                    />
+                )}
+                <div className="w-full ml-3">
+                    <div className="flex-center-y text-lg text-gold font-semibold">
+                        <div>#</div>
+                        <div className="ml-1">{id}</div>
+                    </div>
+                    <div className={rowClass}>
+                        <div>{dataDisplay}</div>
+                    </div>
+                    <div className={rowClass}>
+                        {`${duration}  ${Messages.days}`}
+                    </div>
+                    {/* <div className={`${rowClass} text `}>
                     <span className="font-semibold mr-1 opacity-75">
                         {Messages.provider} :{" "}
                     </span>
                     <ProviderNameItem providerId={provider} />
-                </div>
-                <div className="w-full flex justify-end ">
+                </div> */}
+                    {/* <div className="w-full flex justify-end ">
                     <div className="text-xl">{`${Messages.supplierPrice} \b \b`}</div>
                     <PriceTag price={price} />
+                </div> */}
                 </div>
-                <div className="w-full flex justify-end ">
-                    <div className="text-xl">{`${Messages.price} \b \b`}</div>
-                    <PriceTag price={salePrice} />
+                {/* <Icon icon="sim" className="text-gold" size={36} /> */}
+                <div>
+                    <Image
+                        src="/images/logo/logo.png"
+                        nextImageProps={{
+                            width: 48,
+                            height: 48,
+                            style: { objectFit: "contain" },
+                        }}
+                    />
                 </div>
             </div>
-            <Icon icon="sim" className="text-gold" size={36} />
+            <div className="w-full flex justify-end ">
+                <div className="text-xl">{`${Messages.price} \b \b`}</div>
+                <PriceTag price={salePrice} />
+            </div>
         </BundleItemStyled>
     );
 };
@@ -189,6 +204,7 @@ const BundleItemStyled = styled.div`
 `;
 
 const BundleByCountryPageStyled = styled.div`
+    transition: all 2s linear;
     .bundle-by-country-page__button-checkout {
         color: var(--color-gold) !important;
         border-color: var(--color-gold) !important;
