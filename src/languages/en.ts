@@ -59,6 +59,7 @@ const translations = {
     whyChoosePirateMobileEsims: "Why Choose Pirate Mobile eSim ?",
     testimonials: "Testimonials",
     getStartedToday: "Get Started Today",
+    successfullyRegistered: "Successfully registered new account !",
 };
 
 export default translations;

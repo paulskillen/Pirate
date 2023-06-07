@@ -5,7 +5,7 @@ import Path from "@/common/constant/path";
 import Select from "@/components/select/Select";
 import Messages from "@/languages/Messages";
 import { useAuthRegister } from "@/store/auth/authHook";
-import { Button, InputText, Progress } from "d-react-components";
+import { Button, InputText, Notifications, Progress } from "d-react-components";
 import { useFormik } from "formik";
 import { pick } from "lodash";
 import { useRouter } from "next/router";
@@ -40,11 +40,13 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
             };
             return Progress.show(
                 { method: AuthApi.register, params: [payload] },
-                (res) => {
-                    console.log(
-                        "🚀 >>>>>> file: AuthSignUpPage.tsx:32 >>>>>> res:",
-                        res
-                    );
+                (res: any) => {
+                    if (res?.data?.data?.profile?.id) {
+                        Notifications.showSuccess(
+                            Messages.successfullyRegistered
+                        );
+                        push(Path.singIn());
+                    }
                 }
             );
         },
