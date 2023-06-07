@@ -53,7 +53,12 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 
     const renderHeader = () => {
         return (
-            <section className="flex flex-row justify-between items-center mt-2">
+            <section
+                className="flex flex-row justify-between items-center mt-2"
+                onClick={() => {
+                    router.push({ pathname: Path.listCountry().href });
+                }}
+            >
                 <div className="flex-center-y py-4">
                     {/* <Image
                         alt="logo"
@@ -77,9 +82,6 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         classNameIcon="text-gold"
                         size="large"
                         variant="trans"
-                        onClick={() => {
-                            router.push({ pathname: Path.listCountry().href });
-                        }}
                     />
                 </div>
             </section>
