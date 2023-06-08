@@ -9,7 +9,7 @@ export default {
         process.env.GOOGLE_CLIENT_SECRET ||
         "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",
     PAYPAL_CLIENT_ID:
-        "Ab6X_PfrObilAQyu7PG1NPJ87Pd5dJo3ArbJae-pnxWT6H7LmO4IohXuiyKE2GMmHf7KiXLXTdsHw7Q7",
+        "AZAkLax018bh39V5n1Vbp3QTsOIspCBQ8pvEU5OeNUA0k28EGj63lB9697sTlwbyTLI-T35Mfpya3Fm0",
     PAYPAL_SECRET_CODE:
-        "EMPxdHQhEFV4IDodEJiTfL3GsnoiQdyaJI8tIJ8iKQjV0OSLZ4Ibargpf_UV6wzHp7u69GxmfTiesjYT",
+        "EIRtY98U_vi2XBwZJxGU9n4-f0cu-xOqVaTjsqwouFCJAsh9lgQoySt1BNMRX-hdGUOE3h0ftHoxz_ex",
 };
