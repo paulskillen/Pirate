@@ -104,7 +104,7 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
     const rowClass = ClassNames("flex flex-row items-center text-xl mt-2");
     const orderCountries = getCountriesFromProducts(products || []);
     const countryView = (
-        <div className="text">
+        <div className="text mt-2 opacity-75">
             {join(
                 map(orderCountries, (i) => i?.name),
                 ","
