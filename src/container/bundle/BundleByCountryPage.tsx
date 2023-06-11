@@ -143,8 +143,11 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     return (
         <BundleItemStyled
             className={ClassNames(
-                "mt-4 text-white bg-black rounded-2xl p-3 text-xl z-10 relative",
-                { "border-2": selected, border: !selected }
+                "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative",
+                {
+                    "border-2 bg-primary-dark": selected,
+                    "border bg-black": !selected,
+                }
             )}
             onClick={onClick}
         >
@@ -180,8 +183,9 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                 </div> */}
                 </div>
                 {/* <Icon icon="sim" className="text-gold" size={36} /> */}
-                <div>
+                <div className="rounded-full">
                     <Image
+                        className="rounded-full"
                         src="/images/logo/logo.png"
                         nextImageProps={{
                             width: 48,

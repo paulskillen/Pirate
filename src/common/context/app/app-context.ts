@@ -1,4 +1,5 @@
 import { IBundle } from "@/common/interface/bundle";
+import { ICountry, CountryRegion } from "@/common/interface/location";
 import { IOrder } from "@/common/interface/order";
 import LocalStorage from "@/common/storage/LocalStorage";
 import React, { Dispatch } from "react";
@@ -11,7 +12,10 @@ export interface ISiteConfig {
 }
 
 export interface IMetaData {
-    countryList?: any[];
+    countryList?: ICountry[];
+    countryByRegion?: {
+        [key in CountryRegion]?: ICountry[];
+    };
 }
 
 export interface IAppState {
