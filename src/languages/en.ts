@@ -60,6 +60,14 @@ const translations = {
     testimonials: "Testimonials",
     getStartedToday: "Get Started Today",
     successfullyRegistered: "Successfully registered new account !",
+    northAmerica: "North America",
+    southAmerica: "South America",
+    middleEast: "Middle East",
+    asia: "Asia",
+    africa: "Africa",
+    europe: "Europe",
+    oceania: "Oceania",
+    global: "Global",
 };
 
 export default translations;
