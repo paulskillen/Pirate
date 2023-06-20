@@ -39,6 +39,32 @@ const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
                     } catch (err) {}
                 }}
             />
+            <Script id="banners" type="text/javascript">
+                <iframe
+                    name="banner"
+                    src='https://piratemobile.postaffiliatepro.com/scripts/d4dvubx?a_aid=2023004&amp;a_bid=549b1693&amp;w=1&refx2s6d="+encodeURIComponent(encodeURIComponent(document.URL))+"'
+                    // framespacing="0"
+                    // frameborder="no"
+                    scrolling="no"
+                    width="125"
+                    height="125"
+                    // allowtransparency="true"
+                >
+                    <a
+                        href="https://www.piratemobile.gg/bundle/by-country/2023004"
+                        target="_top"
+                    >
+                        Pirate Mobile
+                    </a>
+                </iframe>
+            </Script>
+            <noscript>
+                <h2>
+                    <a href="https://www.piratemobile.gg/bundle/by-country/2023004">
+                        Pirate Mobile
+                    </a>
+                </h2>
+            </noscript>
             <BundleByCountryPage countryCode={countryCode} />;
         </Fragment>
     );

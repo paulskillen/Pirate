@@ -88,7 +88,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         <MainStyled className="home-page__container container bg-transparent z-10 relative text-white px-3 ">
             {renderHeader()}
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                {renderBlocks()}
+                {/* {renderBlocks()} */}
                 <div className="h-52" />
             </div>
         </MainStyled>
