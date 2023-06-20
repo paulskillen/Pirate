@@ -1,15 +1,25 @@
-/** @type {import('next').NextConfig} */
+// /** @type {import('next').NextConfig} */
 
-const withPWA = require("next-pwa")({
-    dest: "public",
-    register: true,
-    disable: process.env.REACT_APP_ENV === "dev",
-    skipWaiting: true,
-});
-const nextConfig = withPWA({
+// const withPWA = require("next-pwa")({
+//     dest: "public",
+//     register: true,
+//     disable: process.env.REACT_APP_ENV === "dev",
+//     skipWaiting: true,
+// });
+// const nextConfig = withPWA({
+//     reactStrictMode: true,
+//     env: {
+//         REACT_APP_ENV: process.env.REACT_APP_ENV,
+//     },
+// });
+// module.exports = nextConfig;
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     reactStrictMode: true,
     env: {
         REACT_APP_ENV: process.env.REACT_APP_ENV,
     },
-});
+};
+
 module.exports = nextConfig;
