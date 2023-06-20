@@ -6,15 +6,14 @@ module.exports = {
         extend: {
             colors: {
                 primary: "#28425F",
-                "page-bg": "#BEC8DC",
-                "com-bg": "#D9E1F0",
-                "secondary-com-bg": "#D9E5FA",
+                "primary-dark": "#0d1c2b",
+                "primary-light": "#476a92",
                 "input-bg": "#EBF1FC",
-                "primary-text": "#2C3035",
-                "secondary-text": "#707B86",
                 "hover-color": "#3F5871",
                 "gray-light": "rgba(#152331,0.2)",
-                "gold": "rgba(192,157,94,1)",
+                "gold-light": "rgb(245, 206, 133)",
+                gold: "rgba(192,157,94,1)",
+                "gold-dark": "rgb(153, 118, 53)",
             },
             fontFamily: {
                 sans: ["Poppins"],

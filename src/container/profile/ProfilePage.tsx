@@ -8,6 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";
+import PageHeader from "../shared/header/PageHeader";
 import MenuItem from "../shared/navigation/MenuItem";
 
 export interface IProfilePageProps {
@@ -56,21 +57,13 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
     return (
         <ProfilePageStyled className="flex flex-col items-center justify-start w-screen h-screen relative text-white">
             <div className="profile-page__header w-full bg-primary">
-                <div
-                    className={`flex flex-row items-center justify-between py-2 px-4   w-full`}
-                >
-                    <Button
-                        onClick={() => router.push(Path.home().href)}
-                        variant="trans"
-                        iconName="arrow_back_ios_new"
-                        className="px-0"
-                        color="light"
-                    />
-                    <h5 className={`font-semibold text-white `}>
-                        {Messages.profile}
-                    </h5>
-                    <div />
-                </div>
+                <PageHeader
+                    title={Messages.profile}
+                    className="bg-primary"
+                    onLeftClick={() => {
+                        router.push(Path.home().href);
+                    }}
+                />
             </div>
             <div className="profile-page__avatar-wrapper p-2 bg-black rounded-pill">
                 <Avatar
@@ -115,6 +108,9 @@ export default ProfilePage;
 const ProfilePageStyled = styled.div`
     .profile-page__header {
         min-height: 20%;
+        .profile-page__button-left {
+            color: var(--color-gold) !important;
+        }
     }
     .profile-page__avatar-wrapper {
         margin-top: -50px;

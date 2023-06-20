@@ -12,7 +12,7 @@ const Policy: NextPage = () => {
             <PageHeader title={Messages.policy} />
             <p className="h-screen px-4 pt-4 pb-20 overflow-y-scroll z-50 bg-black relative text-white">
                 <h3 className="font-bold mb-3 text-white">
-                    Terms and Conditions for Sale of Non-Refundable Product:
+                    TERMS AND CONDITIONS OF PIRATE MOBILE ESIM SALES
                 </h3>
                 <section>
                     Pirate Mobile eSims are a digital product. The purchaser is
@@ -23,17 +23,17 @@ const Policy: NextPage = () => {
                 </section>
 
                 <section className="mt-2">
-                    <b>1. Definition of Non-Refundable Product:</b>The eSim
-                    product sold under this agreement is a non-refundable
-                    product. This means that once the product has been
-                    purchased, the buyer will not be entitled to a refund of any
-                    kind.
+                    <b>1. ACCEPTANCE OF TERMS:</b>By purchasing and using Pirate
+                    Mobile eSims, you acknowledge and agree to the terms and
+                    conditions outlined herein. If you do not agree with any
+                    part of these terms and conditions, please refrain from
+                    using our services.
                 </section>
                 <section className="mt-2">
-                    <b>2. Payment Terms:</b> The buyer must make full payment
-                    for the non-refundable product at the time of purchase. No
-                    refunds will be given for any reasons, including cancelled
-                    orders or returned goods.
+                    <b>2. DESCRIPTION OF SERVICES :</b> The buyer must make full
+                    payment for the non-refundable product at the time of
+                    purchase. No refunds will be given for any reasons,
+                    including cancelled orders or returned goods.
                 </section>
                 <section className="mt-2">
                     <b>3. Product Ownership:</b> The seller retains ownership of

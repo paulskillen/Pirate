@@ -1,7 +1,8 @@
-import BundleApi from "@/apis/bundle/BundleApi";
 import BundleByCountryPage from "@/container/bundle/BundleByCountryPage";
 import { LayoutClean } from "@/container/shared/layout/Layout";
-import React from "react";
+import Script from "next/script";
+import React, { Fragment } from "react";
+
 export interface IBundlesByCountryProps {
     [key: string]: any;
 }
@@ -9,10 +10,8 @@ export interface IBundlesByCountryProps {
 export const getServerSideProps: any = async (context: any) => {
     const countryCode = context?.query?.countrySlug;
     if (countryCode) {
-        const bundles = await BundleApi.listBundleFromCountry(countryCode);
         return {
             props: {
-                bundles: bundles?.data?.data?.data ?? [],
                 countryCode,
             },
         };
@@ -20,10 +19,29 @@ export const getServerSideProps: any = async (context: any) => {
 };
 
 const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
-    bundles,
     countryCode,
 }) => {
-    return <BundleByCountryPage bundles={bundles} countryCode={countryCode} />;
+    return (
+        <Fragment>
+            <Script
+                type="text/javascript"
+                id="pap_x2s6df8d"
+                src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
+            />
+            <Script
+                type="text/javascript"
+                onLoad={() => {
+                    try {
+                        //@ts-ignore
+                        PostAffTracker.setAccountId("default1");
+                        //@ts-ignore
+                        PostAffTracker.track();
+                    } catch (err) {}
+                }}
+            />
+            <BundleByCountryPage countryCode={countryCode} />;
+        </Fragment>
+    );
 };
 
 export default BundlesByCountry;

@@ -1,6 +1,6 @@
 import Path from "@/common/constant/path";
 import AppLink from "@/components/link/AppLink";
-import LayoutHeader from "@/container/shared/layout/LayoutHeader";
+import PageHeader from "@/container/shared/header/PageHeader";
 import Messages from "@/languages/Messages";
 import { useAuthAccessToken } from "@/store/auth/authHook";
 import { Button, InputText } from "d-react-components";
@@ -36,14 +36,19 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
         return (
             <div>
                 <InputText
+                    classNameLabel="text-white"
                     label={Messages.username}
+                    placeholder={Messages.username}
                     name="username"
                     value={loginForm.values.username}
                     error={loginForm.errors.username}
                     onChange={loginForm.handleChange}
                 />
                 <InputText
+                    className="mt-3"
+                    classNameLabel="text-white"
                     label={Messages.password}
+                    placeholder={Messages.password}
                     name="password"
                     value={loginForm.values.password}
                     error={loginForm.errors.password}
@@ -56,15 +61,13 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
 
     return (
         <div className="bg-black">
-            <LayoutHeader
-                textColor="white"
+            <PageHeader
                 title={Messages.signIn}
-                bgColor="transparent"
-                onBackClick={() => {
+                onLeftClick={() => {
                     router.push(Path.home().href);
                 }}
             />
-            <div className="px-4 mt-4 h-screen">
+            <div className="px-4 mt-5 h-screen">
                 <div>
                     {renderLoginInputs()}
                     <Button
@@ -77,7 +80,9 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                     </Button>
                     <div className="d-flex mt-4 align-items-center">
                         <div className="divider " />
-                        <small className="mx-3 text text-white">{Messages.or}</small>
+                        <small className="mx-3 text text-white">
+                            {Messages.or}
+                        </small>
                         <div className="divider " />
                     </div>
                     <AuthSignInSocial />
@@ -87,7 +92,7 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                             {Messages.dontHaveAnAccount}
                         </small>
                         <AppLink href={Path.singUp()?.href}>
-                            <small className="text-gold font-semibold ml-1 text text-underline">
+                            <small className="text-gold text font-semibold ml-2 text-underline">
                                 {Messages.signUp}
                             </small>
                         </AppLink>

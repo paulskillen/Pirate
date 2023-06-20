@@ -8,4 +8,8 @@ export default {
     GOOGLE_CLIENT_SECRET:
         process.env.GOOGLE_CLIENT_SECRET ||
         "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",
+    PAYPAL_CLIENT_ID:
+        "AZAkLax018bh39V5n1Vbp3QTsOIspCBQ8pvEU5OeNUA0k28EGj63lB9697sTlwbyTLI-T35Mfpya3Fm0",
+    PAYPAL_SECRET_CODE:
+        "EIRtY98U_vi2XBwZJxGU9n4-f0cu-xOqVaTjsqwouFCJAsh9lgQoySt1BNMRX-hdGUOE3h0ftHoxz_ex",
 };

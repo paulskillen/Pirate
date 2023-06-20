@@ -1,8 +1,8 @@
 import { find, isEmpty, map } from "lodash";
 import ClassNames from "classnames";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { IBundle } from "@/common/interface/bundle";
-import { Button, Checkbox } from "d-react-components";
+import { Button, Checkbox, Progress } from "d-react-components";
 import ProviderNameItem from "../provider/shared/ProviderNameItem";
 import Messages from "@/languages/Messages";
 import { AppStateContext } from "@/common/context/app/app-context";
@@ -14,9 +14,10 @@ import PriceTag from "../shared/items/PriceTag";
 import Path from "@/common/constant/path";
 import PageHeader from "../shared/header/PageHeader";
 import Icon from "@/components/icon/Icon";
+import styled from "@emotion/styled";
+import BundleApi from "@/apis/bundle/BundleApi";
 
 export interface IBundleByCountryPageProps {
-    bundles: IBundle[];
     countryCode: string;
     [key: string]: any;
 }
@@ -29,23 +30,42 @@ export interface IBundleItemProps {
 }
 
 const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
-    bundles = [],
     countryCode,
 }) => {
     const router = useRouter();
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
+    const [bundles, setBundles] = useState<IBundle[]>();
     const currentCountry = find(
         countryList,
         (item) => item?.isoAlpha2 === countryCode
     );
 
+    useEffect(() => {
+        if (countryCode) {
+            loadBundles();
+        }
+    }, [countryCode]);
+
+    const loadBundles = () => {
+        return Progress.show(
+            {
+                method: BundleApi.listBundleFromCountry,
+                params: [countryCode],
+            },
+            (res: any) => {
+                const resBundles = res?.data?.data?.data ?? [];
+                setBundles(resBundles);
+            }
+        );
+    };
+
     const renderCheckout = () => {
         return (
             <div className="fixed bottom-5 w-full px-3 z-30">
                 <Button
-                    className="w-full font-bold z-30 border border-slate-500"
+                    className="w-full font-bold z-30 border bundle-by-country-page__button-checkout"
                     style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         if (selectedBundle) {
@@ -62,13 +82,13 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     };
 
     return (
-        <div className="bg-transparent text-white relative">
+        <BundleByCountryPageStyled className="bg-transparent text-white relative">
             <PageHeader
                 title={currentCountry?.name}
                 customerRight={
                     <Image
                         alt="flag"
-                        className="w-12 h-auto rounded border"
+                        className="w-12 h-auto rounded border bundle-by-country-page__flag"
                         src={convertBase64ToImgSource(currentCountry?.flag)}
                     />
                 }
@@ -90,7 +110,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                 <div className="h-96" />
             </div>
             {!isEmpty(selectedBundle) && renderCheckout()}
-        </div>
+        </BundleByCountryPageStyled>
     );
 };
 
@@ -102,8 +122,16 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     selected,
     showRadio = true,
 }) => {
-    const { provider, name, dataAmount, duration, description, salePrice, id } =
-        bundle || {};
+    const {
+        provider,
+        name,
+        dataAmount,
+        duration,
+        description,
+        price,
+        salePrice,
+        id,
+    } = bundle || {};
     const rowClass = ClassNames("flex flex-row items-center text-xl mt-3");
     const dataDisplay = useMemo(() => {
         if (provider === ProviderName.ESIM_GO) {
@@ -113,41 +141,79 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     }, [dataAmount, provider]);
 
     return (
-        <div
-            className="flex flex-row mt-4 text-white bg-black rounded-2xl p-3 text-xl z-10 relative border"
+        <BundleItemStyled
+            className={ClassNames(
+                "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative",
+                {
+                    "border-2 bg-primary-dark": selected,
+                    "border bg-black": !selected,
+                }
+            )}
             onClick={onClick}
         >
-            {showRadio && (
-                <Checkbox
-                    onChange={() => {}}
-                    checked={selected}
-                    variant="radio"
-                    className="h-fit text-white border-white mt-1"
-                />
-            )}
-            <div className="w-full ml-3">
-                <div className="flex-center-y">
-                    <div>#</div>
-                    <div className="ml-1">{id}</div>
-                </div>
-                <div className={rowClass}>
-                    <div>{dataDisplay}</div>
-                </div>
-                <div className={rowClass}>
-                    {`${duration}  ${Messages.days}`}
-                </div>
-                <div className={`${rowClass} text `}>
+            <div className="flex flex-row">
+                {showRadio && (
+                    <Checkbox
+                        onChange={() => {}}
+                        checked={selected}
+                        variant="radio"
+                        className="h-fit text-white border-white mt-1"
+                    />
+                )}
+                <div className="w-full ml-3">
+                    <div className="flex-center-y text-lg text-gold font-semibold">
+                        <div>#</div>
+                        <div className="ml-1">{id}</div>
+                    </div>
+                    <div className={rowClass}>
+                        <div>{dataDisplay}</div>
+                    </div>
+                    <div className={rowClass}>
+                        {`${duration}  ${Messages.days}`}
+                    </div>
+                    {/* <div className={`${rowClass} text `}>
                     <span className="font-semibold mr-1 opacity-75">
                         {Messages.provider} :{" "}
                     </span>
                     <ProviderNameItem providerId={provider} />
+                </div> */}
+                    {/* <div className="w-full flex justify-end ">
+                    <div className="text-xl">{`${Messages.supplierPrice} \b \b`}</div>
+                    <PriceTag price={price} />
+                </div> */}
                 </div>
-                <div className="w-full flex justify-end ">
-                    <div className="text-xl">{`${Messages.price} \b \b`}</div>
-                    <PriceTag price={salePrice} />
+                {/* <Icon icon="sim" className="text-gold" size={36} /> */}
+                <div className="rounded-full">
+                    <Image
+                        className="rounded-full"
+                        src="/images/logo/logo.png"
+                        nextImageProps={{
+                            width: 48,
+                            height: 48,
+                            style: { objectFit: "contain" },
+                        }}
+                    />
                 </div>
             </div>
-            <Icon icon="sim" className="text-gold" size={36} />
-        </div>
+            <div className="w-full flex justify-end ">
+                <div className="text-xl">{`${Messages.price} \b \b`}</div>
+                <PriceTag price={salePrice} />
+            </div>
+        </BundleItemStyled>
     );
 };
+
+const BundleItemStyled = styled.div`
+    border-color: var(--color-gold) !important;
+`;
+
+const BundleByCountryPageStyled = styled.div`
+    transition: all 2s linear;
+    .bundle-by-country-page__button-checkout {
+        color: var(--color-gold) !important;
+        border-color: var(--color-gold) !important;
+    }
+    .bundle-by-country-page__flag {
+        border-color: var(--color-gold) !important;
+    }
+`;

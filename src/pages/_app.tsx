@@ -18,6 +18,9 @@ import { NextComponentType, NextPageContext } from "next";
 import { isEmpty } from "lodash";
 import { wrapper } from "@/store/store";
 import InitComponent from "@/container/app/content/InitComponent";
+import AppSeo from "@/container/seo/app-seo/AppSeo";
+import SocialSeo from "@/container/seo/social-seo/SocialSeo";
+import { CONFIG } from "@/configuration/AppConfig";
 
 export type MattressAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
@@ -26,8 +29,7 @@ export type MattressAppProps = AppProps & {
 };
 
 const initialOptions = {
-    "client-id":
-        "AXcQh-HAlPuWKMa-1jIB5b-IVs5Qs_dl5MmBHKQEJTQYKh-K9w-tipJ2I9YOXTGG_SVQSCfqdfY2Zpjs",
+    "client-id": CONFIG.PAYPAL_CLIENT_ID,
     currency: "USD",
     intent: "capture",
     // "data-client-token": "EIRtY98U_vi2XBwZJxGU9n4-f0cu-xOqVaTjsqwouFCJAsh9lgQoySt1BNMRX-hdGUOE3h0ftHoxz_ex",
@@ -81,6 +83,8 @@ function App({ Component, pageProps }: MattressAppProps) {
         saveStateContext({ ...appStateContext, cart: userCart });
     }, [userCart]);
 
+    console.log({ initialOptions });
+
     return (
         <SessionProvider session={pageProps?.session}>
             <PayPalScriptProvider options={initialOptions}>
@@ -107,6 +111,8 @@ function App({ Component, pageProps }: MattressAppProps) {
                                     content="width=device-width, initial-scale=1, maximum-scale=1"
                                 />
                             </Head>
+                            <AppSeo />
+                            <SocialSeo />
                             <Component {...pageProps} />
                         </Layout>
                     </AppStateContext.Provider>

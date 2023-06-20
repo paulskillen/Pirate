@@ -1,5 +1,6 @@
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
+import { ICountry } from "@/common/interface/location";
 import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
@@ -77,7 +78,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                     }
                     return <CountryItem key={item?.id} country={item} />;
                 })}
-                <div className="h-32 w-100"/>
+                <div className="h-32 w-100" />
             </div>
         </div>
     );
@@ -85,10 +86,10 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
 
 export default ListCountryPage;
 
-const CountryItem = ({ country }: any) => {
+const CountryItem = ({ country }: { country: ICountry }) => {
     const { name, flag } = country || {};
     return (
-        <AppLink href={Path.bundleByCountry(country?.isoAlpha2)}>
+        <AppLink href={Path.bundleByCountry(country?.iso ?? "")}>
             <div className="flex flex-row items-center text-white w-full mt-4 pb-3">
                 <Image
                     className="w-12 rounded border"

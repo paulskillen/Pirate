@@ -54,6 +54,20 @@ const translations = {
     myDeviceIsCompatibleWithEsim: "My device is compatible with the eSim",
     seeCompatibleDeviceList: "see compatible device list",
     keyFeatures: "Key Features",
+    supplierPrice: "Supplier Price",
+    howItWorks: "How It Works",
+    whyChoosePirateMobileEsims: "Why Choose Pirate Mobile eSim ?",
+    testimonials: "Testimonials",
+    getStartedToday: "Get Started Today",
+    successfullyRegistered: "Successfully registered new account !",
+    northAmerica: "North America",
+    southAmerica: "South America",
+    middleEast: "Middle East",
+    asia: "Asia",
+    africa: "Africa",
+    europe: "Europe",
+    oceania: "Oceania",
+    global: "Global",
 };
 
 export default translations;

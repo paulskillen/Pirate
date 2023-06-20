@@ -87,10 +87,21 @@ const Path = {
         href: "/esims/detail/[esimSlug]",
         as: `/esims/detail/${order?.id}`,
     }),
+    // ----------------------------------------
+    // -- ESIMS
+    // ----------------------------------------
+
+    information: (): ILinkProps => ({
+        href: "/information",
+    }),
 
     // ----------------------------------------
     // -- AUTH
     // ----------------------------------------
+
+    singIn: (): ILinkProps => ({
+        href: "/login",
+    }),
 
     singUp: (): ILinkProps => ({
         href: "/login/sign-up",
