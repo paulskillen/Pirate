@@ -4,7 +4,9 @@
     "private": true,
     "scripts": {
         "dev": "REACT_APP_ENV=dev next dev",
-        "dev:pro": "REACT_APP_ENV=production next dev",
+        "start:debug": "REACT_APP_ENV=dev next dev",
+        "start:dev": "REACT_APP_ENV=dev next dev",
+        "start:pro": "REACT_APP_ENV=production next dev",
         "dev-turbo": "next dev --turbo",
         "build": "next build",
         "build:dev": "REACT_APP_ENV=dev next build",

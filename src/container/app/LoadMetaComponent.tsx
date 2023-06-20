@@ -1,5 +1,6 @@
 import MetaDataApi from "@/apis/meta-data/MetaDataApi";
 import { AppStateContext } from "@/common/context/app/app-context";
+import { groupBy } from "lodash";
 import React, { useContext, useEffect } from "react";
 
 export interface ILoadMetaComponentProps {
@@ -14,7 +15,9 @@ const LoadMetaComponent: React.FC<ILoadMetaComponentProps> = ({ id }) => {
 
     const loadMetaData = async () => {
         const data = await MetaDataApi.listCountry();
-        setMetaData({ ...metaData, countryList: data?.data?.data ?? [] });
+        const countryList = data?.data?.data ?? [];
+        const groupedBy = groupBy(countryList, (item) => item?.region);
+        setMetaData({ ...metaData, countryList, countryByRegion: groupedBy });
     };
 
     return null;
