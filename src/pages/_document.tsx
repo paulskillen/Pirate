@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
     const renderPreLoader = () => {
@@ -95,11 +96,50 @@ export default function Document() {
                     src="//code.tidio.co/n5kpnrwrwg6fivrwgopiu0ypr7df8noh.js"
                     async
                 ></script> */}
-                <script
+                {/* <script
                     src="/static/pwa.js"
                     type="text/javascript"
                     defer
-                ></script>
+                ></script> */}
+                <Script
+                    type="text/javascript"
+                    id="pap_x2s6df8d"
+                    src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
+                ></Script>
+
+                <Script
+                    type="text/javascript"
+                    onLoad={() => {
+                        //@ts-ignore
+                        PostAffTracker.setAccountId("default1");
+                        try {
+                            //@ts-ignore
+                            PostAffTracker.track();
+                        } catch (err) {
+                            console.error({ err });
+                        }
+                    }}
+                />
+
+                {/* <script
+                    type="text/javascript"
+                    onLoad={function () {
+                        var papScriptHeader = document.createElement("script");
+                        papScriptHeader.src =
+                            "https://URL_TO_PostAffiliatePro/scripts/trackjs.js";
+                        papScriptHeader.id = "pap_x2s6df8d";
+                        papScriptHeader.type = "text/javascript";
+                        papScriptHeader.onload = function () {
+                            try {
+                                //@ts-ignore
+                                PostAffTracker.setAccountId("default1");
+                                //@ts-ignore
+                                PostAffTracker.track();
+                            } catch (err) {}
+                        };
+                        document.body.appendChild(papScriptHeader);
+                    }}
+                /> */}
             </body>
         </Html>
     );
