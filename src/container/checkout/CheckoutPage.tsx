@@ -6,9 +6,10 @@ import { IOrder } from "@/common/interface/order";
 import { convertBase64ToImgSource } from "@/common/utils/image";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
+import CheckoutSuccess from "@/pages/checkout/success";
 import { useAuthProfile } from "@/store/auth/authHook";
 import { addOrderAction } from "@/store/order-history/orderHistoryActions";
-import { Button, Checkbox, Progress } from "d-react-components";
+import { Button, Checkbox, Modal, Progress } from "d-react-components";
 import { map, reduce } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo, useState } from "react";
@@ -18,6 +19,7 @@ import PageHeader from "../shared/header/PageHeader";
 import SelectPaymentButton, {
     IPayPalOrderResponse,
 } from "../shared/payment/SelectPaymentButton";
+import CheckoutSuccessView from "./CheckoutSuccessView";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -38,7 +40,6 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         compatible?: boolean;
     }>({});
     const isGuest = !customerId;
-
     const totalAmount = useMemo(() => {
         return reduce(
             userCart,
@@ -49,6 +50,10 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
             0
         );
     }, [userCart]);
+    const [openCheckoutSuccessModal, setOpenCheckoutSuccessModal] = useState<{
+        open: boolean;
+        order?: IOrder;
+    }>({ open: false });
 
     useEffect(() => {
         if (paymentOrder?.id) {
@@ -104,15 +109,28 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
     const renderButton = () => {
         return (
-            <div className="absolute bottom-5 w-full px-3 z-30">
+            <div className="">
                 <Button
-                    className="w-full font-bold z-30"
+                    className="w-full font-bold z-30 mt-3"
                     style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         fetchData();
                     }}
                 >
                     Fetch Data
+                    {/* {`${Messages.completePurchase}`} */}
+                </Button>
+                <Button
+                    className="w-full font-bold z-30 mt-3"
+                    style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
+                    onClick={() => {
+                        setOpenCheckoutSuccessModal({
+                            open: true,
+                            order: fetchOrder as any,
+                        });
+                    }}
+                >
+                    Open Modal
                     {/* {`${Messages.completePurchase}`} */}
                 </Button>
             </div>
@@ -199,7 +217,22 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                             purchasingItems={userCart}
                         />
                     )}
+                {renderButton()}
             </div>
+            {openCheckoutSuccessModal.open &&
+                openCheckoutSuccessModal?.order && (
+                    <Modal
+                        open={openCheckoutSuccessModal?.open}
+                        onClose={() => {
+                            setOpenCheckoutSuccessModal({ open: false });
+                        }}
+                        showFooter={false}
+                    >
+                        <CheckoutSuccessView
+                            order={openCheckoutSuccessModal.order}
+                        />
+                    </Modal>
+                )}
         </div>
     );
 };
