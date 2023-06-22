@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
@@ -92,22 +93,13 @@ export default function Document() {
                 {renderPreLoader()}
                 <Main />
                 <NextScript />
-                {/* <script
-                    src="//code.tidio.co/n5kpnrwrwg6fivrwgopiu0ypr7df8noh.js"
-                    async
-                ></script> */}
-                {/* <script
-                    src="/static/pwa.js"
-                    type="text/javascript"
-                    defer
-                ></script> */}
-                <Script
+                <script
                     type="text/javascript"
                     id="pap_x2s6df8d"
                     src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
-                ></Script>
+                ></script>
 
-                <Script
+                <script
                     type="text/javascript"
                     onLoad={() => {
                         //@ts-ignore
