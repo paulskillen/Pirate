@@ -69,6 +69,24 @@ export default function Document() {
         );
     };
 
+    const addAPAScript = () => {
+        if (!process.browser) {
+            return undefined;
+        }
+        const papScriptHeader = document.createElement("script");
+        papScriptHeader.src =
+            "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js";
+        papScriptHeader.id = "pap_x2s6df8d";
+        papScriptHeader.type = "text/javascript";
+        papScriptHeader.onload = function () {
+            try {
+                //@ts-ignore
+                PostAffTracker.track();
+            } catch (err) {}
+        };
+        document.body.appendChild(papScriptHeader);
+    };
+
     return (
         <Html lang="en">
             <Head>
@@ -112,6 +130,8 @@ export default function Document() {
                         }
                     }}
                 />
+
+                {addAPAScript()}
 
                 {/* <script
                     type="text/javascript"
