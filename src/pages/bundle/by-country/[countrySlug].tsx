@@ -1,3 +1,4 @@
+import PostAffiliatePro from "@/components/third-party/PostAffiliatePro";
 import BundleByCountryPage from "@/container/bundle/BundleByCountryPage";
 import { LayoutClean } from "@/container/shared/layout/Layout";
 import Script from "next/script";
@@ -23,7 +24,7 @@ const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
 }) => {
     return (
         <Fragment>
-            <Script
+            {/* <Script
                 type="text/javascript"
                 id="pap_x2s6df8d"
                 src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
@@ -64,7 +65,8 @@ const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
                         Pirate Mobile
                     </a>
                 </h2>
-            </noscript>
+            </noscript> */}
+            <PostAffiliatePro />
             <BundleByCountryPage countryCode={countryCode} />;
         </Fragment>
     );
