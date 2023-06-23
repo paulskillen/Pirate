@@ -10,11 +10,6 @@ const CheckoutSuccessView: React.FC<ICheckoutSuccessViewProps> = ({
 }) => {
     const { id, products, orderNo, subTotal } = order || {};
     const productId = products?.[0]?.product?.id;
-
-    console.log(
-        "🚀 >>>>>> file: CheckoutSuccessView.tsx:13 >>>>>> order:",
-        order
-    );
     return (
         <div>
             <img
