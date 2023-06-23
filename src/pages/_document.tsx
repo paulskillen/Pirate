@@ -82,7 +82,9 @@ export default function Document() {
             try {
                 //@ts-ignore
                 PostAffTracker.track();
-            } catch (err) {}
+            } catch (err) {
+                console.error({ err });
+            }
         };
         document.body.appendChild(papScriptHeader);
     };
@@ -117,7 +119,7 @@ export default function Document() {
                     src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
                 ></script>
 
-                <script
+                {/* <script
                     type="text/javascript"
                     onLoad={() => {
                         //@ts-ignore
@@ -129,7 +131,7 @@ export default function Document() {
                             console.error({ err });
                         }
                     }}
-                />
+                /> */}
 
                 {addAPAScript()}
 
