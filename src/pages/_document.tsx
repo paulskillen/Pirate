@@ -119,6 +119,29 @@ export default function Document() {
                     src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
                 ></script>
 
+                <script
+                    type="text/javascript"
+                    onLoad={() => {
+                        if (!process.browser) {
+                            return undefined;
+                        }
+                        const papScriptHeader =
+                            document.createElement("script");
+                        papScriptHeader.src =
+                            "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js";
+                        papScriptHeader.id = "pap_x2s6df8d";
+                        papScriptHeader.type = "text/javascript";
+                        papScriptHeader.onload = function () {
+                            try {
+                                //@ts-ignore
+                                PostAffTracker.track();
+                            } catch (err) {
+                                console.error({ err });
+                            }
+                        };
+                        document.body.appendChild(papScriptHeader);
+                    }}
+                />
                 {/* <script
                     type="text/javascript"
                     onLoad={() => {
