@@ -11,6 +11,7 @@ import { useAuthProfile } from "@/store/auth/authHook";
 import { addOrderAction } from "@/store/order-history/orderHistoryActions";
 import { Button, Checkbox, Modal, Progress } from "d-react-components";
 import { map, reduce } from "lodash";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -91,16 +92,29 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 setPaymentOrder(undefined as any);
                 const order = res?.data?.data?.data;
                 if (order) {
-                    if (isGuest) {
-                        dispatch(addOrderAction(order));
-                        router.push(Path.esimsHistory().href || "");
-                    } else {
-                        router.push(Path.orderDetail(order).as || "");
-                    }
+                    // if (isGuest) {
+                    //     dispatch(addOrderAction(order));
+                    //     router.push(Path.esimsHistory().href || "");
+                    // } else {
+                    //     router.push(Path.orderDetail(order).as || "");
+                    // }
+                    afterSuccessCreateOrder(order, isGuest);
+                    setOpenCheckoutSuccessModal({ open: true, order });
                 }
             }
         );
     };
+
+    const afterSuccessCreateOrder = (order: any, isGuest: boolean) =>
+        setTimeout(() => {
+            setOpenCheckoutSuccessModal({ open: false });
+            if (isGuest) {
+                dispatch(addOrderAction(order));
+                router.push(Path.esimsHistory().href || "");
+            } else {
+                router.push(Path.orderDetail(order).as || "");
+            }
+        }, 4000);
 
     const fetchData = async () => {
         const res = await OrderApi.detail("64323aa0d7feb0c46cf53b42");
@@ -198,15 +212,6 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                         <SelectPaymentButton
                             totalAmount={totalAmount}
                             onSuccess={(orderRes, orderSer) => {
-                                console.log(
-                                    "🚀 >>>>>> file: CheckoutPage.tsx:99 >>>>>> orderSer:",
-                                    orderSer
-                                );
-                                console.log(
-                                    "🚀 >>>>>> file: CheckoutPage.tsx:108 >>>>>> orderRes:",
-                                    orderRes
-                                );
-
                                 if (orderRes?.status === "COMPLETED") {
                                     // onSuccessPaymentHandler(orderRes, orderSer);
                                     setPaymentOrder(orderRes);
@@ -217,7 +222,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                             purchasingItems={userCart}
                         />
                     )}
-                {renderButton()}
+                {/* {renderButton()} */}
             </div>
             {openCheckoutSuccessModal.open &&
                 openCheckoutSuccessModal?.order && (
@@ -227,7 +232,27 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                             setOpenCheckoutSuccessModal({ open: false });
                         }}
                         showFooter={false}
+                        showHeader={false}
+                        closable={false}
+                        maskClosable={false}
+                        bodyStyle={{
+                            backgroundColor: "black",
+                            // borderRadius: "3rem",
+                        }}
+                        className="bg-black"
+                        classNameContent="bg-black border border-gold rounded-2xl"
                     >
+                        <div className="flex flex-col items-center justify-between">
+                            <Image
+                                alt="logo_mobile"
+                                src={"/images/logo/logo.png"}
+                                width={50}
+                                height={50}
+                            />
+                            <div className="text-gold font-semibold mt-3">
+                                {Messages.thankyouForYourPurchase}
+                            </div>
+                        </div>
                         <CheckoutSuccessView
                             order={openCheckoutSuccessModal.order}
                         />

@@ -11,7 +11,7 @@ const getConfig = () => {
         case ENV.DEV:
             return DevConfig;
         default:
-            return ProConfig;
+            return DevConfig;
     }
 };
 
