@@ -3,6 +3,20 @@ import API from "../API";
 import { F_LOGIN, F_LOGIN_SOCIAL } from "./AuthFragment";
 
 const AuthApi = {
+    login: (input: any) =>
+        API.instance.mutate({
+            mutation: gql`
+                ${F_LOGIN}
+                mutation login($input: LoginInput!) {
+                    data: login(input: $input) {
+                        ...F_LOGIN
+                    }
+                }
+            `,
+            variables: { input },
+            fetchPolicy: "no-cache",
+        }),
+
     loginSocial: (provider: string, token: string) =>
         API.instance.mutate({
             mutation: gql`

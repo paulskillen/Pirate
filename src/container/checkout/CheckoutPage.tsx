@@ -31,7 +31,7 @@ const TEST_CUSTOMER = "643f548bab6d359facb8881e";
 const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const { id: customerId } = useAuthProfile() || {};
+    const { id: customerId, email } = useAuthProfile() || {};
     const { userCart, activeOrder, setActiveOrder } =
         useContext(AppStateContext);
     const [paymentOrder, setPaymentOrder] = useState<IPayPalOrderResponse>();

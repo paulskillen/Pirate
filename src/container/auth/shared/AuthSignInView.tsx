@@ -1,20 +1,32 @@
 import Path from "@/common/constant/path";
+import * as Yup from "yup";
 import AppLink from "@/components/link/AppLink";
 import PageHeader from "@/container/shared/header/PageHeader";
 import Messages from "@/languages/Messages";
 import { useAuthAccessToken } from "@/store/auth/authHook";
-import { Button, InputText } from "d-react-components";
+import { Button, InputText, Progress, StringUtils } from "d-react-components";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import AuthSignInSocial from "./AuthSignInSocial";
+import AuthApi from "@/apis/auth/AuthApi";
+import { useDispatch } from "react-redux";
+import { signInAction } from "@/store/auth/authActions";
 
 export interface IAuthSignInViewProps {
     [key: string]: any;
 }
 
+// const emailReg = new RegExp("^[w-.]+@([w-]+.)+[w-]{2,4}$");
+
+const LoginSchema = Yup.object().shape({
+    username: Yup.string().required("Is required !"),
+    password: Yup.string().required("Is required !"),
+});
+
 const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
     const accessToken = useAuthAccessToken();
+    const dispatch = useDispatch();
     const router = useRouter();
     const loginForm = useFormik({
         initialValues: {
@@ -23,14 +35,25 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
         },
         validateOnChange: false,
         validateOnBlur: false,
-        // validationSchema: LoginSchema,
+        validationSchema: LoginSchema,
         onSubmit: (values) => {
             // setOnLoadSignIn(true);
             onSubmitHandler();
         },
     });
 
-    const onSubmitHandler = () => {};
+    const { values, errors } = loginForm || {};
+
+    const onSubmitHandler = async () => {
+        const params = { email: values?.username, password: values?.password };
+        return Progress.show({ method: AuthApi.login, params }, (res: any) => {
+            const { accessToken, profile, isRegistered } =
+                res?.data?.data ?? {};
+            if (isRegistered && accessToken && profile) {
+                dispatch(signInAction({ profile, accessToken }));
+            }
+        });
+    };
 
     const renderLoginInputs = () => {
         return (
@@ -73,7 +96,7 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                     <Button
                         type="submit"
                         className="btn btn-primary mt-3 w-100"
-                        // onClick={() => loginForm.handleSubmit()}
+                        onClick={() => loginForm.handleSubmit()}
                         // disabled={timeLeft > 0}
                     >
                         {Messages.login}

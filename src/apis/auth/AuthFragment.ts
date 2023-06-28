@@ -32,6 +32,8 @@ export const F_LOGIN = gql`
     ${F_CUSTOMER}
     fragment F_LOGIN on LoginResponseDto {
         accessToken
+        isVerified
+        isRegistered
         profile {
             ...F_CUSTOMER
         }
