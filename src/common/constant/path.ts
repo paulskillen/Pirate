@@ -100,7 +100,7 @@ const Path = {
     // ----------------------------------------
 
     singIn: (): ILinkProps => ({
-        href: "/login",
+        href: "/profile",
     }),
 
     singUp: (): ILinkProps => ({
