@@ -45,7 +45,7 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
                         Notifications.showSuccess(
                             Messages.successfullyRegistered
                         );
-                        push(Path.singIn());
+                        push && push(Path.singIn().href);
                     }
                 }
             );
