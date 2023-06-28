@@ -16,6 +16,7 @@ import PageHeader from "../shared/header/PageHeader";
 import Icon from "@/components/icon/Icon";
 import styled from "@emotion/styled";
 import BundleApi from "@/apis/bundle/BundleApi";
+import { COLOR_GOLD, COLOR_PRIMARY, COLOR_PRIMARY_DARK } from "@/common/constant/app-style";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -63,10 +64,10 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 
     const renderCheckout = () => {
         return (
-            <div className="fixed bottom-5 w-full px-3 z-30">
+            <div className="fixed bottom-5 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center">
                 <Button
-                    className="w-full font-bold z-30 border bundle-by-country-page__button-checkout"
-                    style={{ width: "100%", fontWeight: "bold", fontSize: 16 }}
+                    className="w-full font-bold z-30 border bundle-by-country-page__button-checkout rounded-pill flex flex-col"
+                    style={{ fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         if (selectedBundle) {
                             setUserCart([selectedBundle]);
@@ -74,8 +75,10 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         }
                     }}
                 >
-                    {`${Messages.checkout}\b \b`}
-                    <PriceTag price={selectedBundle?.salePrice} />
+                    <div>{`${Messages.checkout}`}</div>
+                    <div className="mt-1">
+                        <PriceTag price={selectedBundle?.salePrice} />
+                    </div>
                 </Button>
             </div>
         );
@@ -215,5 +218,13 @@ const BundleByCountryPageStyled = styled.div`
     }
     .bundle-by-country-page__flag {
         border-color: var(--color-gold) !important;
+    }
+    .bundle-by-country-page__footer {
+        .bundle-by-country-page__button-checkout {
+            background-color: ${COLOR_GOLD} !important;
+            color: white !important;
+            height: 113px;
+            border: 2px solid white !important;
+        }
     }
 `;
