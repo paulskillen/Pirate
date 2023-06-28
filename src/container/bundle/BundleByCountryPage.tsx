@@ -16,7 +16,11 @@ import PageHeader from "../shared/header/PageHeader";
 import Icon from "@/components/icon/Icon";
 import styled from "@emotion/styled";
 import BundleApi from "@/apis/bundle/BundleApi";
-import { COLOR_GOLD, COLOR_PRIMARY, COLOR_PRIMARY_DARK } from "@/common/constant/app-style";
+import {
+    COLOR_GOLD,
+    COLOR_PRIMARY,
+    COLOR_PRIMARY_DARK,
+} from "@/common/constant/app-style";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -223,8 +227,13 @@ const BundleByCountryPageStyled = styled.div`
         .bundle-by-country-page__button-checkout {
             background-color: ${COLOR_GOLD} !important;
             color: white !important;
-            height: 113px;
+            width: calc(100vw / 3.5) !important;
+            height: calc(100vw / 3.5);
             border: 2px solid white !important;
+            @media (min-width: 576px) {
+                width: 175px !important;
+                height: 175px;
+            }
         }
     }
 `;
