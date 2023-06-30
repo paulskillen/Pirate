@@ -42,7 +42,7 @@ const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
                     } catch (err) {}
                 }}
             /> */}
-            <PostAffiliatePro />
+            {/* <PostAffiliatePro /> */}
             {/* <PAPTrackingClick /> */}
             <BundleByCountryPage countryCode={countryCode} />;
         </Fragment>

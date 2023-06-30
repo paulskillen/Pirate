@@ -1,6 +1,6 @@
 import Path from "@/common/constant/path";
 import Image from "@/components/image/Image";
-import { PAPTrackingClick } from "@/components/third-party/PostAffiliatePro";
+import PostAffiliatePro, { PAPTrackingClick } from "@/components/third-party/PostAffiliatePro";
 import AuthSignInView from "@/container/auth/shared/AuthSignInView";
 import { useAuthAccessToken } from "@/store/auth/authHook";
 import styled from "@emotion/styled";
@@ -49,7 +49,8 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
         <LayoutStyled className="layout-container bg-black">
             <div className="flex-grow w-100">{children}</div>
             <TabBottom />
-            <PAPTrackingClick />
+            {/* <PAPTrackingClick /> */}
+            <PostAffiliatePro />
         </LayoutStyled>
     );
 };
@@ -60,7 +61,7 @@ export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
     return (
         <LayoutStyled className="layout-container bg-black">
             <div className="flex-grow w-100">{children}</div>
-            <PAPTrackingClick />
+            <PostAffiliatePro />
         </LayoutStyled>
     );
 };
@@ -72,7 +73,7 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
         return (
             <Fragment>
                 <AuthSignInView />
-                <PAPTrackingClick />
+                <PostAffiliatePro />
             </Fragment>
         );
     }
@@ -80,7 +81,7 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     return (
         <LayoutStyled className="layout_container bg-black">
             {children}
-            <PAPTrackingClick />
+            <PostAffiliatePro />
         </LayoutStyled>
     );
 };
