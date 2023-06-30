@@ -7,6 +7,15 @@ const PostAffiliatePro = () => {
         script.src =
             "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js"; // Replace with your Post Affiliate Pro tracking code URL
         script.async = true;
+        script.type = "text/javascript";
+        script.onload = function () {
+            //@ts-ignore
+            PostAffTracker.setAccountId("default1");
+            try {
+                //@ts-ignore
+                PostAffTracker.track();
+            } catch (err) {}
+        };
         document.body.appendChild(script);
 
         return () => {
