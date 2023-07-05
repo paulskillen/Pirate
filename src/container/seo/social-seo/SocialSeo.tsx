@@ -8,7 +8,7 @@ export interface ISocialSeoProps {
 export const MYScript = {
     type: "Organization",
     name: "Pirate Mobile",
-    // url: "https://www.piratemobile.gg/",
+    url: "https://www.piratemobile.gg/",
     // sameAs: [
     //     "https://web.facebook.com/doxuan.trung.1/",
     //     "https://www.instagram.com/do_xuan_trung_hp/",

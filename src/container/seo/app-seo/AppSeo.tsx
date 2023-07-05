@@ -16,30 +16,30 @@ const DEFAULT_CONFIG_SEO: DefaultSeoProps = {
     openGraph: {
         title: DefaultTitle,
         description: DefaultDescription,
-        // url: "https://www.piratemobile.gg/",
+        url: "https://www.piratemobile.gg/",
         type: "store",
         locale: "en_IE",
         siteName: "pirate mobile",
-        profile: {
-            firstName: "Trung",
-            lastName: "Do Xuan",
-            username: "trung dev",
-            gender: "male",
-        },
-        // images: [
-        //     {
-        //         url: "/images/logo/logo.png",
-        //         width: 500,
-        //         height: 500,
-        //         alt: "site logo",
-        //     },
-        //     {
-        //         url: "/images/logo/logo.png",
-        //         width: 300,
-        //         height: 300,
-        //         alt: "site logo",
-        //     },
-        // ],
+        // profile: {
+        //     firstName: "Trung",
+        //     lastName: "Do Xuan",
+        //     username: "trung dev",
+        //     gender: "male",
+        // },
+        images: [
+            {
+                url: "/images/logo/logo.png",
+                width: 500,
+                height: 500,
+                alt: "site logo",
+            },
+            {
+                url: "/images/logo/logo.png",
+                width: 300,
+                height: 300,
+                alt: "site logo",
+            },
+        ],
     },
     // twitter: {
     //     handle: "@trung-dev",
