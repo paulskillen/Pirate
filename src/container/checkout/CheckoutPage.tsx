@@ -219,7 +219,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                             purchasingItems={userCart}
                         />
                     )}
-                {/* {renderButton()} */}
+                {renderButton()}
             </div>
             {openCheckoutSuccessModal.open &&
                 openCheckoutSuccessModal?.order && (
