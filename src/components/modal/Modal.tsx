@@ -1,10 +1,17 @@
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
-import { ModalProps, Button, Modal as DModal } from "d-react-components";
+import {
+    ModalProps,
+    Button,
+    Modal as DModal,
+    WrapperComponent,
+} from "d-react-components";
 import React from "react";
+import Icon from "../icon/Icon";
 
 export interface IModalProps extends ModalProps {
     [key: string]: any;
+    wrapper?: any;
 }
 
 const Modal: React.FC<IModalProps> = ({
@@ -12,21 +19,44 @@ const Modal: React.FC<IModalProps> = ({
     onClose,
     showFooter,
     children,
+    wrapper,
     ...props
 }) => {
+    const renderCloseButton = () => {
+        return (
+            <div
+                className="flex justify-end w-fit pirate-mobile-modal__close-icon"
+                onClick={onClose}
+            >
+                <Icon
+                    icon="close-outline"
+                    useIconSet="carbon"
+                    size={24}
+                    className="text-gold"
+                />
+            </div>
+        );
+    };
+
     const renderFooter = () => {
         return (
-            <FooterStyled className="flex-center-y mt-3 w-full justify-evenly">
-                <Button size="small" color="dark" className="rounded-full pirate-mobile-modal__cancel-button" onClick={onClose}>
+            <div className="flex-center-y mt-3 w-full justify-evenly">
+                <Button
+                    size="small"
+                    color="dark"
+                    className="rounded-full pirate-mobile-modal__cancel-button"
+                    onClick={onClose}
+                >
                     {Messages.cancel}
                 </Button>
                 <Button
+                    iconName="send"
                     size="small"
                     className="rounded-full pirate-mobile-modal__save-button"
                 >
-                    {Messages.save}
+                    <div>{Messages.save}</div>
                 </Button>
-            </FooterStyled>
+            </div>
         );
     };
 
@@ -45,15 +75,28 @@ const Modal: React.FC<IModalProps> = ({
             showFooter={false}
             showHeader={false}
         >
-            {children}
-            {showFooter && renderFooter()}
+            {/*@ts-ignore  */}
+            <WrapperComponent
+                element={wrapper || <ModalStyled className="test" />}
+            >
+                {renderCloseButton()}
+                {children}
+                {showFooter && renderFooter()}
+            </WrapperComponent>
         </DModal>
     );
 };
 
 export default Modal;
 
-const FooterStyled = styled.div`
+const ModalStyled = styled.div`
+    position: relative;
+    padding: 16px;
+    .pirate-mobile-modal__close-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
     .pirate-mobile-modal__save-button {
         border: 1px solid var(--color-gold) !important;
     }
