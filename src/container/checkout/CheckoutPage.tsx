@@ -1,17 +1,14 @@
 import OrderApi from "@/apis/order/OrderApi";
 import Path from "@/common/constant/path";
-import { PaymentMethod, PAYMENT_METHODS } from "@/common/constant/payment";
+import { PaymentMethod } from "@/common/constant/payment";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { IOrder } from "@/common/interface/order";
-import { convertBase64ToImgSource } from "@/common/utils/image";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
-import CheckoutSuccess from "@/pages/checkout/success";
 import { useAuthProfile } from "@/store/auth/authHook";
 import { addOrderAction } from "@/store/order-history/orderHistoryActions";
-import { Button, Checkbox, Modal, Progress } from "d-react-components";
+import { Button, Checkbox, Progress } from "d-react-components";
 import { map, reduce } from "lodash";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -20,7 +17,7 @@ import PageHeader from "../shared/header/PageHeader";
 import SelectPaymentButton, {
     IPayPalOrderResponse,
 } from "../shared/payment/SelectPaymentButton";
-import CheckoutSuccessView from "./CheckoutSuccessView";
+import CheckoutSuccessModal from "./CheckoutSuccessModal";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -226,37 +223,13 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
             </div>
             {openCheckoutSuccessModal.open &&
                 openCheckoutSuccessModal?.order && (
-                    <Modal
-                        open={openCheckoutSuccessModal?.open}
-                        onClose={() => {
-                            setOpenCheckoutSuccessModal({ open: false });
-                        }}
-                        showFooter={false}
-                        showHeader={false}
-                        closable={false}
-                        maskClosable={false}
-                        bodyStyle={{
-                            backgroundColor: "black",
-                            // borderRadius: "3rem",
-                        }}
-                        className="bg-black"
-                        classNameContent="bg-black border border-gold rounded-2xl"
-                    >
-                        <div className="flex flex-col items-center justify-between">
-                            <Image
-                                alt="logo_mobile"
-                                src={"/images/logo/logo.png"}
-                                width={50}
-                                height={50}
-                            />
-                            <div className="text-gold font-semibold mt-3">
-                                {Messages.thankyouForYourPurchase}
-                            </div>
-                        </div>
-                        <CheckoutSuccessView
-                            order={openCheckoutSuccessModal.order}
-                        />
-                    </Modal>
+                    <CheckoutSuccessModal
+                        open={openCheckoutSuccessModal.open}
+                        order={openCheckoutSuccessModal.order}
+                        onClose={() =>
+                            setOpenCheckoutSuccessModal({ open: false })
+                        }
+                    />
                 )}
         </div>
     );
