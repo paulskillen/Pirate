@@ -68,6 +68,7 @@ const translations = {
     europe: "Europe",
     oceania: "Oceania",
     global: "Global",
+    save: "Save",
     thankyouForYourPurchase: "Thank you for your purchase! ",
 };
 
