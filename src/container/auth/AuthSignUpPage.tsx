@@ -1,4 +1,5 @@
 import AuthApi from "@/apis/auth/AuthApi";
+import { signOut, useSession } from "next-auth/react";
 import * as Yup from "yup";
 import { CUSTOMER_TITLES } from "@/common/constant/customer";
 import Path from "@/common/constant/path";
@@ -10,6 +11,7 @@ import { useFormik } from "formik";
 import { pick } from "lodash";
 import { useRouter } from "next/router";
 import React from "react";
+import Icon from "@/components/icon/Icon";
 
 export interface IAuthSignUpPageProps {
     [key: string]: any;
@@ -18,6 +20,7 @@ const AuthSignUpSchema = Yup.object().shape({});
 
 const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
     const registerData = useAuthRegister();
+    const { data: session } = useSession();
     const { query, push } = useRouter();
     const profile = query?.profile
         ? JSON.parse((query?.profile as any) ?? {})
@@ -126,6 +129,24 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
                     setFieldValue("confirmPassword", e?.target?.value)
                 }
             />
+            {session && (
+                <div className="w-full flex justify-end mt-3">
+                    <div
+                        className="underline"
+                        onClick={() => {
+                            push(Path.profile().href);
+                            signOut();
+                        }}
+                    >
+                        <Icon
+                            useIconSet="google-material"
+                            icon="cached"
+                            className="text-gray-300 mr-2 inline-block"
+                        />
+                        {Messages.switchToOtherAccount}
+                    </div>
+                </div>
+            )}
             <Button
                 className="fixed bottom-5 w-auto left-3 right-3"
                 onClick={handleSubmit as any}

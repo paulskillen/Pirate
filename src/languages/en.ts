@@ -73,9 +73,17 @@ const translations = {
     requiredField: "Required field !",
     emailIsNotValid: "Email is not valid !",
     send: "Send",
+    sent: "Sent",
+    sending: "Sending",
+    retry: "Retry",
+    switchToOtherAccount: "Switch To Other Account",
     thankyouForYourPurchase: "Thank you for your purchase !",
+    sendingEmailDescription:
+        "The eSim Qr Code is sending to the @email",
+    sentEmailSuccessDescription:
+        "The eSim Qr Code was sent to the @email. Please check your email and follow the instruction to install your eSim",
     emailFormDescription:
-        "Please input your email and hit send, we will send you the  QrCode and the instruction to install the eSim",
+        "Please input your email and hit send, we will send you the eSim Qr Code and the instruction to install the eSim",
 };
 
 export default translations;

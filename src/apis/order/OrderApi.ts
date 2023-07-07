@@ -70,6 +70,17 @@ const OrderApi = {
             fetchPolicy: "no-cache",
         }),
 
+    sentEmail: (input: any) =>
+        API.instance.mutate({
+            mutation: gql`
+                mutation sentEmail($input: CustomerSendEmailAfterOrderInput!) {
+                    data: sendEmailAfterOrderForCustomer(input: $input)
+                }
+            `,
+            variables: { input },
+            fetchPolicy: "no-cache",
+        }),
+
     // update: (id: string, input: any) =>
     //     API.withConverter(detailConvertor).mutate({
     //         mutation: gql`
