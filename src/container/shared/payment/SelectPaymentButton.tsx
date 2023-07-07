@@ -11,13 +11,13 @@ import {
 } from "@paypal/paypal-js/types/components/buttons";
 import Icon from "@/components/icon/Icon";
 import Messages from "@/languages/Messages";
-import { Modal } from "d-react-components";
 import { map } from "lodash";
 import React, { useContext, useState } from "react";
 import { IBundle } from "@/common/interface/bundle";
 import OrderApi from "@/apis/order/OrderApi";
 import { IOrder } from "@/common/interface/order";
 import { AppStateContext } from "@/common/context/app/app-context";
+import Modal from "@/components/modal/Modal";
 
 export interface IPayPalOrderResponse extends OrderResponseBody {}
 export type PayPalOrderStatusType = OrderResponseBodyMinimal["status"];
@@ -159,18 +159,20 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
                         setOpenPaymentsModal({ open: false });
                     }}
                 >
-                    {map(PAYMENT_METHODS, (item) => {
-                        const { icon, id, label } = item || {};
-                        if (id === PaymentMethod.PAYPAL) {
-                            return renderPayPal();
-                        }
-                        return (
-                            <div className="flex items-center">
-                                <Icon icon={icon} />
-                                <div>{label}</div>
-                            </div>
-                        );
-                    })}
+                    <div className="mt-5">
+                        {map(PAYMENT_METHODS, (item) => {
+                            const { icon, id, label } = item || {};
+                            if (id === PaymentMethod.PAYPAL) {
+                                return renderPayPal();
+                            }
+                            return (
+                                <div className="flex items-center">
+                                    <Icon icon={icon} />
+                                    <div>{label}</div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </Modal>
             )}
         </React.Fragment>
