@@ -4,9 +4,10 @@ import IcoMoon, { IconProps as IcoMoonProps } from "react-icomoon";
 import bootstrap from "./collection/bootstrap.json";
 import elegant from "./collection/elegant.json";
 import carbon from "./collection/carbon.json";
+import googleMaterial from "./collection/google-material.json";
 
 export interface IconProps extends IcoMoonProps {
-    useIconSet?: "bootstrap" | "elegant" | "carbon";
+    useIconSet?: "bootstrap" | "elegant" | "carbon" | "google-material";
 }
 
 const Icon = ({
@@ -21,6 +22,8 @@ const Icon = ({
         switch (useIconSet) {
             case "elegant":
                 return elegant;
+            case "google-material":
+                return googleMaterial;
             case "carbon":
                 return carbon;
 
