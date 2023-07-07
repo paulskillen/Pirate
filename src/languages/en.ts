@@ -69,7 +69,13 @@ const translations = {
     oceania: "Oceania",
     global: "Global",
     save: "Save",
-    thankyouForYourPurchase: "Thank you for your purchase! ",
+    viewOrder: "View Order",
+    requiredField: "Required field !",
+    emailIsNotValid: "Email is not valid !",
+    send: "Send",
+    thankyouForYourPurchase: "Thank you for your purchase !",
+    emailFormDescription:
+        "Please input your email and hit send, we will send you the  QrCode and the instruction to install the eSim",
 };
 
 export default translations;

@@ -31,3 +31,23 @@
 .border-gold {
     border-color: $gold-color !important;
 }
+
+.d-modal__children {
+    padding: 0px !important;
+}
+
+.d-input-text__input-container {
+    @media (max-width: 576px) {
+        min-height: 42px !important;
+    }
+}
+
+.d-button {
+    &:hover {
+        background-color: transparent !important;
+    }
+    &:active {
+        background-color: transparent !important;
+        opacity: 50%;
+    }
+}

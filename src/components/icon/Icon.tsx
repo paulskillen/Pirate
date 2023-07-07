@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ClassNames from "classnames";
 import IcoMoon, { IconProps as IcoMoonProps } from "react-icomoon";
-import iconSet from "./collection/bootstrap.json";
-import iconSetElegant from "./collection/elegant.json";
+import bootstrap from "./collection/bootstrap.json";
+import elegant from "./collection/elegant.json";
+import carbon from "./collection/carbon.json";
 
-export interface IconProps extends IcoMoonProps {}
+export interface IconProps extends IcoMoonProps {
+    useIconSet?: "bootstrap" | "elegant" | "carbon";
+}
 
 const Icon = ({
     size = 20,
     className,
+    useIconSet = "bootstrap",
     color,
     style = {},
     ...props
 }: IconProps) => {
+    const getSet = useMemo(() => {
+        switch (useIconSet) {
+            case "elegant":
+                return elegant;
+            case "carbon":
+                return carbon;
+
+            default:
+                return bootstrap;
+        }
+    }, [useIconSet]);
     return (
         <IcoMoon
-            iconSet={iconSet}
+            iconSet={getSet as any}
             {...props}
             size={size}
             color={color}
