@@ -89,13 +89,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 setPaymentOrder(undefined as any);
                 const order = res?.data?.data?.data;
                 if (order) {
-                    // if (isGuest) {
-                    //     dispatch(addOrderAction(order));
-                    //     router.push(Path.esimsHistory().href || "");
-                    // } else {
-                    //     router.push(Path.orderDetail(order).as || "");
-                    // }
-                    afterSuccessCreateOrder(order, isGuest);
+                    // afterSuccessCreateOrder(order, isGuest);
                     setOpenCheckoutSuccessModal({ open: true, order });
                 }
             }

@@ -20,6 +20,7 @@ const Modal: React.FC<IModalProps> = ({
     showFooter,
     children,
     wrapper,
+    title,
     ...props
 }) => {
     const renderCloseButton = () => {
@@ -36,6 +37,10 @@ const Modal: React.FC<IModalProps> = ({
                 />
             </div>
         );
+    };
+
+    const renderTitle = () => {
+        return <div className="h5 text-gold text-center w-full">{title}</div>;
     };
 
     const renderFooter = () => {
@@ -80,6 +85,7 @@ const Modal: React.FC<IModalProps> = ({
                 element={wrapper || <ModalStyled className="test" />}
             >
                 {renderCloseButton()}
+                {title && renderTitle()}
                 {children}
                 {showFooter && renderFooter()}
             </WrapperComponent>
