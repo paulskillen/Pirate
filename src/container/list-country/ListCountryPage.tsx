@@ -1,10 +1,10 @@
 import Path from "@/common/constant/path";
-import { Element, scroller, Link } from "react-scroll";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { ICountry } from "@/common/interface/location";
 import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
+import styled from "@emotion/styled";
 import { Button, InputTextSearch } from "d-react-components";
 import { forEach, map } from "lodash";
 import { useRouter } from "next/router";
@@ -13,11 +13,10 @@ import React, {
     useContext,
     useEffect,
     useMemo,
-    useState,
+    useState
 } from "react";
+import { Element, Link } from "react-scroll";
 import { useScroll, useSessionStorage } from "react-use";
-import styled from "@emotion/styled";
-import { COLOR_GOLD } from "@/common/constant/app-style";
 
 export interface IListCountryPageProps {
     [key: string]: any;
@@ -65,25 +64,6 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
         });
         return found;
     }, []);
-
-    useEffect(() => {
-        const handleOnScroll = () => {
-            const list = listRef.current;
-            const childNodes = list?.childNodes;
-            console.log({ y });
-
-            console.log(
-                "🚀 >>>>>> file: ListCountryPage.tsx:73 >>>>>> handleOnScroll >>>>>> childs:",
-                childNodes
-            );
-        };
-
-        const scrollElement = scrollRef?.current;
-        scrollElement &&
-            scrollElement?.addEventListener("scroll", handleOnScroll);
-        return () =>
-            scrollElement?.removeEventListener("scroll", handleOnScroll);
-    }, [listRef, y]);
 
     useEffect(() => {
         if (value && value > 0) {
