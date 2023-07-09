@@ -1,10 +1,10 @@
 import Path from "@/common/constant/path";
+import { Element, Link } from "react-scroll";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { ICountry } from "@/common/interface/location";
 import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
-import styled from "@emotion/styled";
 import ClassNames from "classnames";
 import { Button, InputTextSearch } from "d-react-components";
 import { forEach, map } from "lodash";
@@ -16,8 +16,8 @@ import React, {
     useMemo,
     useState
 } from "react";
-import { Element, Link } from "react-scroll";
 import { useScroll, useSessionStorage } from "react-use";
+import styled from "@emotion/styled";
 
 export interface IListCountryPageProps {
     [key: string]: any;
@@ -146,7 +146,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                             name={`${item?.iso ?? ""}`}
                             id={item?.iso ?? ""}
                         >
-                            <CountryItem key={item?.id} country={item} />;
+                            <CountryItem key={item?.id} country={item} />
                         </Element>
                     );
                 })}
