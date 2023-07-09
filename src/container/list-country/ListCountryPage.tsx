@@ -146,7 +146,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                             name={`${item?.iso ?? ""}`}
                             id={item?.iso ?? ""}
                         >
-                            <CountryItem key={item?.id} country={item} />;
+                            <CountryItem key={item?.id} country={item} />
                         </Element>
                     );
                 })}
