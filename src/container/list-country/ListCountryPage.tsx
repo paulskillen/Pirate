@@ -1,4 +1,5 @@
 import Path from "@/common/constant/path";
+import ClassNames from "classnames";
 import { Element, scroller, Link } from "react-scroll";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { ICountry } from "@/common/interface/location";
@@ -34,11 +35,13 @@ const scrollKey = "scrollKey";
 const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
     const scrollRef = React.useRef<HTMLDivElement>(null);
     const listRef = React.useRef<HTMLDivElement>(null);
-    const { x, y } = useScroll(scrollRef);
-    const [value, setValue] = useSessionStorage(scrollKey, 0);
     const router = useRouter();
-    const [textSearch, setTextSearch] = useState("");
+    const { x, y } = useScroll(scrollRef);
     const { metaData } = useContext(AppStateContext);
+
+    const [value, setValue] = useSessionStorage(scrollKey, 0);
+    const [textSearch, setTextSearch] = useState("");
+    const [activeAlphabet, setActiveAlphabet] = useState<any>();
     const { countryList = [] } = metaData || {};
     const alphabetList: IAlphabetItem[] = useMemo(() => {
         const res = new Map();
@@ -70,12 +73,12 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
         const handleOnScroll = () => {
             const list = listRef.current;
             const childNodes = list?.childNodes;
-            console.log({ y });
+            // console.log({ y });
 
-            console.log(
-                "🚀 >>>>>> file: ListCountryPage.tsx:73 >>>>>> handleOnScroll >>>>>> childs:",
-                childNodes
-            );
+            // console.log(
+            //     "🚀 >>>>>> file: ListCountryPage.tsx:73 >>>>>> handleOnScroll >>>>>> childs:",
+            //     childNodes
+            // );
         };
 
         const scrollElement = scrollRef?.current;
@@ -105,9 +108,19 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                             smooth
                             spy
                             to={id}
-                            className="pt-1 text-base list-country-page__alphabet-item hover-pointer"
-                            activeClass="font-semibold"
+                            className={ClassNames(
+                                "pt-1 text-base list-country-page__alphabet-item hover-pointer",
+                                {
+                                    "list-country-page__alphabet-item--active":
+                                        activeAlphabet?.id === character?.id,
+                                }
+                            )}
+                            activeClass="list-country-page__alphabet-item--active"
                             containerId="list-country-page"
+                            duration={500}
+                            onSetActive={() => {
+                                setActiveAlphabet(character);
+                            }}
                             offset={-150}
                         >
                             {character?.label}
@@ -148,7 +161,14 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                             return null;
                         }
                     }
-                    return <CountryItem key={item?.id} country={item} />;
+                    return (
+                        <Element
+                            name={`${item?.iso ?? ""}`}
+                            id={item?.iso ?? ""}
+                        >
+                            <CountryItem key={item?.id} country={item} />;
+                        </Element>
+                    );
                 })}
                 {renderAlphabetList()}
                 <div className="h-32 w-100" />
@@ -163,11 +183,7 @@ const CountryItem = ({ country }: { country: ICountry }) => {
     const { name, flag, iso } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.iso ?? "")} id={iso}>
-            <Element
-                name={`${country?.iso ?? ""}`}
-                id={country?.iso ?? ""}
-            ></Element>
-            <div className="flex flex-row items-center text-white w-full mt-4 pb-3">
+            <div className="flex flex-row items-center text-white mt-4 pb-3">
                 <Image
                     className="w-12 rounded border"
                     alt="flag"
@@ -193,15 +209,27 @@ const ListCountryPageStyle = styled.div`
         position: fixed;
         right: 30px;
         top: 80px;
+        z-index: 999;
+        pointer-events: all;
         .list-country-page__alphabet-item {
+            text-align: center;
+            transition: 0.5s all linear;
             color: var(--color-gold) !important;
             &:active {
                 font-weight: bold;
             }
             &:hover {
                 font-weight: bold;
-                color: var(--color-gold-light) !important;
             }
+        }
+        .list-country-page__alphabet-item--active {
+            /* font-weight: bold; */
+            color: white !important;
+            border-radius: 999px;
+            background-color: var(--color-gold);
+            width: 25px;
+            height: 25px;
+            text-align: center;
         }
     }
 `;
