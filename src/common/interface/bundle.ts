@@ -1,4 +1,13 @@
+import { ICountry } from "./location";
 import { ProviderName } from "./provider";
+
+export interface IBundleData {
+    countries?: ICountry[];
+    imageUrl?: string;
+    roamingEnabled?: ICountry[];
+    speed?: string[];
+    [key: string]: any;
+}
 
 export interface IBundle {
     id?: string;
@@ -9,7 +18,7 @@ export interface IBundle {
     duration: any;
     price: any;
     salePrice: number | null;
-    bundleData?: any;
+    bundleData?: IBundleData;
     updatedAt?: Date;
     createdAt?: Date;
 }

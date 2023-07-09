@@ -61,7 +61,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
         }
         if (title) {
             return (
-                <div className="text-xl text-gold flex-1 text-center">
+                <div className="text-xl text-gold-light flex-1 text-center font-semibold">
                     {title}
                 </div>
             );
@@ -98,6 +98,6 @@ const PageHeaderStyled = styled.div`
     z-index: 10;
     /* border-bottom: 0.1px solid var(--color-gold); */
     .page-header__left-button {
-        color: var(--color-gold) !important;
+        color: var(--color-gold-light) !important;
     }
 `;
