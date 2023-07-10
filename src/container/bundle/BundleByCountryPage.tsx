@@ -1,4 +1,4 @@
-import { find, isEmpty, map } from "lodash";
+import { find, isEmpty, join, map } from "lodash";
 import ClassNames from "classnames";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { IBundle } from "@/common/interface/bundle";
@@ -145,9 +145,11 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
         description,
         price,
         salePrice,
+        bundleData,
         id,
     } = bundle || {};
-    const rowClass = ClassNames("flex flex-row items-center text-xl mt-3");
+    const { speed } = bundleData || {};
+    const rowClass = ClassNames("flex flex-row items-center text-lg mt-2");
     const dataDisplay = useMemo(() => {
         if (provider === ProviderName.ESIM_GO) {
             return `${Math.floor(dataAmount / 1000)}GB`;
@@ -182,25 +184,33 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         <div className="ml-1">{id}</div>
                     </div>
                     <div className={rowClass}>
-                        <div>{dataDisplay}</div>
+                        <div className="mr-1 text-gold text-base">
+                            {Messages.data} :{" "}
+                        </div>
+                        <div className="font-semibold text-gray-300">
+                            {dataDisplay}
+                        </div>
                     </div>
                     <div className={rowClass}>
-                        {`${duration}  ${Messages.days}`}
+                        <div className="mr-1 text-gold  text-base">
+                            {Messages.duration} :{" "}
+                        </div>
+                        <div className="font-semibold text-gray-300">{`${duration}  ${Messages.days}`}</div>
                     </div>
-                    {/* <div className={`${rowClass} text `}>
-                    <span className="font-semibold mr-1 opacity-75">
-                        {Messages.provider} :{" "}
-                    </span>
-                    <ProviderNameItem providerId={provider} />
-                </div> */}
-                    {/* <div className="w-full flex justify-end ">
-                    <div className="text-xl">{`${Messages.supplierPrice} \b \b`}</div>
-                    <PriceTag price={price} />
-                </div> */}
+                    {/* {speed?.length && (
+                        <div className={rowClass}>
+                            <div className="mr-1 text-gold  text-base">
+                                {Messages.speed} :{" "}
+                            </div>
+                            <div className="font-semibold text-gray-300">
+                                {join(speed, ",")}
+                            </div>
+                        </div>
+                    )} */}
                 </div>
-                {/* <Icon icon="sim" className="text-gold" size={36} /> */}
                 <div className="rounded-full">
                     <Image
+                        alt="pirate_logo"
                         className="rounded-full"
                         src="/images/logo/logo.png"
                         nextImageProps={{
@@ -211,9 +221,17 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                     />
                 </div>
             </div>
-            <div className="w-full flex justify-end ">
-                <div className="text-xl">{`${Messages.price} \b \b`}</div>
-                <PriceTag price={salePrice} />
+            <div className="w-full ml-3 px-3 flex justify-end items-center font-semibold text-gray-300 mt-2">
+                {/* <div className="text-sm  text- px-2 py-1 rounded">{`${Messages.seeMoreDetail} >>`}</div> */}
+                <div className="flex-center-y">
+                    <Icon
+                        icon="pricetags"
+                        useIconSet="elegant"
+                        size={16}
+                        className="mr-2 text-gold"
+                    />
+                    <PriceTag price={salePrice} />
+                </div>
             </div>
         </BundleItemStyled>
     );

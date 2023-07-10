@@ -76,6 +76,9 @@ const translations = {
     sent: "Sent",
     sending: "Sending",
     retry: "Retry",
+    data: "Data",
+    speed: "Speed",
+    seeMoreDetail: "More detail",
     switchToOtherAccount: "Switch To Other Account",
     thankyouForYourPurchase: "Thank you for your purchase !",
     sendingEmailDescription:

@@ -73,7 +73,6 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
         <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white ">
             <PageHeader title={Messages.orderHistory} />
             {renderContent()}
-            <div className="h-96" />
         </div>
     );
 };
