@@ -36,39 +36,43 @@ export interface IBundleItemProps {
 
 const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     countryCode,
+    bundles,
 }) => {
     const router = useRouter();
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
-    const [bundles, setBundles] = useState<IBundle[]>();
+    // const [bundles, setBundles] = useState<IBundle[]>();
     const currentCountry = find(
         countryList,
         (item) => item?.isoAlpha2 === countryCode
     );
 
-    useEffect(() => {
-        if (countryCode) {
-            loadBundles();
-        }
-    }, [countryCode]);
+    // useEffect(() => {
+    //     if (countryCode) {
+    //         loadBundles();
+    //     }
+    // }, [countryCode]);
 
-    const loadBundles = () => {
-        return Progress.show(
-            {
-                method: BundleApi.listBundleFromCountry,
-                params: [countryCode],
-            },
-            (res: any) => {
-                const resBundles = res?.data?.data?.data ?? [];
-                setBundles(resBundles);
-            }
-        );
-    };
+    // const loadBundles = () => {
+    //     return Progress.show(
+    //         {
+    //             method: BundleApi.listBundleFromCountry,
+    //             params: [countryCode],
+    //         },
+    //         (res: any) => {
+    //             const resBundles = res?.data?.data?.data ?? [];
+    //             setBundles(resBundles);
+    //         }
+    //     );
+    // };
 
     const renderCheckout = () => {
         return (
-            <div className="fixed bottom-5 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center">
+            <div
+                className="fixed bottom-5 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center bounce-in-top"
+                data-aos="bounce-in-top"
+            >
                 <Button
                     className="w-full font-bold z-30 border bundle-by-country-page__button-checkout rounded-pill flex flex-col"
                     style={{ fontWeight: "bold", fontSize: 16 }}
@@ -87,6 +91,10 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
             </div>
         );
     };
+
+    if (!bundles?.length) {
+        return <div />;
+    }
 
     return (
         <BundleByCountryPageStyled className="bg-transparent text-white relative">
@@ -150,13 +158,14 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     return (
         <BundleItemStyled
             className={ClassNames(
-                "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative",
+                "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative bounce-in-top",
                 {
                     "border-2 bg-primary-dark": selected,
                     "border bg-black": !selected,
                 }
             )}
             onClick={onClick}
+            data-aos="bounce-in-top"
         >
             <div className="flex flex-row">
                 {showRadio && (
