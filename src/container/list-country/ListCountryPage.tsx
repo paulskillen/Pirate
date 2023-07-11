@@ -80,7 +80,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
 
     const renderAlphabetList = () => {
         return (
-            <div className="flex flex-col list-country-page__alphabet">
+            <div className="flex flex-col list-country-page__alphabet z-50 pr-5 pl-3">
                 {map(alphabetList, (character) => {
                     const { id, label, countryId } = character || {};
                     return (
@@ -169,7 +169,7 @@ const CountryItem = ({ country }: { country: ICountry }) => {
                     alt="flag"
                     src={`data:image/png;base64, ${flag}`}
                 />
-                <div className="text-xl font-semibold ml-3 max-w-xs ">
+                <div className="text-lg font-semibold ml-3 max-w-xs ">
                     {name}
                 </div>
             </div>
@@ -187,7 +187,7 @@ const ListCountryPageStyle = styled.div`
 
     .list-country-page__alphabet {
         position: fixed;
-        right: 30px;
+        right: 0px;
         top: 80px;
         z-index: 999;
         pointer-events: all;

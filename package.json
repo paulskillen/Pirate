@@ -50,6 +50,7 @@
         "react-localization": "^1.0.19",
         "react-modal": "^3.15.1",
         "react-pageflip": "^2.0.3",
+        "react-qr-hooks": "^1.0.7",
         "react-redux": "^8.0.5",
         "react-scroll": "^1.8.8",
         "react-slick": "^0.29.0",

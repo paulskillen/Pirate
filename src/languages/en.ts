@@ -27,7 +27,7 @@ const translations = {
     completePurchase: "Complete Purchase",
     dontHaveAnAccount: "Don't have an account ?",
     tokenIsExpire: "Token is expired !",
-    listOrderEmpty: "You don't have any orders yet!",
+    listOrderEmpty: "You don't have any orders yet !",
     subTotal: "Subtotal",
     setting: "Setting",
     helpCenter: "Help Center",
