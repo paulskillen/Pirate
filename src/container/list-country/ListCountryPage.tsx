@@ -123,7 +123,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                     onChange={(e: any) => {
                         setTextSearch(e?.target?.value);
                     }}
-                    placeholder={Messages.search}
+                    placeholder={Messages.searchCountryBy}
                 />
                 <Button
                     variant="trans"
@@ -195,6 +195,8 @@ const ListCountryPageStyle = styled.div`
             text-align: center;
             transition: 0.5s all linear;
             color: var(--color-gold) !important;
+            width: 25px;
+            height: 25px;
             &:active {
                 font-weight: bold;
             }
@@ -203,12 +205,9 @@ const ListCountryPageStyle = styled.div`
             }
         }
         .list-country-page__alphabet-item--active {
-            /* font-weight: bold; */
             color: white !important;
             border-radius: 999px;
             background-color: var(--color-gold);
-            width: 25px;
-            height: 25px;
             text-align: center;
         }
     }

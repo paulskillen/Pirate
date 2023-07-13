@@ -28,12 +28,12 @@ const MENUS = [
         icon: "settings",
         path: Path.setting().href,
     },
-    {
-        id: "helpCenter",
-        label: "helpCenter",
-        icon: "settings_phone",
-        path: Path.helpCenter().href,
-    },
+    // {
+    //     id: "helpCenter",
+    //     label: "helpCenter",
+    //     icon: "settings_phone",
+    //     path: Path.helpCenter().href,
+    // },
     {
         id: "promos",
         label: "promos",
@@ -41,8 +41,8 @@ const MENUS = [
         path: Path.aboutUs().href,
     },
     {
-        id: "about",
-        label: "about",
+        id: "aboutUs",
+        label: "aboutUs",
         icon: "info",
         path: Path.aboutUs().href,
     },

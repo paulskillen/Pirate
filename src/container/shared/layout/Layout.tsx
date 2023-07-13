@@ -1,6 +1,8 @@
 import Path from "@/common/constant/path";
 import Image from "@/components/image/Image";
-import PostAffiliatePro, { PAPTrackingClick } from "@/components/third-party/PostAffiliatePro";
+import PostAffiliatePro, {
+    PAPTrackingClick,
+} from "@/components/third-party/PostAffiliatePro";
 import AuthSignInView from "@/container/auth/shared/AuthSignInView";
 import { useAuthAccessToken } from "@/store/auth/authHook";
 import styled from "@emotion/styled";
@@ -13,6 +15,7 @@ const IMG_MOBILE = 250;
 const IMG_DESKTOP = 600;
 
 export interface ILayoutProps extends PropsWithChildren<{}> {
+    hideLogo?: boolean;
     [key: string]: any;
 }
 
@@ -44,7 +47,7 @@ const LogoView = () => {
     );
 };
 
-const Layout: React.FC<ILayoutProps> = ({ children }) => {
+const Layout: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
     return (
         <LayoutStyled className="layout-container bg-black">
             <div className="flex-grow w-100">{children}</div>
@@ -57,9 +60,13 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
 
 export default Layout;
 
-export const LayoutClean: React.FC<ILayoutProps> = ({ children }) => {
+export const LayoutClean: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
     return (
-        <LayoutStyled className="layout-container bg-black">
+        <LayoutStyled
+            className={ClassNames("layout-container bg-black", {
+                "layout-container--hide-logo": hideLogo,
+            })}
+        >
             <div className="flex-grow w-100">{children}</div>
             <PostAffiliatePro />
         </LayoutStyled>
