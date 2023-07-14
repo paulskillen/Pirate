@@ -37,6 +37,8 @@ const translations = {
     yourOrders: "Your Orders",
     qrCode: "Qr Code",
     policy: "Policy",
+    privacyPolicy: "Privacy Policy",
+    termConditions: "Term and Conditions",
     search: "Search...",
     searchCountryBy: "Country name or code...",
     code: "Code",
@@ -51,6 +53,7 @@ const translations = {
     hideEsimQrCode: "Hide ESim Qr Code",
     showEsimQrCode: "Show ESim Qr Code",
     readAndAgreeWith: "I've read and agreed with",
+    thePrivacyPolicy: "privacy policy",
     termAndCondition: "the term and conditions",
     myDeviceIsCompatibleWithEsim: "My device is compatible with the eSim",
     seeCompatibleDeviceList: "see compatible device list",
@@ -83,8 +86,7 @@ const translations = {
     seeMoreDetail: "More detail",
     switchToOtherAccount: "Switch To Other Account",
     thankyouForYourPurchase: "Thank you for your purchase !",
-    sendingEmailDescription:
-        "The eSim Qr Code is sending to the @email",
+    sendingEmailDescription: "The eSim Qr Code is sending to the @email",
     sentEmailSuccessDescription:
         "The eSim Qr Code was sent to the @email. Please check your email and follow the instruction to install your eSim",
     emailFormDescription:

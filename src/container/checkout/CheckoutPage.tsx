@@ -155,13 +155,20 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                         }
                         checked={userAgreement?.policy}
                     />
-                    <div className="ml-3 text text-white">
+                    <div className="ml-3 text text-white text-xs">
                         {Messages.readAndAgreeWith}
                         <AppLink
-                            className="inline ml-1 underline font-semibold italic text-white"
-                            href={Path.policy().href}
+                            className="inline ml-1 underline italic text-white"
+                            href={Path.termConditions().href}
                         >
                             <span>{Messages.termAndCondition}</span>
+                        </AppLink>
+                        <span className="mx-1">&</span>
+                        <AppLink
+                            className="inline ml-1 underline italic text-white"
+                            href={Path.policy().href}
+                        >
+                            <span>{Messages.thePrivacyPolicy}</span>
                         </AppLink>
                     </div>
                 </div>
@@ -178,7 +185,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                     <div className="ml-3 text text-white">
                         {Messages.myDeviceIsCompatibleWithEsim}
                         <AppLink
-                            className="inline ml-1 underline font-semibold italic text-white"
+                            className="inline ml-1 underline italic text-white"
                             href={Path.compatibleDevice().href}
                         >
                             <span>{Messages.seeCompatibleDeviceList}</span>
