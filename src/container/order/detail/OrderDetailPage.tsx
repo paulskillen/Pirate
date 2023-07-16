@@ -1,4 +1,5 @@
 import OrderApi from "@/apis/order/OrderApi";
+import { useQrEncode, useQrDecode } from "react-qr-hooks";
 import { ESIM_GO_GET_ESIM_QR_CODE_IMG } from "@/common/constant/app";
 import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
 import PageHeader from "@/container/shared/header/PageHeader";
@@ -24,7 +25,7 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
     const { provider, subTotal, total, orderNo, eSimData } = orderDetail || {};
     const [showQrCode, setShowQrCode] = useState(false);
     const { qrCode, eSimId } = eSimData || {};
-
+    const decoded = useQrDecode(`data:image/png;base64,${qrCode}`);
     const rowClass = ClassNames(
         "flex flex-row items-center justify-between text-xl mt-3"
     );

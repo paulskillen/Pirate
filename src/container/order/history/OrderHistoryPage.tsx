@@ -55,8 +55,8 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
     const renderContent = () => {
         if (!(orderList?.length > 0)) {
             return (
-                <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-white">
-                    {Messages.listOrderEmpty}
+                <div className="flex flex-col items-center justify-start  w-screen h-screen relative text-white">
+                    <div className="mt-24">{Messages.listOrderEmpty}</div>
                 </div>
             );
         }

@@ -1,21 +1,23 @@
-import PostAffiliatePro, {
-    PAPTrackingClick,
-} from "@/components/third-party/PostAffiliatePro";
+import BundleApi from "@/apis/bundle/BundleApi";
+import { IBundle } from "@/common/interface/bundle";
 import BundleByCountryPage from "@/container/bundle/BundleByCountryPage";
 import { LayoutClean } from "@/container/shared/layout/Layout";
-import Script from "next/script";
 import React, { Fragment } from "react";
 
 export interface IBundlesByCountryProps {
-    [key: string]: any;
+    bundles: IBundle[];
+    countryCode: any;
 }
 
 export const getServerSideProps: any = async (context: any) => {
     const countryCode = context?.query?.countrySlug;
     if (countryCode) {
+        const res = await BundleApi.listBundleFromCountry(countryCode);
+        const resBundles = res?.data?.data?.data ?? [];
         return {
             props: {
                 countryCode,
+                bundles: resBundles,
             },
         };
     }
@@ -23,28 +25,11 @@ export const getServerSideProps: any = async (context: any) => {
 
 const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
     countryCode,
+    bundles,
 }) => {
     return (
         <Fragment>
-            {/* <Script
-                type="text/javascript"
-                id="pap_x2s6df8d"
-                src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
-            />
-            <Script
-                type="text/javascript"
-                onLoad={() => {
-                    try {
-                        //@ts-ignore
-                        PostAffTracker.setAccountId("default1");
-                        //@ts-ignore
-                        PostAffTracker.track();
-                    } catch (err) {}
-                }}
-            /> */}
-            {/* <PostAffiliatePro /> */}
-            {/* <PAPTrackingClick /> */}
-            <BundleByCountryPage countryCode={countryCode} />;
+            <BundleByCountryPage countryCode={countryCode} bundles={bundles} />;
         </Fragment>
     );
 };
