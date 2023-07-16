@@ -9,7 +9,7 @@ import "../styles/global.css";
 import "../styles/style.scss";
 import DefaultLayout from "@/container/shared/layout/Layout";
 import API from "@/apis/API";
-import { ComponentType, useEffect, useState } from "react";
+import { ComponentType, Fragment, useEffect, useState } from "react";
 import {
     AppStateContext,
     loadStateContext,
@@ -27,6 +27,7 @@ import { CONFIG } from "@/configuration/AppConfig";
 export type MattressAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
         Layout: ComponentType;
+        getLayout?: (props: any) => any;
     };
 };
 
@@ -91,6 +92,32 @@ function App({ Component, pageProps }: MattressAppProps) {
 
     console.log({ initialOptions });
 
+    const renderMainContent = () => {
+        const getLayout = Component.getLayout;
+
+        const content = (
+            <Fragment>
+                <Head>
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1, maximum-scale=1"
+                    />
+                </Head>
+                <AppSeo />
+                <SocialSeo />
+                <Component {...pageProps} />
+            </Fragment>
+        );
+        if (getLayout) {
+            return getLayout(content);
+        }
+
+        return (
+            //@ts-ignore
+            <Layout>{content}</Layout>
+        );
+    };
+
     return (
         <SessionProvider session={pageProps?.session}>
             <PayPalScriptProvider options={initialOptions}>
@@ -109,18 +136,7 @@ function App({ Component, pageProps }: MattressAppProps) {
                     >
                         <LoadMetaComponent />
                         <InitComponent />
-                        {/* @ts-ignore */}
-                        <Layout>
-                            <Head>
-                                <meta
-                                    name="viewport"
-                                    content="width=device-width, initial-scale=1, maximum-scale=1"
-                                />
-                            </Head>
-                            <AppSeo />
-                            <SocialSeo />
-                            <Component {...pageProps} />
-                        </Layout>
+                        {renderMainContent()}
                     </AppStateContext.Provider>
                 </ApolloProvider>
             </PayPalScriptProvider>

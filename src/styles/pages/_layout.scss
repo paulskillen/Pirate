@@ -4,7 +4,7 @@
     min-height: 100%;
 }
 
-.layout-container::after {
+.layout-container:not(.layout-container--hide-logo)::after {
     content: "";
     background-image: url("/images/logo/logo.png");
     background-position: center;

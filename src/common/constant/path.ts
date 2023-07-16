@@ -127,6 +127,10 @@ const Path = {
         href: "/policy",
     }),
 
+    termConditions: (): ILinkProps => ({
+        href: "/term-conditions",
+    }),
+
     compatibleDevice: (): ILinkProps => ({
         href: "/compatible-device",
     }),
