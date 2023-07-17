@@ -38,14 +38,14 @@ const MENUS = [
         id: "promos",
         label: "promos",
         icon: "query_stats",
-        path: Path.aboutUs().href,
+        path: Path.promos().href,
     },
-    {
-        id: "aboutUs",
-        label: "aboutUs",
-        icon: "info",
-        path: Path.aboutUs().href,
-    },
+    // {
+    //     id: "aboutUs",
+    //     label: "aboutUs",
+    //     icon: "info",
+    //     path: Path.aboutUs().href,
+    // },
 ];
 
 const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
