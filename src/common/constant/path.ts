@@ -123,6 +123,10 @@ const Path = {
         href: "/about-us",
     }),
 
+    promos: (): ILinkProps => ({
+        href: "/promos",
+    }),
+
     policy: (): ILinkProps => ({
         href: "/policy",
     }),
