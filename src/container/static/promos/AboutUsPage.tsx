@@ -4,18 +4,18 @@ import Image from "next/image";
 import React from "react";
 import * as Yup from "yup";
 
-export interface IAboutUsPageProps {
+export interface IPromosPageProps {
     [key: string]: any;
 }
 
 const IMG_MOBILE = 250;
 const IMG_DESKTOP = 600;
 
-const AboutUsPage: React.FC<IAboutUsPageProps> = ({ id }) => {
+const PromosPage: React.FC<IPromosPageProps> = ({ id }) => {
     return (
         <div className="home-page_container w-screen h-screen bg-black text-white overflow-y-scroll">
             <PageHeader
-                title={Messages.aboutUs}
+                title={Messages.promos}
             />
             <section className="w-full px-3 flex-col lg:flex-row flex justify-center items-center">
                 <Image
@@ -51,4 +51,4 @@ const AboutUsPage: React.FC<IAboutUsPageProps> = ({ id }) => {
     );
 };
 
-export default AboutUsPage;
+export default PromosPage;
