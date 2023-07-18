@@ -1,6 +1,12 @@
 import { find, isEmpty, join, map } from "lodash";
 import ClassNames from "classnames";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, {
+    Fragment,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 import { IBundle } from "@/common/interface/bundle";
 import { Button, Checkbox, Icon as DIcon } from "d-react-components";
 import ProviderNameItem from "../provider/shared/ProviderNameItem";
@@ -22,6 +28,7 @@ import {
     COLOR_PRIMARY,
     COLOR_PRIMARY_DARK,
 } from "@/common/constant/app-style";
+import Modal, { IModalProps } from "@/components/modal/Modal";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -35,6 +42,10 @@ export interface IBundleItemProps {
     selected?: boolean;
 }
 
+export interface IBundleDetailModalProps extends Omit<IModalProps, "children"> {
+    bundle: IBundle;
+}
+
 const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     countryCode,
     bundles,
@@ -43,7 +54,6 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
-    // const [bundles, setBundles] = useState<IBundle[]>();
     const currentCountry = find(
         countryList,
         (item) => item?.isoAlpha2 === countryCode
@@ -157,32 +167,148 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
         }
         return null;
     }, [dataAmount, provider]);
+    const [openDetailModal, setOpenDetailModal] = useState(false);
 
     return (
-        <BundleItemStyled
-            className={ClassNames(
-                "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative bounce-in-top",
-                {
-                    "border-2 bg-darken": selected,
-                    "border bg-black": !selected,
-                }
-            )}
-            onClick={onClick}
-            data-aos="bounce-in-top"
-        >
-            <div className="flex flex-row">
-                {showRadio && (
-                    <Checkbox
-                        onChange={() => {}}
-                        checked={selected}
-                        variant="radio"
-                        className="h-fit text-white border-white mt-1"
-                    />
+        <Fragment>
+            <BundleItemStyled
+                className={ClassNames(
+                    "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative bounce-in-top",
+                    {
+                        "border-2 bg-darken": selected,
+                        "border bg-black": !selected,
+                    }
                 )}
-                <div className="w-full ml-3">
-                    <div className="flex-center-y text-lg text-gold font-semibold">
-                        <div className="ml-1">{id}</div>
+                data-aos="bounce-in-top"
+            >
+                <div className="flex flex-row" onClick={onClick}>
+                    {showRadio && (
+                        <Checkbox
+                            onChange={() => {}}
+                            checked={selected}
+                            variant="radio"
+                            className="h-fit text-white border-white mt-1"
+                        />
+                    )}
+                    <div className="w-full ml-3">
+                        <div className="flex-center-y text-lg text-gold font-semibold">
+                            <div className="ml-1">{id}</div>
+                        </div>
+                        <div className={rowClass}>
+                            <div className="mr-1 text-gold text-base">
+                                {Messages.data} :{" "}
+                            </div>
+                            <div className="font-semibold text-gray-300">
+                                {dataDisplay}
+                            </div>
+                        </div>
+                        <div className={rowClass}>
+                            <div className="mr-1 text-gold  text-base">
+                                {Messages.duration} :{" "}
+                            </div>
+                            <div className="font-semibold text-gray-300">{`${duration}  ${Messages.days}`}</div>
+                        </div>
+                        {/* {speed?.length && (
+                        <div className={rowClass}>
+                            <div className="mr-1 text-gold  text-base">
+                                {Messages.speed} :{" "}
+                            </div>
+                            <div className="font-semibold text-gray-300">
+                                {join(speed, ",")}
+                            </div>
+                        </div>
+                    )} */}
                     </div>
+                    <div className="rounded-full">
+                        <Image
+                            alt="pirate_logo"
+                            className="rounded-full"
+                            src="/images/logo/logo.png"
+                            nextImageProps={{
+                                width: 48,
+                                height: 48,
+                                style: { objectFit: "contain" },
+                            }}
+                        />
+                    </div>
+                </div>
+                <div className="w-full ml-3 px-3 flex justify-between items-center font-semibold text-gray-300 mt-2">
+                    <Button
+                        size="x-small"
+                        variant="outline"
+                        className="bundle-item__button-detail"
+                        onClick={() => setOpenDetailModal(true)}
+                    >
+                        <Icon
+                            icon="settings"
+                            useIconSet="feather"
+                            size={14}
+                            className="block text-gold"
+                        />
+                        <div className="ml-1 text">{Messages.seeDetail}</div>
+                    </Button>
+                    <div
+                        className="flex-center-y w-full justify-end"
+                        onClick={onClick}
+                    >
+                        <Icon
+                            icon="md-pricetags"
+                            useIconSet="ion"
+                            size={16}
+                            className="mr-2 text-gold"
+                        />
+                        <PriceTag price={salePrice} />
+                    </div>
+                </div>
+            </BundleItemStyled>
+            {openDetailModal && (
+                <BundleDetailModal
+                    bundle={bundle}
+                    open={openDetailModal}
+                    onClose={() => setOpenDetailModal(false)}
+                />
+            )}
+        </Fragment>
+    );
+};
+
+export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
+    bundle,
+    onClick,
+    selected,
+    showRadio = true,
+    open,
+    onClose,
+}) => {
+    const {
+        provider,
+        name,
+        dataAmount,
+        duration,
+        description,
+        price,
+        salePrice,
+        bundleData,
+        id,
+    } = bundle || {};
+
+    console.log(
+        "🚀 >>>>>> file: BundleByCountryPage.tsx:295 >>>>>> bundle:",
+        bundle
+    );
+    const { speed, countries } = bundleData || {};
+    const rowClass = ClassNames("flex flex-row items-start text-lg mt-2");
+    const dataDisplay = useMemo(() => {
+        if (provider === ProviderName.ESIM_GO) {
+            return `${Math.floor(dataAmount / 1000)}GB`;
+        }
+        return null;
+    }, [dataAmount, provider]);
+
+    const renderContent = () => {
+        return (
+            <div className="flex flex-row">
+                <div className="w-full ml-3">
                     <div className={rowClass}>
                         <div className="mr-1 text-gold text-base">
                             {Messages.data} :{" "}
@@ -197,7 +323,22 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         </div>
                         <div className="font-semibold text-gray-300">{`${duration}  ${Messages.days}`}</div>
                     </div>
-                    {/* {speed?.length && (
+                    <div className={`${rowClass} w-full`}>
+                        <div className="mr-1 text-gold  text-base">
+                            {Messages.description}:
+                        </div>
+                        <div className="font-semibold text-gray-300 w-full">{`${description}`}</div>
+                    </div>
+                    <div className="flex-center-y text-white">
+                        <Icon
+                            icon="md-pricetags"
+                            useIconSet="ion"
+                            size={16}
+                            className="mr-2 text-gold"
+                        />
+                        <PriceTag price={salePrice} />
+                    </div>
+                    {speed?.length && (
                         <div className={rowClass}>
                             <div className="mr-1 text-gold  text-base">
                                 {Messages.speed} :{" "}
@@ -206,9 +347,9 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                                 {join(speed, ",")}
                             </div>
                         </div>
-                    )} */}
+                    )}
                 </div>
-                <div className="rounded-full">
+                {/* <div className="rounded-full">
                     <Image
                         alt="pirate_logo"
                         className="rounded-full"
@@ -219,33 +360,15 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                             style: { objectFit: "contain" },
                         }}
                     />
-                </div>
+                </div> */}
             </div>
-            <div className="w-full ml-3 px-3 flex justify-between items-center font-semibold text-gray-300 mt-2">
-                <Button
-                    size="x-small"
-                    variant="outline"
-                    className="bundle-item__button-detail"
-                >
-                    <Icon
-                        icon="settings"
-                        useIconSet="feather"
-                        size={14}
-                        className="block text-gold"
-                    />
-                    <div className="ml-1 text">{Messages.seeDetail}</div>
-                </Button>
-                <div className="flex-center-y">
-                    <Icon
-                        icon="md-pricetags"
-                        useIconSet="ion"
-                        size={16}
-                        className="mr-2 text-gold"
-                    />
-                    <PriceTag price={salePrice} />
-                </div>
-            </div>
-        </BundleItemStyled>
+        );
+    };
+
+    return (
+        <Modal open={open} onClose={onClose} title={description}>
+            {renderContent()}
+        </Modal>
     );
 };
 
@@ -254,8 +377,9 @@ const BundleItemStyled = styled.div`
     .bundle-item__button-detail {
         background-color: black;
         border: 1px solid var(--color-gold);
-        height: 32px !important;
+        height: 28px !important;
         z-index: 100;
+        padding: 0 8px !important;
         .text {
             font-size: 12px !important;
             color: white;
