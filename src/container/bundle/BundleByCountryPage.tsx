@@ -2,7 +2,7 @@ import { find, isEmpty, join, map } from "lodash";
 import ClassNames from "classnames";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { IBundle } from "@/common/interface/bundle";
-import { Button, Checkbox, Progress } from "d-react-components";
+import { Button, Checkbox, Icon as DIcon } from "d-react-components";
 import ProviderNameItem from "../provider/shared/ProviderNameItem";
 import Messages from "@/languages/Messages";
 import { AppStateContext } from "@/common/context/app/app-context";
@@ -17,6 +17,7 @@ import Icon from "@/components/icon/Icon";
 import styled from "@emotion/styled";
 import BundleApi from "@/apis/bundle/BundleApi";
 import {
+    COLOR_DARKEN,
     COLOR_GOLD,
     COLOR_PRIMARY,
     COLOR_PRIMARY_DARK,
@@ -162,7 +163,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
             className={ClassNames(
                 "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative bounce-in-top",
                 {
-                    "border-2 bg-primary-dark": selected,
+                    "border-2 bg-darken": selected,
                     "border bg-black": !selected,
                 }
             )}
@@ -180,7 +181,6 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                 )}
                 <div className="w-full ml-3">
                     <div className="flex-center-y text-lg text-gold font-semibold">
-                        <div>#</div>
                         <div className="ml-1">{id}</div>
                     </div>
                     <div className={rowClass}>
@@ -221,12 +221,24 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                     />
                 </div>
             </div>
-            <div className="w-full ml-3 px-3 flex justify-end items-center font-semibold text-gray-300 mt-2">
-                {/* <div className="text-sm  text- px-2 py-1 rounded">{`${Messages.seeMoreDetail} >>`}</div> */}
+            <div className="w-full ml-3 px-3 flex justify-between items-center font-semibold text-gray-300 mt-2">
+                <Button
+                    size="x-small"
+                    variant="outline"
+                    className="bundle-item__button-detail"
+                >
+                    <Icon
+                        icon="settings"
+                        useIconSet="feather"
+                        size={14}
+                        className="block text-gold"
+                    />
+                    <div className="ml-1 text">{Messages.seeDetail}</div>
+                </Button>
                 <div className="flex-center-y">
                     <Icon
-                        icon="pricetags"
-                        useIconSet="elegant"
+                        icon="md-pricetags"
+                        useIconSet="ion"
                         size={16}
                         className="mr-2 text-gold"
                     />
@@ -239,6 +251,17 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
 
 const BundleItemStyled = styled.div`
     border-color: var(--color-gold) !important;
+    .bundle-item__button-detail {
+        background-color: black;
+        border: 1px solid var(--color-gold);
+        height: 32px !important;
+        z-index: 100;
+        .text {
+            font-size: 12px !important;
+            color: white;
+            line-height: 16px;
+        }
+    }
 `;
 
 const BundleByCountryPageStyled = styled.div`

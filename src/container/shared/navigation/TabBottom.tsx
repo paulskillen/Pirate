@@ -5,9 +5,15 @@ import AppLink from "@/components/link/AppLink";
 import { useRouter } from "next/router";
 import React from "react";
 import Path from "../../../common/constant/path";
+import styled from "@emotion/styled";
 
 export interface ITabBottomProps {
     [key: string]: any;
+}
+
+export interface ITabBottomItemProps {
+    icon?: string;
+    link?: string;
 }
 
 const ICON_SIZE = 28;
@@ -17,27 +23,30 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
     const router = useRouter();
     const { pathname, query } = router || {};
     const activeClass = (isActive?: boolean) => {
-        return ClassNames({ "rounded-full bg-primary-dark": isActive });
+        return ClassNames({ "rounded-full bg-darken": isActive });
     };
     const iconClass = (isActive?: boolean) => {
-        return ClassNames({ "text-gold": !isActive, "text-gold-light": isActive });
+        return ClassNames({
+            "text-gold": !isActive,
+            "text-gold-light": isActive,
+        });
     };
 
     return (
         <div
-            className="tab-bottom bg-primary  z-20 fixed flex items-center justify-center gap-x-16 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-1 border-t-2 border-t-slate-500"
+            className="tab-bottom bg-black  z-20 fixed flex items-center justify-between gap-8 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-1 border-t border-t-gold"
             style={{ height: `${TAB_BOTTOM_HEIGHT}px` }}
         >
             <AppLink href={Path.home()}>
                 <div
-                    className={`${classItem} ${activeClass(
+                    className={`ml-2 ${classItem} ${activeClass(
                         pathname === Path.home().href
                     )}`}
                 >
                     <Icon
                         icon="house"
                         size={ICON_SIZE}
-                        className={`${iconClass(
+                        className={` ${iconClass(
                             pathname === Path.home().href
                         )}`}
                     />
@@ -76,7 +85,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
 
             <AppLink href={Path.profile()}>
                 <div
-                    className={`${classItem} ${activeClass(
+                    className={`mr-2 ${classItem} ${activeClass(
                         pathname === Path.profile().href
                     )}`}
                 >
@@ -94,3 +103,13 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
 };
 
 export default TabBottom;
+
+const TabBottomItem: React.FC<ITabBottomProps> = ({ id }) => {
+    return (
+        <AppLink>
+            <TabBottomItemStyled></TabBottomItemStyled>
+        </AppLink>
+    );
+};
+
+const TabBottomItemStyled = styled.div``;
