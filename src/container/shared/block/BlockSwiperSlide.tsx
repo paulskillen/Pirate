@@ -16,17 +16,17 @@ const HOME_PAGE_COVERS = [
     {
         id: "1",
         label: "High",
-        src: "/images/home-page-cover.jpeg",
+        src: "/images/information/1.jpeg",
     },
     {
         id: "3",
         label: "Low",
-        src: "/images/home-page-cover-1.jpg",
+        src: "/images/information/2.jpeg",
     },
     {
         id: "4",
         label: "Low",
-        src: "/images/home-page-cover-2.png",
+        src: "/images/information/3.jpeg",
     },
 ];
 
@@ -74,7 +74,7 @@ export default BlockSwiperSlide;
 const BlockSwiperSlideStyled = styled.div`
     .home-page__slider-image-wrapper {
         position: relative;
-        padding-bottom: 56.25%;
+        padding-bottom: 100%;
         .home-page__slider-image {
             position: absolute;
             width: 100%;

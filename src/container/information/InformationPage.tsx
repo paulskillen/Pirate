@@ -20,7 +20,7 @@ const BLOCK_INFORMATION = [
         title: Messages.introduction,
         description:
             "At Pirate Mobile, we understand the importance of staying connected wherever you go. Introducing Pirate Mobile digital SIM card, your passport to hassle-free global connectivity. Say goodbye to physical SIM cards and unlock a world of seamless communication and data access right from your device.",
-        image: "/images/logo/logo.png",
+        image: "/images/information/1.jpeg",
     },
     {
         id: "2",
@@ -59,9 +59,8 @@ const BLOCK_INFORMATION = [
     {
         id: "7",
         title: Messages.getStartedToday,
-        subTitle:
+        description:
             "Get started with Pirate Mobile digital SIM card today and experience the freedom of seamless global connectivity. Activate your digital SIM card now and unlock a world of possibilities.",
-        description: "",
         image: "/images/logo/logo.png",
     },
 ];
@@ -96,9 +95,6 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
                     </div>
                 </div> */}
                 <div className="flex-center-y w-">
-                    {/* <div className="text-xl text-gold font-semibold w-100 text-end mb-2">
-                        {Messages.selectDestination}
-                    </div> */}
                     <Button
                         iconName="search"
                         className="rounded px-0 home-page__button-search ml-3"

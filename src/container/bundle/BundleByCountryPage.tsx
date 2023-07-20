@@ -366,7 +366,7 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
     };
 
     return (
-        <Modal open={open} onClose={onClose} title={description}>
+        <Modal open={open} onClose={onClose} title={description} closable maskClosable>
             {renderContent()}
         </Modal>
     );

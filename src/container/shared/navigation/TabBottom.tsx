@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import React from "react";
 import Path from "../../../common/constant/path";
 import styled from "@emotion/styled";
+import Image from "next/image";
+import Square from "@/common/assets/svg/square.svg";
+import { COLOR_GOLD, COLOR_GOLD_LIGHT } from "@/common/constant/app-style";
 
 export interface ITabBottomProps {
     [key: string]: any;
@@ -73,12 +76,14 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         pathname === Path.information().href
                     )}`}
                 >
-                    <Icon
-                        icon="list-ul"
-                        className={`${iconClass(
+                    <Square
+                        fill={
                             pathname === Path.information().href
-                        )}`}
-                        size={ICON_SIZE}
+                                ? COLOR_GOLD_LIGHT
+                                : COLOR_GOLD
+                        }
+                        width={ICON_SIZE}
+                        height={ICON_SIZE}
                     />
                 </div>
             </AppLink>
