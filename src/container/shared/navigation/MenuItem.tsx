@@ -1,5 +1,7 @@
+import { COLOR_PRIMARY } from "@/common/constant/app-style";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
+import styled from "@emotion/styled";
 import { Icon } from "d-react-components";
 import { filter } from "lodash";
 import React, { useState } from "react";
@@ -21,14 +23,18 @@ const MenuItem: React.FC<IMenuItemProps> = ({ menu }) => {
 
     return (
         <AppLink href={path} className="w-full" style={{ width: "100%" }}>
-            <div className="flex flex-row items-center mt-4 w-full bg-primary p-3 rounded-xl">
+            <MenuItemStyled className="flex flex-row items-center mt-4 w-full bg-primary p-3 rounded-xl border-gold">
                 <Icon name={icon} className="text-gold" size="x-large" />
-                <div className="text-xl text-white ml-3">
+                <div className="text-lg text-gold ml-3">
                     {(Messages as any)[label]}
                 </div>
-            </div>
+            </MenuItemStyled>
         </AppLink>
     );
 };
 
 export default MenuItem;
+
+const MenuItemStyled = styled.div`
+    background-color: rgba(253, 253, 253, 0.15) !important;
+`;

@@ -10,6 +10,7 @@
     --color-gold-light: rgb(245, 206, 133);
     --color-gold: rgba(192, 157, 94, 1);
     --color-gold-dark: rgb(153, 118, 53);
+    --color-darken: rgb(38, 38, 38);
     --body-font-family: "Poppins", "sans-serif";
 
     height: 100% !important;

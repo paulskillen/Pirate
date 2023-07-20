@@ -163,13 +163,13 @@ const CountryItem = ({ country }: { country: ICountry }) => {
     const { name, flag, iso } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.iso ?? "")} id={iso}>
-            <div className="flex flex-row items-center text-white mt-4 pb-3">
+            <div className="flex flex-row items-center text-gray-300 mt-4 pb-3">
                 <Image
                     className="w-12 rounded border"
                     alt="flag"
                     src={`data:image/png;base64, ${flag}`}
                 />
-                <div className="text-lg font-semibold ml-3 max-w-xs ">
+                <div className="text-base font-semibold ml-3 max-w-xs ">
                     {name}
                 </div>
             </div>

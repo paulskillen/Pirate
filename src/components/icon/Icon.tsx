@@ -1,13 +1,23 @@
 import React, { useMemo } from "react";
-import ClassNames from "classnames";
 import IcoMoon, { IconProps as IcoMoonProps } from "react-icomoon";
 import bootstrap from "./collection/bootstrap.json";
 import elegant from "./collection/elegant.json";
 import carbon from "./collection/carbon.json";
+import ion from "./collection/ion.json";
+import feather from "./collection/feather.json";
 import googleMaterial from "./collection/google-material.json";
 
+declare const ICON_SET: readonly [
+    "bootstrap",
+    "elegant",
+    "carbon",
+    "google-material",
+    "ion",
+    "feather"
+];
+
 export interface IconProps extends IcoMoonProps {
-    useIconSet?: "bootstrap" | "elegant" | "carbon" | "google-material";
+    useIconSet?: (typeof ICON_SET)[number];
 }
 
 const Icon = ({
@@ -26,6 +36,10 @@ const Icon = ({
                 return googleMaterial;
             case "carbon":
                 return carbon;
+            case "ion":
+                return ion;
+            case "feather":
+                return feather;
 
             default:
                 return bootstrap;

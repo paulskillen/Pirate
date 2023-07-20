@@ -56,10 +56,10 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
 
     return (
         <ProfilePageStyled className="flex flex-col items-center justify-start w-screen h-screen relative text-white">
-            <div className="profile-page__header w-full bg-primary">
+            <div className="profile-page__header w-full">
                 <PageHeader
                     title={Messages.profile}
-                    className="bg-primary"
+                    className="bg-transparent"
                     onLeftClick={() => {
                         router.push(Path.home().href);
                     }}
@@ -74,8 +74,8 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
                 />
             </div>
             <div className="w-full overflow-y-scroll flex flex-col items-center pb-5">
-                <div className="mt-3">{email}</div>
-                <div className="mt-3">{`${firstName} ${lastName}`}</div>
+                <div className="mt-3 text-gold font-semibold">{email}</div>
+                <div className="mt-2 text-gold font-semibold">{`${firstName} ${lastName}`}</div>
                 <div className="px-4 w-full z-20">
                     {MENUS.map((item, index) => {
                         return <MenuItem key={item?.id} menu={item} />;
@@ -83,7 +83,7 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
                 </div>
 
                 <Button
-                    className="z-10 mt-4"
+                    className="z-10 mt-4 profile-page__signout-button"
                     onClick={() => {
                         signOut();
                         dispatch(signOutAction());
@@ -95,7 +95,7 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
                 >
                     {Messages.signOut}
                 </Button>
-                <div className="profile-page__copy-right small text-center mt-2">
+                <div className="profile-page__copy-right small text-center mt-2 text-gold">
                     © 2023 Pirate Mobile Co., Ltd. All Rights Reserved.
                 </div>
             </div>
@@ -108,6 +108,7 @@ export default ProfilePage;
 const ProfilePageStyled = styled.div`
     .profile-page__header {
         min-height: 20%;
+        background-color: rgba(253, 253, 253, 0.15) !important;
         .profile-page__button-left {
             color: var(--color-gold) !important;
         }
@@ -115,7 +116,12 @@ const ProfilePageStyled = styled.div`
     .profile-page__avatar-wrapper {
         margin-top: -50px;
     }
+    .profile-page__signout-button {
+        color: var(--color-gold) !important;
+    }
     .profile-page__copy-right {
         max-width: 50%;
+        position: fixed;
+        bottom: 20px;
     }
 `;
