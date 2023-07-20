@@ -60,7 +60,7 @@ const translations = {
     keyFeatures: "Key Features",
     supplierPrice: "Supplier Price",
     howItWorks: "How It Works",
-    whyChoosePirateMobileEsims: "Why Choose Pirate Mobile eSim ?",
+    whyChoosePirateMobileEsims: "Why Choose Pirate Mobile digital SIM card ?",
     testimonials: "Testimonials",
     getStartedToday: "Get Started Today",
     successfullyRegistered: "Successfully registered new account !",
