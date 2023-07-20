@@ -48,7 +48,7 @@ const translations = {
     purchasedAt: "Purchased at",
     installApp: "Install App",
     loadQrCode: "Load Qr Code",
-    whatIsPirateMobile: "What is Pirate Mobile eSim?",
+    whatIsPirateMobile: "What is Pirate Mobile digital SIM card ?",
     compatibleDevices: "Compatible Devices",
     hideEsimQrCode: "Hide ESim Qr Code",
     showEsimQrCode: "Show ESim Qr Code",
