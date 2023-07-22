@@ -1,6 +1,7 @@
 import {
     COLOR_DARKEN,
     COLOR_GOLD,
+    COLOR_GOLD_TRANS,
     COLOR_INPUT_CONTENT,
 } from "@/common/constant/app-style";
 import styled from "@emotion/styled";
@@ -48,15 +49,29 @@ const Select: React.FC<IInputSelectProps> = ({
 export default Select;
 
 const SelectStyled = styled.div`
+    .ant-select-selector {
+        .ant-select-selection-item {
+            color: ${COLOR_INPUT_CONTENT} !important;
+        }
+    }
+
     .select-country {
         .ant-select-arrow {
             margin-top: -10px !important;
         }
         .ant-select-selection-search-input {
-            color: ${COLOR_GOLD} !important;
-        }
-        input::placeholder {
-            color: ${COLOR_GOLD} !important;
+            /* color: ${COLOR_GOLD} !important; */
+            /* &::placeholder {
+                color: ${COLOR_GOLD} !important;
+            } */
+            /* ::-webkit-input-placeholder {
+            } */
+            /* input::placeholder {
+                color: #909 !important;
+            } */
+            /* input::-webkit-input-placeholder {
+                color: #909 !important;
+            } */
         }
     }
 `;
@@ -68,10 +83,12 @@ const DropdownStyled = styled.div`
     border-right: 1px solid ${COLOR_GOLD};
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+
     .ant-select-item-option {
         color: ${COLOR_INPUT_CONTENT};
     }
+
     .ant-select-item-option-active {
-        background-color: ${COLOR_GOLD};
+        background-color: ${COLOR_GOLD_TRANS};
     }
 `;

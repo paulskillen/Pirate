@@ -13,6 +13,7 @@ module.exports = {
                 "gray-light": "rgba(#152331,0.2)",
                 "gold-light": "rgb(245, 206, 133)",
                 gold: "rgba(192,157,94,1)",
+                "gold-trans": "rgba(192,157,94,0.25)",
                 "gold-dark": "rgb(153, 118, 53)",
                 darken: "rgb(38, 38, 38)",
             },

@@ -80,7 +80,7 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
 
     const renderAlphabetList = () => {
         return (
-            <div className="flex flex-col list-country-page__alphabet z-50 pr-5 pl-3">
+            <div className="flex flex-col list-country-page__alphabet z-50 pr-5">
                 {map(alphabetList, (character) => {
                     const { id, label, countryId } = character || {};
                     return (
@@ -159,11 +159,21 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
 
 export default ListCountryPage;
 
-export const CountryItem = ({ country }: { country: ICountry }) => {
+export const CountryItem = ({
+    country,
+    hoverColor = true,
+}: {
+    country: ICountry;
+    hoverColor?: any;
+}) => {
     const { name, flag, iso } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.iso ?? "")} id={iso}>
-            <div className="flex flex-row items-center text-gray-300 mt-3 pb-3">
+            <div
+                className={`flex flex-row items-center text-gray-300 pt-3 pb-3 pl-3 ${ClassNames(
+                    { "hover:bg-gold-trans": hoverColor }
+                )}`}
+            >
                 <Image
                     className="w-12 rounded border"
                     alt="flag"
