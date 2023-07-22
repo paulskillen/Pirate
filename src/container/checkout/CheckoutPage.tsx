@@ -16,7 +16,7 @@ import { BundleItem } from "../bundle/BundleByCountryPage";
 import PageHeader from "../shared/header/PageHeader";
 import SelectPaymentButton, {
     IPayPalOrderResponse,
-} from "../shared/payment/SelectPaymentButton";
+} from "../shared/input/SelectPaymentButton";
 import CheckoutSuccessModal from "./CheckoutSuccessModal";
 
 export interface ICheckoutPageProps {

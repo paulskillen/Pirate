@@ -1,8 +1,8 @@
 import { Button } from "d-react-components";
 import React, { useState, useEffect } from "react";
-import Select, { SelectProps } from "./Select";
+import Select, { IInputSelectProps } from "./Select";
 
-export interface SelectConfirmationProps extends SelectProps {
+export interface SelectConfirmationProps extends IInputSelectProps {
     footerClassName?: string;
     confirmText?: string;
     cancelText?: string;

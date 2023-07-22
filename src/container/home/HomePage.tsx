@@ -9,6 +9,7 @@ import { isEmpty, map } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import BlockCountryByRegion from "../shared/block/BlockCountryByRegion";
+import SelectCountry from "../shared/input/SelectCountry";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -36,22 +37,11 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                 }}
             >
                 <div className="flex-center-y py-4">
-                    {/* <Image
-                        alt="logo"
-                        src="/images/logo/logo.png"
-                        // layout="fill"
-                        style={{ objectFit: "cover" }}
-                        width={50}
-                        height={50}
-                    /> */}
                     <div className="text-gold  h4  font-semibold ml-3">
                         {Messages.selectDestination}
                     </div>
                 </div>
                 <div className="flex-center-y w-">
-                    {/* <div className="text-xl text-gold font-semibold w-100 text-end mb-2">
-                        {Messages.selectDestination}
-                    </div> */}
                     <Button
                         iconName="search"
                         className="rounded px-0 home-page__button-search ml-3"
@@ -64,33 +54,38 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         );
     };
 
-    const renderBlocks = () => {
-        if (isEmpty(countryByRegion)) {
-            return null;
-        }
+    const renderNewHeader = () => {
+        return <SelectCountry />;
+    };
+
+    const renderGrids = () => {
         return (
-            <div>
-                {map(REGIONS, (item, key) => {
-                    const { id, label } = item || {};
-                    const isDisplay = HOME_PAGE_DISPLAY_REGIONS.includes(
-                        id as any
-                    );
-                    if (!isDisplay) {
-                        return null;
-                    }
-                    return <BlockCountryByRegion region={id} />;
-                })}
+            <div className="h-screen grid grid-flow-col gap-x-4 gap-y-1 bg-slate-500">
+                {/* {renderBlocks()} */}
+                <div className="bg-red-400 col-span-2 grid grid-flow-row gap-y-3 gap-x-3">
+                    <div className="bg-yellow-400 col-span-4">
+                        Grid Item Inside
+                    </div>
+                    <div className="bg-yellow-400 col-span-2">
+                        Grid Item Inside
+                    </div>
+                    <div className="bg-yellow-400 col-span-2">
+                        Grid Item Inside
+                    </div>
+                </div>
+                <div className="bg-red-400 col-span-3">Grid Item</div>
+                <div className="bg-red-400 col-span-4">Grid Item</div>
             </div>
         );
     };
 
     return (
         <MainStyled className="home-page__container container bg-transparent z-10 relative text-white px-3 ">
-            {renderHeader()}
-            <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                {/* {renderBlocks()} */}
+            {renderNewHeader()}
+            {/* <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
                 <div className="h-52" />
-            </div>
+            </div> */}
+            {/* {renderGrids()} */}
         </MainStyled>
     );
 };

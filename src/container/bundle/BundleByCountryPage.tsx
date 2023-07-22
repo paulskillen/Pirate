@@ -1,34 +1,28 @@
-import { find, isEmpty, join, map } from "lodash";
+import {
+    COLOR_GOLD
+} from "@/common/constant/app-style";
+import Path from "@/common/constant/path";
+import { AppStateContext } from "@/common/context/app/app-context";
+import { IBundle } from "@/common/interface/bundle";
+import { ProviderName } from "@/common/interface/provider";
+import { convertBase64ToImgSource } from "@/common/utils/image";
+import Icon from "@/components/icon/Icon";
+import Image from "@/components/image/Image";
+import Modal, { IModalProps } from "@/components/modal/Modal";
+import Messages from "@/languages/Messages";
+import styled from "@emotion/styled";
 import ClassNames from "classnames";
+import { Button, Checkbox } from "d-react-components";
+import { find, isEmpty, join, map } from "lodash";
+import { useRouter } from "next/router";
 import React, {
     Fragment,
     useContext,
-    useEffect,
     useMemo,
-    useState,
+    useState
 } from "react";
-import { IBundle } from "@/common/interface/bundle";
-import { Button, Checkbox, Icon as DIcon } from "d-react-components";
-import ProviderNameItem from "../provider/shared/ProviderNameItem";
-import Messages from "@/languages/Messages";
-import { AppStateContext } from "@/common/context/app/app-context";
-import Image from "@/components/image/Image";
-import { convertBase64ToImgSource } from "@/common/utils/image";
-import { useRouter } from "next/router";
-import { ProviderName } from "@/common/interface/provider";
-import PriceTag from "../shared/items/PriceTag";
-import Path from "@/common/constant/path";
 import PageHeader from "../shared/header/PageHeader";
-import Icon from "@/components/icon/Icon";
-import styled from "@emotion/styled";
-import BundleApi from "@/apis/bundle/BundleApi";
-import {
-    COLOR_DARKEN,
-    COLOR_GOLD,
-    COLOR_PRIMARY,
-    COLOR_PRIMARY_DARK,
-} from "@/common/constant/app-style";
-import Modal, { IModalProps } from "@/components/modal/Modal";
+import PriceTag from "../shared/items/PriceTag";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;

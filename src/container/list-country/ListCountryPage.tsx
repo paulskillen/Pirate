@@ -159,11 +159,11 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
 
 export default ListCountryPage;
 
-const CountryItem = ({ country }: { country: ICountry }) => {
+export const CountryItem = ({ country }: { country: ICountry }) => {
     const { name, flag, iso } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.iso ?? "")} id={iso}>
-            <div className="flex flex-row items-center text-gray-300 mt-4 pb-3">
+            <div className="flex flex-row items-center text-gray-300 mt-3 pb-3">
                 <Image
                     className="w-12 rounded border"
                     alt="flag"

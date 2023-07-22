@@ -94,6 +94,7 @@ const translations = {
         "The eSim Qr Code was sent to the @email. Please check your email and follow the instruction to install your eSim",
     emailFormDescription:
         "Please input your email and hit send, we will send you the eSim Qr Code and the instruction to install the eSim",
+    seeAllCountries: "See all countries",
 };
 
 export default translations;

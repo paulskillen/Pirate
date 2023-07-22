@@ -3419,10 +3419,10 @@ csstype@^3.0.2, csstype@^3.0.6:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
-d-react-components@^0.3.72:
-  version "0.3.72"
-  resolved "https://registry.yarnpkg.com/d-react-components/-/d-react-components-0.3.72.tgz#00acfb5107bc9c12c868503a76fad91655fadef8"
-  integrity sha512-eU8NroBXEyXJc8pyMvYqIJDPBMQJKDKLKmjH1tdXU4+RgJi9fBqxJtKq75zaEaH+b9liZHIyvfSbTpLioa9J+g==
+d-react-components@^0.3.75:
+  version "0.3.75"
+  resolved "https://registry.yarnpkg.com/d-react-components/-/d-react-components-0.3.75.tgz#4f2bd812a9818988f146e511186ff16fab051cd8"
+  integrity sha512-S0rwMuCU7Mp8pvwVzMU+tQqpqnplJcop8fPQkKMLBbl19W3vpD/v9RuvWof7aaCQW0LaW2CvChqRHAg/eQsmWA==
   dependencies:
     antd "^4.23.1"
     bootstrap "4.5.3"

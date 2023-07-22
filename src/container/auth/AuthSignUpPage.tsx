@@ -3,7 +3,6 @@ import { signOut, useSession } from "next-auth/react";
 import * as Yup from "yup";
 import { CUSTOMER_TITLES } from "@/common/constant/customer";
 import Path from "@/common/constant/path";
-import Select from "@/components/select/Select";
 import Messages from "@/languages/Messages";
 import { useAuthRegister } from "@/store/auth/authHook";
 import { Button, InputText, Notifications, Progress } from "d-react-components";
@@ -12,6 +11,7 @@ import { pick } from "lodash";
 import { useRouter } from "next/router";
 import React from "react";
 import Icon from "@/components/icon/Icon";
+import Select from "@/components/select/Select";
 
 export interface IAuthSignUpPageProps {
     [key: string]: any;

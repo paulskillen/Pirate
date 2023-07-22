@@ -81,8 +81,9 @@
 // -- colors
 // ----------------------------------------
 
-    $primary-color:                  #152637                  !default;
-    $secondary-color:                #DE0D0C                  !default;
+    $primary-color:                  rgba(192,157,94,1)       !default;
+    $primary-light-color:            rgb(245, 206, 133)       !default;
+    $secondary-color:                #28425F                  !default;
     $gold-color:                rgba(192,157,94,1)            !default;
 
     
@@ -140,8 +141,8 @@
     $text-label-color:              rgba(0, 0, 0, 0.9)       !default;
 
     //border color
-    $border-color:                  #ECECEC                    !default;
-    $border-focus-color:            #041b47                    !default;
+    $border-color:                  $primary-color                    !default;
+    $border-focus-color:            $primary-light-color                    !default;
     //line-color
     $line-color:                    rgba(216, 216, 216, 1)                     !default;
 
@@ -521,11 +522,11 @@
     // ----------------------------------------
 
         //color
-        $input-bg-color:           #EBF1FC                                  !default;
+        $input-bg-color:           rgb(38, 38, 38)                          !default;
         $input-color-placeholder:   $placeholder-color                        !default;
         $input-color-disabled:      $text-disabled-color                      !default;
         $input-bg-color-disabled:   $bg-muted-color                           !default;
-        $input-color-content:       $text-color                               !default;
+        $input-color-content:       rgba(216, 216, 216, 1)                  !default;
         $input-color-label:         $text-label-color                         !default;
         $input-color-error:         $error-color                              !default;
 

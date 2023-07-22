@@ -4,7 +4,7 @@ import AppLink from "@/components/link/AppLink";
 import PageHeader from "@/container/shared/header/PageHeader";
 import Messages from "@/languages/Messages";
 import { useAuthAccessToken } from "@/store/auth/authHook";
-import { Button, InputText, Progress, StringUtils } from "d-react-components";
+import { Button, Progress, StringUtils } from "d-react-components";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -12,6 +12,7 @@ import AuthSignInSocial from "./AuthSignInSocial";
 import AuthApi from "@/apis/auth/AuthApi";
 import { useDispatch } from "react-redux";
 import { signInAction } from "@/store/auth/authActions";
+import InputText from "@/components/input/InputText";
 
 export interface IAuthSignInViewProps {
     [key: string]: any;
