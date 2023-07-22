@@ -1,4 +1,3 @@
-import { COLOR_PRIMARY } from "@/common/constant/app-style";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";

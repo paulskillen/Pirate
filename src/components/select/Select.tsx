@@ -1,100 +1,77 @@
-import { Select as SelectAnt } from "antd";
-import classNames from "classnames";
-import React, { useMemo, useState } from "react";
-import Icon from "../icon/Icon";
-import { isEmpty } from "lodash";
-import { ViewTextError } from "d-react-components";
+import {
+    COLOR_DARKEN,
+    COLOR_GOLD,
+    COLOR_INPUT_CONTENT,
+} from "@/common/constant/app-style";
+import styled from "@emotion/styled";
+import ClassNames from "classnames";
+import { SelectProps, Select as DSelect } from "d-react-components";
+import React from "react";
 
-const { Option } = SelectAnt;
-export interface SelectProps {
-    onChange?: (props: any) => void;
-    dataSource?: any[];
-    getLabel?: (item: any) => any;
-    getKey?: (item: any) => any;
-    getValue?: (item: any) => any;
-    defaultValue?: string[];
-    placeholder?: string;
-    name?: string;
-    mode?: "multiple" | "tags" | undefined;
-    allowClear?: boolean;
-    className?: string;
-    containerClassName?: string;
-    value?: string[] | any;
-    error?: any;
-    disabled?: boolean;
-    [key: string]: any;
+export interface IInputSelectProps extends SelectProps {
+    renderFooterDropdown?: () => React.ReactElement;
 }
 
-function Select(props: SelectProps) {
-    const {
-        onChange,
-        dataSource = [],
-        getLabel = (item: { label: string }) => item.label,
-        getKey = (item: { id: string }) => item.id,
-        defaultValue = [],
-        placeholder = "Please select",
-        mode,
-        allowClear = true,
-        className = "",
-        containerClassName = "",
-        value = [],
-        error,
-        getValue = (item: any) => item?.id ?? null,
-        disabled = false,
-    } = props;
-    const [onFocus, setOnFocus] = useState(false);
-    const children = useMemo(
-        () =>
-            dataSource.map((dataItem) => {
-                const label = getLabel(dataItem);
-                const key = getKey(dataItem);
-                return (
-                    <Option key={key} value={getValue(dataItem)}>
-                        {label}
-                    </Option>
-                );
-            }),
-        [dataSource]
-    );
-    const selectContainerClass = classNames(
+const Select: React.FC<IInputSelectProps> = ({
+    variant,
+    className,
+    hidden,
+    renderFooterDropdown,
+    ...props
+}) => {
+    const container = ClassNames(
         "d-select__container",
-        { "custom-select__container-focus": onFocus },
-        { "custom-select__container-disable": disabled },
-        containerClassName
+        `d-select__container-${variant}`,
+        className
     );
-    const selectClass = classNames("custom-select__select", `${className}`);
+
+    const renderDropdown = (menu: React.ReactElement) => {
+        return (
+            <DropdownStyled>
+                {menu}
+                {renderFooterDropdown && renderFooterDropdown()}
+            </DropdownStyled>
+        );
+    };
+
     return (
-        <>
-            <div className={selectContainerClass}>
-                <label
-                    className="text-white mb-1"
-                    data-layout={!isEmpty(value) ? "visible" : "hidden"}
-                >
-                    {placeholder}
-                </label>
-                <SelectAnt
-                    {...props}
-                    value={value}
-                    mode={mode}
-                    allowClear={allowClear}
-                    placeholder={placeholder}
-                    defaultValue={defaultValue}
-                    onChange={onChange}
-                    className={selectClass}
-                    suffixIcon={null}
-                    onFocus={() => setOnFocus(true)}
-                    onBlur={() => setOnFocus(false)}
-                >
-                    {children}
-                </SelectAnt>
-                <Icon
-                    icon="unfold_more"
-                    className="custom-select__arrow-icon"
-                />
-            </div>
-            {error && <ViewTextError error={error} />}
-        </>
+        <DSelect
+            {...props}
+            dropdownRender={renderDropdown}
+            wrapperElement={
+                <SelectStyled className={container} hidden={hidden} />
+            }
+        />
     );
-}
+};
 
 export default Select;
+
+const SelectStyled = styled.div`
+    .select-country {
+        .ant-select-arrow {
+            margin-top: -10px !important;
+        }
+        .ant-select-selection-search-input {
+            color: ${COLOR_GOLD} !important;
+        }
+        input::placeholder {
+            color: ${COLOR_GOLD} !important;
+        }
+    }
+`;
+const DropdownStyled = styled.div`
+    background-color: ${COLOR_DARKEN};
+    border-top: 1px solid ${COLOR_GOLD};
+    border-bottom: 1px solid ${COLOR_GOLD};
+    border-left: 1px solid ${COLOR_GOLD};
+    border-right: 1px solid ${COLOR_GOLD};
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    .ant-select-item-option {
+        color: ${COLOR_INPUT_CONTENT};
+    }
+    .ant-select-item-option-active {
+        background-color: ${COLOR_GOLD};
+    }
+`;

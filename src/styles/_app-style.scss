@@ -38,8 +38,22 @@
 
 .d-input-text__input-container {
     @media (max-width: 576px) {
-        min-height: 42px !important;
+        min-height: 50px !important;
     }
+}
+
+.d-select__select .ant-select-selector {
+    min-height: 50px !important;
+}
+
+.d-select__container
+    .ant-select-single:not(.ant-select-customize-input)
+    .ant-select-selector
+    .ant-select-selection-search-input {
+    height: 50px !important;
+}
+.ant-select-selection-search-input {
+    color: $input-color-content !important;
 }
 
 .d-button {
@@ -50,4 +64,20 @@
         background-color: transparent !important;
         opacity: 50%;
     }
+}
+
+// change auto complete input background color
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px $input-bg-color inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: $input-color-content !important;
+}
+
+.ant-select-dropdown {
+    background-color: transparent !important;
 }
