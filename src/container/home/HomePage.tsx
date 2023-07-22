@@ -8,7 +8,6 @@ import { Button } from "d-react-components";
 import { isEmpty, map } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
-import BlockCountryByRegion from "../shared/block/BlockCountryByRegion";
 import SelectCountry from "../shared/input/SelectCountry";
 
 export interface IHomePageProps {

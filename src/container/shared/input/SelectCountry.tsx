@@ -17,7 +17,7 @@ const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
     const { countryList = [] } = metaData || {};
 
     const renderCountryItem = (country: any) => {
-        return <CountryItem country={country} />;
+        return <CountryItem country={country} hoverColor={false} />;
     };
 
     return (
