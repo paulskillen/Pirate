@@ -1,10 +1,10 @@
 import { LayoutClean, LayoutAuth } from "@/container/shared/layout/Layout";
-import PromosPage from "@/container/static/about-us/AboutUsPage";
+import AboutUsPage from "@/container/static/about-us/AboutUsPage";
 import type { NextPage } from "next";
 import React from "react";
 
 const AboutUs: NextPage = () => {
-    return <PromosPage />;
+    return <AboutUsPage />;
 };
 
 export default AboutUs;
