@@ -28,7 +28,10 @@ const Select: React.FC<IInputSelectProps> = ({
 
     const renderDropdown = (menu: React.ReactElement) => {
         return (
-            <DropdownStyled id="select__dropdown-pirate-mobile">
+            <DropdownStyled
+                id="select__dropdown-pirate-mobile"
+                onTouchStart={(e) => e?.preventDefault?.()}
+            >
                 {menu}
                 {renderFooterDropdown && renderFooterDropdown()}
             </DropdownStyled>
