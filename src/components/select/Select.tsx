@@ -84,7 +84,7 @@ const DropdownStyled = styled.div`
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     overflow: auto;
-    overscroll-behavior: none; /*   <--- the trick    */
+    overscroll-behavior: none !important; /*   <--- the trick    */
     .ant-select-item-option {
         color: ${COLOR_INPUT_CONTENT};
     }
