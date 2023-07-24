@@ -92,7 +92,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 export default HomePage;
 
 const MainStyled = styled.main`
-    overflow: auto;
+    overflow: hidden !important;
     .home-page__button-search {
         margin-bottom: 5px;
         i {
