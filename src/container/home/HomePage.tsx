@@ -28,27 +28,27 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const { metaData } = useContext(AppStateContext);
     const { countryByRegion } = metaData || {};
 
-    useEffect(() => {
-        document &&
-            document?.getElementById &&
-            document
-                .getElementById("select__dropdown-pirate-mobile")
-                ?.addEventListener?.(
-                    "touchstart",
-                    function (ev: any) {
-                        //@ts-ignore
-                        const e = document.getElementById?.(
-                            "select__dropdown-pirate-mobile"
-                        );
-                        if (e) {
-                            Object.assign(e, { innerHTML: ev?.target?.id });
-                            ev?.preventDefault?.();
-                            Object.assign(ev, { bubbles: false });
-                        }
-                    },
-                    { passive: true }
-                );
-    }, []);
+    // useEffect(() => {
+    //     document &&
+    //         document?.getElementById &&
+    //         document
+    //             .getElementById("select__dropdown-pirate-mobile")
+    //             ?.addEventListener?.(
+    //                 "touchstart",
+    //                 function (ev: any) {
+    //                     //@ts-ignore
+    //                     const e = document.getElementById?.(
+    //                         "select__dropdown-pirate-mobile"
+    //                     )?.innerHTML;
+    //                     if (e) {
+    //                         Object.assign(e, { innerHTML: ev?.target?.id });
+    //                         ev?.preventDefault?.();
+    //                         Object.assign(ev, { bubbles: false });
+    //                     }
+    //                 },
+    //                 { passive: true }
+    //             );
+    // }, []);
 
     const renderHeader = () => {
         return (
