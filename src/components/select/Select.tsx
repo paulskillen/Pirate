@@ -28,7 +28,7 @@ const Select: React.FC<IInputSelectProps> = ({
 
     const renderDropdown = (menu: React.ReactElement) => {
         return (
-            <DropdownStyled>
+            <DropdownStyled id="select__dropdown-pirate-mobile">
                 {menu}
                 {renderFooterDropdown && renderFooterDropdown()}
             </DropdownStyled>
@@ -83,7 +83,6 @@ const DropdownStyled = styled.div`
     border-right: 1px solid ${COLOR_GOLD};
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    overflow: auto;
     overscroll-behavior: contain !important; /*   <--- the trick    */
     .ant-select-item-option {
         color: ${COLOR_INPUT_CONTENT};
