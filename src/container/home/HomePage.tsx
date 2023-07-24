@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+// @ts-ignore
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { CountryRegion, REGIONS } from "@/common/interface/location";
@@ -7,7 +8,7 @@ import styled from "@emotion/styled";
 import { Button } from "d-react-components";
 import { isEmpty, map } from "lodash";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import SelectCountry from "../shared/input/SelectCountry";
 
 export interface IHomePageProps {
@@ -26,6 +27,28 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
     const { metaData } = useContext(AppStateContext);
     const { countryByRegion } = metaData || {};
+
+    // useEffect(() => {
+    //     document &&
+    //         document?.getElementById &&
+    //         document
+    //             .getElementById("select__dropdown-pirate-mobile")
+    //             ?.addEventListener?.(
+    //                 "touchstart",
+    //                 function (ev: any) {
+    //                     //@ts-ignore
+    //                     const e = document.getElementById?.(
+    //                         "select__dropdown-pirate-mobile"
+    //                     )?.innerHTML;
+    //                     if (e) {
+    //                         Object.assign(e, { innerHTML: ev?.target?.id });
+    //                         ev?.preventDefault?.();
+    //                         Object.assign(ev, { bubbles: false });
+    //                     }
+    //                 },
+    //                 { passive: true }
+    //             );
+    // }, []);
 
     const renderHeader = () => {
         return (

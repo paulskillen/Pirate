@@ -1,14 +1,13 @@
+import Square from "@/common/assets/svg/square.svg";
 import { TAB_BOTTOM_HEIGHT } from "@/common/constant/app";
-import ClassNames from "classnames";
+import { COLOR_GOLD, COLOR_GOLD_LIGHT } from "@/common/constant/app-style";
 import Icon from "@/components/icon/Icon";
 import AppLink from "@/components/link/AppLink";
+import styled from "@emotion/styled";
+import ClassNames from "classnames";
 import { useRouter } from "next/router";
 import React from "react";
 import Path from "../../../common/constant/path";
-import styled from "@emotion/styled";
-import Image from "next/image";
-import Square from "@/common/assets/svg/square.svg";
-import { COLOR_GOLD, COLOR_GOLD_LIGHT } from "@/common/constant/app-style";
 
 export interface ITabBottomProps {
     [key: string]: any;
