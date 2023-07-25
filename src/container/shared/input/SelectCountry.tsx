@@ -13,7 +13,7 @@ export interface ISelectCountryProps {
 }
 
 const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
-    const { metaData } = useContext(AppStateContext);
+    const { metaData, openSelectCountry } = useContext(AppStateContext);
     const { countryList = [] } = metaData || {};
 
     const renderCountryItem = (country: any) => {
@@ -22,6 +22,7 @@ const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
 
     return (
         <Select
+            open={openSelectCountry}
             filterOption={(input: any, option: any) => {
                 const { children, value } = option.props;
                 const country = children?.props?.country ?? {};

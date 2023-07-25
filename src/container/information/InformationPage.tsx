@@ -127,7 +127,7 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
     };
 
     return (
-        <MainStyled className="home-page__container bg-transparent z-10 relative text-white ">
+        <MainStyled className="home-page__container container px-0 bg-transparent z-10 relative text-white ">
             {renderHeader()}
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
                 <BlockSwiperSlide />
