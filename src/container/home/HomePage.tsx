@@ -2,11 +2,10 @@
 // @ts-ignore
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
-import { CountryRegion, REGIONS } from "@/common/interface/location";
+import { CountryRegion } from "@/common/interface/location";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { Button } from "d-react-components";
-import { isEmpty, map } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import SelectCountry from "../shared/input/SelectCountry";
@@ -28,27 +27,19 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const { metaData } = useContext(AppStateContext);
     const { countryByRegion } = metaData || {};
 
-    // useEffect(() => {
-    //     document &&
-    //         document?.getElementById &&
-    //         document
-    //             .getElementById("select__dropdown-pirate-mobile")
-    //             ?.addEventListener?.(
-    //                 "touchstart",
-    //                 function (ev: any) {
-    //                     //@ts-ignore
-    //                     const e = document.getElementById?.(
-    //                         "select__dropdown-pirate-mobile"
-    //                     )?.innerHTML;
-    //                     if (e) {
-    //                         Object.assign(e, { innerHTML: ev?.target?.id });
-    //                         ev?.preventDefault?.();
-    //                         Object.assign(ev, { bubbles: false });
-    //                     }
-    //                 },
-    //                 { passive: true }
-    //             );
-    // }, []);
+    useEffect(() => {
+        function handleOnClick(e: PointerEvent) {
+            const eventTarget = e?.target;
+            const eventDetail = e?.detail;
+            console.log(
+                "🚀 >>>>>> file: HomePage.tsx:35 >>>>>> handleOnClick >>>>>> eventTarget:",
+                (eventTarget as any)?.className
+            );
+        }
+        document.addEventListener("click", handleOnClick as any);
+        return () =>
+            document.removeEventListener("click", handleOnClick as any);
+    });
 
     const renderHeader = () => {
         return (
@@ -102,12 +93,16 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     };
 
     return (
-        <MainStyled className="home-page__container container bg-transparent z-10 relative text-white px-3 ">
+        <MainStyled className="home-page__container container bg-transparent h-screen z-10 relative text-white px-3 bg-red-400 ">
             {renderNewHeader()}
             {/* <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
                 <div className="h-52" />
             </div> */}
             {/* {renderGrids()} */}
+            <div
+                className="logo-click-mask bg-transparent"
+                id="logo-click-mask"
+            />
         </MainStyled>
     );
 };
@@ -115,6 +110,8 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 export default HomePage;
 
 const MainStyled = styled.main`
+    position: relative;
+    overflow: hidden;
     .home-page__button-search {
         margin-bottom: 5px;
         i {
@@ -137,5 +134,14 @@ const MainStyled = styled.main`
             bottom: 0;
             right: 0;
         }
+    }
+    .logo-click-mask {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
     }
 `;
