@@ -20,6 +20,7 @@ export interface IMetaData {
 
 export interface IAppState {
     me: any;
+    openSelectCountry?: boolean;
     metaData?: IMetaData;
     siteConfig: ISiteConfig;
     userCart: IBundle[];
@@ -28,6 +29,7 @@ export interface IAppState {
     setMetaData: Dispatch<IMetaData>;
     setUserCart: Dispatch<IBundle[]>;
     setActiveOrder: Dispatch<IOrder>;
+    setOpenSelectCountry: Dispatch<boolean | undefined>;
 }
 
 export const appStateDefault: IAppState = {
@@ -40,6 +42,7 @@ export const appStateDefault: IAppState = {
     setMetaData: () => {},
     setUserCart: () => {},
     setActiveOrder: () => {},
+    setOpenSelectCountry: () => {},
 };
 
 export const AppStateContext = React.createContext(appStateDefault);

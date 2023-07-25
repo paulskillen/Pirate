@@ -9,6 +9,7 @@ import { Button } from "d-react-components";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import SelectCountry from "../shared/input/SelectCountry";
+import { IDS_OPEN_SELECT_COUNTRY } from "@/common/constant/app";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -24,22 +25,32 @@ const HOME_PAGE_DISPLAY_REGIONS = [
 
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
-    const { metaData } = useContext(AppStateContext);
+    const { metaData, setOpenSelectCountry } = useContext(AppStateContext);
     const { countryByRegion } = metaData || {};
 
     useEffect(() => {
-        function handleOnClick(e: PointerEvent) {
-            const eventTarget = e?.target;
-            const eventDetail = e?.detail;
-            console.log(
-                "🚀 >>>>>> file: HomePage.tsx:35 >>>>>> handleOnClick >>>>>> eventTarget:",
-                (eventTarget as any)?.className
-            );
+        function handleOnClick(e: any) {
+            const eventTargetId: any = e?.target?.id;
+            if (!IDS_OPEN_SELECT_COUNTRY.includes(eventTargetId)) {
+                setOpenSelectCountry(undefined);
+            }
         }
         document.addEventListener("click", handleOnClick as any);
         return () =>
             document.removeEventListener("click", handleOnClick as any);
-    });
+    }, []);
+
+    useEffect(() => {
+        function handleOnTouchMove(e: any) {
+            const eventTargetId: any = e?.target?.id;
+            if (eventTargetId == "home-page__container") {
+                e?.preventDefault?.();
+            }
+        }
+        document.addEventListener("touchmove", handleOnTouchMove as any);
+        return () =>
+            document.removeEventListener("touchmove", handleOnTouchMove as any);
+    }, []);
 
     const renderHeader = () => {
         return (
@@ -93,14 +104,20 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     };
 
     return (
-        <MainStyled className="home-page__container container bg-transparent h-screen z-10 relative text-white px-3 bg-red-400 ">
+        <MainStyled
+            id="home-page__container"
+            className="home-page__container container bg-transparent h-screen z-10 relative text-white px-3 bg-red-400 "
+        >
             {renderNewHeader()}
             {/* <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
                 <div className="h-52" />
             </div> */}
             {/* {renderGrids()} */}
             <div
-                className="logo-click-mask bg-transparent"
+                onClick={() =>
+                    setOpenSelectCountry && setOpenSelectCountry(true)
+                }
+                className="logo-click-mask"
                 id="logo-click-mask"
             />
         </MainStyled>
@@ -111,7 +128,6 @@ export default HomePage;
 
 const MainStyled = styled.main`
     position: relative;
-    overflow: hidden;
     .home-page__button-search {
         margin-bottom: 5px;
         i {

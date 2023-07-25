@@ -43,6 +43,9 @@ function App({ Component, pageProps }: MattressAppProps) {
     const [metaData, setMetaData] = useState([]);
     const [userCart, setUserCart] = useState({});
     const [activeOrder, setActiveOrder] = useState({});
+    const [openSelectCountry, setOpenSelectCountry] = useState<
+        boolean | undefined
+    >(undefined);
 
     useEffect(() => {
         const preloader = document.querySelector(".site-preloader");
@@ -131,6 +134,8 @@ function App({ Component, pageProps }: MattressAppProps) {
                                 setUserCart,
                                 activeOrder,
                                 setActiveOrder,
+                                openSelectCountry,
+                                setOpenSelectCountry,
                             } as any
                         }
                     >

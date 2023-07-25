@@ -72,6 +72,8 @@ const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({ id }) => {
 export default BlockSwiperSlide;
 
 const BlockSwiperSlideStyled = styled.div`
+    display: flex;
+    justify-content: center;
     .home-page__slider-image-wrapper {
         position: relative;
         padding-bottom: 100%;
@@ -83,6 +85,13 @@ const BlockSwiperSlideStyled = styled.div`
             left: 0;
             bottom: 0;
             right: 0;
+        }
+        @media (min-width: 576px) {
+            width: 100%;
+            padding-bottom: 60%;
+            .home-page__slider-image {
+                object-fit: fill !important;
+            }
         }
     }
 `;
