@@ -36,7 +36,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
 
     return (
         <div
-            className="tab-bottom bg-black  z-20 fixed flex items-center justify-between gap-8 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-1 border-t border-t-gold"
+            className="tab-bottom bg-black  z-20 fixed flex items-center justify-between md:justify-center md:gap-32 gap-8 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-1 border-t border-t-gold"
             style={{ height: `${TAB_BOTTOM_HEIGHT}px` }}
         >
             <AppLink href={Path.home()}>
