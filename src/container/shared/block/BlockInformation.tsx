@@ -3,6 +3,8 @@ import ClassNames from "classnames";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import React from "react";
+import AppLink from "@/components/link/AppLink";
+import Messages from "@/languages/Messages";
 
 export interface IBlockInformationProps {
     item?: any;
@@ -13,7 +15,7 @@ const BlockInformation: React.FC<IBlockInformationProps> = ({
     item,
     position = "left",
 }) => {
-    const { title, subTitle, description, image } = item || {};
+    const { title, subTitle, description, image, link } = item || {};
     const renderImage = () => {
         return (
             <div className="col-span-3 position-relative block-information__image-wrapper px-0">
@@ -27,17 +29,39 @@ const BlockInformation: React.FC<IBlockInformationProps> = ({
             </div>
         );
     };
+
+    const renderSubContent = () => {
+        if (link) {
+            return (
+                <div className="w-100">
+                    <ViewShowMore className="text-gold" limitLength={100}>
+                        {description}
+                    </ViewShowMore>
+                    <div className="w-100 flex justify-center opacity-60 ">
+                        <AppLink
+                            className="text-center"
+                            href={link}
+                        >{`>> ${Messages.showMore}`}</AppLink>
+                    </div>
+                </div>
+            );
+        }
+        if (description) {
+            return (
+                <ViewShowMore className="text-gold" limitLength={100}>
+                    {description}
+                </ViewShowMore>
+            );
+        }
+        return null;
+    };
+
     return (
-        <BlockInformationStyled className="grid grid-cols-12 mt-4 border p-3 rounded-2xl bg-black">
+        <BlockInformationStyled className="md:col-span-6 border p-3 rounded-2xl bg-black">
             {/* {position === "left" && renderImage()} */}
-            <div className="col-span-12">
+            <div className="">
                 <div
-                    className={`d-flex flex-column justify-content-center align-items-center  py-2 ${ClassNames(
-                        {
-                            "pl-3": position === "left",
-                            "pr-3": position === "right",
-                        }
-                    )}`}
+                    className={`d-flex flex-column justify-content-center align-items-center  py-2`}
                 >
                     <h5 className="title font-weight-bold text-white">
                         {title}
@@ -47,11 +71,7 @@ const BlockInformation: React.FC<IBlockInformationProps> = ({
                             {subTitle}
                         </div>
                     )}
-                    {description && (
-                        <ViewShowMore className="text-gold" limitLength={100}>
-                            {description}
-                        </ViewShowMore>
-                    )}
+                    {renderSubContent()}
                 </div>
             </div>
             {/* {position === "right" && renderImage()} */}

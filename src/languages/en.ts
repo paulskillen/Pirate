@@ -85,6 +85,7 @@ const translations = {
     speed: "Speed",
     seeMoreDetail: "More detail",
     seeDetail: "See detail",
+    showMore: "Show more",
     description: "Description",
     startFindingYourDestination: "Find your next destination",
     switchToOtherAccount: "Switch To Other Account",

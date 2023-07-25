@@ -63,6 +63,14 @@ const BLOCK_INFORMATION = [
             "Get started with Pirate Mobile digital SIM card today and experience the freedom of seamless global connectivity. Activate your digital SIM card now and unlock a world of possibilities.",
         image: "/images/logo/logo.png",
     },
+    {
+        id: "7",
+        title: Messages.compatibleDevices,
+        link: Path.compatibleDevice().href,
+        description:
+            "See all the list of compatible device that support digital SIM card",
+        image: "/images/logo/logo.png",
+    },
 ];
 
 const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
@@ -84,16 +92,6 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
                         Pirate <span className="text-gold">Mobile</span>
                     </div>
                 </div>
-                {/* <div className="flex-center-y ">
-                    <div className="mr-3 hover:cursor-pointer p-0 m-0">
-                        <Icon
-                            id="installApp"
-                            name="cloud_download"
-                            className="text-gold "
-                            size="x-large"
-                        />
-                    </div>
-                </div> */}
                 <div className="flex-center-y w-">
                     <Button
                         iconName="search"
@@ -112,7 +110,7 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
 
     const renderInformationBlocks = () => {
         return (
-            <Fragment>
+            <div className="grid grid-flow-row md:grid-flow-row md:grid-cols-12 gap-4 mt-4">
                 {BLOCK_INFORMATION.map((block, index) => {
                     return (
                         <BlockInformation
@@ -122,7 +120,7 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
                         />
                     );
                 })}
-            </Fragment>
+            </div>
         );
     };
 
