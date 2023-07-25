@@ -57,8 +57,7 @@ const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({ id }) => {
                                     alt="slider-homepage"
                                     src={item?.src}
                                     className="home-page__slider-image rounded-2xl"
-                                    layout="fill"
-                                    style={{ objectFit: "cover" }}
+                                    fill
                                 />
                             </div>
                         </SwiperSlide>
@@ -74,7 +73,7 @@ export default BlockSwiperSlide;
 const BlockSwiperSlideStyled = styled.div`
     .home-page__slider-image-wrapper {
         position: relative;
-        padding-bottom: 100%;
+        padding-bottom: 80%;
         .home-page__slider-image {
             position: absolute;
             width: 100%;
@@ -83,6 +82,7 @@ const BlockSwiperSlideStyled = styled.div`
             left: 0;
             bottom: 0;
             right: 0;
+            object-fit: cover !important;
         }
         @media (min-width: 576px) {
             width: 100%;
