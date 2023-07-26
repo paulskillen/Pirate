@@ -4,6 +4,7 @@ import { IOrder } from "@/common/interface/order";
 import Icon from "@/components/icon/Icon";
 import AppLink from "@/components/link/AppLink";
 import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
+import MobileHeader from "@/container/shared/header/MobileHeader";
 import PageHeader from "@/container/shared/header/PageHeader";
 import PriceTag from "@/container/shared/items/PriceTag";
 import Messages from "@/languages/Messages";
@@ -57,9 +58,7 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
         if (!(orderList?.length > 0)) {
             return (
                 <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-gold">
-                    <div className="text-gold">
-                        {Messages.listOrderEmpty}
-                    </div>
+                    <div className="text-gold">{Messages.listOrderEmpty}</div>
                     {/* <AppLink className="text-gold">
                         <div className="text-gold">{Messages.startFindingYourDestination}</div>
                     </AppLink> */}
@@ -76,8 +75,8 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white ">
-            <PageHeader title={Messages.orderHistory} />
+        <div className="container px-0 flex flex-col items-center justify-start w-screen h-screen relative text-white ">
+            <MobileHeader />
             {renderContent()}
         </div>
     );

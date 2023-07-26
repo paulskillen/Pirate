@@ -92,6 +92,6 @@ const DropdownStyled = styled.div`
     }
 
     .ant-select-item-option-active {
-        background-color: ${COLOR_GOLD_TRANS};
+        background-color: ${COLOR_GOLD_TRANS} !important;
     }
 `;

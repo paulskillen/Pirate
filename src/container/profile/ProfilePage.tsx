@@ -73,7 +73,7 @@ const ProfilePage: React.FC<IProfilePageProps> = ({ id }) => {
                     size="large"
                 />
             </div>
-            <div className="w-full overflow-y-scroll flex flex-col items-center pb-5">
+            <div className="w-full container px-0 overflow-y-scroll flex flex-col items-center pb-5">
                 <div className="mt-3 text-gold font-semibold">{email}</div>
                 <div className="mt-2 text-gold font-semibold">{`${firstName} ${lastName}`}</div>
                 <div className="px-4 w-full z-20">
