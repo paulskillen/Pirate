@@ -101,22 +101,30 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                 </AppLink>
             </div>
         );
-    }, [isHome]);
+    }, [pathname, isHome]);
+
+    const renderLogo = useMemo(() => {
+        return (
+            <AppLink href={Path.home()}>
+                <div className="flex-center-y">
+                    <Image
+                        alt="logo"
+                        src="/images/logo/logo.png"
+                        style={{ objectFit: "cover" }}
+                        width={50}
+                        height={50}
+                    />
+                    <div className="text-white  font-semibold ml-3">
+                        Pirate <span className="text-gold">Mobile</span>
+                    </div>
+                </div>
+            </AppLink>
+        );
+    }, []);
 
     return (
         <section className="display-none md:flex container flex-row justify-between items-center px-3 pt-4 z-20">
-            <div className="flex-center-y">
-                <Image
-                    alt="logo"
-                    src="/images/logo/logo.png"
-                    style={{ objectFit: "cover" }}
-                    width={50}
-                    height={50}
-                />
-                <div className="text-white  font-semibold ml-3">
-                    Pirate <span className="text-gold">Mobile</span>
-                </div>
-            </div>
+            {renderLogo}
             {renderMenus}
         </section>
     );

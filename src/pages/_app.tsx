@@ -93,8 +93,6 @@ function App({ Component, pageProps }: MattressAppProps) {
         AOS.init();
     }, []);
 
-    console.log({ initialOptions });
-
     const renderMainContent = () => {
         const getLayout = Component.getLayout;
 
