@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import BlockInformation from "../shared/block/BlockInformation";
 import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
+import MobileHeader from "../shared/header/MobileHeader";
 
 export interface IInformationPageProps {
     [key: string]: any;
@@ -78,7 +79,7 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
 
     const renderHeader = () => {
         return (
-            <section className="flex flex-row justify-between items-center px-3">
+            <section className="information-page__header flex d-md-none flex-row justify-between items-center px-3">
                 <div className="flex-center-y py-4">
                     <Image
                         alt="logo"
@@ -126,7 +127,7 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
 
     return (
         <MainStyled className="home-page__container container px-0 bg-transparent z-10 relative text-white ">
-            {renderHeader()}
+            <MobileHeader className=""/>
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
                 <BlockSwiperSlide />
                 <div className="px-3">{renderInformationBlocks()}</div>
@@ -140,6 +141,8 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
 export default InformationPage;
 
 const MainStyled = styled.main`
+    .information-page__header {
+    }
     .home-page__button-search {
         margin-bottom: 5px;
         i {

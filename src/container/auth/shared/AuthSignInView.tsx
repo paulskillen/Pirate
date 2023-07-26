@@ -84,7 +84,7 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
     };
 
     return (
-        <div className="bg-black">
+        <div className="bg-black container px-0">
             <PageHeader
                 title={Messages.signIn}
                 onLeftClick={() => {
@@ -107,7 +107,7 @@ const AuthSignInView: React.FC<IAuthSignInViewProps> = ({ id }) => {
                         <small className="mx-3 text text-white">
                             {Messages.or}
                         </small>
-                        <div className="divider " />
+                        <div className="divider bg-gold" />
                     </div>
                     <AuthSignInSocial />
 

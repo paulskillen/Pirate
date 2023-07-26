@@ -10,6 +10,7 @@ import ClassNames from "classnames";
 import { useRouter } from "next/router";
 import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import TabBottom from "../navigation/TabBottom";
+import DesktopHeader from "../header/DesktopHeader";
 
 const IMG_MOBILE = 250;
 const IMG_DESKTOP = 600;
@@ -50,6 +51,7 @@ const LogoView = () => {
 const Layout: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
     return (
         <LayoutStyled className="layout-container bg-black">
+            <DesktopHeader />
             <div className="flex-grow w-100">{children}</div>
             <TabBottom />
             {/* <PAPTrackingClick /> */}
@@ -78,10 +80,10 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
 
     if (!accessToken) {
         return (
-            <Fragment>
+            <LayoutStyled className="layout_container bg-black">
                 <AuthSignInView />
                 <PostAffiliatePro />
-            </Fragment>
+            </LayoutStyled>
         );
     }
 
@@ -96,5 +98,11 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
 const LayoutStyled = styled.div`
     position: relative;
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
+    @media (min-width: 768px) {
+        .tab-bottom {
+            display: none !important;
+        }
+    }
 `;

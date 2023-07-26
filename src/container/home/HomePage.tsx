@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import SelectCountry from "../shared/input/SelectCountry";
 import { IDS_OPEN_SELECT_COUNTRY } from "@/common/constant/app";
+import DesktopHeader from "../shared/header/DesktopHeader";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -29,27 +30,27 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const { countryByRegion } = metaData || {};
 
     useEffect(() => {
-        function handleOnClick(e: any) {
-            const eventTargetId: any = e?.target?.id;
-            if (!IDS_OPEN_SELECT_COUNTRY.includes(eventTargetId)) {
-                setOpenSelectCountry(undefined);
-            }
-        }
-        document.addEventListener("click", handleOnClick as any);
-        return () =>
-            document.removeEventListener("click", handleOnClick as any);
+        // function handleOnClick(e: any) {
+        //     const eventTargetId: any = e?.target?.id;
+        //     if (!IDS_OPEN_SELECT_COUNTRY.includes(eventTargetId)) {
+        //         setOpenSelectCountry(undefined);
+        //     }
+        // }
+        // document.addEventListener("click", handleOnClick as any);
+        // return () =>
+        //     document.removeEventListener("click", handleOnClick as any);
     }, []);
 
     useEffect(() => {
-        function handleOnTouchMove(e: any) {
-            const eventTargetId: any = e?.target?.id;
-            if (eventTargetId == "home-page__container") {
-                e?.preventDefault?.();
-            }
-        }
-        document.addEventListener("touchmove", handleOnTouchMove as any);
-        return () =>
-            document.removeEventListener("touchmove", handleOnTouchMove as any);
+        // function handleOnTouchMove(e: any) {
+        //     const eventTargetId: any = e?.target?.id;
+        //     if (eventTargetId == "home-page__container") {
+        //         e?.preventDefault?.();
+        //     }
+        // }
+        // document.addEventListener("touchmove", handleOnTouchMove as any);
+        // return () =>
+        //     document.removeEventListener("touchmove", handleOnTouchMove as any);
     }, []);
 
     const renderHeader = () => {

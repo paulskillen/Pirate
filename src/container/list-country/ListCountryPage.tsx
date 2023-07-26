@@ -18,6 +18,7 @@ import React, {
 } from "react";
 import { useScroll, useSessionStorage } from "react-use";
 import styled from "@emotion/styled";
+import { COLOR_DARKEN, COLOR_GOLD } from "@/common/constant/app-style";
 
 export interface IListCountryPageProps {
     [key: string]: any;
@@ -159,20 +160,16 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
 
 export default ListCountryPage;
 
-export const CountryItem = ({
-    country,
-    hoverColor = true,
-}: {
-    country: ICountry;
-    hoverColor?: any;
-}) => {
+export const CountryItem = (props: { country: ICountry; hoverColor?: any }) => {
+    const { country, hoverColor = true } = props;
     const { name, flag, iso } = country || {};
     return (
         <AppLink href={Path.bundleByCountry(country?.iso ?? "")} id={iso}>
-            <div
+            <CountryListItemStyle
                 className={`flex flex-row items-center text-gray-300 pt-3 pb-3 pl-3 ${ClassNames(
                     { "hover:bg-gold-trans": hoverColor }
                 )}`}
+                {...props}
             >
                 <Image
                     className="w-12 rounded border"
@@ -182,7 +179,7 @@ export const CountryItem = ({
                 <div className="text-base font-semibold ml-3 max-w-xs ">
                     {name}
                 </div>
-            </div>
+            </CountryListItemStyle>
         </AppLink>
     );
 };
@@ -222,3 +219,5 @@ const ListCountryPageStyle = styled.div`
         }
     }
 `;
+
+const CountryListItemStyle = styled.div``;

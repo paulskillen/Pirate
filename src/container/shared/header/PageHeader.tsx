@@ -82,7 +82,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
 
     return (
         <PageHeaderStyled
-            className={`w-full flex flex-row items-center justify-between py-2 px-4 bg-black ${className}`}
+            className={`page-header w-full flex flex-row items-center justify-between py-2 px-4 bg-black ${className}`}
         >
             {renderLeft()}
             {renderCenter()}
