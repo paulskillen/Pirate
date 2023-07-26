@@ -30,15 +30,15 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const { countryByRegion } = metaData || {};
 
     useEffect(() => {
-        // function handleOnClick(e: any) {
-        //     const eventTargetId: any = e?.target?.id;
-        //     if (!IDS_OPEN_SELECT_COUNTRY.includes(eventTargetId)) {
-        //         setOpenSelectCountry(undefined);
-        //     }
-        // }
-        // document.addEventListener("click", handleOnClick as any);
-        // return () =>
-        //     document.removeEventListener("click", handleOnClick as any);
+        function handleOnClick(e: any) {
+            const eventTargetId: any = e?.target?.id;
+            if (!IDS_OPEN_SELECT_COUNTRY.includes(eventTargetId)) {
+                setOpenSelectCountry(undefined);
+            }
+        }
+        document.addEventListener("click", handleOnClick as any);
+        return () =>
+            document.removeEventListener("click", handleOnClick as any);
     }, []);
 
     useEffect(() => {
@@ -110,9 +110,6 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             className="home-page__container container bg-transparent h-screen z-10 relative text-white px-3 bg-red-400 "
         >
             {renderNewHeader()}
-            {/* <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                <div className="h-52" />
-            </div> */}
             {/* {renderGrids()} */}
             <div
                 onClick={() =>
@@ -129,6 +126,7 @@ export default HomePage;
 
 const MainStyled = styled.main`
     position: relative;
+    overflow-y: auto !important;
     .home-page__button-search {
         margin-bottom: 5px;
         i {
