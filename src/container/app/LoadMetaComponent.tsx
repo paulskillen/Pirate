@@ -14,10 +14,18 @@ const LoadMetaComponent: React.FC<ILoadMetaComponentProps> = ({ id }) => {
     }, []);
 
     const loadMetaData = async () => {
-        const data = await MetaDataApi.listCountry();
-        const countryList = data?.data?.data ?? [];
-        const groupedBy = groupBy(countryList, (item) => item?.region);
-        setMetaData({ ...metaData, countryList, countryByRegion: groupedBy });
+        try {
+            const data = await MetaDataApi.listCountry();
+            const countryList = data?.data?.data ?? [];
+            const groupedBy = groupBy(countryList, (item) => item?.region);
+            setMetaData({
+                ...metaData,
+                countryList,
+                countryByRegion: groupedBy,
+            });
+        } catch (error) {
+            console.error({ error });
+        }
     };
 
     return null;
