@@ -81,3 +81,18 @@ input:-webkit-autofill {
 .ant-select-dropdown {
     background-color: transparent !important;
 }
+
+.input-text-password {
+    .d-input-text__suffix-container {
+        background-color: transparent !important;
+        border: none !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        i {
+            color: var(--color-gold);
+            display: block !important;
+        }
+    }
+}

@@ -99,6 +99,7 @@ const translations = {
     emailFormDescription:
         "Please input your email and hit send, we will send you the eSim Qr Code and the instruction to install the eSim",
     seeAllCountries: "See all countries",
+    passwordsAreNotMatched: "Passwords are not matched !",
 };
 
 export default translations;
