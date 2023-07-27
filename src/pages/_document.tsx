@@ -69,10 +69,17 @@ export default function Document() {
         );
     };
 
-    const addAPAScript = () => {
+    const addAPAScriptFunc = () => {
         if (!process.browser) {
             return undefined;
         }
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.id = "pap_x2s6df8d";
+        script.src =
+            "https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"; // Replace with your Post Affiliate Pro tracking code URL
+        script.async = true;
+        document.body.appendChild(script);
         const papScriptHeader = document.createElement("script");
         papScriptHeader.src =
             "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js";
@@ -87,6 +94,41 @@ export default function Document() {
             }
         };
         document.body.appendChild(papScriptHeader);
+    };
+
+    const renderAPAScriptFunc = () => {
+        //     return {
+        //          <script
+        //     type="text/javascript"
+        //     id="pap_x2s6df8d"
+        //     src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
+        // ></script>
+
+        // <script
+        //     type="text/javascript"
+        //     onLoad={() => {
+        //         if (!process.browser) {
+        //             return undefined;
+        //         }
+        //         const papScriptHeader =
+        //             document.createElement("script");
+        //         papScriptHeader.src =
+        //             "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js";
+        //         papScriptHeader.id = "pap_x2s6df8d";
+        //         papScriptHeader.type = "text/javascript";
+        //         papScriptHeader.onload = function () {
+        //             try {
+        //                 //@ts-ignore
+        //                 PostAffTracker.track();
+        //             } catch (err) {
+        //                 console.error({ err });
+        //             }
+        //         };
+        //         document.body.appendChild(papScriptHeader);
+        //     }}
+        // />
+        //     };
+        return null;
     };
 
     return (
@@ -120,70 +162,8 @@ export default function Document() {
                 {renderPreLoader()}
                 <Main />
                 <NextScript />
-                <script
-                    type="text/javascript"
-                    id="pap_x2s6df8d"
-                    src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
-                ></script>
-
-                <script
-                    type="text/javascript"
-                    onLoad={() => {
-                        if (!process.browser) {
-                            return undefined;
-                        }
-                        const papScriptHeader =
-                            document.createElement("script");
-                        papScriptHeader.src =
-                            "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js";
-                        papScriptHeader.id = "pap_x2s6df8d";
-                        papScriptHeader.type = "text/javascript";
-                        papScriptHeader.onload = function () {
-                            try {
-                                //@ts-ignore
-                                PostAffTracker.track();
-                            } catch (err) {
-                                console.error({ err });
-                            }
-                        };
-                        document.body.appendChild(papScriptHeader);
-                    }}
-                />
-                {/* <script
-                    type="text/javascript"
-                    onLoad={() => {
-                        //@ts-ignore
-                        PostAffTracker.setAccountId("default1");
-                        try {
-                            //@ts-ignore
-                            PostAffTracker.track();
-                        } catch (err) {
-                            console.error({ err });
-                        }
-                    }}
-                /> */}
-
-                {addAPAScript()}
-
-                {/* <script
-                    type="text/javascript"
-                    onLoad={function () {
-                        var papScriptHeader = document.createElement("script");
-                        papScriptHeader.src =
-                            "https://URL_TO_PostAffiliatePro/scripts/trackjs.js";
-                        papScriptHeader.id = "pap_x2s6df8d";
-                        papScriptHeader.type = "text/javascript";
-                        papScriptHeader.onload = function () {
-                            try {
-                                //@ts-ignore
-                                PostAffTracker.setAccountId("default1");
-                                //@ts-ignore
-                                PostAffTracker.track();
-                            } catch (err) {}
-                        };
-                        document.body.appendChild(papScriptHeader);
-                    }}
-                /> */}
+                {addAPAScriptFunc()}
+                {renderAPAScriptFunc()}
             </body>
         </Html>
     );
