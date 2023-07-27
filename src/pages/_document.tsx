@@ -96,41 +96,6 @@ export default function Document() {
         document.body.appendChild(papScriptHeader);
     };
 
-    const renderAPAScriptFunc = () => {
-        //     return {
-        //          <script
-        //     type="text/javascript"
-        //     id="pap_x2s6df8d"
-        //     src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
-        // ></script>
-
-        // <script
-        //     type="text/javascript"
-        //     onLoad={() => {
-        //         if (!process.browser) {
-        //             return undefined;
-        //         }
-        //         const papScriptHeader =
-        //             document.createElement("script");
-        //         papScriptHeader.src =
-        //             "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js";
-        //         papScriptHeader.id = "pap_x2s6df8d";
-        //         papScriptHeader.type = "text/javascript";
-        //         papScriptHeader.onload = function () {
-        //             try {
-        //                 //@ts-ignore
-        //                 PostAffTracker.track();
-        //             } catch (err) {
-        //                 console.error({ err });
-        //             }
-        //         };
-        //         document.body.appendChild(papScriptHeader);
-        //     }}
-        // />
-        //     };
-        return null;
-    };
-
     return (
         <Html lang="en">
             <Head>
@@ -162,8 +127,35 @@ export default function Document() {
                 {renderPreLoader()}
                 <Main />
                 <NextScript />
-                {addAPAScriptFunc()}
-                {renderAPAScriptFunc()}
+                <Script
+                    type="text/javascript"
+                    id="pap_x2s6df8d"
+                    src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
+                />
+                <Script
+                    type="text/javascript"
+                    onLoad={() => {
+                        if (!process.browser) {
+                            return undefined;
+                        }
+                        const papScriptHeader =
+                            document.createElement("script");
+                        papScriptHeader.src =
+                            "https://piratemobile.postaffiliatepro.com/scripts/trackjs.js";
+                        papScriptHeader.id = "pap_x2s6df8d";
+                        papScriptHeader.type = "text/javascript";
+                        papScriptHeader.onload = function () {
+                            try {
+                                //@ts-ignore
+                                PostAffTracker.track();
+                            } catch (err) {
+                                console.error({ err });
+                            }
+                        };
+                        document.body.appendChild(papScriptHeader);
+                    }}
+                />
+                {/* {addAPAScriptFunc()} */}
             </body>
         </Html>
     );
