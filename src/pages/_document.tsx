@@ -127,7 +127,7 @@ export default function Document() {
                 {renderPreLoader()}
                 <Main />
                 <NextScript />
-                <Script
+                {/* <Script
                     type="text/javascript"
                     id="pap_x2s6df8d"
                     src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
@@ -154,7 +154,7 @@ export default function Document() {
                         };
                         document.body.appendChild(papScriptHeader);
                     }}
-                />
+                /> */}
                 {/* {addAPAScriptFunc()} */}
             </body>
         </Html>
