@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { Button } from "d-react-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import BlockInformation from "../shared/block/BlockInformation";
 import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
 import MobileHeader from "../shared/header/MobileHeader";
@@ -75,40 +75,6 @@ const BLOCK_INFORMATION = [
 ];
 
 const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
-    const router = useRouter();
-
-    const renderHeader = () => {
-        return (
-            <section className="information-page__header flex d-md-none flex-row justify-between items-center px-3">
-                <div className="flex-center-y py-4">
-                    <Image
-                        alt="logo"
-                        src="/images/logo/logo.png"
-                        // layout="fill"
-                        style={{ objectFit: "cover" }}
-                        width={50}
-                        height={50}
-                    />
-                    <div className="text-white  font-semibold ml-3">
-                        Pirate <span className="text-gold">Mobile</span>
-                    </div>
-                </div>
-                <div className="flex-center-y w-">
-                    <Button
-                        iconName="search"
-                        className="rounded px-0 home-page__button-search ml-3"
-                        classNameIcon="text-gold"
-                        size="large"
-                        variant="trans"
-                        onClick={() => {
-                            router.push({ pathname: Path.listCountry().href });
-                        }}
-                    />
-                </div>
-            </section>
-        );
-    };
-
     const renderInformationBlocks = () => {
         return (
             <div className="grid grid-flow-row md:grid-flow-row md:grid-cols-12 gap-4 mt-4">
@@ -124,14 +90,16 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
             </div>
         );
     };
+    const slider = useMemo(() => {
+        return <BlockSwiperSlide />;
+    }, []);
 
     return (
         <MainStyled className="home-page__container container px-0 bg-transparent z-10 relative text-white ">
-            <MobileHeader className=""/>
+            <MobileHeader className="" />
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                <BlockSwiperSlide />
+                {slider}
                 <div className="px-3">{renderInformationBlocks()}</div>
-
                 <div className="h-96" />
             </div>
         </MainStyled>

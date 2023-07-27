@@ -23,7 +23,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
             <div className="flex-grow w-100">{children}</div>
             <TabBottom />
             {/* <PAPTrackingClick /> */}
-            {/* <PostAffiliatePro /> */}
+            <PostAffiliatePro />
         </LayoutStyled>
     );
 };
@@ -38,7 +38,7 @@ export const LayoutClean: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
             })}
         >
             <div className="flex-grow w-100">{children}</div>
-            {/* <PostAffiliatePro /> */}
+            <PostAffiliatePro />
         </LayoutStyled>
     );
 };
@@ -50,7 +50,7 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
         return (
             <LayoutStyled className="layout_container bg-black">
                 <AuthSignInView />
-                {/* <PostAffiliatePro /> */}
+                <PostAffiliatePro />
             </LayoutStyled>
         );
     }
@@ -58,7 +58,7 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     return (
         <LayoutStyled className="layout_container bg-black">
             {children}
-            {/* <PostAffiliatePro /> */}
+            <PostAffiliatePro />
         </LayoutStyled>
     );
 };
