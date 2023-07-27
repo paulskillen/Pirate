@@ -18,6 +18,7 @@ import SelectPaymentButton, {
     IPayPalOrderResponse,
 } from "../shared/input/SelectPaymentButton";
 import CheckoutSuccessModal from "./CheckoutSuccessModal";
+import styled from "@emotion/styled";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -144,7 +145,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
     const renderAgreement = () => {
         return (
-            <div className="bg-black mt-4 p-4 rounded-2xl border border-gold">
+            <div className="bg-black mt-4 p-4 rounded-2xl border border-gold checkout-page__agreement">
                 <div className="flex-center-y">
                     <Checkbox
                         onChange={() =>
@@ -199,7 +200,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     return (
         <div className="">
             <PageHeader title={Messages.yourOrder} />
-            <div className="h-screen overflow-y-scroll px-4 z-10 relative">
+            <CheckoutStyled className="h-screen overflow-y-scroll px-4 z-10 relative flex flex-col items-center">
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
@@ -221,7 +222,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                         />
                     )}
                 {/* {renderButton()} */}
-            </div>
+            </CheckoutStyled>
             {openCheckoutSuccessModal.open &&
                 openCheckoutSuccessModal.order && (
                     <CheckoutSuccessModal
@@ -237,3 +238,12 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 };
 
 export default CheckoutPage;
+
+const CheckoutStyled = styled.div`
+    .checkout-page__agreement,
+    .select-payment-button {
+        @media (min-width: 768px) {
+            width: 50vw;
+        }
+    }
+`;

@@ -85,10 +85,10 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
 
     const renderGrids = () => {
         return (
-            <div className="h-screen grid grid-flow-col gap-x-4 gap-y-1 bg-slate-500">
+            <div className="h-screen grid grid-flow-row grid-rows-5 gap-x-4 gap-y-1 bg-slate-500">
                 {/* {renderBlocks()} */}
                 <div className="bg-red-400 col-span-2 grid grid-flow-row gap-y-3 gap-x-3">
-                    <div className="bg-yellow-400 col-span-4">
+                    <div className="bg-yellow-400 col-span-4 text-center my-auto mx-auto">
                         Grid Item Inside
                     </div>
                     <div className="bg-yellow-400 col-span-2">
@@ -102,6 +102,24 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                 <div className="bg-red-400 col-span-4">Grid Item</div>
             </div>
         );
+        // return (
+        //     <div className="h-screen grid grid-flow-col gap-x-4 gap-y-1 bg-slate-500">
+        //         {/* {renderBlocks()} */}
+        //         <div className="bg-red-400 col-span-2 grid grid-flow-row gap-y-3 gap-x-3">
+        //             <div className="bg-yellow-400 col-span-4">
+        //                 Grid Item Inside
+        //             </div>
+        //             <div className="bg-yellow-400 col-span-2">
+        //                 Grid Item Inside
+        //             </div>
+        //             <div className="bg-yellow-400 col-span-2">
+        //                 Grid Item Inside
+        //             </div>
+        //         </div>
+        //         <div className="bg-red-400 col-span-3">Grid Item</div>
+        //         <div className="bg-red-400 col-span-4">Grid Item</div>
+        //     </div>
+        // );
     };
 
     return (
