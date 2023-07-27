@@ -107,7 +107,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     />
                 }
             />
-            <div className="h-screen overflow-y-scroll px-4 container flex flex-col items-center">
+            <div className="h-screen overflow-y-scroll px-4 container md:flex flex-col items-center">
                 {map(bundles, (item, index) => {
                     const isSelected =
                         !!selectedBundle?.name &&
