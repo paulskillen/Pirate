@@ -68,6 +68,18 @@ const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
             dataSource={isLoading ? placeholder : countryList}
             showSearch
             renderFooterDropdown={() => {
+                if (isLoading) {
+                    return (
+                        <div
+                            role="status"
+                            className="animate-pulse flex items-center justify-end w-full  pr-3"
+                        >
+                            <div className="w-1/12">
+                                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                            </div>
+                        </div>
+                    );
+                }
                 return (
                     <AppLink href={Path.listCountry().href}>
                         <div
