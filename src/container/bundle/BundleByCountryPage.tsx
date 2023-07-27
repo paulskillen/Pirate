@@ -1,6 +1,4 @@
-import {
-    COLOR_GOLD
-} from "@/common/constant/app-style";
+import { COLOR_GOLD } from "@/common/constant/app-style";
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { IBundle } from "@/common/interface/bundle";
@@ -15,12 +13,7 @@ import ClassNames from "classnames";
 import { Button, Checkbox } from "d-react-components";
 import { find, isEmpty, join, map } from "lodash";
 import { useRouter } from "next/router";
-import React, {
-    Fragment,
-    useContext,
-    useMemo,
-    useState
-} from "react";
+import React, { Fragment, useContext, useMemo, useState } from "react";
 import PageHeader from "../shared/header/PageHeader";
 import PriceTag from "../shared/items/PriceTag";
 
@@ -34,6 +27,7 @@ export interface IBundleItemProps {
     showRadio?: boolean;
     onClick?: any;
     selected?: boolean;
+    className?: string;
 }
 
 export interface IBundleDetailModalProps extends Omit<IModalProps, "children"> {
@@ -113,7 +107,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     />
                 }
             />
-            <div className="h-screen overflow-y-scroll px-4">
+            <div className="h-screen overflow-y-scroll px-4 container flex flex-col items-center">
                 {map(bundles, (item, index) => {
                     const isSelected =
                         !!selectedBundle?.name &&
@@ -141,6 +135,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     onClick,
     selected,
     showRadio = true,
+    className,
 }) => {
     const {
         provider,
@@ -171,7 +166,8 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                     {
                         "border-2 bg-darken": selected,
                         "border bg-black": !selected,
-                    }
+                    },
+                    className
                 )}
                 data-aos="bounce-in-top"
             >
@@ -192,7 +188,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                             <div className="mr-1 text-gold text-base">
                                 {Messages.data} :{" "}
                             </div>
-                            <div className="font-semibold text-gray-300">
+                            <div className="font-medium text text-gray-300">
                                 {dataDisplay}
                             </div>
                         </div>
@@ -200,7 +196,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                             <div className="mr-1 text-gold  text-base">
                                 {Messages.duration} :{" "}
                             </div>
-                            <div className="font-semibold text-gray-300">{`${duration}  ${Messages.days}`}</div>
+                            <div className="font-medium text text-gray-300">{`${duration}  ${Messages.days}`}</div>
                         </div>
                         {/* {speed?.length && (
                         <div className={rowClass}>
@@ -226,19 +222,21 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         />
                     </div>
                 </div>
-                <div className="w-full ml-3 px-3 flex justify-between items-center font-semibold text-gray-300 mt-2">
+                <div className="w-full ml-3 px-3 flex justify-between items-center  text-gray-300 mt-2">
                     <Button
-                        size="x-small"
+                        size="auto"
                         variant="outline"
-                        className="bundle-item__button-detail"
+                        className="px-3 bundle-item__button-detail"
                         onClick={() => setOpenDetailModal(true)}
                     >
-                        <Icon
-                            icon="settings"
-                            useIconSet="feather"
-                            size={14}
-                            className="block text-gold"
-                        />
+                        <div>
+                            <Icon
+                                icon="settings"
+                                useIconSet="feather"
+                                size={14}
+                                className="block text-gold"
+                            />
+                        </div>
                         <div className="ml-1 text">{Messages.seeDetail}</div>
                     </Button>
                     <div
@@ -251,7 +249,10 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                             size={16}
                             className="mr-2 text-gold"
                         />
-                        <PriceTag price={salePrice} />
+                        <PriceTag
+                            className="font-medium text"
+                            price={salePrice}
+                        />
                     </div>
                 </div>
             </BundleItemStyled>
@@ -360,7 +361,13 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
     };
 
     return (
-        <Modal open={open} onClose={onClose} title={description} closable maskClosable>
+        <Modal
+            open={open}
+            onClose={onClose}
+            title={description}
+            closable
+            maskClosable
+        >
             {renderContent()}
         </Modal>
     );
@@ -368,12 +375,16 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
 
 const BundleItemStyled = styled.div`
     border-color: var(--color-gold) !important;
+    width: 100%;
+    @media (min-width: 768px) {
+        width: 50vw;
+    }
     .bundle-item__button-detail {
         background-color: black;
         border: 1px solid var(--color-gold);
         height: 28px !important;
         z-index: 100;
-        padding: 0 8px !important;
+        padding: 4px 18px !important;
         .text {
             font-size: 12px !important;
             color: white;
