@@ -58,6 +58,15 @@ const SelectStyled = styled.div`
         }
     }
 
+    .ant-select-clear {
+        background-color: transparent !important;
+        color: white;
+    }
+
+    .ant-select-arrow {
+        color: ${COLOR_GOLD};
+    }
+
     .select-country {
         .ant-select-arrow {
             margin-top: -10px !important;

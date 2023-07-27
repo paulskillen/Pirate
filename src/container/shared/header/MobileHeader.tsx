@@ -33,19 +33,21 @@ const MobileHeader: React.FC<IMobileHeaderProps> = ({ className }) => {
         <section
             className={`d-flex d-md-none container flex-row justify-between items-center px-3 pt-3 pb-3 z-20 ${className}`}
         >
-            <div className="flex-center-y">
-                <Image
-                    alt="logo"
-                    src="/images/logo/logo.png"
-                    // layout="fill"
-                    style={{ objectFit: "cover" }}
-                    width={50}
-                    height={50}
-                />
-                <div className="text-white  font-semibold ml-3">
-                    Pirate <span className="text-gold">Mobile</span>
+            <AppLink href={Path.home().href}>
+                <div className="flex-center-y">
+                    <Image
+                        alt="logo"
+                        src="/images/logo/logo.png"
+                        // layout="fill"
+                        style={{ objectFit: "cover" }}
+                        width={50}
+                        height={50}
+                    />
+                    <div className="text-white  font-semibold ml-3">
+                        Pirate <span className="text-gold">Mobile</span>
+                    </div>
                 </div>
-            </div>
+            </AppLink>
             <div className="flex-center-y pointer-events-auto">
                 <AppLink href={Path.listCountry().href}>
                     <div
