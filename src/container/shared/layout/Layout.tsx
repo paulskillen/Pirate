@@ -67,7 +67,7 @@ const LayoutStyled = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh !important;
     @media (min-width: 768px) {
         .tab-bottom {
             display: none !important;

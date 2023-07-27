@@ -81,9 +81,8 @@ const AuthSignUpPage: React.FC<IAuthSignUpPageProps> = ({ id }) => {
     const { values, errors, handleSubmit, handleChange, setFieldValue } =
         signUpForm;
 
-    console.log("🚀 >>>>>> file: AuthSignUpPage.tsx:74 >>>>>> errors:", errors);
     return (
-        <div className="relative bg-black text-white overflow-y-scroll h-screen z-20 px-4 pt-4">
+        <div className="relative text-white overflow-y-scroll h-screen z-20 px-4 pt-4">
             <Button
                 variant="trans"
                 iconName="arrow_back_ios"

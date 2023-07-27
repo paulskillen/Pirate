@@ -286,11 +286,6 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
         bundleData,
         id,
     } = bundle || {};
-
-    console.log(
-        "🚀 >>>>>> file: BundleByCountryPage.tsx:295 >>>>>> bundle:",
-        bundle
-    );
     const { speed, countries } = bundleData || {};
     const rowClass = ClassNames("flex flex-row items-start text-lg mt-2");
     const dataDisplay = useMemo(() => {
