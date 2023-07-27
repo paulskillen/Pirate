@@ -6,18 +6,35 @@ import AppLink from "@/components/link/AppLink";
 import Select from "@/components/select/Select";
 import { CountryItem } from "@/container/list-country/ListCountryPage";
 import Messages from "@/languages/Messages";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 
 export interface ISelectCountryProps {
     [key: string]: any;
 }
 
+const placeholder = [
+    { id: 1, label: "1" },
+    { id: 2, label: "2" },
+    { id: 3, label: "3" },
+    { id: 4, label: "4" },
+    { id: 5, label: "5" },
+];
+
 const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
     const { metaData, openSelectCountry } = useContext(AppStateContext);
     const { countryList = [] } = metaData || {};
-
+    const isLoading = useMemo(() => {
+        return countryList?.length === 0;
+    }, [countryList]);
     const renderCountryItem = (country: any) => {
-        return <CountryItem country={country} hoverColor={false} />;
+        return (
+            <CountryItem
+                key={`${country}_${country?.id}_${isLoading}`}
+                country={country}
+                hoverColor={false}
+                loading={isLoading}
+            />
+        );
     };
 
     return (
@@ -48,7 +65,7 @@ const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
             getLabel={renderCountryItem}
             placeholder={Messages.selectDestination}
             className="mt-3"
-            dataSource={countryList}
+            dataSource={isLoading ? placeholder : countryList}
             showSearch
             renderFooterDropdown={() => {
                 return (
