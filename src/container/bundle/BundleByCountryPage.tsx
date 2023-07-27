@@ -107,7 +107,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     />
                 }
             />
-            <div className="h-screen overflow-y-scroll px-4 container flex flex-col items-center">
+            <div className="h-screen overflow-y-scroll px-4 container md:flex flex-col items-center">
                 {map(bundles, (item, index) => {
                     const isSelected =
                         !!selectedBundle?.name &&
@@ -286,11 +286,6 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
         bundleData,
         id,
     } = bundle || {};
-
-    console.log(
-        "🚀 >>>>>> file: BundleByCountryPage.tsx:295 >>>>>> bundle:",
-        bundle
-    );
     const { speed, countries } = bundleData || {};
     const rowClass = ClassNames("flex flex-row items-start text-lg mt-2");
     const dataDisplay = useMemo(() => {

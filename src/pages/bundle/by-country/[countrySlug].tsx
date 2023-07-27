@@ -27,11 +27,7 @@ const BundlesByCountry: React.FC<IBundlesByCountryProps> = ({
     countryCode,
     bundles,
 }) => {
-    return (
-        <Fragment>
-            <BundleByCountryPage countryCode={countryCode} bundles={bundles} />;
-        </Fragment>
-    );
+    return <BundleByCountryPage countryCode={countryCode} bundles={bundles} />;
 };
 
 export default BundlesByCountry;
