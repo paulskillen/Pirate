@@ -12,14 +12,11 @@
     --color-gold-dark: rgb(153, 118, 53);
     --color-darken: rgb(38, 38, 38);
     --body-font-family: "Poppins", "sans-serif";
-
-    height: 100% !important;
 }
 
 body {
     font-family: var(--body-font-family);
     background-color: #cad3e5;
-    height: 100% !important;
 }
 
 button {

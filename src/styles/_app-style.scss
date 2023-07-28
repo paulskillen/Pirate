@@ -82,8 +82,9 @@ input:-webkit-autofill {
     background-color: transparent !important;
 }
 
-.input-text-password {
-    .d-input-text__suffix-container {
+.d-input-text__container {
+    .d-input-text__suffix-container,
+    .d-input-text__prefix-container {
         background-color: transparent !important;
         border: none !important;
         display: flex;

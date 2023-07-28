@@ -28,9 +28,7 @@ const Select: React.FC<IInputSelectProps> = ({
 
     const renderDropdown = (menu: React.ReactElement) => {
         return (
-            <DropdownStyled
-                id="select__dropdown-pirate-mobile"
-            >
+            <DropdownStyled id="select__dropdown-pirate-mobile">
                 {menu}
                 {renderFooterDropdown && renderFooterDropdown()}
             </DropdownStyled>
@@ -40,6 +38,7 @@ const Select: React.FC<IInputSelectProps> = ({
     return (
         <DSelect
             {...props}
+            open
             dropdownRender={renderDropdown}
             wrapperElement={
                 <SelectStyled className={container} hidden={hidden} />

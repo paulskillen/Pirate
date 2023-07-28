@@ -9,13 +9,14 @@ export interface IInputTextProps extends Omit<InputTextProps, "variant"> {
 const InputText: React.FC<IInputTextProps> = ({ className, ...props }) => {
     return (
         <DInputText
-            {...(props as any)}
             wrapperElement={
                 <InputStyled
                     className={`d-input-text__container ${className}`}
                     {...(props as any)}
                 />
             }
+            {...(props as any)}
+
         />
     );
 };
