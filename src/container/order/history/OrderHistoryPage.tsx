@@ -3,6 +3,10 @@ import Path from "@/common/constant/path";
 import { IOrder } from "@/common/interface/order";
 import Icon from "@/components/icon/Icon";
 import AppLink from "@/components/link/AppLink";
+import TabSwitch, {
+    ITabSwitchItem,
+    TabSwitchType,
+} from "@/components/tab/TabSwitch";
 import ProviderNameItem from "@/container/provider/shared/ProviderNameItem";
 import MobileHeader from "@/container/shared/header/MobileHeader";
 import PageHeader from "@/container/shared/header/PageHeader";
@@ -28,9 +32,21 @@ export interface IOrderItemProps {
 
 const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
     const router = useRouter();
+    const tabs = [
+        {
+            id: "esim",
+            label: Messages.yourEsim,
+        },
+        {
+            id: "order",
+            label: Messages.yourOrder,
+        },
+    ];
+
     const orderLocals = useOrderHistory();
     const { id: customerId, email } = useAuthProfile() || {};
     const [orderList, setOrderList] = useState<Array<any>>([]);
+    const [activeTab, setActiveTab] = useState<ITabSwitchItem>(tabs?.[0]);
     const isGuest = !customerId;
 
     useEffect(() => {
@@ -54,14 +70,21 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
         }
     };
 
-    const renderContent = () => {
+    const renderTab = () => {
+        return (
+            <TabSwitch
+                dataSource={tabs as any}
+                value={activeTab}
+                onChange={(v) => setActiveTab(v)}
+            />
+        );
+    };
+
+    const renderOrderContent = () => {
         if (!(orderList?.length > 0)) {
             return (
-                <div className="flex flex-col items-center justify-center  w-screen h-screen relative text-gold">
-                    <div className="text-gold">{Messages.listOrderEmpty}</div>
-                    {/* <AppLink className="text-gold">
-                        <div className="text-gold">{Messages.startFindingYourDestination}</div>
-                    </AppLink> */}
+                <div className="text-gold empty-content">
+                    {Messages.listOrderEmpty}
                 </div>
             );
         }
@@ -74,11 +97,21 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
         );
     };
 
+    const renderEsimContent = () => {
+        return <div />;
+    };
+
     return (
-        <div className="container px-0 flex flex-col items-center justify-start w-screen h-screen relative text-white ">
+        <OrderHistoryStyled className="container px-0 flex flex-col items-center justify-start w-screen h-screen relative text-white z-10">
             <MobileHeader />
-            {renderContent()}
-        </div>
+            <div className="w-full px-3 mt-3 md:w-3/4">
+                {renderTab()}
+                <div className="flex flex-col items-center w-full h-screen overflow-y-scroll  relative">
+                    {activeTab?.id === "order" && renderOrderContent()}
+                    {activeTab?.id === "esim" && renderEsimContent()}
+                </div>
+            </div>
+        </OrderHistoryStyled>
     );
 };
 
@@ -149,6 +182,16 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
         </OrderItemStyled>
     );
 };
+
+const OrderHistoryStyled = styled.div`
+    .empty-content {
+        margin-top: calc(100vh * 0.4);
+        opacity: 0.5;
+        @media (max-width: 768px) {
+            margin-top: calc(100vh * 0.35);
+        }
+    }
+`;
 
 const OrderItemStyled = styled.div`
     border-color: var(--color-gold) !important;

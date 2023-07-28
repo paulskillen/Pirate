@@ -121,14 +121,6 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
             id="list-country-page"
         >
             <div className="flex flex-row items-center list-country-page__header bg-black pt-3 pb-2 px-3">
-                <Button
-                    onClick={() => {
-                        return router.back();
-                    }}
-                    variant="trans"
-                    iconName="arrow_back_ios_new"
-                    className="page-header__left-button text-gold pl-0 pr-3"
-                />
                 <InputSearch
                     className="w-full"
                     onChange={(e: any) => {
@@ -136,6 +128,14 @@ const ListCountryPage: React.FC<IListCountryPageProps> = ({ id }) => {
                     }}
                     value={textSearch}
                     placeholder={Messages.selectDestination}
+                />
+                <Button
+                    onClick={() => {
+                        return router.back();
+                    }}
+                    variant="outline"
+                    content="Back"
+                    className="page-header__back-button text-gold pl-4 pr-4 ml-3"
                 />
             </div>
             <div className="mt-20" ref={listRef}>
@@ -227,6 +227,10 @@ const ListCountryPageStyle = styled.div`
         top: 0;
         left: 0;
         right: 0;
+    }
+
+    .page-header__back-button {
+        background-color: ${COLOR_DARKEN} !important;
     }
 
     .list-country-page__alphabet {
