@@ -1,5 +1,7 @@
 import { useApplyClientState } from "@/store/client";
 import { load, save } from "@/store/store";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Progress, ProgressComponent } from "d-react-components";
 import { forEach, isArray, isEmpty } from "lodash";
 import React, { ReactNode, useEffect, useRef } from "react";
@@ -15,6 +17,10 @@ const InitComponent = () => {
     const progressRef = useRef<ReactNode>();
     useEffect(() => {
         Progress.initialProgress(progressRef.current);
+    }, []);
+
+    useEffect(() => {
+        AOS.init();
     }, []);
 
     // preloader language

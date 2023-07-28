@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import React, { Fragment, useContext, useMemo, useState } from "react";
 import PageHeader from "../shared/header/PageHeader";
 import PriceTag from "../shared/items/PriceTag";
+import Aos from "aos";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -28,6 +29,7 @@ export interface IBundleItemProps {
     onClick?: any;
     selected?: boolean;
     className?: string;
+    animation?: string;
 }
 
 export interface IBundleDetailModalProps extends Omit<IModalProps, "children"> {
@@ -108,16 +110,18 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                 }
             />
             <div className="h-screen overflow-y-scroll px-4 container md:flex flex-col items-center">
-                {map(bundles, (item, index) => {
+                {map(bundles, (item, index: any) => {
                     const isSelected =
                         !!selectedBundle?.name &&
                         selectedBundle?.name === item?.name;
+                    const isEvent = index % 2 === 0;
                     return (
                         <BundleItem
                             key={item?.id}
                             selected={isSelected}
                             bundle={item}
                             onClick={() => setSelectedBundle(item)}
+                            animation={isEvent ? "fade-right" : "fade-right"}
                         />
                     );
                 })}
@@ -136,6 +140,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     selected,
     showRadio = true,
     className,
+    animation,
 }) => {
     const {
         provider,
@@ -162,14 +167,14 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
         <Fragment>
             <BundleItemStyled
                 className={ClassNames(
-                    "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative bounce-in-top",
+                    "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative",
                     {
                         "border-2 bg-darken": selected,
                         "border bg-black": !selected,
                     },
                     className
                 )}
-                data-aos="bounce-in-top"
+                data-aos={animation}
             >
                 <div className="flex flex-row" onClick={onClick}>
                     {showRadio && (

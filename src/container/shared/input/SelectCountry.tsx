@@ -244,13 +244,16 @@ const SelectCountryStyled = styled.div`
         max-height: 350px;
         overflow-y: hidden;
         transition: 0.5s all linear;
-
         .ant-select-item-option {
             color: ${COLOR_INPUT_CONTENT};
         }
 
         .ant-select-item-option-active {
             background-color: ${COLOR_GOLD_TRANS} !important;
+        }
+
+        @media (max-width: 576px) {
+            max-height: 450px;
         }
     }
     .select-country__dropdown-visible {
