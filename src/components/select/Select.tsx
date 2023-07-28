@@ -38,7 +38,6 @@ const Select: React.FC<IInputSelectProps> = ({
     return (
         <DSelect
             {...props}
-            open
             dropdownRender={renderDropdown}
             wrapperElement={
                 <SelectStyled className={container} hidden={hidden} />
