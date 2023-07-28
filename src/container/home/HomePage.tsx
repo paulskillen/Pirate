@@ -33,7 +33,8 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         function handleOnClick(e: any) {
             const eventTargetId: any = e?.target?.id;
             if (!IDS_OPEN_SELECT_COUNTRY.includes(eventTargetId)) {
-                setOpenSelectCountry(undefined);
+                setOpenSelectCountry(false);
+                return e;
             }
         }
         document.addEventListener("click", handleOnClick as any);

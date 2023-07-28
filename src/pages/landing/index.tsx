@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import styled from "@emotion/styled";
+import Path from "@/common/constant/path";
 
 const Landing: NextPage = () => {
     return (

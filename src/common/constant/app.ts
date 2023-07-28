@@ -15,4 +15,9 @@ const ESIM_GO_API_URL = "https://api.esim-go.com/v2.2";
 export const ESIM_GO_GET_ESIM_QR_CODE_IMG = (code: string) =>
     `${ESIM_GO_API_URL}/esims/${code}/qr`;
 
-export const IDS_OPEN_SELECT_COUNTRY = ["logo-click-mask"];
+export const IDS_OPEN_SELECT_COUNTRY = [
+    "logo-click-mask",
+    "select-country__input",
+    "select-country__dropdown",
+    "input-text__clear-icon",
+];

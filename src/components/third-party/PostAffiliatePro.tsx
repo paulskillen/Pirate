@@ -10,10 +10,10 @@ const PostAffiliatePro = () => {
         script.type = "text/javascript";
         script.onload = function () {
             //@ts-ignore
-            PostAffTracker.setAccountId("default1");
+            PostAffTracker?.setAccountId?.("default1");
             try {
                 //@ts-ignore
-                PostAffTracker.track();
+                PostAffTracker?.track?.();
             } catch (err) {}
         };
         document.body.appendChild(script);
