@@ -1,6 +1,4 @@
 import type { AppProps } from "next/app";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Head from "next/head";
 import { ApolloProvider } from "@apollo/client";
 import { SessionProvider } from "next-auth/react";
@@ -88,10 +86,6 @@ function App({ Component, pageProps }: MattressAppProps) {
         const appStateContext = loadStateContext();
         saveStateContext({ ...appStateContext, cart: userCart });
     }, [userCart]);
-
-    useEffect(() => {
-        AOS.init();
-    }, []);
 
     const renderMainContent = () => {
         const getLayout = Component.getLayout;
