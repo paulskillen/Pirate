@@ -16,7 +16,6 @@ import { useRouter } from "next/router";
 import React, { Fragment, useContext, useMemo, useState } from "react";
 import PageHeader from "../shared/header/PageHeader";
 import PriceTag from "../shared/items/PriceTag";
-import Aos from "aos";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -49,31 +48,9 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         (item) => item?.isoAlpha2 === countryCode
     );
 
-    // useEffect(() => {
-    //     if (countryCode) {
-    //         loadBundles();
-    //     }
-    // }, [countryCode]);
-
-    // const loadBundles = () => {
-    //     return Progress.show(
-    //         {
-    //             method: BundleApi.listBundleFromCountry,
-    //             params: [countryCode],
-    //         },
-    //         (res: any) => {
-    //             const resBundles = res?.data?.data?.data ?? [];
-    //             setBundles(resBundles);
-    //         }
-    //     );
-    // };
-
     const renderCheckout = () => {
         return (
-            <div
-                className="fixed bottom-5 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center bounce-in-top"
-                data-aos="bounce-in-top"
-            >
+            <div className="fixed bottom-5 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center bounce-in-top">
                 <Button
                     className="w-full font-bold z-30 border bundle-by-country-page__button-checkout rounded-pill flex flex-col"
                     style={{ fontWeight: "bold", fontSize: 16 }}
@@ -174,7 +151,6 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                     },
                     className
                 )}
-                data-aos={animation}
             >
                 <div className="flex flex-row" onClick={onClick}>
                     {showRadio && (
