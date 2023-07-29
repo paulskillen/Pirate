@@ -1,4 +1,4 @@
-import { PaymentMethod, PAYMENT_METHODS } from "@/common/constant/payment";
+import { PaymentMethod, PAYMENT_METHODS } from "@/common/interface/payment";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import {
     OrderResponseBody,

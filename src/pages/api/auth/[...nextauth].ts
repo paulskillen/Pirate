@@ -1,9 +1,4 @@
-import AuthApi from "@/apis/auth/AuthApi";
-import { SocialProvider } from "@/common/constant/app";
-import Path from "@/common/constant/path";
 import { CONFIG } from "@/configuration/AppConfig";
-import { saveRegister } from "@/store/auth/authActions";
-import { store } from "@/store/store";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 

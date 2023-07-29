@@ -1,4 +1,4 @@
-import { OrderPaymentStatus, PaymentMethod } from "../constant/payment";
+import { OrderPaymentStatus, PaymentMethod } from "./payment";
 import { IBundle } from "./bundle";
 import { ICustomer } from "./customer";
 import { ProviderName } from "./provider";

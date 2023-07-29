@@ -10,6 +10,7 @@ export const F_ORDER = gql`
         id
         createdAt
         orderNo
+        orderType
         status
         products {
             quantity
