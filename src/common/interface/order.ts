@@ -47,6 +47,6 @@ export interface IOrder {
     subTotal: number;
     provider: ProviderName;
     refOrder: string;
-    providerOrder: JSON;
-    eSimData: JSON;
+    providerOrder?: any;
+    eSimData?: { eSimId?: string; [key: string]: any };
 }

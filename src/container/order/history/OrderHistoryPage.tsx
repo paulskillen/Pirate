@@ -1,5 +1,5 @@
 import OrderApi from "@/apis/order/OrderApi";
-import { IOrder } from "@/common/interface/order";
+import { IOrder, OrderType } from "@/common/interface/order";
 import TabSwitch, { ITabSwitchItem } from "@/components/tab/TabSwitch";
 import MobileHeader from "@/container/shared/header/MobileHeader";
 import Messages from "@/languages/Messages";
@@ -7,10 +7,11 @@ import { useAuthProfile } from "@/store/auth/authHook";
 import { useOrderHistory } from "@/store/order-history/orderHistoryHook";
 import styled from "@emotion/styled";
 import { Progress } from "d-react-components";
-import { map } from "lodash";
+import { filter, map } from "lodash";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { OrderItem } from "./OrderItem";
+import ESimItem from "./ESimItem";
 
 export interface IOrderHistoryPageProps {
     [key: string]: any;
@@ -36,14 +37,23 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
 
     const orderLocals = useOrderHistory();
     const { id: customerId, email } = useAuthProfile() || {};
-    const [orderList, setOrderList] = useState<Array<any>>([]);
-
-    console.log(
-        "🚀 >>>>>> file: OrderHistoryPage.tsx:50 >>>>>> orderList:",
-        orderList
-    );
+    const [orderList, setOrderList] = useState<Array<IOrder>>([]);
     const [activeTab, setActiveTab] = useState<ITabSwitchItem>(tabs?.[0]);
     const isGuest = !customerId;
+    const yourEsims = useMemo(() => {
+        if (!orderList.length) {
+            return [];
+        }
+        const filteredOrders = orderList?.filter(
+            (item) =>
+                item?.orderType === OrderType.BUY_NEW &&
+                !!item?.eSimData?.eSimId
+        );
+        if (!filteredOrders.length) {
+            return [];
+        }
+        return filteredOrders;
+    }, [orderList]);
 
     useEffect(() => {
         loadOrderHistory();
@@ -77,7 +87,7 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
     };
 
     const renderOrderContent = () => {
-        if (!(orderList?.length > 0)) {
+        if (!orderList?.length) {
             return (
                 <div className="text-gold empty-content">
                     {Messages.listOrderEmpty}
@@ -85,7 +95,7 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
             );
         }
         return (
-            <div className="overflow-y-scroll px-4 w-full pb-40">
+            <div className="overflow-y-scroll w-full pb-40">
                 {map(orderList, (orderItem) => {
                     return <OrderItem order={orderItem} />;
                 })}
@@ -94,7 +104,20 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
     };
 
     const renderEsimContent = () => {
-        return <div />;
+        if (!orderList?.length) {
+            return (
+                <div className="text-gold empty-content">
+                    {Messages.listOrderEmpty}
+                </div>
+            );
+        }
+        return (
+            <div className="overflow-y-scroll w-full pb-40">
+                {map(yourEsims, (item) => {
+                    return <ESimItem eSimItem={item} />;
+                })}
+            </div>
+        );
     };
 
     return (

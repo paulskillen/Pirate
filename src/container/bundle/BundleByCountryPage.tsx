@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import React, { Fragment, useContext, useMemo, useState } from "react";
 import PageHeader from "../shared/header/PageHeader";
 import PriceTag from "../shared/items/PriceTag";
+import { useSearchParam } from "react-use";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -43,10 +44,14 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
+    const topUpParams = useSearchParam("topup");
     const currentCountry = find(
         countryList,
         (item) => item?.isoAlpha2 === countryCode
     );
+    const isTopUp = useMemo(() => {
+        return topUpParams && topUpParams?.length === 19;
+    }, [topUpParams]);
 
     const renderCheckout = () => {
         return (
@@ -57,7 +62,14 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     onClick={() => {
                         if (selectedBundle) {
                             setUserCart([selectedBundle]);
-                            router.push(Path.checkout().href);
+                            if (isTopUp) {
+                                router.push({
+                                    pathname: Path.checkout().href,
+                                    query: { topup: topUpParams },
+                                });
+                            } else {
+                                router.push(Path.checkout().href);
+                            }
                         }
                     }}
                 >
@@ -117,7 +129,6 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     selected,
     showRadio = true,
     className,
-    animation,
 }) => {
     const {
         provider,

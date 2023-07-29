@@ -103,6 +103,7 @@ const translations = {
     passwordsAreNotMatched: "Passwords are not matched !",
     buyNew: "Buy New",
     topUp: "Top Up",
+    yourEsimCode: "Your eSIM Code",
 };
 
 export default translations;

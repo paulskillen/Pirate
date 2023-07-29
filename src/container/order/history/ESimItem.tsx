@@ -10,56 +10,17 @@ import PriceTag from "@/container/shared/items/PriceTag";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import ClassNames from "classnames";
-import { TimeUtils } from "d-react-components";
+import { Button, TimeUtils } from "d-react-components";
 import { find, forEach, join, map, unionBy } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useMemo } from "react";
+import { getCountriesFromProducts, renderRow } from "./OrderItem";
 
-export interface IOrderItemProps {
-    order: IOrder;
-    [key: string]: any;
+export interface IESimItemProps {
+    eSimItem: IOrder;
 }
 
-export const getCountriesFromProducts = (
-    pros: Array<any>,
-    allCountry?: Array<any>
-) => {
-    const countries: Array<any> = [];
-    forEach(pros, (itemPro) => {
-        const countryItems = itemPro?.product?.bundleData?.countries;
-        if (countryItems && countryItems?.length > 0) {
-            forEach(countryItems, (i) => {
-                countries.push(i);
-            });
-        }
-    });
-    let res;
-    if (countries?.length > 0) {
-        res = unionBy(countries, (i) => i?.iso);
-        if (res?.length && allCountry?.length) {
-            res = map(res, (item) => {
-                return find(allCountry, (i) => i?.iso === item?.iso);
-            });
-        }
-    }
-
-    return res;
-};
-
-export const renderRow = (left: any, right?: any, rowClass?: string) => {
-    return (
-        <div className={`${rowClass} text-sm mt-2 `}>
-            <div className="text-gold">{left}</div>
-            {right && (
-                <div className="ml-2 opacity-75 text-white font-semibold">
-                    {right}
-                </div>
-            )}
-        </div>
-    );
-};
-
-export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
+const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
     const { metaData } = useContext(AppStateContext);
     const { countryList } = metaData || {};
     const router = useRouter();
@@ -72,12 +33,17 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
         products,
         orderType,
         eSimData,
-    } = order || {};
+    } = eSimItem || {};
     const { eSimId } = eSimData || {};
-    const rowClass = ClassNames("flex flex-row items-center text-lg");
+    const rowClass = ClassNames("flex flex-row items-center");
     const orderCountries = useMemo(
         () => getCountriesFromProducts(products || [], countryList),
         [products, countryList]
+    );
+
+    console.log(
+        "🚀 >>>>>> file: ESimItem.tsx:44 >>>>>> orderCountries:",
+        orderCountries
     );
 
     const countryView = (
@@ -105,42 +71,68 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
     );
 
     return (
-        <OrderItemStyled
-            className="flex flex-row mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full"
-            onClick={() => router.push(Path.orderDetail(order).as || "")}
-        >
-            <div className="w-full">
+        <ESimItemStyled className=" mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full">
+            <div
+                className="w-full"
+                onClick={() => router.push(Path.orderDetail(eSimItem).as || "")}
+            >
                 <div className="flex flex-row">
                     <div className="flex flex-col w-full">
                         <div className={rowClass}>
-                            <div className="h5 text-gold">{orderNo}</div>
-                            <ViewLabelStatus
+                            <div className="h5 text-gold">Iccid :</div>
+                            <div className="h5 text-white ml-1 opacity-75">
+                                {eSimId}
+                            </div>
+                            {/* <ViewLabelStatus
                                 className="ml-3"
                                 value={orderType}
                                 dataSource={ORDER_TYPES}
-                            />
+                            /> */}
                         </div>
-                        {orderType === OrderType.BUY_NEW &&
-                            eSimId &&
-                            renderRow(Messages.yourEsimCode, eSimId, rowClass)}
                         {renderRow(
                             Messages.purchasedAt,
                             TimeUtils.convertMiliToDateTime(createdAt),
                             rowClass
                         )}
                     </div>
-                    <Icon icon="cart" color="" className="text-gold" />
+                    <Icon
+                        icon="sim"
+                        color=""
+                        className="text-gold -rotate-90"
+                    />
                 </div>
                 {countryView}
-                <div className="w-full flex justify-end text mt-3">
-                    <div className="">{`${Messages.subTotal} \b \b`}</div>
-                    <PriceTag price={subTotal} className="font-semibold" />
-                </div>
             </div>
-        </OrderItemStyled>
+            <div className="w-full flex">
+                <div
+                    className="flex-1"
+                    onClick={() =>
+                        router.push(Path.orderDetail(eSimItem).as || "")
+                    }
+                />
+                <Button
+                    iconName="add_circle"
+                    size="x-small"
+                    className="border rounded-full"
+                    variant="trans"
+                    onClick={() => {
+                        router.push({
+                            pathname: Path.bundleByCountry(
+                                orderCountries?.[0]?.iso ?? ""
+                            ).as as any,
+                            query: { topup: eSimId },
+                        });
+                    }}
+                >
+                    {Messages.topUp}
+                </Button>
+            </div>
+        </ESimItemStyled>
     );
 };
 
-const OrderItemStyled = styled.div`
+export default ESimItem;
+
+const ESimItemStyled = styled.div`
     border-color: var(--color-gold) !important;
 `;

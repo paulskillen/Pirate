@@ -19,6 +19,7 @@ import SelectPaymentButton, {
 } from "../shared/input/SelectPaymentButton";
 import CheckoutSuccessModal from "./CheckoutSuccessModal";
 import styled from "@emotion/styled";
+import { useSearchParam } from "react-use";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -53,6 +54,11 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         open: boolean;
         order?: IOrder;
     }>({ open: false });
+
+    const topUpParams = useSearchParam("topup");
+    const isTopUp = useMemo(() => {
+        return topUpParams && topUpParams?.length === 19;
+    }, [topUpParams]);
 
     useEffect(() => {
         if (paymentOrder?.id) {
