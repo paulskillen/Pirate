@@ -122,18 +122,15 @@ export default function Document() {
                         `'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);` +
                         `})(window,document,'script','dataLayer','G-HSNF8J72KW');`}
                 </Script>
-            </Head>
-            <body>
-                {renderPreLoader()}
-                <Main />
-                <NextScript />
-                {/* <Script
+                <Script
                     type="text/javascript"
+                    strategy="afterInteractive"
                     id="pap_x2s6df8d"
                     src="https://piratemobile.postaffiliatepro.com/scripts/d4dvujx"
                 />
                 <Script
                     type="text/javascript"
+                    strategy="afterInteractive"
                     onLoad={() => {
                         if (!process.browser) {
                             return undefined;
@@ -154,7 +151,13 @@ export default function Document() {
                         };
                         document.body.appendChild(papScriptHeader);
                     }}
-                /> */}
+                />
+            </Head>
+            <body>
+                {renderPreLoader()}
+                <Main />
+                <NextScript />
+
                 {/* {addAPAScriptFunc()} */}
             </body>
         </Html>
