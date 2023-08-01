@@ -17,7 +17,7 @@ const PromosPage: React.FC<IPromosPageProps> = ({ id }) => {
             <PageHeader
                 title={Messages.promos}
             />
-            <section className="w-full px-3 flex-col lg:flex-row flex justify-center items-center">
+            <section className="container w-full px-3 flex-col lg:flex-row flex justify-center items-center">
                 <Image
                     className="none lg:block"
                     alt="logo"

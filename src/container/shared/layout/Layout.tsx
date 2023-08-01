@@ -11,19 +11,26 @@ import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import TabBottom from "../navigation/TabBottom";
 import DesktopHeader from "../header/DesktopHeader";
 
-export interface ILayoutProps extends PropsWithChildren<{}> {
+export interface IShowHideLayoutConfig {
     hideLogo?: boolean;
-    [key: string]: any;
+    hideDesktopHeader?: boolean;
+    hideTabBottom?: boolean;
 }
 
-const Layout: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
+export interface ILayoutProps extends PropsWithChildren<{}> {
+    [key: string]: any;
+    showHideConfig?: IShowHideLayoutConfig;
+}
+
+const Layout: React.FC<ILayoutProps> = ({ children, showHideConfig }) => {
+    const { hideLogo, hideDesktopHeader } = showHideConfig || {};
     return (
         <LayoutStyled
             className={ClassNames("layout-container bg-black", {
                 "layout-container--hide-logo": hideLogo,
             })}
         >
-            <DesktopHeader />
+            {!hideDesktopHeader && <DesktopHeader />}
             <div className="flex-grow w-100">{children}</div>
             <TabBottom />
             {/* <PAPTrackingClick /> */}
@@ -34,7 +41,11 @@ const Layout: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
 
 export default Layout;
 
-export const LayoutClean: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
+export const LayoutClean: React.FC<ILayoutProps> = ({
+    children,
+    showHideConfig,
+}) => {
+    const { hideLogo } = showHideConfig || {};
     return (
         <LayoutStyled
             className={ClassNames("layout-container bg-black", {

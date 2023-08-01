@@ -11,5 +11,7 @@ export default AboutUs;
 
 //@ts-ignore
 AboutUs.getLayout = function getLayout(page) {
-    return <LayoutClean hideLogo>{page}</LayoutClean>;
+    return (
+        <LayoutClean showHideConfig={{ hideLogo: true }}>{page}</LayoutClean>
+    );
 };

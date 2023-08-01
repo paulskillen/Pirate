@@ -11,7 +11,7 @@ const TermConditionsPage: React.FC<ITermConditionsPageProps> = ({ id }) => {
     return (
         <div className="bg-black">
             <PageHeader title={Messages.termConditions} />
-            <div className="c3 doc-content p-3 bg-black text-gray-300 overflow-y-scroll h-screen relative z-50 pb-52">
+            <div className="container c3 doc-content p-3 bg-black text-gray-300 overflow-y-scroll h-screen relative z-50 pb-52">
                 <p className="c1">
                     <span className="c0">
                         Pirate Mobile Terms and Conditions of Sale:
