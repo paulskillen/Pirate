@@ -79,8 +79,8 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
                 <div className="flex flex-row">
                     <div className="flex flex-col w-full">
                         <div className={rowClass}>
-                            <div className="h5 text-gold">Iccid :</div>
-                            <div className="h5 text-white ml-1 opacity-75">
+                            {/* <div className="h5 text-gold">Iccid :</div> */}
+                            <div className="h5 text-gold">
                                 {eSimId}
                             </div>
                             {/* <ViewLabelStatus

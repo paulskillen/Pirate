@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 import { OrderItem } from "./OrderItem";
 import ESimItem from "./ESimItem";
+import EsimApi from "@/apis/esim/EsimApi";
 
 export interface IOrderHistoryPageProps {
     [key: string]: any;
@@ -126,6 +127,11 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
             <div className="w-full px-3 mt-3 md:w-3/4">
                 {renderTab()}
                 <div className="flex flex-col items-center w-full h-screen overflow-y-scroll  relative">
+                    {/* <button
+                        onClick={() => EsimApi.sendSms("8943108161001914187")}
+                    >
+                        Send Smd
+                    </button> */}
                     {activeTab?.id === "order" && renderOrderContent()}
                     {activeTab?.id === "esim" && renderEsimContent()}
                 </div>
