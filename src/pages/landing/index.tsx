@@ -1,10 +1,8 @@
-import type { NextPage } from "next";
+import Layout from "@/container/shared/layout/Layout";
 import styled from "@emotion/styled";
-import Path from "@/common/constant/path";
-import { useEffect } from "react";
+import type { NextPage } from "next";
 
 const Landing: NextPage = () => {
-
     return (
         <LandingPageStyled className="landing-page">
             <iframe
@@ -20,7 +18,7 @@ export default Landing;
 
 //@ts-ignore
 Landing.getLayout = function getLayout(page) {
-    return <div>{page}</div>;
+    return <Layout hideLogo>{page}</Layout>;
 };
 
 const LandingPageStyled = styled.div`

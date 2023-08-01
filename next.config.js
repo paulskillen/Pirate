@@ -16,6 +16,16 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // async rewrites() {
+    //     return {
+    //         beforeFiles: [
+    //             {
+    //                 source: "/landing",
+    //                 destination: "https://rhq.6db.myftpupload.com/",
+    //             },
+    //         ],
+    //     };
+    // },
     reactStrictMode: true,
     env: {
         REACT_APP_ENV: process.env.REACT_APP_ENV,

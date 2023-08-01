@@ -18,7 +18,11 @@ export interface ILayoutProps extends PropsWithChildren<{}> {
 
 const Layout: React.FC<ILayoutProps> = ({ children, hideLogo }) => {
     return (
-        <LayoutStyled className="layout-container bg-black">
+        <LayoutStyled
+            className={ClassNames("layout-container bg-black", {
+                "layout-container--hide-logo": hideLogo,
+            })}
+        >
             <DesktopHeader />
             <div className="flex-grow w-100">{children}</div>
             <TabBottom />
