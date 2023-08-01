@@ -134,6 +134,7 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
                     </button> */}
                     {activeTab?.id === "order" && renderOrderContent()}
                     {activeTab?.id === "esim" && renderEsimContent()}
+                    <div className="h-80" />
                 </div>
             </div>
         </OrderHistoryStyled>

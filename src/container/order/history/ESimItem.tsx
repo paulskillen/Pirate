@@ -74,15 +74,13 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
         <ESimItemStyled className=" mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full">
             <div
                 className="w-full"
-                onClick={() => router.push(Path.orderDetail(eSimItem).as || "")}
+                // onClick={() => router.push(Path.orderDetail(eSimItem).as || "")}
             >
                 <div className="flex flex-row">
                     <div className="flex flex-col w-full">
                         <div className={rowClass}>
                             {/* <div className="h5 text-gold">Iccid :</div> */}
-                            <div className="h5 text-gold">
-                                {eSimId}
-                            </div>
+                            <div className="h5 text-gold">{eSimId}</div>
                             {/* <ViewLabelStatus
                                 className="ml-3"
                                 value={orderType}
@@ -103,13 +101,24 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
                 </div>
                 {countryView}
             </div>
-            <div className="w-full flex">
-                <div
+            <div className="w-full flex mt-3 gap-3 justify-end">
+                {/* <div
                     className="flex-1"
+                    // onClick={() =>
+                    //     router.push(Path.orderDetail(eSimItem).as || "")
+                    // }
+                /> */}
+                <Button
+                    // iconName="add_circle"
+                    size="x-small"
+                    className="border rounded-full"
+                    variant="trans"
                     onClick={() =>
                         router.push(Path.orderDetail(eSimItem).as || "")
                     }
-                />
+                >
+                    {Messages.seeDetail}
+                </Button>
                 <Button
                     iconName="add_circle"
                     size="x-small"
