@@ -147,7 +147,7 @@ const CompatibleDevice: NextPage = () => {
     return (
         <div className="">
             <PageHeader title={Messages.compatibleDevices} />
-            <div className="h-screen relative bg-black z-10 text-white px-4 pt-3 pb-36 overflow-y-auto" dangerouslySetInnerHTML={{ __html: html }} />
+            <div className="container h-screen relative bg-black z-10 text-white px-4 pt-3 pb-36 overflow-y-auto" dangerouslySetInnerHTML={{ __html: html }} />
         </div>
     );
 };

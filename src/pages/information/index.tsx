@@ -25,7 +25,11 @@ export default Landing;
 
 //@ts-ignore
 Landing.getLayout = function getLayout(page) {
-    return <Layout hideLogo>{page}</Layout>;
+    return (
+        <Layout showHideConfig={{ hideLogo: true, hideDesktopHeader: true }}>
+            {page}
+        </Layout>
+    );
 };
 
 const LandingPageStyled = styled.div`

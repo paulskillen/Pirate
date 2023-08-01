@@ -11,7 +11,7 @@ const PolicyPage: React.FC<IPolicyPageProps> = ({ id }) => {
     return (
         <div className="bg-black">
             <PageHeader title={Messages.privacyPolicy} />
-            <div className="c4 doc-content p-3 bg-black text-gray-300 overflow-y-scroll h-screen relative z-50 pb-52">
+            <div className="container c4 doc-content p-3 bg-black text-gray-300 overflow-y-scroll h-screen relative z-50 pb-52">
                 <p className="c2">
                     <span className="c0">Privacy Policy</span>
                 </p>

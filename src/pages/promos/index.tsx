@@ -10,5 +10,7 @@ export default Promos;
 
 //@ts-ignore
 Promos.getLayout = function getLayout(page) {
-    return <LayoutClean hideLogo>{page}</LayoutClean>;
+    return (
+        <LayoutClean showHideConfig={{ hideLogo: true }}>{page}</LayoutClean>
+    );
 };
