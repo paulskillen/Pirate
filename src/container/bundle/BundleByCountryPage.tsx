@@ -1,7 +1,7 @@
 import { COLOR_GOLD } from "@/common/constant/app-style";
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
-import { IBundle } from "@/common/interface/bundle";
+import { IBundle, isValidEsimIccId } from "@/common/interface/bundle";
 import { ProviderName } from "@/common/interface/provider";
 import { convertBase64ToImgSource } from "@/common/utils/image";
 import Icon from "@/components/icon/Icon";
@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import React, { Fragment, useContext, useMemo, useState } from "react";
 import PageHeader from "../shared/header/PageHeader";
 import PriceTag from "../shared/items/PriceTag";
+import { useSearchParam } from "react-use";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -43,10 +44,14 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
+    const topUpParams = useSearchParam("topup");
     const currentCountry = find(
         countryList,
         (item) => item?.isoAlpha2 === countryCode
     );
+    const isTopUp = useMemo(() => {
+        return topUpParams && isValidEsimIccId(topUpParams);
+    }, [topUpParams]);
 
     const renderCheckout = () => {
         return (
@@ -56,8 +61,21 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     style={{ fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         if (selectedBundle) {
-                            setUserCart([selectedBundle]);
-                            router.push(Path.checkout().href);
+                            if (isTopUp) {
+                                setUserCart([
+                                    {
+                                        ...selectedBundle,
+                                        assignTo: topUpParams,
+                                    },
+                                ]);
+                                router.push({
+                                    pathname: Path.checkout().href,
+                                    query: { topup: topUpParams },
+                                });
+                            } else {
+                                setUserCart([selectedBundle]);
+                                router.push(Path.checkout().href);
+                            }
                         }
                     }}
                 >
@@ -117,7 +135,6 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     selected,
     showRadio = true,
     className,
-    animation,
 }) => {
     const {
         provider,

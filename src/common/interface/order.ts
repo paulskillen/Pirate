@@ -1,4 +1,4 @@
-import { OrderPaymentStatus, PaymentMethod } from "../constant/payment";
+import { OrderPaymentStatus, PaymentMethod } from "./payment";
 import { IBundle } from "./bundle";
 import { ICustomer } from "./customer";
 import { ProviderName } from "./provider";
@@ -47,6 +47,6 @@ export interface IOrder {
     subTotal: number;
     provider: ProviderName;
     refOrder: string;
-    providerOrder: JSON;
-    eSimData: JSON;
+    providerOrder?: any;
+    eSimData?: { eSimId?: string; [key: string]: any };
 }

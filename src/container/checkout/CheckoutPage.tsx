@@ -1,6 +1,6 @@
 import OrderApi from "@/apis/order/OrderApi";
 import Path from "@/common/constant/path";
-import { PaymentMethod } from "@/common/constant/payment";
+import { PaymentMethod } from "@/common/interface/payment";
 import { AppStateContext } from "@/common/context/app/app-context";
 import { IOrder } from "@/common/interface/order";
 import AppLink from "@/components/link/AppLink";
@@ -19,6 +19,7 @@ import SelectPaymentButton, {
 } from "../shared/input/SelectPaymentButton";
 import CheckoutSuccessModal from "./CheckoutSuccessModal";
 import styled from "@emotion/styled";
+import { useSearchParam } from "react-use";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -53,6 +54,11 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         open: boolean;
         order?: IOrder;
     }>({ open: false });
+
+    const topUpParams = useSearchParam("topup");
+    const isTopUp = useMemo(() => {
+        return topUpParams && topUpParams?.length === 19;
+    }, [topUpParams]);
 
     useEffect(() => {
         if (paymentOrder?.id) {
@@ -199,7 +205,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
     return (
         <div className="">
-            <PageHeader title={Messages.yourOrder} />
+            <PageHeader title={Messages.yourPreviousOrder} />
             <CheckoutStyled className="h-screen overflow-y-scroll px-4 z-10 relative flex flex-col items-center">
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;

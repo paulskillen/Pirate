@@ -1,4 +1,4 @@
-import { IOrder } from "@/common/interface/order";
+import { IOrder, OrderType } from "@/common/interface/order";
 import styled from "@emotion/styled";
 import * as Yup from "yup";
 import Modal, { IModalProps } from "@/components/modal/Modal";
@@ -40,7 +40,7 @@ const CheckoutSuccessModal: React.FC<ICheckoutSuccessModalProps> = ({
     order,
 }) => {
     const router = useRouter();
-    const { id, products, subTotal } = order || {};
+    const { id, products, subTotal, orderType } = order || {};
     const productId = products?.[0]?.product?.id;
     const { avatar, email, firstName, lastName } = useAuthProfile() || {};
     const [sendEmailState, setSendEmailState] = useState(SendEmailState.INIT);
@@ -66,10 +66,10 @@ const CheckoutSuccessModal: React.FC<ICheckoutSuccessModalProps> = ({
     const isLogin = !!email;
 
     useEffect(() => {
-        if (isLogin) {
+        if (isLogin && orderType === OrderType.BUY_NEW) {
             onSendingEmail();
         }
-    }, [isLogin]);
+    }, [isLogin, orderType]);
 
     const onSendingEmail = async () => {
         if (sendEmailState === SendEmailState.SENDING) {
@@ -97,6 +97,11 @@ const CheckoutSuccessModal: React.FC<ICheckoutSuccessModalProps> = ({
     const onClickViewOrder = useCallback(() => {
         onClose && onClose();
         router.push(Path.orderDetail(order).as || "");
+    }, [order]);
+
+    const onClickViewEsim = useCallback(() => {
+        onClose && onClose();
+        router.push(Path.esimsDetail(order).as || "");
     }, [order]);
 
     const renderThankyou = useMemo(() => {
@@ -257,10 +262,26 @@ const CheckoutSuccessModal: React.FC<ICheckoutSuccessModalProps> = ({
         );
     }, []);
 
+    const renderButton = () => {
+        return (
+            <div className="flex justify-center">
+                <Button
+                    size="small"
+                    variant="trans"
+                    className="rounded-full checkout-success-modal__button"
+                    onClick={onClickViewEsim}
+                >
+                    {`${Messages.viewEsim} >>`}
+                </Button>
+            </div>
+        );
+    };
+
     return (
         <Modal open={open} onClose={onClose}>
             {renderThankyou}
-            {renderEmailForm()}
+            {orderType === OrderType.BUY_NEW && renderEmailForm()}
+            {orderType === OrderType.TOP_UP && renderButton()}
             {renderPAPScript}
         </Modal>
     );

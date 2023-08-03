@@ -2,7 +2,12 @@ import { useApplyClientState } from "@/store/client";
 import { load, save } from "@/store/store";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Progress, ProgressComponent } from "d-react-components";
+import {
+    DialogComponent,
+    DialogManager,
+    Progress,
+    ProgressComponent,
+} from "d-react-components";
 import { forEach, isArray, isEmpty } from "lodash";
 import React, { ReactNode, useEffect, useRef } from "react";
 import { useStore } from "react-redux";
@@ -15,8 +20,10 @@ const InitComponent = () => {
      * init language
      */
     const progressRef = useRef<ReactNode>();
+    const dialogRef = useRef<ReactNode>();
     useEffect(() => {
         Progress.initialProgress(progressRef.current);
+        DialogManager.initialDialog(dialogRef.current);
     }, []);
 
     useEffect(() => {
@@ -70,6 +77,7 @@ const InitComponent = () => {
                 ref={progressRef as any}
                 transformError={progressTransformError}
             />
+            <DialogComponent ref={dialogRef as any} />
         </div>
     );
 };

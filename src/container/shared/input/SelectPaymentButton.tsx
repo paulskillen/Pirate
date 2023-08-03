@@ -1,4 +1,4 @@
-import { PaymentMethod, PAYMENT_METHODS } from "@/common/constant/payment";
+import { PaymentMethod, PAYMENT_METHODS } from "@/common/interface/payment";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import {
     OrderResponseBody,
@@ -13,7 +13,7 @@ import Icon from "@/components/icon/Icon";
 import Messages from "@/languages/Messages";
 import { map } from "lodash";
 import React, { useContext, useState } from "react";
-import { IBundle } from "@/common/interface/bundle";
+import { IBundle, isValidEsimIccId } from "@/common/interface/bundle";
 import OrderApi from "@/apis/order/OrderApi";
 import { IOrder } from "@/common/interface/order";
 import { AppStateContext } from "@/common/context/app/app-context";
@@ -44,12 +44,16 @@ const mapBundleToPayPalItems = (items: IBundle[]): PurchaseItem[] => {
 
 const mapBundleToOrderProduct = (items: IBundle[]): any[] => {
     return items.map((item) => {
-        const { name, provider } = item;
-        return {
+        const { name, provider, assignTo } = item;
+        const base = {
             id: name,
             quantity: 1,
             provider,
         };
+        if (isValidEsimIccId(assignTo)) {
+            Object.assign(base, { assignTo });
+        }
+        return base;
     });
 };
 
