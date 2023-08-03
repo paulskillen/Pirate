@@ -27,6 +27,17 @@ const EsimApi = {
             fetchPolicy: "no-cache",
         }),
 
+    getBundlesApplied: (iccid: string) =>
+        API.instance.query({
+            query: gql`
+                query getBundlesApplied($iccid: String!) {
+                    data: getListBundlesAppliedToESimForCustomer(iccid: $iccid)
+                }
+            `,
+            variables: { iccid },
+            fetchPolicy: "no-cache",
+        }),
+
     sendSms: (iccid: string) =>
         API.instance.mutate({
             mutation: gql`

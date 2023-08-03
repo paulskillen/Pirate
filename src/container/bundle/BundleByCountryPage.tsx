@@ -1,7 +1,7 @@
 import { COLOR_GOLD } from "@/common/constant/app-style";
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app-context";
-import { IBundle } from "@/common/interface/bundle";
+import { IBundle, isValidEsimIccId } from "@/common/interface/bundle";
 import { ProviderName } from "@/common/interface/provider";
 import { convertBase64ToImgSource } from "@/common/utils/image";
 import Icon from "@/components/icon/Icon";
@@ -50,7 +50,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         (item) => item?.isoAlpha2 === countryCode
     );
     const isTopUp = useMemo(() => {
-        return topUpParams && topUpParams?.length === 19;
+        return topUpParams && isValidEsimIccId(topUpParams);
     }, [topUpParams]);
 
     const renderCheckout = () => {
@@ -61,13 +61,19 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     style={{ fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         if (selectedBundle) {
-                            setUserCart([selectedBundle]);
                             if (isTopUp) {
+                                setUserCart([
+                                    {
+                                        ...selectedBundle,
+                                        assignTo: topUpParams,
+                                    },
+                                ]);
                                 router.push({
                                     pathname: Path.checkout().href,
                                     query: { topup: topUpParams },
                                 });
                             } else {
+                                setUserCart([selectedBundle]);
                                 router.push(Path.checkout().href);
                             }
                         }

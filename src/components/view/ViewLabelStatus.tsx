@@ -14,6 +14,7 @@ export interface ViewLabelStatusProps {
     getValue?: (item: any) => any;
     getLabel?: (item: any) => any;
     showDot?: boolean;
+    size?: "";
 }
 const ViewLabelStatus = ({
     color = "#000000",
@@ -26,10 +27,7 @@ const ViewLabelStatus = ({
     getValue = (item) => item?.id,
     getLabel = (item) => (Messages as any)[item?.label],
 }: ViewLabelStatusProps) => {
-    const classNameContainer = classNames(
-        "d-view-label-status border",
-        className
-    );
+    const classNameContainer = classNames("border", className);
     let colorStatus = "#000000";
     let labelStatus;
 
@@ -74,7 +72,10 @@ const ViewLabelStatus = ({
                     style={styleLabelDot}
                 />
             )}
-            <text className="text-xx-small" style={styleLabelContent}>
+            <text
+                className="text-xx-small d-view-label-status__text"
+                style={styleLabelContent}
+            >
                 {labelStatus}
             </text>
         </ViewLabelStatusStyle>
@@ -83,4 +84,14 @@ const ViewLabelStatus = ({
 
 export default ViewLabelStatus;
 
-const ViewLabelStatusStyle = styled.div``;
+const ViewLabelStatusStyle = styled.div`
+    border-radius: 999px;
+    text-align: center;
+    margin: auto;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .d-view-label-status__text {
+    }
+`;

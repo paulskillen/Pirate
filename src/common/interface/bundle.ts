@@ -21,4 +21,9 @@ export interface IBundle {
     bundleData?: IBundleData;
     updatedAt?: Date;
     createdAt?: Date;
+    assignTo?: string | null;
 }
+
+export const isValidEsimIccId = (iccid?: string | null) => {
+    return iccid && iccid.length === 19;
+};

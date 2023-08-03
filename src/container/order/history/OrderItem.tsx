@@ -10,7 +10,7 @@ import PriceTag from "@/container/shared/items/PriceTag";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import ClassNames from "classnames";
-import { TimeUtils } from "d-react-components";
+import { Button, TimeUtils } from "d-react-components";
 import { find, forEach, join, map, unionBy } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useMemo } from "react";
@@ -107,7 +107,7 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
     return (
         <OrderItemStyled
             className="flex flex-row mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full"
-            onClick={() => router.push(Path.orderDetail(order).as || "")}
+            // onClick={() => router.push(Path.orderDetail(order).as || "")}
         >
             <div className="w-full">
                 <div className="flex flex-row">
@@ -129,13 +129,28 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
                             rowClass
                         )}
                     </div>
-                    <Icon icon="cart" color="" className="text-gold" />
+                    <div className="flex text">
+                        <Icon icon="cart" color="" className="text-gold mr-2" />
+                        <PriceTag price={subTotal} className="font-semibold" />
+                    </div>
                 </div>
                 {countryView}
-                <div className="w-full flex justify-end text mt-3">
+                <div className="w-full flex mt-3 gap-3 justify-end">
+                    <Button
+                        size="x-small"
+                        className="border rounded-full"
+                        variant="trans"
+                        onClick={() =>
+                            router.push(Path.orderDetail(order).as || "")
+                        }
+                    >
+                        {Messages.seeDetail}
+                    </Button>
+                </div>
+                {/* <div className="w-full flex justify-end text mt-3">
                     <div className="">{`${Messages.subTotal} \b \b`}</div>
                     <PriceTag price={subTotal} className="font-semibold" />
-                </div>
+                </div> */}
             </div>
         </OrderItemStyled>
     );

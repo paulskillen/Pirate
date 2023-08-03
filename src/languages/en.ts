@@ -20,7 +20,7 @@ const translations = {
     title: "Title",
     confirmPassword: "Confirm Password",
     checkout: "Checkout",
-    yourOrder: "Your Order",
+    yourPreviousOrder: "You Previous Order",
     bankTransfer: "Bank Transfer",
     orderHistory: "Order History",
     selectPaymentMethod: "Select Payment Method",
@@ -103,7 +103,13 @@ const translations = {
     passwordsAreNotMatched: "Passwords are not matched !",
     buyNew: "Buy New",
     topUp: "Top Up",
+    sendSms: "Send SMS",
+    bundlesApplied: "Applied Bundles",
     yourEsimCode: "Your eSIM Code",
+    showESimAppliedBundles: "Show eSIM's Applied Bundles",
+    hideESimAppliedBundles: "Hide eSIM's Applied Bundles",
+    sendSmsSuccessfully: "Sent SMS Successfully !",
+    viewEsim: "View eSIM",
 };
 
 export default translations;

@@ -10,11 +10,12 @@ import PriceTag from "@/container/shared/items/PriceTag";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import ClassNames from "classnames";
-import { Button, TimeUtils } from "d-react-components";
+import { Button, Notifications, Progress, TimeUtils } from "d-react-components";
 import { find, forEach, join, map, unionBy } from "lodash";
 import { useRouter } from "next/router";
 import React, { useContext, useMemo } from "react";
 import { getCountriesFromProducts, renderRow } from "./OrderItem";
+import EsimApi from "@/apis/esim/EsimApi";
 
 export interface IESimItemProps {
     eSimItem: IOrder;
@@ -41,11 +42,6 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
         [products, countryList]
     );
 
-    console.log(
-        "🚀 >>>>>> file: ESimItem.tsx:44 >>>>>> orderCountries:",
-        orderCountries
-    );
-
     const countryView = (
         <div className="text mt-2 opacity-75">
             {map(orderCountries, (item, index) => {
@@ -70,12 +66,18 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
         </div>
     );
 
+    const onSendSmsToEsim = async () => {
+        return Progress.show(
+            { method: EsimApi.sendSms, params: [eSimId] },
+            (res) => {
+                Notifications.showSuccess(Messages.sendSmsSuccessfully);
+            }
+        );
+    };
+
     return (
         <ESimItemStyled className=" mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full">
-            <div
-                className="w-full"
-                // onClick={() => router.push(Path.orderDetail(eSimItem).as || "")}
-            >
+            <div className="w-full">
                 <div className="flex flex-row">
                     <div className="flex flex-col w-full">
                         <div className={rowClass}>
@@ -102,27 +104,29 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
                 {countryView}
             </div>
             <div className="w-full flex mt-3 gap-3 justify-end">
-                {/* <div
-                    className="flex-1"
-                    // onClick={() =>
-                    //     router.push(Path.orderDetail(eSimItem).as || "")
-                    // }
-                /> */}
                 <Button
                     // iconName="add_circle"
-                    size="x-small"
-                    className="border rounded-full"
+                    size="auto"
+                    className="border rounded-full px-2 py-1"
+                    variant="trans"
+                    onClick={() => onSendSmsToEsim()}
+                >
+                    {Messages.sendSms}
+                </Button>
+                <Button
+                    size="auto"
+                    className="border rounded-full px-2 py-1"
                     variant="trans"
                     onClick={() =>
-                        router.push(Path.orderDetail(eSimItem).as || "")
+                        router.push(Path.esimsDetail(eSimItem).as || "")
                     }
                 >
                     {Messages.seeDetail}
                 </Button>
                 <Button
                     iconName="add_circle"
-                    size="x-small"
-                    className="border rounded-full"
+                    size="auto"
+                    className="border rounded-full px-2 py-1"
                     variant="trans"
                     onClick={() => {
                         router.push({

@@ -32,7 +32,7 @@ const OrderHistoryPage: React.FC<IOrderHistoryPageProps> = () => {
         },
         {
             id: "order",
-            label: Messages.yourOrder,
+            label: Messages.yourPreviousOrder,
         },
     ];
 
