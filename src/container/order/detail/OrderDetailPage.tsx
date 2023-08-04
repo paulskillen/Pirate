@@ -146,7 +146,7 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white overflow-y-scrollpb-40">
+        <div className="flex flex-col items-center justify-start w-screen h-screen relative text-white overflow-y-scroll pb-40">
             <PageHeader title={`# ${orderNo}`} />
             {renderContent()}
         </div>
