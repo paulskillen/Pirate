@@ -154,7 +154,7 @@ const ESimDetailPage: React.FC<IESimDetailPageProps> = ({ orderId }) => {
         );
 
         return (
-            <div className="mt-4 flex flex-col justify-center items-center  max-w-2xl px-4">
+            <div className="mt-4 flex flex-col justify-center items-center w-full  max-w-2xl px-4">
                 <Button
                     className="esim-detail-page__button-qr-code"
                     onClick={() => {
@@ -175,7 +175,7 @@ const ESimDetailPage: React.FC<IESimDetailPageProps> = ({ orderId }) => {
     return (
         <EsimDetailStyled className="relative text-white  ">
             <PageHeader title={`${eSimId}`} />
-            <div className="z-20 relative h-screen w-full px-3">
+            <div className="z-20 relative h-screen w-full container px-3 flex flex-col items-center">
                 {renderContent()}
                 {renderAppliedBundles}
                 <div className="h-60" />
