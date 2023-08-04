@@ -11,18 +11,16 @@ import Icon from "@/components/icon/Icon";
 import InputSearch from "@/components/input/InputSearch";
 import InputText from "@/components/input/InputText";
 import AppLink from "@/components/link/AppLink";
-import Select from "@/components/select/Select";
-import { CountryItem } from "@/container/list-country/ListCountryPage";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { map } from "lodash";
 import React, {
-    Fragment,
     useContext,
     useEffect,
     useMemo,
     useState,
 } from "react";
+import CountryItem from "@/container/list-country/CountryItem";
 
 export interface ISelectCountryProps {
     [key: string]: any;
