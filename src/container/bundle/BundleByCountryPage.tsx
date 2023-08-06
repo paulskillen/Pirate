@@ -95,6 +95,8 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         <PriceTag price={selectedBundle?.salePrice} />
                     </div>
                 </Button>
+                <div className="h-60" />
+
             </div>
         );
         // return (
@@ -163,7 +165,6 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
-                <div className="h-60" />
             </div>
             {!isEmpty(selectedBundle) && renderCheckout()}
         </BundleByCountryPageStyled>
