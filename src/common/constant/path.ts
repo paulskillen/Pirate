@@ -95,6 +95,10 @@ const Path = {
         href: "/information",
     }),
 
+    landing: (): ILinkProps => ({
+        href: "/landing",
+    }),
+
     // ----------------------------------------
     // -- AUTH
     // ----------------------------------------
@@ -141,6 +145,14 @@ const Path = {
 
     helpCenter: (): ILinkProps => ({
         href: "/help-center",
+    }),
+
+    blogs: (): ILinkProps => ({
+        href: "/blogs",
+    }),
+
+    affiliatePage: (): ILinkProps => ({
+        href: "/affiliate",
     }),
 };
 
