@@ -55,7 +55,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 
     const renderCheckout = () => {
         return (
-            <div className="w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center">
+            <div className="fixed bottom-20 w-full px-3 z-30 bundle-by-country-page__footer flex  flex-col mt-4 items-center">
                 <Button
                     className="w-full font-bold z-30 border bundle-by-country-page__button-checkout flex flex-col"
                     style={{ fontWeight: "bold", fontSize: 16 }}
@@ -125,7 +125,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     }
 
     return (
-        <BundleByCountryPageStyled className="bg-transparent text-white relative">
+        <BundleByCountryPageStyled className="bg-transparent text-white relative z-20 overflow-y-scroll h-screen">
             <PageHeader
                 title={currentCountry?.name}
                 customerRight={
@@ -136,7 +136,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     />
                 }
             />
-            <div className="overflow-y-scroll px-4 container md:flex flex-col items-center">
+            <div className="px-4 container md:flex flex-col items-center">
                 {map(bundles, (item, index: any) => {
                     const isSelected =
                         !!selectedBundle?.name &&
@@ -152,6 +152,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
+                <div className="h-60" />
             </div>
             {!isEmpty(selectedBundle) && renderCheckout()}
         </BundleByCountryPageStyled>
@@ -427,14 +428,14 @@ const BundleByCountryPageStyled = styled.div`
         border-color: var(--color-gold) !important;
     }
     .bundle-by-country-page__footer {
-        padding: 16px 16px !important;
+        padding: 0px 16px !important;
         .bundle-by-country-page__button-checkout {
             background-color: ${COLOR_GOLD} !important;
             color: white !important;
             /* width: calc(100vw / 3.5) !important;
             height: calc(100vw / 3.5); */
             width: 100%;
-            height:60px;
+            height: 60px;
             border: 2px solid white !important;
             @media (min-width: 576px) {
                 /* width: 175px !important;
