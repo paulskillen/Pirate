@@ -55,9 +55,9 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 
     const renderCheckout = () => {
         return (
-            <div className="fixed bottom-5 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center bounce-in-top">
+            <div className="w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center">
                 <Button
-                    className="w-full font-bold z-30 border bundle-by-country-page__button-checkout rounded-pill flex flex-col"
+                    className="w-full font-bold z-30 border bundle-by-country-page__button-checkout flex flex-col"
                     style={{ fontWeight: "bold", fontSize: 16 }}
                     onClick={() => {
                         if (selectedBundle) {
@@ -86,6 +86,38 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                 </Button>
             </div>
         );
+        // return (
+        //     <div className="fixed bottom-20 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center bounce-in-top">
+        //         <Button
+        //             className="w-full font-bold z-30 border bundle-by-country-page__button-checkout rounded-pill flex flex-col"
+        //             style={{ fontWeight: "bold", fontSize: 16 }}
+        //             onClick={() => {
+        //                 if (selectedBundle) {
+        //                     if (isTopUp) {
+        //                         setUserCart([
+        //                             {
+        //                                 ...selectedBundle,
+        //                                 assignTo: topUpParams,
+        //                             },
+        //                         ]);
+        //                         router.push({
+        //                             pathname: Path.checkout().href,
+        //                             query: { topup: topUpParams },
+        //                         });
+        //                     } else {
+        //                         setUserCart([selectedBundle]);
+        //                         router.push(Path.checkout().href);
+        //                     }
+        //                 }
+        //             }}
+        //         >
+        //             <div>{`${Messages.checkout}`}</div>
+        //             <div className="mt-1">
+        //                 <PriceTag price={selectedBundle?.salePrice} />
+        //             </div>
+        //         </Button>
+        //     </div>
+        // );
     };
 
     if (!bundles?.length) {
@@ -104,7 +136,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                     />
                 }
             />
-            <div className="h-screen overflow-y-scroll px-4 container md:flex flex-col items-center">
+            <div className="overflow-y-scroll px-4 container md:flex flex-col items-center">
                 {map(bundles, (item, index: any) => {
                     const isSelected =
                         !!selectedBundle?.name &&
@@ -120,7 +152,6 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
-                <div className="h-96" />
             </div>
             {!isEmpty(selectedBundle) && renderCheckout()}
         </BundleByCountryPageStyled>
@@ -396,15 +427,18 @@ const BundleByCountryPageStyled = styled.div`
         border-color: var(--color-gold) !important;
     }
     .bundle-by-country-page__footer {
+        padding: 16px 16px !important;
         .bundle-by-country-page__button-checkout {
             background-color: ${COLOR_GOLD} !important;
             color: white !important;
-            width: calc(100vw / 3.5) !important;
-            height: calc(100vw / 3.5);
+            /* width: calc(100vw / 3.5) !important;
+            height: calc(100vw / 3.5); */
+            width: 100%;
+            height:60px;
             border: 2px solid white !important;
             @media (min-width: 576px) {
-                width: 175px !important;
-                height: 175px;
+                /* width: 175px !important;
+                height: 175px; */
             }
         }
     }
