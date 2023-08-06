@@ -58,10 +58,10 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         return (
             <div
                 className={ClassNames(
-                    "fixed  w-full px-3 z-30 bundle-by-country-page__footer flex  flex-col mt-4 items-center",
+                    "w-full px-3 z-30 bundle-by-country-page__footer flex flex-col items-center",
                     {
-                        "bottom-40": pathname === Path.landing().href,
-                        "bottom-20": pathname !== Path.landing().href,
+                        "mt-4": pathname === Path.landing().href,
+                        "bottom-20 fixed": pathname !== Path.landing().href,
                     }
                 )}
             >
@@ -161,7 +161,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
-                <div className="h-60" />
+                {pathname !== Path.landing().href && <div className="h-60" />}
             </div>
             {!isEmpty(selectedBundle) && renderCheckout()}
         </BundleByCountryPageStyled>
