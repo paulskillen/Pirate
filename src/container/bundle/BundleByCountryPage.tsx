@@ -42,6 +42,8 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 }) => {
     const router = useRouter();
     const { pathname, query } = router || {};
+
+    console.log("🚀 >>>>>> file: BundleByCountryPage.tsx:46 >>>>>> pathname:", pathname);
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
@@ -58,11 +60,11 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         return (
             <div
                 className={ClassNames(
-                    "w-full px-3 z-30 bundle-by-country-page__footer flex flex-col items-center",
-                    {
-                        "mt-4": pathname === Path.landing().href,
-                        "bottom-20 fixed": pathname !== Path.landing().href,
-                    }
+                    "w-full px-3 z-30 bundle-by-country-page__footer flex flex-col items-center mt-4 relative",
+                    // {
+                    //     "mt-4 relative": pathname === Path.landing().href,
+                    //     "bottom-20 fixed": pathname !== Path.landing().href,
+                    // }
                 )}
             >
                 <Button
@@ -161,7 +163,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
-                {pathname !== Path.landing().href && <div className="h-60" />}
+                <div className="h-60" />
             </div>
             {!isEmpty(selectedBundle) && renderCheckout()}
         </BundleByCountryPageStyled>
