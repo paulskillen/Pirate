@@ -69,15 +69,15 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                     />
                 </div>
             </AppLink>
-            <AppLink href={Path.information()}>
+            <AppLink href={Path.landing()}>
                 <div
                     className={`${classItem} ${activeClass(
-                        pathname === Path.information().href
+                        pathname === Path.landing().href
                     )}`}
                 >
                     <Square
                         fill={
-                            pathname === Path.information().href
+                            pathname === Path.landing().href
                                 ? COLOR_GOLD_LIGHT
                                 : COLOR_GOLD
                         }
