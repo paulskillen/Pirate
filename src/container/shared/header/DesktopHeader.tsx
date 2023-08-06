@@ -74,10 +74,10 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                         {Messages.orderHistory}
                     </div>
                 </AppLink>
-                <AppLink href={Path.information()}>
+                <AppLink href={Path.landing()}>
                     <div
                         className={`${classItem} ${activeClass(
-                            pathname === Path.information().href
+                            pathname === Path.landing().href
                         )}`}
                     >
                         {Messages.information}
