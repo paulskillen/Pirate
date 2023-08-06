@@ -41,6 +41,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     bundles,
 }) => {
     const router = useRouter();
+    const { pathname, query } = router || {};
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
     const [selectedBundle, setSelectedBundle] = useState<IBundle>();
@@ -55,7 +56,15 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
 
     const renderCheckout = () => {
         return (
-            <div className="fixed bottom-20 w-full px-3 z-30 bundle-by-country-page__footer flex  flex-col mt-4 items-center">
+            <div
+                className={ClassNames(
+                    "fixed  w-full px-3 z-30 bundle-by-country-page__footer flex  flex-col mt-4 items-center",
+                    {
+                        "bottom-40": pathname === Path.landing().href,
+                        "bottom-20": pathname !== Path.landing().href,
+                    }
+                )}
+            >
                 <Button
                     className="w-full font-bold z-30 border bundle-by-country-page__button-checkout flex flex-col"
                     style={{ fontWeight: "bold", fontSize: 16 }}
