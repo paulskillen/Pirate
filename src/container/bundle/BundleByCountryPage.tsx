@@ -63,11 +63,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         return (
             <div
                 className={ClassNames(
-                    "w-full px-3 z-30 bundle-by-country-page__footer flex flex-col items-center mt-4 relative"
-                    // {
-                    //     "mt-4 relative": pathname === Path.landing().href,
-                    //     "bottom-20 fixed": pathname !== Path.landing().href,
-                    // }
+                    "container px-3 z-30 bundle-by-country-page__footer flex flex-col items-center mt-4 relative"
                 )}
             >
                 <Button
@@ -447,14 +443,11 @@ const BundleByCountryPageStyled = styled.div`
         .bundle-by-country-page__button-checkout {
             background-color: ${COLOR_GOLD} !important;
             color: white !important;
-            /* width: calc(100vw / 3.5) !important;
-            height: calc(100vw / 3.5); */
             width: 100%;
             height: 60px;
             border: 2px solid white !important;
-            @media (min-width: 576px) {
-                /* width: 175px !important;
-                height: 175px; */
+            @media (min-width: 768px) {
+				width: 50vw;
             }
         }
     }

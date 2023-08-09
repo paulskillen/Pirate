@@ -173,36 +173,6 @@ const LandingPage: React.FC<ILandingPageProps> = ({ id }) => {
                     </p>
                 </div>
             </section>
-            {/* <section className="min-h-screen w-full px-3 flex-col  flex justify-center items-center">
-                <Image
-                    className="none lg:block"
-                    alt="logo"
-                    src="/images/logo/logo.png"
-                    width={IMG_DESKTOP}
-                    height={IMG_DESKTOP}
-                />
-                <Image
-                    className="block lg:hidden"
-                    alt="logo"
-                    src="/images/logo/logo.png"
-                    width={IMG_MOBILE}
-                    height={IMG_MOBILE}
-                />
-                <div className="flex flex-col text-center">
-                    <h3 className="text-4xl mt-9 text-wrap max-w-lg text-white">
-                        Get to Know Pirate Mobile
-                    </h3>
-                    <p className="max-w-lg mt-9 leading-10">
-                        When we love to keep track, connectivity is super
-                        important for you, we understand you, therefor we offer
-                        you different possibilities to stay connected in the
-                        place you travel to, weather it is for business or
-                        leisure. we are here to help you. we work transparent,
-                        we have a costumer support 24/7 and easy guiding for
-                        your convenience.
-                    </p>
-                </div>
-            </section> */}
             {renderSubscribeForm()}
         </main>
     );
