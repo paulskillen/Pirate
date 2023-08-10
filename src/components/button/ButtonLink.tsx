@@ -26,7 +26,7 @@ const ButtonLink: React.FC<IButtonLinkProps> = ({
 export default ButtonLink;
 
 const ButtonLinkStyled = styled.button`
-    border: 1px solid ${COLOR_GOLD};
+    border: 1.5px solid ${COLOR_GOLD};
     background-color: black;
     color: white;
     height: 50px;

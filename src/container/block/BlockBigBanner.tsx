@@ -1,25 +1,23 @@
+import { IBlockComponentBaseProps } from "@/common/interface/block";
 import ButtonLink from "@/components/button/ButtonLink";
 import styled from "@emotion/styled";
 import React from "react";
 
-export interface IBlockBigBannerProps {
-    [key: string]: any;
-}
+export interface IBlockBigBannerProps extends IBlockComponentBaseProps<any> {}
 
-const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({ blockData }) => {
-    const {
-        title = "Pirate Mobile provides eSIM data packages to ensure you’re connected everywhere, anytime.",
-        subTitle = "SEAMLESS CONNECTIVITY ANYWHERE IN THE WORLD",
-        buttonText = "Get your data pack",
-    } = blockData || {};
+const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
+    blockData,
+    className,
+}) => {
+    const { title, subTitle, buttonText } = blockData || {};
     return (
-        <BlockBigBannerStyled className="text-white" >
+        <BlockBigBannerStyled className="text-white">
             {subTitle && (
-                <h5 className="text-gold  mb-5 sub-title">
+                <h5 className="text-gold-light  sub-title">
                     {subTitle.toUpperCase()}
                 </h5>
             )}
-            <h1 className="text-white pr-10 mt-5 title">{title}</h1>
+            <h1 className="text-white pr-10 mt-4 title">{title}</h1>
             {buttonText && (
                 <ButtonLink className="mt-5">
                     {buttonText?.toUpperCase?.()}
@@ -43,6 +41,7 @@ const BlockBigBannerStyled = styled.div`
         }
     }
     .sub-title {
-        font-weight: 300;
+        font-weight: 500;
+        font-size: 16px !important;
     }
 `;
