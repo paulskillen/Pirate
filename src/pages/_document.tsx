@@ -112,6 +112,10 @@ export default function Document() {
                     rel="stylesheet"
                 />
                 <link
+                    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,500;0,600;0,700;0,900;1,400;1,500;1,600&display=swap"
+                    rel="stylesheet"
+                />
+                <link
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/icon?family=Material+Icons"
                 />

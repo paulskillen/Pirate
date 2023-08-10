@@ -6,5 +6,7 @@ export interface IBlockComponentBaseProps<T extends IBlockBaseProps<{}>> {
 export interface IBlockBaseProps<T> {
     title?: string;
     subTitle?: string;
+    description?: string;
     dataSource?: T[];
+    [key: string]: any;
 }

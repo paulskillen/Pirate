@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import TabBottom from "../navigation/TabBottom";
 import DesktopHeader from "../header/DesktopHeader";
+import SiteFooter from "../footer/SiteFooter";
 
 export interface IShowHideLayoutConfig {
     hideLogo?: boolean;
@@ -32,6 +33,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, showHideConfig }) => {
         >
             {!hideDesktopHeader && <DesktopHeader />}
             <div className="flex-grow w-100">{children}</div>
+            <SiteFooter />
             <TabBottom />
             {/* <PAPTrackingClick /> */}
             <PostAffiliatePro />

@@ -16,10 +16,12 @@ module.exports = {
                 "gold-trans": "rgba(192,157,94,0.25)",
                 "gold-dark": "rgb(153, 118, 53)",
                 darken: "rgb(38, 38, 38)",
+                blackTrans:"#121212"
             },
             fontFamily: {
                 sans: ["Poppins"],
                 poppins: "Poppins",
+                mont: "Montserrat",
             },
         },
     },
