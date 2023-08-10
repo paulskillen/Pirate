@@ -152,6 +152,13 @@ export default function Document() {
                         document.body.appendChild(papScriptHeader);
                     }}
                 />
+                <Script src="https://www.googletagmanager.com/gtag/js?id=AW-660949335" />
+                <Script id="gtm-script-id" strategy="afterInteractive">
+                    {`window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'AW-660949335');`}
+                </Script>
             </Head>
             <body>
                 {renderPreLoader()}
