@@ -110,6 +110,8 @@ const translations = {
     hideESimAppliedBundles: "Hide eSIM's Applied Bundles",
     sendSmsSuccessfully: "Sent SMS Successfully !",
     viewEsim: "View eSIM",
+    termOfUse: "Term Of Use",
+    byContinueYouAgree: "By continue you agree with our",
 };
 
 export default translations;
