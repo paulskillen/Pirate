@@ -17,6 +17,7 @@ import React, { Fragment, useContext, useMemo, useState } from "react";
 import PageHeader from "../shared/header/PageHeader";
 import PriceTag from "../shared/items/PriceTag";
 import { useSearchParam } from "react-use";
+import AppLink from "@/components/link/AppLink";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -163,8 +164,20 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
+                <div className="text-center mt-3 w-100">
+                    <span className="text-white">
+                        Not sure your device is compatible with eSim ?
+                    </span>
+                    <AppLink
+                        className="inline ml-1 underline italic"
+                        href={Path.compatibleDevice().href}
+                    >
+                        <span>{Messages.seeCompatibleDeviceList}</span>
+                    </AppLink>
+                </div>
                 {isEmpty(selectedBundle) && <div className="h-60" />}
             </div>
+
             {!isEmpty(selectedBundle) && renderCheckout()}
         </BundleByCountryPageStyled>
     );
@@ -447,7 +460,7 @@ const BundleByCountryPageStyled = styled.div`
             height: 60px;
             border: 2px solid white !important;
             @media (min-width: 768px) {
-				width: 50vw;
+                width: 50vw;
             }
         }
     }

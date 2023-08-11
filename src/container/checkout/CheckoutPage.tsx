@@ -203,6 +203,38 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
         );
     };
 
+    const renderPolicyAndCompatible = useMemo(() => {
+        return (
+            <div className="mt-6 flex flex-col items-center justify-center">
+                <div className="text-center text-white w-full">
+                    <span>{Messages.byContinueYouAgree}</span>
+                    <AppLink
+                        className="inline ml-1 underline italic "
+                        href={Path.termConditions().href}
+                    >
+                        <span>{Messages.termAndCondition}</span>
+                    </AppLink>
+                    <span className="mx-1">&</span>
+                    <AppLink
+                        className="inline ml-1 underline italic"
+                        href={Path.policy().href}
+                    >
+                        <span>{Messages.thePrivacyPolicy}</span>
+                    </AppLink>
+                </div>
+                {/* <div className="text-center mt-2 w-75">
+                    <span className="text-white">Not sure your device is compatible with eSim ?</span>
+                    <AppLink
+                        className="inline ml-1 underline italic"
+                        href={Path.compatibleDevice().href}
+                    >
+                        <span>{Messages.seeCompatibleDeviceList}</span>
+                    </AppLink>
+                </div> */}
+            </div>
+        );
+    }, []);
+
     return (
         <div className="">
             <PageHeader title={Messages.yourPreviousOrder} />
@@ -210,23 +242,22 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
-                {renderAgreement()}
-                {totalAmount > 0 &&
-                    userAgreement?.policy &&
-                    userAgreement?.compatible && (
-                        <SelectPaymentButton
-                            totalAmount={totalAmount}
-                            onSuccess={(orderRes, orderSer) => {
-                                if (orderRes?.status === "COMPLETED") {
-                                    // onSuccessPaymentHandler(orderRes, orderSer);
-                                    setPaymentOrder(orderRes);
-                                }
-                            }}
-                            onError={(error: any) => {}}
-                            customerId={customerId}
-                            purchasingItems={userCart}
-                        />
-                    )}
+                {/* {renderAgreement()} */}
+                {totalAmount > 0 && (
+                    <SelectPaymentButton
+                        totalAmount={totalAmount}
+                        onSuccess={(orderRes, orderSer) => {
+                            if (orderRes?.status === "COMPLETED") {
+                                // onSuccessPaymentHandler(orderRes, orderSer);
+                                setPaymentOrder(orderRes);
+                            }
+                        }}
+                        onError={(error: any) => {}}
+                        customerId={customerId}
+                        purchasingItems={userCart}
+                    />
+                )}
+                {renderPolicyAndCompatible}
                 {/* {renderButton()} */}
             </CheckoutStyled>
             {openCheckoutSuccessModal.open &&
