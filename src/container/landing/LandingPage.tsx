@@ -13,6 +13,8 @@ const BLOCK_BIG_BANNER = {
     title: "Pirate Mobile provides eSIM data packages to ensure you’re connected everywhere, anytime.",
     subTitle: "SEAMLESS CONNECTIVITY ANYWHERE IN THE WORLD",
     buttonText: "Get your data pack",
+    imageDesktop:
+        "https://images.unsplash.com/photo-1530160919432-dbafb33e32e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80",
 };
 
 const BLOCK_BOX_BY_BOX_INTRO = {
@@ -81,7 +83,7 @@ const BLOCK_ABOUT_US = {
 const LandingPage: React.FC<ILandingPageProps> = ({ id }) => {
     return (
         <LandingPageStyled className="z-10 relative container">
-            <BlockBigBanner blockData={BLOCK_BIG_BANNER} />
+            <BlockBigBanner className="mt-5" blockData={BLOCK_BIG_BANNER} />
             <BlockBoxByBox
                 blockData={BLOCK_BOX_BY_BOX_INTRO}
                 className="mt-5"

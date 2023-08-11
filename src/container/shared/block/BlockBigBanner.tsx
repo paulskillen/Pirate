@@ -15,7 +15,10 @@ const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
 }) => {
     const { title, subTitle, buttonText } = blockData || {};
     return (
-        <BlockBigBannerStyled className="text-white">
+        <BlockBigBannerStyled
+            className={`text-white flex flex-col justify-center pr-10 pl-5 ${className}`}
+            {...blockData}
+        >
             {subTitle && (
                 <h5 className="text-gold-light  sub-title">
                     {subTitle.toUpperCase()}
@@ -34,6 +37,19 @@ const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
 export default BlockBigBanner;
 
 const BlockBigBannerStyled = styled.div`
+    ${(props: IBlockBaseProps<any>) => {
+        const { imageDesktop } = props || {};
+        if (imageDesktop) {
+            return {
+                backgroundImage: `url(${imageDesktop})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "100vw",
+            };
+        }
+        return {};
+    }}
+    height:650px;
     .title {
         font-size: 80px !important;
         font-weight: 700;
