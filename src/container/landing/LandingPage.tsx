@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import React from "react";
-import BlockBigBanner from "../block/BlockBigBanner";
-import BlockBoxByBox from "../block/BlockBoxByBox";
+import BlockBigBanner from "../shared/block/BlockBigBanner";
+import BlockBoxByBox from "../shared/block/BlockBoxByBox";
 import Icon from "@/components/icon/Icon";
+import BlockAboutUs from "../shared/block/BlockAboutUs";
 
 export interface ILandingPageProps {
     [key: string]: any;
@@ -69,6 +70,14 @@ const BLOCK_BOX_BY_BOX_STEPS = {
     ],
 };
 
+const BLOCK_ABOUT_US = {
+    title: "About.",
+    subTitle:
+        "Pirate Mobile provides eSIM data packages to ensure wherever you go, you are always connected.",
+    description:
+        "We are an international team of telecommunications professionals and digital experience experts spanning Thailand, Vietnam, Dubai, the United Kingdom, Spain and the US. Like you, we travel – for business and fun – and we know how important it is to stay connected while away from home. We’ve leveraged the latest technology to take the headache out of global connectivity, eliminating data roaming fees and awkward SIM swap outs. With Pirate Mobile you simply select your destination and the package that’s best for you. We’ll provide you a QR code to install and activate your eSIM data package. And if something goes wrong, please contact us. We want your experience with us to be as seamless as the connectivity we provide!",
+};
+
 const LandingPage: React.FC<ILandingPageProps> = ({ id }) => {
     return (
         <LandingPageStyled className="z-10 relative container">
@@ -81,6 +90,7 @@ const LandingPage: React.FC<ILandingPageProps> = ({ id }) => {
                 blockData={BLOCK_BOX_BY_BOX_STEPS}
                 className="mt-5"
             />
+            <BlockAboutUs blockData={BLOCK_ABOUT_US} className="mt-5" />
         </LandingPageStyled>
     );
 };
