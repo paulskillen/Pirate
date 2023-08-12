@@ -76,7 +76,7 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
     };
 
     return (
-        <ESimItemStyled className=" mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full">
+        <ESimItemStyled className=" mt-4 text-white border border-gold bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full">
             <div className="w-full">
                 <div className="flex flex-row">
                     <div className="flex flex-col w-full">
@@ -107,15 +107,15 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
                 <Button
                     // iconName="add_circle"
                     size="auto"
-                    className="border rounded-full px-2 py-1"
+                    className="border border-gold rounded-full px-2 py-1 text-gold-light"
                     variant="trans"
                     onClick={() => onSendSmsToEsim()}
                 >
                     {Messages.sendSms}
                 </Button>
                 <Button
-                    size="auto"
-                    className="border rounded-full px-2 py-1"
+                    size="x-small"
+                    className="border border-gold rounded-full px-2 py-1 text-gold-light"
                     variant="trans"
                     onClick={() =>
                         router.push(Path.esimsDetail(eSimItem).as || "")
@@ -126,7 +126,7 @@ const ESimItem: React.FC<IESimItemProps> = ({ eSimItem }) => {
                 <Button
                     iconName="add_circle"
                     size="auto"
-                    className="border rounded-full px-2 py-1"
+                    className="border border-gold rounded-full px-2 py-1 text-gold-light"
                     variant="trans"
                     onClick={() => {
                         router.push({

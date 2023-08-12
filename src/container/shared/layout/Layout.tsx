@@ -55,6 +55,7 @@ export const LayoutClean: React.FC<ILayoutProps> = ({
             })}
         >
             <div className="flex-grow w-100">{children}</div>
+            <SiteFooter />
             <PostAffiliatePro />
         </LayoutStyled>
     );
@@ -67,6 +68,7 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
         return (
             <LayoutStyled className="layout_container bg-black">
                 <AuthSignInView />
+                <SiteFooter />
                 <PostAffiliatePro />
             </LayoutStyled>
         );
@@ -75,6 +77,7 @@ export const LayoutAuth: React.FC<ILayoutProps> = ({ children }) => {
     return (
         <LayoutStyled className="layout_container bg-black">
             {children}
+            <SiteFooter />
             <PostAffiliatePro />
         </LayoutStyled>
     );

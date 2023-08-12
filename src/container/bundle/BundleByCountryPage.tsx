@@ -211,7 +211,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
         <Fragment>
             <BundleItemStyled
                 className={ClassNames(
-                    "mt-4 text-white  rounded-2xl p-3 text-xl z-10 relative",
+                    "mt-4 text-white border-gold  rounded-2xl p-3 text-xl z-10 relative",
                     {
                         "border-2 bg-darken": selected,
                         "border bg-black": !selected,

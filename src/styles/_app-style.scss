@@ -66,6 +66,12 @@
     }
 }
 
+.d-button__trans-primary {
+    &:hover {
+        background-color: var(--color-darken) !important;
+    }
+}
+
 // change auto complete input background color
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
