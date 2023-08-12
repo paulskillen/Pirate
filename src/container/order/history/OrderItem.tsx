@@ -106,7 +106,7 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
 
     return (
         <OrderItemStyled
-            className="flex flex-row mt-4 text-white border bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full"
+            className="flex flex-row mt-4 text-white border border-gold bg-black rounded-2xl p-3 px-4 text-xl z-10 relative w-full"
             // onClick={() => router.push(Path.orderDetail(order).as || "")}
         >
             <div className="w-full">
@@ -138,7 +138,7 @@ export const OrderItem: React.FC<IOrderItemProps> = ({ order, onClick }) => {
                 <div className="w-full flex mt-3 gap-3 justify-end">
                     <Button
                         size="x-small"
-                        className="border rounded-full"
+                        className="border border-gold rounded-full text-gold-light"
                         variant="trans"
                         onClick={() =>
                             router.push(Path.orderDetail(order).as || "")
