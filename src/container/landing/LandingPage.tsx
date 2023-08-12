@@ -5,6 +5,7 @@ import BlockBoxByBox from "../shared/block/BlockBoxByBox";
 import Icon from "@/components/icon/Icon";
 import BlockAboutUs from "../shared/block/BlockAboutUs";
 import BlockLatestNews from "../shared/block/BlockLatestNews";
+import MobileHeader from "../shared/header/MobileHeader";
 
 export interface ILandingPageProps {
     [key: string]: any;
@@ -114,6 +115,7 @@ const BLOCK_ABOUT_LATEST_NEWS = {
 const LandingPage: React.FC<ILandingPageProps> = ({ id }) => {
     return (
         <LandingPageStyled className="z-10 relative">
+            <MobileHeader />
             <BlockBigBanner
                 className="mt-3 md:mt-5 container"
                 blockData={BLOCK_BIG_BANNER}
