@@ -5,6 +5,7 @@ import elegant from "./collection/elegant.json";
 import carbon from "./collection/carbon.json";
 import ion from "./collection/ion.json";
 import feather from "./collection/feather.json";
+import fontisto from "./collection/fontisto.json";
 import googleMaterial from "./collection/google-material.json";
 
 declare const ICON_SET: readonly [
@@ -13,6 +14,7 @@ declare const ICON_SET: readonly [
     "carbon",
     "google-material",
     "ion",
+    "fontisto",
     "feather"
 ];
 
@@ -40,6 +42,8 @@ const Icon = ({
                 return ion;
             case "feather":
                 return feather;
+            case "fontisto":
+                return fontisto;
 
             default:
                 return bootstrap;

@@ -15,7 +15,7 @@ const Image: React.FC<IImageProps> = (props) => {
     const {
         nextImageProps = {},
         src,
-        alt = "",
+        alt = "img_default",
         useNextImg = true,
         className,
     } = props;

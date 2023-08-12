@@ -12,11 +12,12 @@
     --color-gold-dark: rgb(153, 118, 53);
     --color-darken: rgb(38, 38, 38);
     --body-font-family: "Poppins", "sans-serif";
+    background-color: black;
 }
 
 body {
     font-family: var(--body-font-family);
-    background-color: #cad3e5;
+    background-color: black;
 }
 
 button {
@@ -29,4 +30,7 @@ button {
 
 .display-none {
     display: none;
+}
+
+@layer components {
 }

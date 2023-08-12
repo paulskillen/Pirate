@@ -21,3 +21,31 @@ export const IDS_OPEN_SELECT_COUNTRY = [
     "select-country__dropdown",
     "input-text__clear-icon",
 ];
+
+
+
+const AOS_ANIMATION = [
+    "fade-up",
+    "fade-down",
+    "fade-right",
+    "fade-left",
+    "fade-up-right",
+    "fade-up-left",
+    "fade-down-right",
+    "fade-down-left",
+    "fade-down-right",
+    "flip-up",
+    "flip-down",
+    "flip-right",
+    "flip-left",
+    "zoom-in",
+    "zoom-in-up",
+    "zoom-in-down",
+    "zoom-in-left",
+    "zoom-in-right",
+    "zoom-out",
+    "zoom-out-up",
+    "zoom-out-down",
+    "zoom-out-left",
+    "zoom-out-right",
+];

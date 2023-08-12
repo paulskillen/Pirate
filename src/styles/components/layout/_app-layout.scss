@@ -6,10 +6,6 @@ $expand-menu-width: 300px;
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-body {
-    overflow-y: hidden !important;
-}
-
 @mixin expanding-avatar {
     min-width: 85px !important;
     width: 85px !important;
