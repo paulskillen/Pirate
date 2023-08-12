@@ -83,7 +83,7 @@ const BLOCK_ABOUT_US = {
 const LandingPage: React.FC<ILandingPageProps> = ({ id }) => {
     return (
         <LandingPageStyled className="z-10 relative container">
-            <BlockBigBanner className="mt-5" blockData={BLOCK_BIG_BANNER} />
+            <BlockBigBanner className="mt-3 md:mt-5" blockData={BLOCK_BIG_BANNER} />
             <BlockBoxByBox
                 blockData={BLOCK_BOX_BY_BOX_INTRO}
                 className="mt-5"

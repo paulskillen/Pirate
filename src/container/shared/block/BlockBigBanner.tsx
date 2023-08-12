@@ -16,7 +16,7 @@ const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
     const { title, subTitle, buttonText } = blockData || {};
     return (
         <BlockBigBannerStyled
-            className={`text-white flex flex-col justify-center pr-10 pl-5 ${className}`}
+            className={`text-white flex flex-col justify-center md:pr-10 md:pl-5 md:h-[650px] ${className}`}
             {...blockData}
         >
             {subTitle && (
@@ -24,7 +24,9 @@ const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
                     {subTitle.toUpperCase()}
                 </h5>
             )}
-            <h1 className="text-white pr-10 mt-4 title font-mont z-10">{title}</h1>
+            <h1 className="text-white pr-10 mt-4 title font-mont z-10">
+                {title}
+            </h1>
             {buttonText && (
                 <ButtonLink className="mt-5 z-10">
                     {buttonText?.toUpperCase?.()}
@@ -38,20 +40,6 @@ const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
 export default BlockBigBanner;
 
 const BlockBigBannerStyled = styled.div`
-    /* ${(props: IBlockBaseProps<any>) => {
-        const { imageDesktop } = props || {};
-        if (imageDesktop) {
-            return {
-                backgroundImage: `url(${imageDesktop})`,
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "100vw",
-                filter: "blur(5px)",
-            };
-        }
-        return {};
-    }} */
-    height: 650px;
     position: relative;
 
     &:before {
@@ -67,11 +55,11 @@ const BlockBigBannerStyled = styled.div`
         background: inherit;
         z-index: 0;
         ${(props: IBlockBaseProps<any>) => {
-            const { imageDesktop } = props || {};
+            const { imageDesktop, imageMobile } = props || {};
             if (imageDesktop) {
                 return {
-                    backgroundImage: `url(${imageDesktop})`,
-                    backgroundPosition: "center",
+                    backgroundImage: `url(${imageMobile || imageDesktop})`,
+                    backgroundPosition: "top",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "100vw",
                     filter: "blur(3px)",
@@ -79,6 +67,21 @@ const BlockBigBannerStyled = styled.div`
             }
             return {};
         }}
+        @meida (min-width: 768px) {
+            ${(props: IBlockBaseProps<any>) => {
+                const { imageDesktop } = props || {};
+                if (imageDesktop) {
+                    return {
+                        backgroundImage: `url(${imageDesktop})`,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "100vw",
+                        filter: "blur(3px)",
+                    };
+                }
+                return {};
+            }}
+        }
     }
 
     .title {
