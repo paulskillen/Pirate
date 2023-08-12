@@ -20,16 +20,17 @@ const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
             {...blockData}
         >
             {subTitle && (
-                <h5 className="text-gold-light  sub-title">
+                <h5 className="text-gold-light  sub-title z-10">
                     {subTitle.toUpperCase()}
                 </h5>
             )}
-            <h1 className="text-white pr-10 mt-4 title font-mont">{title}</h1>
+            <h1 className="text-white pr-10 mt-4 title font-mont z-10">{title}</h1>
             {buttonText && (
-                <ButtonLink className="mt-5">
+                <ButtonLink className="mt-5 z-10">
                     {buttonText?.toUpperCase?.()}
                 </ButtonLink>
             )}
+            {/* <div className="over-lay_glass" /> */}
         </BlockBigBannerStyled>
     );
 };
@@ -37,7 +38,7 @@ const BlockBigBanner: React.FC<IBlockBigBannerProps> = ({
 export default BlockBigBanner;
 
 const BlockBigBannerStyled = styled.div`
-    ${(props: IBlockBaseProps<any>) => {
+    /* ${(props: IBlockBaseProps<any>) => {
         const { imageDesktop } = props || {};
         if (imageDesktop) {
             return {
@@ -45,11 +46,41 @@ const BlockBigBannerStyled = styled.div`
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "100vw",
+                filter: "blur(5px)",
             };
         }
         return {};
-    }}
-    height:650px;
+    }} */
+    height: 650px;
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.023);
+        box-shadow: inset 0 0 2000px rgba(5, 5, 5, 0.705);
+        filter: blur(5px);
+        background: inherit;
+        z-index: 0;
+        ${(props: IBlockBaseProps<any>) => {
+            const { imageDesktop } = props || {};
+            if (imageDesktop) {
+                return {
+                    backgroundImage: `url(${imageDesktop})`,
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "100vw",
+                    filter: "blur(3px)",
+                };
+            }
+            return {};
+        }}
+    }
+
     .title {
         font-size: 80px !important;
         font-weight: 700;
@@ -63,5 +94,21 @@ const BlockBigBannerStyled = styled.div`
     .sub-title {
         font-weight: 500;
         font-size: 16px !important;
+    }
+
+    .over-lay_glass {
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+            box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+            filter: blur(5px);
+            background: inherit;
+            z-index: 1;
+        }
     }
 `;

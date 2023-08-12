@@ -15,7 +15,7 @@ const ButtonLink: React.FC<IButtonLinkProps> = ({
     ...rest
 }) => {
     return (
-        <AppLink {...rest}>
+        <AppLink className="z-10" {...rest}>
             <ButtonLinkStyled className={className}>
                 {children}
             </ButtonLinkStyled>
