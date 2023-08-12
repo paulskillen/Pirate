@@ -4,8 +4,9 @@ import {
     IBlockComponentBaseProps,
 } from "@/common/interface/block";
 import ButtonLink from "@/components/button/ButtonLink";
+import Icon from "@/components/icon/Icon";
 import styled from "@emotion/styled";
-import { Icon } from "d-react-components";
+// import { Icon } from "d-react-components";
 import { map } from "lodash";
 import React, { useMemo } from "react";
 
@@ -31,7 +32,7 @@ const BlockBoxByBox: React.FC<IBlockBoxByBoxProps> = ({
                 </h5>
             )}
             {dataSource?.length && (
-                <div className="flex flex-col md:flex-row  gap-5">
+                <div className="flex flex-col lg:flex-row  gap-5">
                     {map(dataSource, (item, index) => (
                         <BlockBoxItem key={index} data={item} />
                     ))}
@@ -44,13 +45,16 @@ const BlockBoxByBox: React.FC<IBlockBoxByBoxProps> = ({
 export default BlockBoxByBox;
 
 const BlockBoxItem: React.FC<any> = ({ className, data }) => {
-    const { title, description, icon, showDivider, buttonText } = data || {};
+    const { title, description, icon, showDivider, buttonText, useIconSet } =
+        data || {};
 
     const iconView = useMemo(() => {
         if (typeof icon === "string") {
             return (
                 <Icon
-                    name={icon}
+                    icon={icon}
+                    useIconSet={useIconSet}
+                    size={50}
                     className="text-gold block-box-item__icon mb-12"
                 />
             );
@@ -63,7 +67,7 @@ const BlockBoxItem: React.FC<any> = ({ className, data }) => {
 
     return (
         <BlockBoxItemStyled
-            className={`${className} bg-blackTrans p-5 hover:bg-darken hover:border hover:border-gold-light flex-1`}
+            className={`${className} bg-blackTrans p-4 md:p-5 hover:bg-darken hover:border hover:border-gold-light flex-1`}
         >
             {icon && iconView}
             {title && (

@@ -88,6 +88,11 @@ const BlockBigBannerStyled = styled.div`
         font-size: 80px !important;
         font-weight: 700;
         line-height: 1.1em;
+        @media (max-width: 1024px) {
+            font-size: 65px !important;
+            font-weight: 700;
+            line-height: 1.1em;
+        }
         @media (max-width: 768px) {
             font-size: 34px !important;
             font-weight: 500;

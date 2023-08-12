@@ -14,12 +14,14 @@ const BlockAboutUs: React.FC<IBlockAboutUsProps> = ({
     blockData,
     className,
 }) => {
-    const { title, subTitle, buttonText, description, image } = blockData || {};
+    const { title, subTitle, buttonText, description, imageDesktop } =
+        blockData || {};
+
     return (
         <BlockAboutUsStyled className={`text-white ${className}`}>
             <div className="flex items-center">
-                <div className="bg-gold h-[2px] w-full max-w-[100px]" />
-                <h2 className="text-white pl-10 title font-mont">{title}</h2>
+                <div className="bg-gold h-[2px] w-full max-w-[100px] display-none md:block pr-10" />
+                <h2 className="text-white title font-mont">{title}</h2>
             </div>
             {subTitle && (
                 <div className="text-gold  sub-title mt-4">{subTitle}</div>
@@ -29,16 +31,25 @@ const BlockAboutUs: React.FC<IBlockAboutUsProps> = ({
                     {buttonText?.toUpperCase?.()}
                 </ButtonLink>
             )}
-            {(description || image) && (
-                <div className="mt-4 flex flex-col sm:flex-row sm:items-center">
-                    {image && (
-                        <Image
-                            alt="about_us"
-                            nextImageProps={{ width: 200, height: 200 }}
-                            src={image}
+            {(description || imageDesktop) && (
+                <div className="mt-4 md:grid grid-flow-row grid-cols-12 items-center">
+                    {imageDesktop && (
+                        <div className="relative block-about-us__img-wrapper col-span-4 pb-[100%]">
+                            <Image
+                                useNextImg={false}
+                                alt="about_us"
+                                className="block-about-us__img-wrapper absolute w-full h-full"
+                                // nextImageProps={{ width: 200, height: 200 }}
+                                src={imageDesktop}
+                            />
+                        </div>
+                    )}
+                    {description && (
+                        <p
+                            className="col-span-8 py-3 md:pl-5 md:py-4"
+                            dangerouslySetInnerHTML={{ __html: description }}
                         />
                     )}
-                    {description && <p>{description}</p>}
                 </div>
             )}
         </BlockAboutUsStyled>

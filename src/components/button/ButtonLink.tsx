@@ -1,10 +1,10 @@
 import React from "react";
-import AppLink from "../link/AppLink";
+import AppLink, { AppLinkProps } from "../link/AppLink";
 import styled from "@emotion/styled";
-import { COLOR_GOLD } from "@/common/constant/app-style";
+import { COLOR_GOLD, COLOR_GOLD_LIGHT } from "@/common/constant/app-style";
 import { ILinkProps } from "@/common/interface/link";
 
-export interface IButtonLinkProps extends Partial<ILinkProps> {
+export interface IButtonLinkProps extends Partial<AppLinkProps> {
     children?: any;
     className?: string;
 }
@@ -35,5 +35,13 @@ const ButtonLinkStyled = styled.button`
     :hover {
         background-color: ${COLOR_GOLD};
         color: white !important;
+    }
+    :focus {
+        border: 2.5px solid ${COLOR_GOLD_LIGHT} !important;
+        outline: none;
+    }
+    :focus-visible {
+        border: 2.5px solid ${COLOR_GOLD_LIGHT} !important;
+        outline: none;
     }
 `;

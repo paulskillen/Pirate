@@ -8,6 +8,7 @@ export interface IBlockBaseProps<T> {
     subTitle?: string;
     description?: string;
     imageDesktop?: string;
+    imageMobile?: string;
     dataSource?: T[];
     [key: string]: any;
 }

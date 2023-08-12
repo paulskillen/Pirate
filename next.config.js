@@ -38,6 +38,13 @@ const nextConfig = {
 
         return config;
     },
+    images: {
+        domains: [
+            "www.icloud.com",
+            "drive.google.com",
+            "rhq6db.n3cdn1.secureserver.net",
+        ],
+    },
 };
 
 module.exports = nextConfig;

@@ -111,12 +111,12 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                         alt="logo"
                         src="/images/logo/logo.png"
                         style={{ objectFit: "cover" }}
-                        width={50}
-                        height={50}
+                        width={100}
+                        height={100}
                     />
-                    <div className="text-white  font-semibold ml-3">
+                    <h4 className="text-white  font-semibold ml-3">
                         Pirate <span className="text-gold">Mobile</span>
-                    </div>
+                    </h4>
                 </div>
             </AppLink>
         );
