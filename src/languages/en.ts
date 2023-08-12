@@ -111,6 +111,7 @@ const translations = {
     sendSmsSuccessfully: "Sent SMS Successfully !",
     viewEsim: "View eSIM",
     termOfUse: "Term Of Use",
+    blogs: "Blogs",
     readMore: "Read more...",
     byContinueYouAgree: "By continue you agree with our",
 };
