@@ -67,7 +67,7 @@ const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
                         <div>{Messages.termOfUse}</div>
                     </AppLink>
                 </div>
-                <div className="flex items-center gap-10">
+                <div className="flex items-center gap-10 mt-[1rem] sm:mt-0">
                     <AppLink>
                         <Icon icon="facebook" />
                     </AppLink>
@@ -78,6 +78,7 @@ const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
                         <Icon icon="linkedin" />
                     </AppLink>
                 </div>
+                <div className="block md:hidden h-[100px]" />
             </div>
         </SiteFooterStyled>
     );
