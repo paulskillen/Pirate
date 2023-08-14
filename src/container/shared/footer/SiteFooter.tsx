@@ -46,6 +46,7 @@ const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
                         <Icon
                             className="mx-4"
                             icon="map"
+                            size={30}
                             useIconSet="fontisto"
                         />
                         <div>

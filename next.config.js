@@ -43,6 +43,7 @@ const nextConfig = {
             "www.icloud.com",
             "drive.google.com",
             "rhq6db.n3cdn1.secureserver.net",
+            "pirate-mobile-pro.s3.amazonaws.com",
         ],
     },
 };

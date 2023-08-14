@@ -7,10 +7,18 @@ import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { Button } from "d-react-components";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import SelectCountry from "../shared/input/SelectCountry";
-import { IDS_OPEN_SELECT_COUNTRY } from "@/common/constant/app";
+import {
+    IDS_OPEN_SELECT_COUNTRY,
+    POPULAR_COUNTRIES,
+} from "@/common/constant/app";
 import DesktopHeader from "../shared/header/DesktopHeader";
+import BlockPopularCountries from "../shared/block/BlockPopularCountries";
+import { filter, map } from "lodash";
+import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
+import { SwiperSlide } from "swiper/react";
+import Image from "@/components/image/Image";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -24,10 +32,28 @@ const HOME_PAGE_DISPLAY_REGIONS = [
     CountryRegion.Middle_East,
 ];
 
+const HOME_PAGE_COVERS = [
+    {
+        id: "1",
+        label: "High",
+        src: "https://pirate-mobile-pro.s3.amazonaws.com/356656125_125643223888039_8826555008093974900_n.png",
+    },
+    {
+        id: "3",
+        label: "Low",
+        src: "/images/information/2.jpeg",
+    },
+    {
+        id: "4",
+        label: "Low",
+        src: "/images/information/3.jpeg",
+    },
+];
+
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
     const { metaData, setOpenSelectCountry } = useContext(AppStateContext);
-    const { countryByRegion } = metaData || {};
+    const { countryList } = metaData || {};
 
     useEffect(() => {
         function handleOnClick(e: any) {
@@ -129,6 +155,47 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             className="home-page__container container bg-transparent h-screen z-10 relative text-white px-3 bg-red-400 "
         >
             {renderNewHeader()}
+            {useMemo(() => {
+                return (
+                    <BlockPopularCountries
+                        dataSource={filter(countryList, (item) =>
+                            POPULAR_COUNTRIES.includes(item?.iso ?? "")
+                        )}
+                        className="mt-4"
+                        label={Messages.popularDestinations}
+                    />
+                );
+            }, [countryList])}
+            {useMemo(() => {
+                return (
+                    <BlockSwiperSlide
+                        className="mt-4"
+                        swiperProps={{ pagination: false }}
+                    >
+                        {map(HOME_PAGE_COVERS, (item, index) => {
+                            return (
+                                <SwiperSlide
+                                    className=""
+                                    key={`${item?.id}_${index}`}
+                                >
+                                    <div className=" w-full bg-red-200 grid grid-flow-row grid-cols-12">
+                                        <div className="col-span-4 relative pb-[100%] bg-green-200">
+                                            <Image
+                                                alt="slider-homepage"
+                                                src={item?.src}
+                                                className="absolute w-full h-full"
+                                            />
+                                        </div>
+                                        <div className="col-span-8 bg-gradient-to-l">
+                                            
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                            );
+                        })}
+                    </BlockSwiperSlide>
+                );
+            }, [])}
             {/* {renderGrids()} */}
             <div
                 onClick={() =>

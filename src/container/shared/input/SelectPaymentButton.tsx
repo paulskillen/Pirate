@@ -1,5 +1,5 @@
 import { PaymentMethod, PAYMENT_METHODS } from "@/common/interface/payment";
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import {
     OrderResponseBody,
     OrderResponseBodyMinimal,
@@ -18,6 +18,7 @@ import OrderApi from "@/apis/order/OrderApi";
 import { IOrder } from "@/common/interface/order";
 import { AppStateContext } from "@/common/context/app/app-context";
 import Modal from "@/components/modal/Modal";
+import styled from "@emotion/styled";
 
 export interface IPayPalOrderResponse extends OrderResponseBody {}
 export type PayPalOrderStatusType = OrderResponseBodyMinimal["status"];
@@ -65,6 +66,12 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
     onError,
 }) => {
     const { setActiveOrder } = useContext(AppStateContext);
+    const [{ isPending }] = usePayPalScriptReducer();
+
+    console.log(
+        "🚀 >>>>>> file: SelectPaymentButton.tsx:72 >>>>>> isPending:",
+        isPending
+    );
     const [openPaymentsModal, setOpenPaymentsModal] = useState<{
         open: boolean;
     }>({ open: false });
@@ -134,6 +141,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
                 onApprove={(data, actions) => {
                     return onApproveOrder(actions);
                 }}
+                style={{ layout: "vertical", color: "black" }}
             />
         );
     };
@@ -163,7 +171,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
                         setOpenPaymentsModal({ open: false });
                     }}
                 >
-                    <div className="mt-5">
+                    <PaymentModalStyled className="mt-5">
                         {map(PAYMENT_METHODS, (item) => {
                             const { icon, id, label } = item || {};
                             if (id === PaymentMethod.PAYPAL) {
@@ -176,7 +184,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
                                 </div>
                             );
                         })}
-                    </div>
+                    </PaymentModalStyled>
                 </Modal>
             )}
         </React.Fragment>
@@ -184,3 +192,5 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
 };
 
 export default SelectPaymentButton;
+
+const PaymentModalStyled = styled.div``;
