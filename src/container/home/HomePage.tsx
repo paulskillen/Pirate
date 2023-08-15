@@ -35,18 +35,20 @@ const HOME_PAGE_DISPLAY_REGIONS = [
 const HOME_PAGE_COVERS = [
     {
         id: "1",
-        label: "High",
-        src: "https://pirate-mobile-pro.s3.amazonaws.com/356656125_125643223888039_8826555008093974900_n.png",
+        title: "High",
+        src: "/images/information/cover_1.jpeg",
     },
     {
         id: "3",
-        label: "Low",
-        src: "/images/information/2.jpeg",
+        title: "Join our affiliate program to get passive income !",
+        subTitle: "Up to 20% commission !",
+        src: "/images/information/cover_2.png",
+        buttonText: "Click here",
     },
     {
         id: "4",
-        label: "Low",
-        src: "/images/information/3.jpeg",
+        title: "Low",
+        src: "/images/information/cover_3.png",
     },
 ];
 
@@ -169,25 +171,34 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             {useMemo(() => {
                 return (
                     <BlockSwiperSlide
-                        className="mt-4"
+                        className="mt-5"
                         swiperProps={{ pagination: false }}
                     >
                         {map(HOME_PAGE_COVERS, (item, index) => {
+                            const { title, subTitle } = item || {};
                             return (
                                 <SwiperSlide
                                     className=""
                                     key={`${item?.id}_${index}`}
                                 >
-                                    <div className=" w-full bg-red-200 grid grid-flow-row grid-cols-12">
-                                        <div className="col-span-4 relative pb-[100%] bg-green-200">
+                                    <div className="w-full bg-black grid grid-flow-row grid-cols-12 bg-gradient-to-r from-gold-trans dark:from-black rounded-3xl">
+                                        <div className="home-page__block-slider-image-wrapper col-span-4 relative pb-[100%] rounded-2xl items-center">
                                             <Image
+                                                useNextImg={false}
                                                 alt="slider-homepage"
                                                 src={item?.src}
                                                 className="absolute w-full h-full"
                                             />
                                         </div>
-                                        <div className="col-span-8 bg-gradient-to-l">
-                                            
+                                        <div className="col-span-8 my-auto pl-4">
+                                            {subTitle && (
+                                                <div className="text-white mb-2">
+                                                    {subTitle}
+                                                </div>
+                                            )}
+                                            <h5 className="text-white">
+                                                {title}
+                                            </h5>
                                         </div>
                                     </div>
                                 </SwiperSlide>
@@ -223,18 +234,24 @@ const MainStyled = styled.main`
             background-color: transparent !important;
         }
     }
-    .home-page__slider-image-wrapper {
-        padding-bottom: 67%;
+    .home-page__block-slider-image-wrapper {
         position: relative;
-        .home-page__slider-image {
+        /* &::after {
+            content: "";
             position: absolute;
-            width: 100%;
-            height: auto;
+            right: -30px;
             top: 0;
-            left: 0;
             bottom: 0;
-            right: 0;
-        }
+            left: 100px;
+            pointer-events: none;
+            height: 100%;
+            opacity: 0.5;
+            background-image: linear-gradient(
+                to left,
+                rgba(192, 157, 94, 0.25),
+                rgba(255, 255, 255, 0)
+            );
+        } */
     }
     .logo-click-mask {
         position: absolute;
