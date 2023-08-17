@@ -26,11 +26,11 @@ const BlockPopularCountries: React.FC<IBlockPopularCountriesProps> = ({
                         const { name, flag, iso } = item || {};
                         return (
                             <AppLink
-                                className="min-w-fit "
+                                className="min-w-fit"
                                 href={Path.bundleByCountry(iso ?? "")}
                                 id={`${iso}_${index}`}
                             >
-                                <div className="flex flex-row items-center mt-1 bg-black border border-gold px-2 py-2 rounded-full">
+                                <div className="flex flex-row items-center mt-1 bg-black border border-gold px-2 py-2 rounded-full min-w-[90px]">
                                     <Image
                                         className="w-8 h-8 rounded-full border border-gold"
                                         alt="flag"

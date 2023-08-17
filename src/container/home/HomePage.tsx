@@ -19,6 +19,14 @@ import { filter, map } from "lodash";
 import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
 import { SwiperSlide } from "swiper/react";
 import Image from "@/components/image/Image";
+import BlockWhyChooseUs from "../shared/block/BlockWhyChooseUs";
+import {
+    BLOCK_ABOUT_LATEST_NEWS,
+    BLOCK_BOX_BY_BOX_STEPS,
+    BLOCK_WHY_CHOOSE_US,
+} from "@/common/constant/block";
+import BlockLatestNews from "../shared/block/BlockLatestNews";
+import BlockBoxByBox from "../shared/block/BlockBoxByBox";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -68,18 +76,6 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         document.addEventListener("click", handleOnClick as any);
         return () =>
             document.removeEventListener("click", handleOnClick as any);
-    }, []);
-
-    useEffect(() => {
-        // function handleOnTouchMove(e: any) {
-        //     const eventTargetId: any = e?.target?.id;
-        //     if (eventTargetId == "home-page__container") {
-        //         e?.preventDefault?.();
-        //     }
-        // }
-        // document.addEventListener("touchmove", handleOnTouchMove as any);
-        // return () =>
-        //     document.removeEventListener("touchmove", handleOnTouchMove as any);
     }, []);
 
     const renderHeader = () => {
@@ -151,10 +147,37 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         // );
     };
 
+    const blockWhyUs = useMemo(() => {
+        return (
+            <BlockWhyChooseUs
+                className="mt-3 md:mt-5"
+                blockData={BLOCK_WHY_CHOOSE_US}
+            />
+        );
+    }, []);
+
+    const blockBySteps = useMemo(() => {
+        return (
+            <BlockBoxByBox
+                blockData={BLOCK_BOX_BY_BOX_STEPS}
+                className="mt-5 container"
+            />
+        );
+    }, []);
+
+    const blockLatestNews = useMemo(() => {
+        return (
+            <BlockLatestNews
+                blockData={BLOCK_ABOUT_LATEST_NEWS}
+                className="py-20 px-3"
+            />
+        );
+    }, []);
+
     return (
         <MainStyled
             id="home-page__container"
-            className="home-page__container container bg-transparent h-screen z-10 relative text-white px-3 bg-red-400 "
+            className="home-page__container container bg-transparent min-h-screen z-10 relative text-white px-3 bg-red-400 "
         >
             {renderNewHeader()}
             {useMemo(() => {
@@ -171,7 +194,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             {useMemo(() => {
                 return (
                     <BlockSwiperSlide
-                        className="mt-5"
+                        className="mt-4 md:mt-5"
                         swiperProps={{ pagination: false }}
                     >
                         {map(HOME_PAGE_COVERS, (item, index) => {
@@ -207,6 +230,9 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                     </BlockSwiperSlide>
                 );
             }, [])}
+            {blockWhyUs}
+            {blockBySteps}
+            {blockLatestNews}
             {/* {renderGrids()} */}
             <div
                 onClick={() =>
