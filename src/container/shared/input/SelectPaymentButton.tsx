@@ -67,11 +67,6 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
 }) => {
     const { setActiveOrder } = useContext(AppStateContext);
     const [{ isPending }] = usePayPalScriptReducer();
-
-    console.log(
-        "🚀 >>>>>> file: SelectPaymentButton.tsx:72 >>>>>> isPending:",
-        isPending
-    );
     const [openPaymentsModal, setOpenPaymentsModal] = useState<{
         open: boolean;
     }>({ open: false });
