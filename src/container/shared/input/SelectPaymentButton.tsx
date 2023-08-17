@@ -134,6 +134,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
                 onApprove={(data, actions) => {
                     return onApproveOrder(actions);
                 }}
+                style={{ layout: "vertical", color: "black" }}
             />
         );
     };
