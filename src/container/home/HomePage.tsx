@@ -194,14 +194,14 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             {useMemo(() => {
                 return (
                     <BlockSwiperSlide
-                        className="mt-4 md:mt-5"
-                        swiperProps={{ pagination: false }}
+                        className="mt-4 md:pt-10 md:mb-10 md:px-[10rem]"
+                        swiperProps={{ pagination: true, slidesPerView: 1 }}
                     >
                         {map(HOME_PAGE_COVERS, (item, index) => {
                             const { title, subTitle } = item || {};
                             return (
                                 <SwiperSlide
-                                    className=""
+                                    className="rounded-2xl"
                                     key={`${item?.id}_${index}`}
                                 >
                                     <div className="w-full bg-black grid grid-flow-row grid-cols-12 bg-gradient-to-r from-gold-trans dark:from-black rounded-3xl">
@@ -210,7 +210,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                                                 useNextImg={false}
                                                 alt="slider-homepage"
                                                 src={item?.src}
-                                                className="absolute w-full h-full"
+                                                className="absolute w-full h-full rounded-l-2xl"
                                             />
                                         </div>
                                         <div className="col-span-8 my-auto pl-4">

@@ -3,6 +3,7 @@ import { TAB_BOTTOM_HEIGHT } from "@/common/constant/app";
 import { COLOR_GOLD, COLOR_GOLD_LIGHT } from "@/common/constant/app-style";
 import Icon from "@/components/icon/Icon";
 import AppLink from "@/components/link/AppLink";
+import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import ClassNames from "classnames";
 import { useRouter } from "next/router";
@@ -22,6 +23,7 @@ const ICON_SIZE = 28;
 
 const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
     const classItem = "p-3 rounded-full";
+    const classWrapper = "flex flex-col items-center";
     const router = useRouter();
     const { pathname, query } = router || {};
     const activeClass = (isActive?: boolean) => {
@@ -36,10 +38,10 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
 
     return (
         <div
-            className="tab-bottom bg-black  z-20 fixed flex items-center justify-between md:justify-center md:gap-32 gap-8 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-1 border-t border-t-gold"
+            className="tab-bottom bg-black  z-20 fixed flex items-center justify-between md:justify-center md:gap-32 gap-8 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-3 border-t border-t-gold"
             style={{ height: `${TAB_BOTTOM_HEIGHT}px` }}
         >
-            <AppLink href={Path.home()}>
+            <AppLink className={classWrapper} href={Path.home()}>
                 <div
                     className={`ml-2 ${classItem} ${activeClass(
                         pathname === Path.home().href
@@ -53,8 +55,9 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         )}`}
                     />
                 </div>
+                <div className="small ml-2">{Messages.home}</div>
             </AppLink>
-            <AppLink href={Path.esimsHistory()}>
+            <AppLink className={classWrapper} href={Path.esimsHistory()}>
                 <div
                     className={`${classItem} ${activeClass(
                         pathname === Path.esimsHistory().href
@@ -68,8 +71,9 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         size={ICON_SIZE}
                     />
                 </div>
+                <div className="small text-gold">{Messages.yourEsim}</div>
             </AppLink>
-            <AppLink href={Path.landing()}>
+            <AppLink className={classWrapper} href={Path.landing()}>
                 <div
                     className={`${classItem} ${activeClass(
                         pathname === Path.landing().href
@@ -85,9 +89,10 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         height={ICON_SIZE}
                     />
                 </div>
+                <div className="small text-gold">{Messages.information}</div>
             </AppLink>
 
-            <AppLink href={Path.profile()}>
+            <AppLink className={classWrapper} href={Path.profile()}>
                 <div
                     className={`mr-2 ${classItem} ${activeClass(
                         pathname === Path.profile().href
@@ -101,6 +106,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         size={ICON_SIZE}
                     />
                 </div>
+                <div className="small text-gold mr-2">{Messages.profile}</div>
             </AppLink>
         </div>
     );

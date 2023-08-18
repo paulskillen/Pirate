@@ -6,7 +6,11 @@ export interface IAuthSignInPageProps {
 }
 
 const AuthSignInPage: React.FC<IAuthSignInPageProps> = ({ id }) => {
-    return <AuthSignInView />;
+    return (
+        <div className="relative z-10">
+            <AuthSignInView />;
+        </div>
+    );
 };
 
 export default AuthSignInPage;
