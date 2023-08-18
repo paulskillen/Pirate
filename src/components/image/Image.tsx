@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { ImgHTMLAttributes } from "react";
 import ClassNames from "classnames";
 import ImageNext, { ImageProps } from "next/image";
 
-export interface IImageProps {
+export interface IImageProps extends ImgHTMLAttributes<any> {
     nextImageProps?: Partial<ImageProps>;
     src: string;
     alt?: string;

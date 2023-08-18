@@ -7,10 +7,27 @@ import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { Button } from "d-react-components";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import SelectCountry from "../shared/input/SelectCountry";
-import { IDS_OPEN_SELECT_COUNTRY } from "@/common/constant/app";
+import {
+    IDS_OPEN_SELECT_COUNTRY,
+    POPULAR_COUNTRIES,
+} from "@/common/constant/app";
 import DesktopHeader from "../shared/header/DesktopHeader";
+import BlockPopularCountries from "../shared/block/BlockPopularCountries";
+import { filter, map } from "lodash";
+import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
+import { SwiperSlide } from "swiper/react";
+import Image from "@/components/image/Image";
+import BlockWhyChooseUs from "../shared/block/BlockWhyChooseUs";
+import {
+    BLOCK_ABOUT_LATEST_NEWS,
+    BLOCK_BOX_BY_BOX_STEPS,
+    BLOCK_WHY_CHOOSE_US,
+} from "@/common/constant/block";
+import BlockLatestNews from "../shared/block/BlockLatestNews";
+import BlockBoxByBox from "../shared/block/BlockBoxByBox";
+import MobileHeader from "../shared/header/MobileHeader";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -24,10 +41,32 @@ const HOME_PAGE_DISPLAY_REGIONS = [
     CountryRegion.Middle_East,
 ];
 
+const HOME_PAGE_COVERS = [
+    {
+        id: "1",
+        title: "Working seamlessly across many types of devices!",
+        subTitle: "For one eSIM",
+        src: "/images/information/cover_1.jpeg",
+    },
+    {
+        id: "2",
+        title: "Join our affiliate program to get passive income !",
+        subTitle: "Up to 20% commission !",
+        src: "/images/information/cover_2.png",
+        buttonText: "Click here",
+    },
+    {
+        id: "3",
+        title: "Start your journey by pick one destination !",
+        subTitle: "Worry free by always stay connected !",
+        src: "/images/information/cover_3.png",
+    },
+];
+
 const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     const router = useRouter();
     const { metaData, setOpenSelectCountry } = useContext(AppStateContext);
-    const { countryByRegion } = metaData || {};
+    const { countryList } = metaData || {};
 
     useEffect(() => {
         function handleOnClick(e: any) {
@@ -40,18 +79,6 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         document.addEventListener("click", handleOnClick as any);
         return () =>
             document.removeEventListener("click", handleOnClick as any);
-    }, []);
-
-    useEffect(() => {
-        // function handleOnTouchMove(e: any) {
-        //     const eventTargetId: any = e?.target?.id;
-        //     if (eventTargetId == "home-page__container") {
-        //         e?.preventDefault?.();
-        //     }
-        // }
-        // document.addEventListener("touchmove", handleOnTouchMove as any);
-        // return () =>
-        //     document.removeEventListener("touchmove", handleOnTouchMove as any);
     }, []);
 
     const renderHeader = () => {
@@ -81,7 +108,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     };
 
     const renderNewHeader = () => {
-        return <SelectCountry />;
+        return <SelectCountry className="my-4" />;
     };
 
     const renderGrids = () => {
@@ -123,12 +150,93 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         // );
     };
 
+    const blockWhyUs = useMemo(() => {
+        return (
+            <BlockWhyChooseUs
+                className="mt-3 md:mt-5"
+                blockData={BLOCK_WHY_CHOOSE_US}
+            />
+        );
+    }, []);
+
+    const blockBySteps = useMemo(() => {
+        return (
+            <BlockBoxByBox
+                blockData={BLOCK_BOX_BY_BOX_STEPS}
+                className="mt-5 container"
+            />
+        );
+    }, []);
+
+    const blockLatestNews = useMemo(() => {
+        return (
+            <BlockLatestNews
+                blockData={BLOCK_ABOUT_LATEST_NEWS}
+                className="py-20 px-3"
+            />
+        );
+    }, []);
+
     return (
         <MainStyled
             id="home-page__container"
-            className="home-page__container container bg-transparent h-screen z-10 relative text-white px-3 bg-red-400 "
+            className="home-page__container container bg-transparent min-h-screen z-10 relative text-white px-3 bg-red-400 "
         >
+            <MobileHeader showHideConfig={{ hideSearchIcon: true }} className="px-0" />
             {renderNewHeader()}
+            {useMemo(() => {
+                return (
+                    <BlockPopularCountries
+                        dataSource={filter(countryList, (item) =>
+                            POPULAR_COUNTRIES.includes(item?.iso ?? "")
+                        )}
+                        className="mt-4"
+                        label={Messages.popularDestinations}
+                    />
+                );
+            }, [countryList])}
+            {useMemo(() => {
+                return (
+                    <BlockSwiperSlide
+                        className="pt-[3rem] mb-[3rem] md:pt-[5rem] md:mb-[5rem] md:px-[10rem]"
+                        swiperProps={{ pagination: true, slidesPerView: 1 }}
+                    >
+                        {map(HOME_PAGE_COVERS, (item, index) => {
+                            const { title, subTitle } = item || {};
+                            return (
+                                <SwiperSlide
+                                    className="rounded-2xl"
+                                    key={`${item?.id}_${index}`}
+                                >
+                                    <div className="w-full bg-black grid grid-flow-row grid-cols-12 bg-gradient-to-r from-gold-trans dark:from-black rounded-3xl">
+                                        <div className="home-page__block-slider-image-wrapper col-span-4 relative pb-[100%] rounded-2xl items-center">
+                                            <Image
+                                                useNextImg={false}
+                                                alt="slider-homepage"
+                                                src={item?.src}
+                                                className="absolute w-full h-full rounded-l-2xl"
+                                            />
+                                        </div>
+                                        <div className="col-span-8 my-auto pl-6 flex flex-col justify-evenly h-full">
+                                            {subTitle && (
+                                                <h5 className="text-gold-light block text-base lg:text-xl">
+                                                    {subTitle}
+                                                </h5>
+                                            )}
+                                            <h3 className="text-gold text-lg lg:text-3xl block">
+                                                {title}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                            );
+                        })}
+                    </BlockSwiperSlide>
+                );
+            }, [])}
+            {blockWhyUs}
+            {blockBySteps}
+            {blockLatestNews}
             {/* {renderGrids()} */}
             <div
                 onClick={() =>
@@ -156,18 +264,24 @@ const MainStyled = styled.main`
             background-color: transparent !important;
         }
     }
-    .home-page__slider-image-wrapper {
-        padding-bottom: 67%;
+    .home-page__block-slider-image-wrapper {
         position: relative;
-        .home-page__slider-image {
+        /* &::after {
+            content: "";
             position: absolute;
-            width: 100%;
-            height: auto;
+            right: -30px;
             top: 0;
-            left: 0;
             bottom: 0;
-            right: 0;
-        }
+            left: 100px;
+            pointer-events: none;
+            height: 100%;
+            opacity: 0.5;
+            background-image: linear-gradient(
+                to left,
+                rgba(192, 157, 94, 0.25),
+                rgba(255, 255, 255, 0)
+            );
+        } */
     }
     .logo-click-mask {
         position: absolute;

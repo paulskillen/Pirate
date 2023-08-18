@@ -29,37 +29,42 @@ const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
                     </div>
                     <div className="bg-gold-light h-[2px] w-full max-w-[100px]" />
                 </div>
-                <div className="flex flex-col items-start flex-1">
+                <div className="flex flex-col items-center md:items-start flex-1">
                     <h5 className="text-white max-sm:hidden">CONTACT US</h5>
 
                     <div className="flex flex-row my-4">
                         <Icon
-                            className="mx-4"
+                            className="mx-3 text-gold-light"
                             icon="email"
                             useIconSet="fontisto"
                         />
-                        <AppLink href="mailto: info@piratemobile.gg">
-                            <div>info@piratemobile.gg</div>
+                        <AppLink href="mailto:info@piratemobile.gg">
+                            <div className="text-gold-light">
+                                info@piratemobile.gg
+                            </div>
                         </AppLink>
                     </div>
-                    <div className="flex flex-row my-4">
+                    {/* <div className="flex flex-row my-4">
                         <Icon
                             className="mx-4"
                             icon="map"
+                            size={30}
                             useIconSet="fontisto"
                         />
                         <div>
                             Avenue House St. Julian's Avenue St Peter Port
                             Guernsey Channel Islands GY1 1WA
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
             <div className="bg-gold-trans h-[1px] w-full" />
             <div className="w-100 flex flex-col sm:flex-row justify-between items-center py-5">
                 <div className="flex flex-col sm:flex-row items-center gap-3 text-lg">
-                    <div>Pirate Mobile 2023 All rights reserved</div>
+                    <div className="text-gold">
+                        © 2023, eSIM Powered by Pirate Mobile
+                    </div>
                     <AppLink href={Path.policy().href}>
                         <div>{Messages.privacyPolicy}</div>
                     </AppLink>
@@ -69,13 +74,13 @@ const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
                 </div>
                 <div className="flex items-center gap-10 mt-[1rem] sm:mt-0">
                     <AppLink>
-                        <Icon icon="facebook" />
+                        <Icon className="text-gold-light" icon="facebook" />
                     </AppLink>
                     <AppLink>
-                        <Icon icon="instagram" />
+                        <Icon className="text-gold-light" icon="instagram" />
                     </AppLink>
                     <AppLink>
-                        <Icon icon="linkedin" />
+                        <Icon className="text-gold-light" icon="linkedin" />
                     </AppLink>
                 </div>
                 <div className="block md:hidden h-[100px]" />

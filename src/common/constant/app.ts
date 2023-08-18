@@ -1,4 +1,4 @@
-export const TAB_BOTTOM_HEIGHT = "85";
+export const TAB_BOTTOM_HEIGHT = "90";
 
 // KEY
 export const GOOGLE_API_KEY = "API_GOOGLE_KEY";
@@ -22,30 +22,17 @@ export const IDS_OPEN_SELECT_COUNTRY = [
     "input-text__clear-icon",
 ];
 
-
-
-const AOS_ANIMATION = [
-    "fade-up",
-    "fade-down",
-    "fade-right",
-    "fade-left",
-    "fade-up-right",
-    "fade-up-left",
-    "fade-down-right",
-    "fade-down-left",
-    "fade-down-right",
-    "flip-up",
-    "flip-down",
-    "flip-right",
-    "flip-left",
-    "zoom-in",
-    "zoom-in-up",
-    "zoom-in-down",
-    "zoom-in-left",
-    "zoom-in-right",
-    "zoom-out",
-    "zoom-out-up",
-    "zoom-out-down",
-    "zoom-out-left",
-    "zoom-out-right",
+export const POPULAR_COUNTRIES = [
+    "US",
+    "EG",
+    "TN",
+    "MA",
+    "TR",
+    "AE",
+    "IT",
+    "FR",
+    "US",
+    "ES",
+    "GB",
+    "BE",
 ];

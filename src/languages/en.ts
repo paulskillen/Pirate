@@ -114,6 +114,7 @@ const translations = {
     blogs: "Blogs",
     readMore: "Read more...",
     byContinueYouAgree: "By continue you agree with our",
+    popularDestinations: "Popular destinations",
 };
 
 export default translations;

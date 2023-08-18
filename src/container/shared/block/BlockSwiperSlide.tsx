@@ -1,38 +1,30 @@
 import Image from "next/image";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, SwiperProps } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import styled from "@emotion/styled";
+import { COLOR_GOLD } from "@/common/constant/app-style";
 
 export interface IBlockSwiperSlideProps {
-    [key: string]: any;
+    children?: any;
+    className?: string;
+    label?: string;
+    swiperProps?: SwiperProps;
 }
 
-const HOME_PAGE_COVERS = [
-    {
-        id: "1",
-        label: "High",
-        src: "/images/information/1.jpeg",
-    },
-    {
-        id: "3",
-        label: "Low",
-        src: "/images/information/2.jpeg",
-    },
-    {
-        id: "4",
-        label: "Low",
-        src: "/images/information/3.jpeg",
-    },
-];
-
-const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({ id }) => {
+const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({
+    children,
+    swiperProps = {},
+    className,
+    label,
+}) => {
     return (
-        <BlockSwiperSlideStyled>
+        <BlockSwiperSlideStyled className={className}>
+            {label && <h5 className="">{label}</h5>}
             <Swiper
                 loop
                 spaceBetween={20}
@@ -48,8 +40,9 @@ const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({ id }) => {
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Autoplay, Pagination, Navigation]}
+                {...swiperProps}
             >
-                {HOME_PAGE_COVERS.map((item) => {
+                {/* {HOME_PAGE_COVERS.map((item) => {
                     return (
                         <SwiperSlide key={item?.id}>
                             <div className="home-page__slider-image-wrapper rounded-2xl">
@@ -62,7 +55,8 @@ const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({ id }) => {
                             </div>
                         </SwiperSlide>
                     );
-                })}
+                })} */}
+                {children}
             </Swiper>
         </BlockSwiperSlideStyled>
     );
@@ -91,5 +85,12 @@ const BlockSwiperSlideStyled = styled.div`
                 object-fit: fill !important;
             }
         }
+    }
+    .swiper-pagination-bullets {
+        .swiper-pagination-bullet {
+            background-color: ${COLOR_GOLD};
+        }
+        bottom: 2px;
+        text-align: end;
     }
 `;

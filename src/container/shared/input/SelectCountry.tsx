@@ -14,15 +14,11 @@ import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { map } from "lodash";
-import React, {
-    useContext,
-    useEffect,
-    useMemo,
-    useState,
-} from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import CountryItem from "@/container/list-country/CountryItem";
 
 export interface ISelectCountryProps {
+    className?: string;
     [key: string]: any;
 }
 
@@ -121,7 +117,7 @@ const filterCountry = (text: string, country: any) => {
     );
 };
 
-const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
+const SelectCountry: React.FC<ISelectCountryProps> = ({ className }) => {
     const { metaData, openSelectCountry, setOpenSelectCountry } =
         useContext(AppStateContext);
     const { countryList = [] } = metaData || {};
@@ -199,7 +195,7 @@ const SelectCountry: React.FC<ISelectCountryProps> = ({ id }) => {
     }, [openSelectCountry]);
 
     return (
-        <SelectCountryStyled className="mt-3">
+        <SelectCountryStyled className={`${className}`}>
             <InputSearch
                 id="select-country__input"
                 onChange={(v) => {

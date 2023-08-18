@@ -1,14 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import Path from "@/common/constant/path";
-import ViewShowMore from "@/components/view/ViewShowMore";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
-import { Button } from "d-react-components";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import React, { Fragment, useMemo } from "react";
+import React from "react";
 import BlockInformation from "../shared/block/BlockInformation";
-import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
 import MobileHeader from "../shared/header/MobileHeader";
 
 export interface IInformationPageProps {
@@ -90,15 +85,11 @@ const InformationPage: React.FC<IInformationPageProps> = ({ id }) => {
             </div>
         );
     };
-    const slider = useMemo(() => {
-        return <BlockSwiperSlide />;
-    }, []);
 
     return (
         <MainStyled className="home-page__container container px-0 bg-transparent z-10 relative text-white ">
             <MobileHeader className="" />
             <div className="h-screen overflow-y-scroll hide-scroll-bar-y">
-                {slider}
                 <div className="px-3">{renderInformationBlocks()}</div>
                 <div className="h-96" />
             </div>

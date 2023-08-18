@@ -23,7 +23,7 @@ import styled from "@emotion/styled";
 export interface IPayPalOrderResponse extends OrderResponseBody {}
 export type PayPalOrderStatusType = OrderResponseBodyMinimal["status"];
 
-export interface ISelectPaymentButtonProps {
+export interface ISelectPaymentViewProps {
     totalAmount: number;
     customerId?: string;
     purchasingItems?: Array<IBundle>;
@@ -58,7 +58,7 @@ const mapBundleToOrderProduct = (items: IBundle[]): any[] => {
     });
 };
 
-const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
+const SelectPaymentView: React.FC<ISelectPaymentViewProps> = ({
     totalAmount,
     customerId,
     purchasingItems,
@@ -130,6 +130,7 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
     const renderPayPal = () => {
         return (
             <PayPalButtons
+                className="w-full flex flex-col justify-center items-center"
                 createOrder={(data, actions) => {
                     return onCreateOrder(actions) as any;
                 }}
@@ -142,50 +143,23 @@ const SelectPaymentButton: React.FC<ISelectPaymentButtonProps> = ({
     };
 
     return (
-        <React.Fragment>
-            <div
-                className="bg-black border border-gold text-white flex items-center justify-between px-4 py-3 rounded-2xl mt-4 w-full select-payment-button"
-                onClick={() => {
-                    setOpenPaymentsModal({ open: true });
-                }}
-            >
-                <div className="flex items-center">
-                    <div className="bg-black border-2 border-gold p-2 rounded-full mr-2">
-                        <Icon icon="credit-card" className="text-gold" />
+        <SelectPaymentViewStyled className="mt-4 w-full border border-gold p-4 rounded-2xl flex justify-center items-center md:w-[50vw]">
+            {map(PAYMENT_METHODS, (item) => {
+                const { icon, id, label } = item || {};
+                if (id === PaymentMethod.PAYPAL) {
+                    return renderPayPal();
+                }
+                return (
+                    <div className="flex items-center">
+                        <Icon icon={icon} />
+                        <div>{label}</div>
                     </div>
-                    <div>{Messages.selectPaymentMethod}</div>
-                </div>
-                <Icon icon="arrow-right" className="text-gold" />
-            </div>
-            {openPaymentsModal.open && (
-                <Modal
-                    showFooter={false}
-                    title={Messages.selectPaymentMethod}
-                    open={openPaymentsModal.open}
-                    onClose={() => {
-                        setOpenPaymentsModal({ open: false });
-                    }}
-                >
-                    <PaymentModalStyled className="mt-5">
-                        {map(PAYMENT_METHODS, (item) => {
-                            const { icon, id, label } = item || {};
-                            if (id === PaymentMethod.PAYPAL) {
-                                return renderPayPal();
-                            }
-                            return (
-                                <div className="flex items-center">
-                                    <Icon icon={icon} />
-                                    <div>{label}</div>
-                                </div>
-                            );
-                        })}
-                    </PaymentModalStyled>
-                </Modal>
-            )}
-        </React.Fragment>
+                );
+            })}
+        </SelectPaymentViewStyled>
     );
 };
 
-export default SelectPaymentButton;
+export default SelectPaymentView;
 
-const PaymentModalStyled = styled.div``;
+const SelectPaymentViewStyled = styled.div``;

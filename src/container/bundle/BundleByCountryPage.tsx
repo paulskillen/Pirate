@@ -29,6 +29,7 @@ export interface IBundleItemProps {
     showRadio?: boolean;
     onClick?: any;
     selected?: boolean;
+    isRecommended?: boolean;
     className?: string;
     animation?: string;
 }
@@ -53,12 +54,24 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     const isTopUp = useMemo(() => {
         return topUpParams && isValidEsimIccId(topUpParams);
     }, [topUpParams]);
+    const recommendBundle = useMemo(() => {
+        let res = find(bundles, (item) => item?.dataAmount === 5000);
+        if (res) {
+            return res;
+        } else {
+            res = find(bundles, (item) => item?.dataAmount === 3000);
+            if (!res) {
+                res = find(bundles, (item) => item?.dataAmount === 1000);
+            }
+        }
+        return res;
+    }, [bundles]);
 
     const renderCheckout = () => {
         return (
             <div
                 className={ClassNames(
-                    "container px-3 z-30 bundle-by-country-page__footer flex flex-col items-center mt-4 relative"
+                    "container px-3 z-30 bundle-by-country-page__footer flex flex-col items-center mt-4 fixed bottom-0 md:relative md:bottom-auto"
                 )}
             >
                 <Button
@@ -89,41 +102,9 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         <PriceTag price={selectedBundle?.salePrice} />
                     </div>
                 </Button>
-                <div className="h-60" />
+                <div className="h-16" />
             </div>
         );
-        // return (
-        //     <div className="fixed bottom-20 w-full px-3 z-30 bundle-by-country-page__footer flex justify-center items-center bounce-in-top">
-        //         <Button
-        //             className="w-full font-bold z-30 border bundle-by-country-page__button-checkout rounded-pill flex flex-col"
-        //             style={{ fontWeight: "bold", fontSize: 16 }}
-        //             onClick={() => {
-        //                 if (selectedBundle) {
-        //                     if (isTopUp) {
-        //                         setUserCart([
-        //                             {
-        //                                 ...selectedBundle,
-        //                                 assignTo: topUpParams,
-        //                             },
-        //                         ]);
-        //                         router.push({
-        //                             pathname: Path.checkout().href,
-        //                             query: { topup: topUpParams },
-        //                         });
-        //                     } else {
-        //                         setUserCart([selectedBundle]);
-        //                         router.push(Path.checkout().href);
-        //                     }
-        //                 }
-        //             }}
-        //         >
-        //             <div>{`${Messages.checkout}`}</div>
-        //             <div className="mt-1">
-        //                 <PriceTag price={selectedBundle?.salePrice} />
-        //             </div>
-        //         </Button>
-        //     </div>
-        // );
     };
 
     if (!bundles?.length) {
@@ -131,7 +112,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     }
 
     return (
-        <BundleByCountryPageStyled className="bg-transparent text-white relative z-20 overflow-y-scroll h-screen">
+        <BundleByCountryPageStyled className="bg-transparent text-white  z-20">
             <PageHeader
                 title={currentCountry?.name}
                 customerRight={
@@ -148,10 +129,12 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         !!selectedBundle?.name &&
                         selectedBundle?.name === item?.name;
                     const isEvent = index % 2 === 0;
+                    const isRecommended = item?.id === recommendBundle?.id;
                     return (
                         <BundleItem
                             key={item?.id}
                             selected={isSelected}
+                            isRecommended={isRecommended}
                             bundle={item}
                             onClick={() => setSelectedBundle(item)}
                             animation={isEvent ? "fade-right" : "fade-right"}
@@ -183,20 +166,12 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     bundle,
     onClick,
     selected,
+    isRecommended,
     showRadio = true,
     className,
 }) => {
-    const {
-        provider,
-        name,
-        dataAmount,
-        duration,
-        description,
-        price,
-        salePrice,
-        bundleData,
-        id,
-    } = bundle || {};
+    const { provider, dataAmount, duration, salePrice, bundleData, id } =
+        bundle || {};
     const { speed } = bundleData || {};
     const rowClass = ClassNames("flex flex-row items-center text-lg mt-2");
     const dataDisplay = useMemo(() => {
@@ -219,6 +194,19 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                     className
                 )}
             >
+                {isRecommended && (
+                    <div className="py-2 bg-gold-dark text w-full text-center flex-center-y justify-center rounded-t-2xl absolute top-0 right-0 left-0">
+                        <Icon
+                            icon="checkmark-starburst"
+                            className="mr-2"
+                            useIconSet="fluent-ui"
+                        />
+                        <div className="text-white text font-semibold">
+                            Recommended
+                        </div>
+                    </div>
+                )}
+                {isRecommended && <div className="py-2 mb-3" />}
                 <div className="flex flex-row" onClick={onClick}>
                     {showRadio && (
                         <Checkbox
@@ -446,7 +434,7 @@ const BundleByCountryPageStyled = styled.div`
         border-color: var(--color-gold) !important;
     }
     .bundle-by-country-page__footer {
-        padding: 0px 16px !important;
+        /* padding: 0px 16px !important; */
         .bundle-by-country-page__button-checkout {
             background-color: ${COLOR_GOLD} !important;
             color: white !important;
