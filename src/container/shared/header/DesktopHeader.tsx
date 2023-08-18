@@ -80,7 +80,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                 >
                     <div className={`${classItem}`}>{Messages.blogs}</div>
                 </AppLink>
-                <AppLink href={Path.landing()}>
+                {/* <AppLink href={Path.landing()}>
                     <div
                         className={`${classItem} ${activeClass(
                             pathname === Path.landing().href
@@ -88,7 +88,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                     >
                         {Messages.information}
                     </div>
-                </AppLink>
+                </AppLink> */}
 
                 <AppLink href={Path.profile()}>
                     <div

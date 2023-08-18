@@ -7,38 +7,35 @@ export const BLOCK_WHY_CHOOSE_US = {
             id: 1,
             icon: "world-o",
             useIconSet: "fontisto",
-            title: "Choose your destination and package that suits your needs",
-            description:
-                "Choose the package based on your data needs for a perfect match of data usage and cost-effectiveness.",
-            image: "https://rhq6db.n3cdn1.secureserver.net/wp-content/uploads/2023/07/windows-YzLMmxDTrvI-unsplash-768x512.jpg",
+            title: "Instant Connectivity",
+            description: "Get your eSIM from anywhere at anytime",
+            image: "https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
         },
         {
             id: 2,
             icon: "phone",
-            title: "Confirm compatibility and click on check out to complete the purchase",
-            description: "Not sure if your phone is eSIM compatible?",
+            title: "Global Coverage",
+            description:
+                "Get connected in 178+ countries and regions around the world",
             buttonText: "Click here",
-            image: "https://rhq6db.n3cdn1.secureserver.net/wp-content/uploads/2023/07/windows-YzLMmxDTrvI-unsplash-768x512.jpg",
+            image: "https://images.unsplash.com/photo-1519160558534-579f5106e43f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
         },
         {
             id: 3,
             icon: "qr-code-scan",
-            title: "Use the QR code provided to install and activate your eSIM",
-            description:
-                "After successful payment, activate your eSIM by scanning the QR code or check your email for the QR code sent to you.",
-            image: "https://rhq6db.n3cdn1.secureserver.net/wp-content/uploads/2023/07/windows-YzLMmxDTrvI-unsplash-768x512.jpg",
+            title: "Affordable and Transparent",
+            description: "No hidden fees and entirely prepaid",
+            image: "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=800&q=60",
         },
         {
             id: 4,
             icon: "qr-code-scan",
-            title: "Use the QR code provided to install and activate your eSIM",
-            description:
-                "After successful payment, activate your eSIM by scanning the QR code or check your email for the QR code sent to you.",
-            image: "https://rhq6db.n3cdn1.secureserver.net/wp-content/uploads/2023/07/windows-YzLMmxDTrvI-unsplash-768x512.jpg",
+            title: "Fast and Secure",
+            description: "No hidden fees and entirely prepaid",
+            image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnVufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
         },
     ],
 };
-
 
 export const BLOCK_ABOUT_LATEST_NEWS = {
     title: "Latest News.",
@@ -63,7 +60,6 @@ export const BLOCK_ABOUT_LATEST_NEWS = {
         },
     ],
 };
-
 
 export const BLOCK_BOX_BY_BOX_STEPS = {
     title: "3 SIMPLE STEPS",
@@ -93,4 +89,3 @@ export const BLOCK_BOX_BY_BOX_STEPS = {
         },
     ],
 };
-

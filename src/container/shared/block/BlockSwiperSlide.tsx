@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import styled from "@emotion/styled";
+import { COLOR_GOLD } from "@/common/constant/app-style";
 
 export interface IBlockSwiperSlideProps {
     children?: any;
@@ -84,5 +85,12 @@ const BlockSwiperSlideStyled = styled.div`
                 object-fit: fill !important;
             }
         }
+    }
+    .swiper-pagination-bullets {
+        .swiper-pagination-bullet {
+            background-color: ${COLOR_GOLD};
+        }
+        bottom: 2px;
+        text-align: end;
     }
 `;

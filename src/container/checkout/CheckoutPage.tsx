@@ -20,6 +20,7 @@ import SelectPaymentButton, {
 import CheckoutSuccessModal from "./CheckoutSuccessModal";
 import styled from "@emotion/styled";
 import { useSearchParam } from "react-use";
+import SelectPaymentView from "../shared/input/SelectPaymentView";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -238,13 +239,27 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     return (
         <div className="">
             <PageHeader title={Messages.yourPreviousOrder} />
-            <CheckoutStyled className="h-screen overflow-y-scroll px-4 z-10 relative flex flex-col items-center">
+            <CheckoutStyled className="min-h-screen px-4 z-10 relative flex flex-col items-center">
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
                 {/* {renderAgreement()} */}
-                {totalAmount > 0 && (
+                {/* {totalAmount > 0 && (
                     <SelectPaymentButton
+                        totalAmount={totalAmount}
+                        onSuccess={(orderRes, orderSer) => {
+                            if (orderRes?.status === "COMPLETED") {
+                                // onSuccessPaymentHandler(orderRes, orderSer);
+                                setPaymentOrder(orderRes);
+                            }
+                        }}
+                        onError={(error: any) => {}}
+                        customerId={customerId}
+                        purchasingItems={userCart}
+                    />
+                )} */}
+                {totalAmount > 0 && (
+                    <SelectPaymentView
                         totalAmount={totalAmount}
                         onSuccess={(orderRes, orderSer) => {
                             if (orderRes?.status === "COMPLETED") {

@@ -27,6 +27,7 @@ import {
 } from "@/common/constant/block";
 import BlockLatestNews from "../shared/block/BlockLatestNews";
 import BlockBoxByBox from "../shared/block/BlockBoxByBox";
+import MobileHeader from "../shared/header/MobileHeader";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -43,19 +44,21 @@ const HOME_PAGE_DISPLAY_REGIONS = [
 const HOME_PAGE_COVERS = [
     {
         id: "1",
-        title: "High",
+        title: "Working seamlessly across many types of devices!",
+        subTitle: "For one eSIM",
         src: "/images/information/cover_1.jpeg",
     },
     {
-        id: "3",
+        id: "2",
         title: "Join our affiliate program to get passive income !",
         subTitle: "Up to 20% commission !",
         src: "/images/information/cover_2.png",
         buttonText: "Click here",
     },
     {
-        id: "4",
-        title: "Low",
+        id: "3",
+        title: "Start your journey by pick one destination !",
+        subTitle: "Worry free by always stay connected !",
         src: "/images/information/cover_3.png",
     },
 ];
@@ -105,7 +108,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     };
 
     const renderNewHeader = () => {
-        return <SelectCountry />;
+        return <SelectCountry className="my-4" />;
     };
 
     const renderGrids = () => {
@@ -179,6 +182,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             id="home-page__container"
             className="home-page__container container bg-transparent min-h-screen z-10 relative text-white px-3 bg-red-400 "
         >
+            <MobileHeader showHideConfig={{ hideSearchIcon: true }} className="px-0" />
             {renderNewHeader()}
             {useMemo(() => {
                 return (
@@ -194,7 +198,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             {useMemo(() => {
                 return (
                     <BlockSwiperSlide
-                        className="mt-4 md:pt-10 md:mb-10 md:px-[10rem]"
+                        className="pt-[3rem] mb-[3rem] md:pt-[5rem] md:mb-[5rem] md:px-[10rem]"
                         swiperProps={{ pagination: true, slidesPerView: 1 }}
                     >
                         {map(HOME_PAGE_COVERS, (item, index) => {
@@ -213,15 +217,15 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                                                 className="absolute w-full h-full rounded-l-2xl"
                                             />
                                         </div>
-                                        <div className="col-span-8 my-auto pl-4">
+                                        <div className="col-span-8 my-auto pl-6 flex flex-col justify-evenly h-full">
                                             {subTitle && (
-                                                <div className="text-white mb-2">
+                                                <h5 className="text-gold-light block text-base lg:text-xl">
                                                     {subTitle}
-                                                </div>
+                                                </h5>
                                             )}
-                                            <h5 className="text-white">
+                                            <h3 className="text-gold text-lg lg:text-3xl block">
                                                 {title}
-                                            </h5>
+                                            </h3>
                                         </div>
                                     </div>
                                 </SwiperSlide>

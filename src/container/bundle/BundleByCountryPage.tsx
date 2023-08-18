@@ -72,7 +72,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         return (
             <div
                 className={ClassNames(
-                    "container px-3 z-30 bundle-by-country-page__footer flex flex-col items-center mt-4"
+                    "container px-3 z-30 bundle-by-country-page__footer flex flex-col items-center mt-4 fixed bottom-0 md:relative md:bottom-auto"
                 )}
             >
                 <Button
@@ -436,8 +436,6 @@ const BundleByCountryPageStyled = styled.div`
     }
     .bundle-by-country-page__footer {
         /* padding: 0px 16px !important; */
-        position: fixed;
-        bottom: 0;
         .bundle-by-country-page__button-checkout {
             background-color: ${COLOR_GOLD} !important;
             color: white !important;

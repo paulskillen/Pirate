@@ -34,4 +34,5 @@ export const POPULAR_COUNTRIES = [
     "US",
     "ES",
     "GB",
+    "BE",
 ];
