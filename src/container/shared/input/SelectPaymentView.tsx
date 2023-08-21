@@ -130,7 +130,7 @@ const SelectPaymentView: React.FC<ISelectPaymentViewProps> = ({
     const renderPayPal = () => {
         return (
             <PayPalButtons
-                className="w-full flex flex-col justify-center items-center"
+                className="flex flex-col justify-center items-center w-full md:w-[75%]"
                 createOrder={(data, actions) => {
                     return onCreateOrder(actions) as any;
                 }}
@@ -143,7 +143,7 @@ const SelectPaymentView: React.FC<ISelectPaymentViewProps> = ({
     };
 
     return (
-        <SelectPaymentViewStyled className="mt-4 w-full border border-gold p-4 rounded-2xl flex justify-center items-center md:w-[50vw]">
+        <SelectPaymentViewStyled className="mt-4  border border-gold p-4 rounded-2xl flex justify-center items-center w-full md:w-[50vw]">
             {map(PAYMENT_METHODS, (item) => {
                 const { icon, id, label } = item || {};
                 if (id === PaymentMethod.PAYPAL) {
@@ -162,4 +162,5 @@ const SelectPaymentView: React.FC<ISelectPaymentViewProps> = ({
 
 export default SelectPaymentView;
 
-const SelectPaymentViewStyled = styled.div``;
+const SelectPaymentViewStyled = styled.div`
+`;
