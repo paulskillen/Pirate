@@ -19,7 +19,7 @@ export interface ITabBottomItemProps {
     link?: string;
 }
 
-const ICON_SIZE = 28;
+const ICON_SIZE = 24;
 
 const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
     const classItem = "p-3 rounded-full";
@@ -36,9 +36,11 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
         });
     };
 
+    const textClass = "small ml-2 mb-2";
+
     return (
         <div
-            className="tab-bottom bg-black  z-20 fixed flex items-center justify-between md:justify-center md:gap-32 gap-8 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-3 border-t border-t-gold"
+            className="tab-bottom backdrop-blur-sm bg-black bg-opacity-70  z-20 fixed flex items-center justify-between md:justify-center md:gap-32 gap-8 -bottom-3 left-0 right-0 h-5 pb-3 rounded-tl-3xl rounded-tr-3xl pt-3 border-t border-t-gold"
             style={{ height: `${TAB_BOTTOM_HEIGHT}px` }}
         >
             <AppLink className={classWrapper} href={Path.home()}>
@@ -55,7 +57,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         )}`}
                     />
                 </div>
-                <div className="small ml-2">{Messages.home}</div>
+                <div className={`${textClass} ml-2`}>{Messages.home}</div>
             </AppLink>
             <AppLink className={classWrapper} href={Path.esimsHistory()}>
                 <div
@@ -71,7 +73,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         size={ICON_SIZE}
                     />
                 </div>
-                <div className="small text-gold">{Messages.yourEsim}</div>
+                <div className={textClass}>{Messages.yourEsim}</div>
             </AppLink>
             <AppLink className={classWrapper} href={Path.landing()}>
                 <div
@@ -89,7 +91,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         height={ICON_SIZE}
                     />
                 </div>
-                <div className="small text-gold">{Messages.information}</div>
+                <div className={textClass}>{Messages.information}</div>
             </AppLink>
 
             <AppLink className={classWrapper} href={Path.profile()}>
@@ -106,7 +108,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         size={ICON_SIZE}
                     />
                 </div>
-                <div className="small text-gold mr-2">{Messages.profile}</div>
+                <div className={`${textClass} mr-2`}>{Messages.profile}</div>
             </AppLink>
         </div>
     );
