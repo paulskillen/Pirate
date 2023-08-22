@@ -238,7 +238,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
 
     return (
         <div className="">
-            <PageHeader title={Messages.yourPreviousOrder} />
+            <PageHeader title={Messages.yourOrder} showLeftButton={false} />
             <CheckoutStyled className="min-h-screen px-4 z-10 relative flex flex-col items-center">
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;

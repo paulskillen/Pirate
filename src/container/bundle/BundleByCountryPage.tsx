@@ -102,7 +102,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         <PriceTag price={selectedBundle?.salePrice} />
                     </div>
                 </Button>
-                <div className="h-16" />
+                <div className="h-4" />
             </div>
         );
     };
