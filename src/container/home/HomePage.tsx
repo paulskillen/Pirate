@@ -28,6 +28,7 @@ import {
 import BlockLatestNews from "../shared/block/BlockLatestNews";
 import BlockBoxByBox from "../shared/block/BlockBoxByBox";
 import MobileHeader from "../shared/header/MobileHeader";
+import AppLink from "@/components/link/AppLink";
 
 export interface IHomePageProps {
     [key: string]: any;
@@ -47,19 +48,22 @@ const HOME_PAGE_COVERS = [
         title: "Working seamlessly across many types of devices!",
         subTitle: "For one eSIM",
         src: "/images/information/cover_1.jpeg",
+        link: Path.listCountry().href,
     },
     {
         id: "2",
         title: "Join our affiliate program to get passive income !",
-        subTitle: "Up to 20% commission !",
+        subTitle: "Up to 18% commission !",
         src: "/images/information/cover_2.png",
         buttonText: "Click here",
+        link: "https://piratemobile.postaffiliatepro.com/affiliates/login.php",
     },
     {
         id: "3",
         title: "Start your journey by pick one destination !",
         subTitle: "Worry free by always stay connected !",
         src: "/images/information/cover_3.png",
+        link: Path.listCountry().href,
     },
 ];
 
@@ -163,7 +167,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
         return (
             <BlockBoxByBox
                 blockData={BLOCK_BOX_BY_BOX_STEPS}
-                className="mt-5 container"
+                className="mt-5 container px-0 md:px-4"
             />
         );
     }, []);
@@ -182,7 +186,10 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             id="home-page__container"
             className="home-page__container container bg-transparent min-h-screen z-10 relative text-white px-3 bg-red-400 "
         >
-            <MobileHeader showHideConfig={{ hideSearchIcon: true }} className="px-0" />
+            <MobileHeader
+                showHideConfig={{ hideSearchIcon: true }}
+                className="px-0"
+            />
             {renderNewHeader()}
             {useMemo(() => {
                 return (
@@ -202,32 +209,34 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
                         swiperProps={{ pagination: true, slidesPerView: 1 }}
                     >
                         {map(HOME_PAGE_COVERS, (item, index) => {
-                            const { title, subTitle } = item || {};
+                            const { title, subTitle, link } = item || {};
                             return (
                                 <SwiperSlide
                                     className="rounded-2xl"
                                     key={`${item?.id}_${index}`}
                                 >
-                                    <div className="w-full bg-black grid grid-flow-row grid-cols-12 bg-gradient-to-r from-gold-trans dark:from-black rounded-3xl">
-                                        <div className="home-page__block-slider-image-wrapper col-span-4 relative pb-[100%] rounded-2xl items-center">
-                                            <Image
-                                                useNextImg={false}
-                                                alt="slider-homepage"
-                                                src={item?.src}
-                                                className="absolute w-full h-full rounded-l-2xl"
-                                            />
+                                    <AppLink href={link}>
+                                        <div className="w-full bg-black grid grid-flow-row grid-cols-12 bg-gradient-to-r from-gold-trans dark:from-black rounded-3xl">
+                                            <div className="home-page__block-slider-image-wrapper col-span-4 relative pb-[100%] rounded-2xl items-center">
+                                                <Image
+                                                    useNextImg={false}
+                                                    alt="slider-homepage"
+                                                    src={item?.src}
+                                                    className="absolute w-full h-full rounded-l-2xl"
+                                                />
+                                            </div>
+                                            <div className="col-span-8 my-auto pl-6 flex flex-col justify-evenly h-full">
+                                                {subTitle && (
+                                                    <h5 className="text-gold-light block text-base lg:text-xl">
+                                                        {subTitle}
+                                                    </h5>
+                                                )}
+                                                <h3 className="text-gold text-lg lg:text-3xl block">
+                                                    {title}
+                                                </h3>
+                                            </div>
                                         </div>
-                                        <div className="col-span-8 my-auto pl-6 flex flex-col justify-evenly h-full">
-                                            {subTitle && (
-                                                <h5 className="text-gold-light block text-base lg:text-xl">
-                                                    {subTitle}
-                                                </h5>
-                                            )}
-                                            <h3 className="text-gold text-lg lg:text-3xl block">
-                                                {title}
-                                            </h3>
-                                        </div>
-                                    </div>
+                                    </AppLink>
                                 </SwiperSlide>
                             );
                         })}
