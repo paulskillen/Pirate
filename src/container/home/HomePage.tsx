@@ -60,8 +60,8 @@ const HOME_PAGE_COVERS = [
     },
     {
         id: "3",
-        title: "Start your journey by pick one destination !",
-        subTitle: "Worry free by always stay connected !",
+        title: "Start your journey by pick one destination!",
+        subTitle: "Worry free by always stay connected!",
         src: "/images/information/cover_3.png",
         link: Path.listCountry().href,
     },

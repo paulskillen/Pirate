@@ -73,13 +73,26 @@ const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
                     </AppLink>
                 </div>
                 <div className="flex items-center gap-10 mt-[1rem] sm:mt-0">
-                    <AppLink>
+                    <AppLink
+                        href={
+                            "https://www.facebook.com/piratemobileofficial?mibextid=LQQJ4d"
+                        }
+                        target="_blank"
+                    >
                         <Icon className="text-gold-light" icon="facebook" />
                     </AppLink>
-                    <AppLink>
+                    <AppLink
+                        href={
+                            "https://instagram.com/piratemobileofficial?igshid=OGQ5ZDc2ODk2ZA=="
+                        }
+                        target="_blank"
+                    >
                         <Icon className="text-gold-light" icon="instagram" />
                     </AppLink>
-                    <AppLink>
+                    <AppLink
+                        href={"https://www.linkedin.com/company/pirate-mobile/"}
+                        target="_blank"
+                    >
                         <Icon className="text-gold-light" icon="linkedin" />
                     </AppLink>
                 </div>

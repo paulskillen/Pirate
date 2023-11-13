@@ -142,12 +142,12 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
-                <div className="text-center mt-3 w-100">
+                <div className="text-center mt-3 w-100 z-20">
                     <span className="text-white">
                         Not sure your device is compatible with eSim ?
                     </span>
                     <AppLink
-                        className="inline ml-1 underline italic"
+                        className="inline ml-1 underline italic z-20"
                         href={Path.compatibleDevice().href}
                     >
                         <span>{Messages.seeCompatibleDeviceList}</span>
