@@ -63,7 +63,7 @@ export interface ICountry {
     isoAlpha2?: string;
     isoAlpha3?: string;
     isoNumeric?: string;
-    currency?: string;
+    currency?: { code?: string; name?: string; symbol?: any };
     flag?: string;
     iso?: string;
     region?: string;

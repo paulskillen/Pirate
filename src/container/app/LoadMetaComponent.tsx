@@ -15,13 +15,15 @@ const LoadMetaComponent: React.FC<ILoadMetaComponentProps> = ({ id }) => {
 
     const loadMetaData = async () => {
         try {
-            const data = await MetaDataApi.listCountry();
-            const countryList = data?.data?.data ?? [];
+            const resCountries = await MetaDataApi.listCountry();
+            const resRates = await MetaDataApi.currencyRates();
+            const countryList = resCountries?.data?.data ?? [];
             const groupedBy = groupBy(countryList, (item) => item?.region);
             setMetaData({
                 ...metaData,
                 countryList,
                 countryByRegion: groupedBy,
+                currencyRates: resRates?.data?.data?.conversion_rates,
             });
         } catch (error) {
             console.error({ error });

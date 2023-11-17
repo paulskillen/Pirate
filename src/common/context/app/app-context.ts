@@ -6,6 +6,11 @@ import React, { Dispatch } from "react";
 
 export const APP_STATE_CONTEXT = "APP_STATE_CONTEXT";
 
+export interface IUserData {
+    profile?: any;
+    currency?: string;
+}
+
 export interface ISiteConfig {
     breadcrumb?: any[];
     label?: string;
@@ -16,24 +21,26 @@ export interface IMetaData {
     countryByRegion?: {
         [key in CountryRegion]?: ICountry[];
     };
+    currencyRates?: any;
 }
 
 export interface IAppState {
-    me: any;
+    userData: IUserData;
     openSelectCountry?: boolean;
     metaData?: IMetaData;
-    siteConfig: ISiteConfig;
+    siteConfig?: ISiteConfig;
     userCart: IBundle[];
     activeOrder: IOrder;
-    setSiteConfig: (values: any) => any;
+    setSiteConfig?: (values: any) => any;
     setMetaData: Dispatch<IMetaData>;
     setUserCart: Dispatch<IBundle[]>;
+    setUserData: Dispatch<IUserData>;
     setActiveOrder: Dispatch<IOrder>;
     setOpenSelectCountry: Dispatch<boolean | undefined>;
 }
 
 export const appStateDefault: IAppState = {
-    me: {},
+    userData: {},
     metaData: {},
     siteConfig: {} as any,
     userCart: [] as any,
@@ -41,6 +48,7 @@ export const appStateDefault: IAppState = {
     setSiteConfig: () => {},
     setMetaData: () => {},
     setUserCart: () => {},
+    setUserData: () => {},
     setActiveOrder: () => {},
     setOpenSelectCountry: () => {},
 };
@@ -53,4 +61,12 @@ export const loadStateContext = (): any => {
 
 export const saveStateContext = (state: any) => {
     return LocalStorage.set(APP_STATE_CONTEXT, state);
+};
+
+export const updateStateContext = (key: keyof IAppState, value: any) => {
+    const state = loadStateContext();
+    return LocalStorage.set(APP_STATE_CONTEXT, {
+        ...(state || {}),
+        [key]: value,
+    });
 };

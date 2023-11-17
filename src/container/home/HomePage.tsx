@@ -245,7 +245,7 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             }, [])}
             {blockWhyUs}
             {blockBySteps}
-            {blockLatestNews}
+            {/* {blockLatestNews} */}
             {/* {renderGrids()} */}
             <div
                 onClick={() =>

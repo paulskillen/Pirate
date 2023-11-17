@@ -44,6 +44,7 @@ const nextConfig = {
             "drive.google.com",
             "rhq6db.n3cdn1.secureserver.net",
             "pirate-mobile-pro.s3.amazonaws.com",
+            "upload.wikimedia.org",
         ],
     },
 };

@@ -10,6 +10,7 @@ import API from "@/apis/API";
 import { ComponentType, Fragment, useEffect, useState } from "react";
 import {
     AppStateContext,
+    IUserData,
     loadStateContext,
     saveStateContext,
 } from "@/common/context/app/app-context";
@@ -38,9 +39,10 @@ const initialOptions = {
 
 function App({ Component, pageProps }: MattressAppProps) {
     const Layout: ComponentType = Component.Layout || DefaultLayout;
-    const [metaData, setMetaData] = useState([]);
-    const [userCart, setUserCart] = useState({});
-    const [activeOrder, setActiveOrder] = useState({});
+    const [metaData, setMetaData] = useState({});
+    const [userCart, setUserCart] = useState<any>({});
+    const [activeOrder, setActiveOrder] = useState<any>({});
+    const [userData, setUserData] = useState<IUserData>({});
     const [openSelectCountry, setOpenSelectCountry] = useState<
         boolean | undefined
     >(undefined);
@@ -77,8 +79,13 @@ function App({ Component, pageProps }: MattressAppProps) {
 
     useEffect(() => {
         const appStateContext = loadStateContext();
-        if (appStateContext && !isEmpty(appStateContext?.cart)) {
-            setUserCart({ ...(appStateContext?.cart ?? {}) });
+        if (appStateContext) {
+            if (!isEmpty(appStateContext?.cart)) {
+                setUserCart({ ...(appStateContext?.cart ?? {}) });
+            }
+            if (!isEmpty(appStateContext?.userData)) {
+                setUserData(appStateContext?.userData);
+            }
         }
     }, []);
 
@@ -118,18 +125,18 @@ function App({ Component, pageProps }: MattressAppProps) {
             <PayPalScriptProvider options={initialOptions}>
                 <ApolloProvider client={API.instance}>
                     <AppStateContext.Provider
-                        value={
-                            {
-                                metaData,
-                                setMetaData,
-                                userCart,
-                                setUserCart,
-                                activeOrder,
-                                setActiveOrder,
-                                openSelectCountry,
-                                setOpenSelectCountry,
-                            } as any
-                        }
+                        value={{
+                            metaData,
+                            setMetaData,
+                            userCart,
+                            setUserCart,
+                            activeOrder,
+                            setActiveOrder,
+                            openSelectCountry,
+                            setOpenSelectCountry,
+                            userData,
+                            setUserData,
+                        }}
                     >
                         <LoadMetaComponent />
                         <InitComponent />

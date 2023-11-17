@@ -11,6 +11,15 @@ const MetaDataApi = {
             `,
             // fetchPolicy: "no-cache",
         }),
+
+    currencyRates: () =>
+        API.instance.query({
+            query: gql`
+                query getCurrencyRates {
+                    data: getCurrencyRates
+                }
+            `,
+        }),
 };
 
 export default MetaDataApi;

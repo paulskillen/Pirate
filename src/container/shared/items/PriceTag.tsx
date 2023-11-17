@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import { AppStateContext } from "@/common/context/app/app-context";
+import React, { useContext, useMemo } from "react";
 
 export interface IPriceTagProps {
     price: any;
@@ -6,6 +7,13 @@ export interface IPriceTagProps {
 }
 
 const PriceTag: React.FC<IPriceTagProps> = ({ price, className }) => {
+    const { metaData } = useContext(AppStateContext);
+    const { currencyRates } = metaData || {};
+
+    console.log(
+        "🚀 >>>>>> file: PriceTag.tsx:13 >>>>>> currencyRates:",
+        currencyRates
+    );
     const displayPrice = useMemo(() => {
         return price?.toLocaleString?.();
     }, [price]);

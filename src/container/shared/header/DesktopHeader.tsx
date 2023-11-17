@@ -12,6 +12,7 @@ import { COLOR_GOLD, COLOR_GOLD_LIGHT } from "@/common/constant/app-style";
 import Icon from "@/components/icon/Icon";
 import AppLink from "@/components/link/AppLink";
 import ClassNames from "classnames";
+import SelectCurrency from "../items/SelectCurrency";
 
 export interface IDesktopHeaderProps {
     [key: string]: any;
@@ -74,12 +75,12 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                         {Messages.orderHistory}
                     </div>
                 </AppLink>
-                <AppLink
+                {/* <AppLink
                     target="_blank"
                     href="https://rhq.6db.myftpupload.com/blogs/"
                 >
                     <div className={`${classItem}`}>{Messages.blogs}</div>
-                </AppLink>
+                </AppLink> */}
                 {/* <AppLink href={Path.landing()}>
                     <div
                         className={`${classItem} ${activeClass(
@@ -89,6 +90,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                         {Messages.information}
                     </div>
                 </AppLink> */}
+                <SelectCurrency />
 
                 <AppLink href={Path.profile()}>
                     <div
