@@ -37,8 +37,8 @@ const BlockSwiperSlide: React.FC<IBlockSwiperSlideProps> = ({
                     disableOnInteraction: false,
                 }}
                 speed={3000}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
+                // onSlideChange={() => console.log("slide change")}
+                // onSwiper={(swiper) => console.log(swiper)}
                 modules={[Autoplay, Pagination, Navigation]}
                 {...swiperProps}
             >

@@ -4,7 +4,7 @@ import {
     DEFAULT_CURRENCY,
 } from "@/common/constant/currency";
 import { AppStateContext } from "@/common/context/app/app.context";
-import { useUpdateCurrency } from "@/common/context/app/app.hooks";
+import { useUpdateCurrency } from "@/common/context/app/hooks.context";
 import Image from "@/components/image/Image";
 import Select from "@/components/select/Select";
 import React, { useContext, useMemo } from "react";
@@ -25,9 +25,12 @@ const SelectCurrency: React.FC<ISelectCurrencyProps> = ({ id }) => {
                 flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/1599px-Flag_of_Europe.svg.png",
             };
         }
-        const foundCountry = countryList?.find(
-            (item) => item?.currency?.code === currency
-        );
+        const foundCountry = countryList?.find((item) => {
+            if (currency === CurrencyType.USD) {
+                return item?.iso === "US";
+            }
+            return item?.currency?.code === currency;
+        });
         return {
             id: currency,
             flag: foundCountry?.flag,

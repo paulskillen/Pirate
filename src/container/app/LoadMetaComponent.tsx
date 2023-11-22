@@ -1,5 +1,9 @@
 import MetaDataApi from "@/apis/meta-data/MetaDataApi";
-import { AppStateContext } from "@/common/context/app/app.context";
+import {
+    AppStateContext,
+    loadStateStorage,
+    updateStateStorage,
+} from "@/common/context/app/app.context";
 import { groupBy } from "lodash";
 import React, { useContext, useEffect } from "react";
 
@@ -15,9 +19,15 @@ const LoadMetaComponent: React.FC<ILoadMetaComponentProps> = ({ id }) => {
 
     const loadMetaData = async () => {
         try {
-            const resCountries = await MetaDataApi.listCountry();
+            const appState = loadStateStorage();
+            let countryList = appState?.metaData?.countryList;
+            const resCountries = countryList
+                ? null
+                : await MetaDataApi.listCountry();
             const resRates = await MetaDataApi.currencyRates();
-            const countryList = resCountries?.data?.data ?? [];
+            if (resCountries) {
+                countryList = resCountries?.data?.data ?? [];
+            }
             const groupedBy = groupBy(countryList, (item) => item?.region);
             setMetaData({
                 ...metaData,
@@ -25,6 +35,7 @@ const LoadMetaComponent: React.FC<ILoadMetaComponentProps> = ({ id }) => {
                 countryByRegion: groupedBy,
                 currencyRates: resRates?.data?.data?.conversion_rates,
             });
+            updateStateStorage("metaData", { countryList });
         } catch (error) {
             console.error({ error });
         }

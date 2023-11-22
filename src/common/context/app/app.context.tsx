@@ -56,16 +56,16 @@ export const appStateDefault: IAppState = {
 
 export const AppStateContext = React.createContext(appStateDefault);
 
-export const loadStateContext = (): any => {
+export const loadStateStorage = (): IAppState & { cart: any } => {
     return LocalStorage.get(APP_STATE_CONTEXT);
 };
 
-export const saveStateContext = (state: any) => {
+export const saveStateStorage = (state: any) => {
     return LocalStorage.set(APP_STATE_CONTEXT, state);
 };
 
-export const updateStateContext = (key: keyof IAppState, value: any) => {
-    const state = loadStateContext();
+export const updateStateStorage = (key: keyof IAppState, value: any) => {
+    const state = loadStateStorage();
     return LocalStorage.set(APP_STATE_CONTEXT, {
         ...(state || {}),
         [key]: value,
@@ -73,7 +73,7 @@ export const updateStateContext = (key: keyof IAppState, value: any) => {
 };
 
 export default function AppSateProvider({ children }: any) {
-    const [metaData, setMetaData] = useState({});
+    const [metaData, setMetaData] = useState<IAppState["metaData"]>({});
     const [userCart, setUserCart] = useState<any>({});
     const [activeOrder, setActiveOrder] = useState<any>({});
     const [userData, setUserData] = useState<IUserData>({});
@@ -82,7 +82,7 @@ export default function AppSateProvider({ children }: any) {
     >(undefined);
 
     useEffect(() => {
-        const appStateContext = loadStateContext();
+        const appStateContext = loadStateStorage();
         if (appStateContext) {
             if (!isEmpty(appStateContext?.cart)) {
                 setUserCart({ ...(appStateContext?.cart ?? {}) });
@@ -94,8 +94,8 @@ export default function AppSateProvider({ children }: any) {
     }, []);
 
     useEffect(() => {
-        const appStateContext = loadStateContext();
-        saveStateContext({ ...appStateContext, cart: userCart });
+        const appStateContext = loadStateStorage();
+        saveStateStorage({ ...appStateContext, cart: userCart });
     }, [userCart]);
 
     return (
