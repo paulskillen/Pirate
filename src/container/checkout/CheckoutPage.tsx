@@ -1,7 +1,7 @@
 import OrderApi from "@/apis/order/OrderApi";
 import Path from "@/common/constant/path";
 import { PaymentMethod } from "@/common/interface/payment";
-import { AppStateContext } from "@/common/context/app/app-context";
+import { AppStateContext } from "@/common/context/app/app.context";
 import { IOrder } from "@/common/interface/order";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";

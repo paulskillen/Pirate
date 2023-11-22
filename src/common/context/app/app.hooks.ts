@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppStateContext, updateStateContext } from "./app-context";
+import { AppStateContext, updateStateContext } from "./app.context";
 
 export const useUpdateCurrency = () => {
     const { userData, setUserData } = useContext(AppStateContext);

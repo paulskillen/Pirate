@@ -16,7 +16,7 @@ import React, { useContext, useState } from "react";
 import { IBundle, isValidEsimIccId } from "@/common/interface/bundle";
 import OrderApi from "@/apis/order/OrderApi";
 import { IOrder } from "@/common/interface/order";
-import { AppStateContext } from "@/common/context/app/app-context";
+import { AppStateContext } from "@/common/context/app/app.context";
 import Modal from "@/components/modal/Modal";
 import styled from "@emotion/styled";
 

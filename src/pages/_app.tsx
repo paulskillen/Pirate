@@ -1,27 +1,21 @@
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import { ApolloProvider } from "@apollo/client";
-import { SessionProvider } from "next-auth/react";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import "../styles/global.css";
-import "../styles/style.scss";
-import DefaultLayout from "@/container/shared/layout/Layout";
 import API from "@/apis/API";
-import { ComponentType, Fragment, useEffect, useState } from "react";
-import {
-    AppStateContext,
-    IUserData,
-    loadStateContext,
-    saveStateContext,
-} from "@/common/context/app/app-context";
+import AppSateProvider from "@/common/context/app/app.context";
+import { CONFIG } from "@/configuration/AppConfig";
 import LoadMetaComponent from "@/container/app/LoadMetaComponent";
-import { NextComponentType, NextPageContext } from "next";
-import { isEmpty } from "lodash";
-import { wrapper } from "@/store/store";
 import InitComponent from "@/container/app/content/InitComponent";
 import AppSeo from "@/container/seo/app-seo/AppSeo";
 import SocialSeo from "@/container/seo/social-seo/SocialSeo";
-import { CONFIG } from "@/configuration/AppConfig";
+import DefaultLayout from "@/container/shared/layout/Layout";
+import { wrapper } from "@/store/store";
+import { ApolloProvider } from "@apollo/client";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { NextComponentType, NextPageContext } from "next";
+import { SessionProvider } from "next-auth/react";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { ComponentType, Fragment, useEffect } from "react";
+import "../styles/global.css";
+import "../styles/style.scss";
 
 export type MattressAppProps = AppProps & {
     Component: NextComponentType<NextPageContext, any> & {
@@ -39,13 +33,6 @@ const initialOptions = {
 
 function App({ Component, pageProps }: MattressAppProps) {
     const Layout: ComponentType = Component.Layout || DefaultLayout;
-    const [metaData, setMetaData] = useState({});
-    const [userCart, setUserCart] = useState<any>({});
-    const [activeOrder, setActiveOrder] = useState<any>({});
-    const [userData, setUserData] = useState<IUserData>({});
-    const [openSelectCountry, setOpenSelectCountry] = useState<
-        boolean | undefined
-    >(undefined);
 
     useEffect(() => {
         const preloader = document.querySelector(".site-preloader");
@@ -77,23 +64,6 @@ function App({ Component, pageProps }: MattressAppProps) {
         }, 100);
     }, []);
 
-    useEffect(() => {
-        const appStateContext = loadStateContext();
-        if (appStateContext) {
-            if (!isEmpty(appStateContext?.cart)) {
-                setUserCart({ ...(appStateContext?.cart ?? {}) });
-            }
-            if (!isEmpty(appStateContext?.userData)) {
-                setUserData(appStateContext?.userData);
-            }
-        }
-    }, []);
-
-    useEffect(() => {
-        const appStateContext = loadStateContext();
-        saveStateContext({ ...appStateContext, cart: userCart });
-    }, [userCart]);
-
     const renderMainContent = () => {
         const getLayout = Component.getLayout;
 
@@ -124,24 +94,11 @@ function App({ Component, pageProps }: MattressAppProps) {
         <SessionProvider session={pageProps?.session}>
             <PayPalScriptProvider options={initialOptions}>
                 <ApolloProvider client={API.instance}>
-                    <AppStateContext.Provider
-                        value={{
-                            metaData,
-                            setMetaData,
-                            userCart,
-                            setUserCart,
-                            activeOrder,
-                            setActiveOrder,
-                            openSelectCountry,
-                            setOpenSelectCountry,
-                            userData,
-                            setUserData,
-                        }}
-                    >
+                    <AppSateProvider>
                         <LoadMetaComponent />
                         <InitComponent />
                         {renderMainContent()}
-                    </AppStateContext.Provider>
+                    </AppSateProvider>
                 </ApolloProvider>
             </PayPalScriptProvider>
         </SessionProvider>

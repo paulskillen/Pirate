@@ -1,6 +1,6 @@
 import { COLOR_GOLD } from "@/common/constant/app-style";
 import Path from "@/common/constant/path";
-import { AppStateContext } from "@/common/context/app/app-context";
+import { AppStateContext } from "@/common/context/app/app.context";
 import { IBundle, isValidEsimIccId } from "@/common/interface/bundle";
 import { ProviderName } from "@/common/interface/provider";
 import { convertBase64ToImgSource } from "@/common/utils/image";

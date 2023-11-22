@@ -1,5 +1,5 @@
 import MetaDataApi from "@/apis/meta-data/MetaDataApi";
-import { AppStateContext } from "@/common/context/app/app-context";
+import { AppStateContext } from "@/common/context/app/app.context";
 import { groupBy } from "lodash";
 import React, { useContext, useEffect } from "react";
 

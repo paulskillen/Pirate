@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 // @ts-ignore
 import Path from "@/common/constant/path";
-import { AppStateContext } from "@/common/context/app/app-context";
+import { AppStateContext } from "@/common/context/app/app.context";
 import { CountryRegion } from "@/common/interface/location";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";

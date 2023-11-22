@@ -1,4 +1,4 @@
-import { AppStateContext } from "@/common/context/app/app-context";
+import { AppStateContext } from "@/common/context/app/app.context";
 import React, { useContext, useMemo } from "react";
 
 export interface IPriceTagProps {

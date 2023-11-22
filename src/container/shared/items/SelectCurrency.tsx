@@ -3,8 +3,8 @@ import {
     CurrencyType,
     DEFAULT_CURRENCY,
 } from "@/common/constant/currency";
-import { AppStateContext } from "@/common/context/app/app-context";
-import { useUpdateCurrency } from "@/common/context/app/app-hooks";
+import { AppStateContext } from "@/common/context/app/app.context";
+import { useUpdateCurrency } from "@/common/context/app/app.hooks";
 import Image from "@/components/image/Image";
 import Select from "@/components/select/Select";
 import React, { useContext, useMemo } from "react";

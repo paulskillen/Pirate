@@ -2,7 +2,8 @@ import { IBundle } from "@/common/interface/bundle";
 import { ICountry, CountryRegion } from "@/common/interface/location";
 import { IOrder } from "@/common/interface/order";
 import LocalStorage from "@/common/storage/LocalStorage";
-import React, { Dispatch } from "react";
+import { isEmpty } from "lodash";
+import React, { Dispatch, useEffect, useState } from "react";
 
 export const APP_STATE_CONTEXT = "APP_STATE_CONTEXT";
 
@@ -70,3 +71,49 @@ export const updateStateContext = (key: keyof IAppState, value: any) => {
         [key]: value,
     });
 };
+
+export default function AppSateProvider({ children }: any) {
+    const [metaData, setMetaData] = useState({});
+    const [userCart, setUserCart] = useState<any>({});
+    const [activeOrder, setActiveOrder] = useState<any>({});
+    const [userData, setUserData] = useState<IUserData>({});
+    const [openSelectCountry, setOpenSelectCountry] = useState<
+        boolean | undefined
+    >(undefined);
+
+    useEffect(() => {
+        const appStateContext = loadStateContext();
+        if (appStateContext) {
+            if (!isEmpty(appStateContext?.cart)) {
+                setUserCart({ ...(appStateContext?.cart ?? {}) });
+            }
+            if (!isEmpty(appStateContext?.userData)) {
+                setUserData(appStateContext?.userData);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        const appStateContext = loadStateContext();
+        saveStateContext({ ...appStateContext, cart: userCart });
+    }, [userCart]);
+
+    return (
+        <AppStateContext.Provider
+            value={{
+                metaData,
+                setMetaData,
+                userCart,
+                setUserCart,
+                activeOrder,
+                setActiveOrder,
+                openSelectCountry,
+                setOpenSelectCountry,
+                userData,
+                setUserData,
+            }}
+        >
+            {children}
+        </AppStateContext.Provider>
+    );
+}
