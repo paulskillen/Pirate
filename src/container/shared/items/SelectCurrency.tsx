@@ -7,6 +7,7 @@ import { AppStateContext } from "@/common/context/app/app.context";
 import { useUpdateCurrency } from "@/common/context/app/hooks.context";
 import Image from "@/components/image/Image";
 import Select from "@/components/select/Select";
+import { find } from "lodash";
 import React, { useContext, useMemo } from "react";
 
 export interface ISelectCurrencyProps {
@@ -18,11 +19,17 @@ const SelectCurrency: React.FC<ISelectCurrencyProps> = ({ id }) => {
     const { metaData, userData } = useContext(AppStateContext);
     const { countryList } = metaData || {};
     const { currency } = userData || {};
+
     const currencySources = CURRENCY_LIST.map((currency) => {
         if (currency === CurrencyType.EUR) {
             return {
                 id: currency,
                 flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/1599px-Flag_of_Europe.svg.png",
+                currency: {
+                    code: CurrencyType.EUR,
+                    name: "Euro",
+                    symbol: "€",
+                },
             };
         }
         const foundCountry = countryList?.find((item) => {
@@ -34,22 +41,27 @@ const SelectCurrency: React.FC<ISelectCurrencyProps> = ({ id }) => {
         return {
             id: currency,
             flag: foundCountry?.flag,
+            currency: foundCountry?.currency,
         };
     });
 
     const value = useMemo(() => {
-        if (!currency) {
+        if (!currency?.code) {
             return DEFAULT_CURRENCY;
         }
-        return currency;
+        return currency?.code;
     }, [currency]);
 
     return (
         <Select
             dataSource={currencySources}
             value={value}
-            onChange={(value) => {
-                updateCurrency(value);
+            onChange={(id) => {
+                const value = find(
+                    currencySources,
+                    (i) => i?.id === id
+                )?.currency;
+                updateCurrency(value as any);
             }}
             allowClear={false}
             getLabel={(item) => {

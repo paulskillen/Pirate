@@ -9,7 +9,7 @@ import ClassNames from "classnames";
 import { useRouter } from "next/router";
 import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import TabBottom from "../navigation/TabBottom";
-import DesktopHeader from "../header/DesktopHeader";
+import DesktopHeader, { IDesktopHeaderProps } from "../header/DesktopHeader";
 import SiteFooter from "../footer/SiteFooter";
 
 export interface IShowHideLayoutConfig {
@@ -21,9 +21,14 @@ export interface IShowHideLayoutConfig {
 export interface ILayoutProps extends PropsWithChildren<{}> {
     [key: string]: any;
     showHideConfig?: IShowHideLayoutConfig;
+    desktopHeaderProps?: IDesktopHeaderProps;
 }
 
-const Layout: React.FC<ILayoutProps> = ({ children, showHideConfig }) => {
+const Layout: React.FC<ILayoutProps> = ({
+    children,
+    showHideConfig,
+    desktopHeaderProps = {},
+}) => {
     const { hideLogo, hideDesktopHeader } = showHideConfig || {};
     return (
         <LayoutStyled
@@ -31,7 +36,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, showHideConfig }) => {
                 "layout-container--hide-logo": hideLogo,
             })}
         >
-            {!hideDesktopHeader && <DesktopHeader />}
+            {!hideDesktopHeader && <DesktopHeader {...desktopHeaderProps} />}
             <div className="flex-grow w-100">{children}</div>
             <SiteFooter />
             <TabBottom />

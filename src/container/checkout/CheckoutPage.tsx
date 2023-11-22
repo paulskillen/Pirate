@@ -21,6 +21,7 @@ import CheckoutSuccessModal from "./CheckoutSuccessModal";
 import styled from "@emotion/styled";
 import { useSearchParam } from "react-use";
 import SelectPaymentView from "../shared/input/SelectPaymentView";
+import SelectCurrency from "../shared/items/SelectCurrency";
 
 export interface ICheckoutPageProps {
     [key: string]: any;
@@ -237,9 +238,20 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     }, []);
 
     return (
-        <div className="">
-            <PageHeader title={Messages.yourOrder} showLeftButton={false} />
-            <CheckoutStyled className="min-h-screen px-4 z-10 relative flex flex-col items-center">
+        <CheckoutStyled className="">
+            <PageHeader
+                title={Messages.yourOrder}
+                className="mt-3 checkout__page-header"
+                classNameTitle="checkout__page-header-title"
+                classNameWrapperTitle="flex justify-start"
+                showLeftButton={false}
+                customerRight={
+                    <div>
+                        <SelectCurrency />
+                    </div>
+                }
+            />
+            <div className="min-h-screen px-4 z-10 relative flex flex-col items-center">
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
@@ -274,7 +286,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 )}
                 {renderPolicyAndCompatible}
                 {/* {renderButton()} */}
-            </CheckoutStyled>
+            </div>
             {openCheckoutSuccessModal.open &&
                 openCheckoutSuccessModal.order && (
                     <CheckoutSuccessModal
@@ -285,7 +297,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                         }
                     />
                 )}
-        </div>
+        </CheckoutStyled>
     );
 };
 
@@ -296,6 +308,19 @@ const CheckoutStyled = styled.div`
     .select-payment-button {
         @media (min-width: 768px) {
             width: 50vw;
+        }
+    }
+    .checkout__page-header {
+        @media (max-width: 768px) {
+            .checkout__page-header-title {
+                text-align: start !important;
+                padding-left: 1.5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            width: 50vw !important;
+            padding-left: 0px !important;
+            padding-right: 0px !important;
         }
     }
 `;

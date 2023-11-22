@@ -4,7 +4,8 @@ import {
     loadStateStorage,
     updateStateStorage,
 } from "@/common/context/app/app.context";
-import { groupBy } from "lodash";
+import { groupBy, isEmpty } from "lodash";
+import moment from "moment";
 import React, { useContext, useEffect } from "react";
 
 export interface ILoadMetaComponentProps {
@@ -20,22 +21,38 @@ const LoadMetaComponent: React.FC<ILoadMetaComponentProps> = ({ id }) => {
     const loadMetaData = async () => {
         try {
             const appState = loadStateStorage();
-            let countryList = appState?.metaData?.countryList;
+            let { countryList, currencyDate, currencyRates } =
+                appState?.metaData ?? {};
+            const skipLoadingCurrencies =
+                !isEmpty(currencyRates) &&
+                currencyDate &&
+                moment(currencyDate).isSame(moment(), "day");
             const resCountries = countryList
                 ? null
                 : await MetaDataApi.listCountry();
-            const resRates = await MetaDataApi.currencyRates();
+            const resRates = skipLoadingCurrencies
+                ? null
+                : await MetaDataApi.currencyRates();
             if (resCountries) {
                 countryList = resCountries?.data?.data ?? [];
             }
             const groupedBy = groupBy(countryList, (item) => item?.region);
+            if (resRates) {
+                currencyRates = resRates?.data?.data?.conversion_rates;
+            }
+
             setMetaData({
                 ...metaData,
                 countryList,
                 countryByRegion: groupedBy,
-                currencyRates: resRates?.data?.data?.conversion_rates,
+                currencyRates,
+                currencyDate: new Date(),
             });
-            updateStateStorage("metaData", { countryList });
+            updateStateStorage("metaData", {
+                countryList,
+                currencyRates,
+                currencyDate: new Date(),
+            });
         } catch (error) {
             console.error({ error });
         }

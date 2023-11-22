@@ -1,3 +1,4 @@
+import { CurrencyType, ICurrency } from "@/common/constant/currency";
 import { IBundle } from "@/common/interface/bundle";
 import { ICountry, CountryRegion } from "@/common/interface/location";
 import { IOrder } from "@/common/interface/order";
@@ -9,7 +10,7 @@ export const APP_STATE_CONTEXT = "APP_STATE_CONTEXT";
 
 export interface IUserData {
     profile?: any;
-    currency?: string;
+    currency?: ICurrency;
 }
 
 export interface ISiteConfig {
@@ -23,6 +24,7 @@ export interface IMetaData {
         [key in CountryRegion]?: ICountry[];
     };
     currencyRates?: any;
+    currencyDate?: Date;
 }
 
 export interface IAppState {

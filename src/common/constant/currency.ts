@@ -6,6 +6,12 @@ export enum CurrencyType {
     EUR = "EUR",
 }
 
+export interface ICurrency {
+    code?: CurrencyType;
+    name?: string;
+    symbol?: any;
+}
+
 export const DEFAULT_CURRENCY = CurrencyType.USD;
 
 export const CURRENCY_LIST = [

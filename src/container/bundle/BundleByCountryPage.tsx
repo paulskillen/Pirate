@@ -6,6 +6,7 @@ import { ProviderName } from "@/common/interface/provider";
 import { convertBase64ToImgSource } from "@/common/utils/image";
 import Icon from "@/components/icon/Icon";
 import Image from "@/components/image/Image";
+import AppLink from "@/components/link/AppLink";
 import Modal, { IModalProps } from "@/components/modal/Modal";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
@@ -14,10 +15,10 @@ import { Button, Checkbox } from "d-react-components";
 import { find, isEmpty, join, map } from "lodash";
 import { useRouter } from "next/router";
 import React, { Fragment, useContext, useMemo, useState } from "react";
+import { useSearchParam } from "react-use";
 import PageHeader from "../shared/header/PageHeader";
 import PriceTag from "../shared/items/PriceTag";
-import { useSearchParam } from "react-use";
-import AppLink from "@/components/link/AppLink";
+import SelectCurrency from "../shared/items/SelectCurrency";
 
 export interface IBundleByCountryPageProps {
     countryCode: string;
@@ -46,7 +47,6 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     const { pathname, query } = router || {};
     const { metaData, setUserCart } = useContext(AppStateContext);
     const { countryList = [] } = metaData ?? {};
-    const [selectedBundle, setSelectedBundle] = useState<IBundle>();
     const topUpParams = useSearchParam("topup");
     const currentCountry = find(
         countryList,
@@ -67,6 +67,9 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
         }
         return res;
     }, [bundles]);
+    const [selectedBundle, setSelectedBundle] = useState<IBundle>(
+        recommendBundle || bundles?.[2]
+    );
 
     const renderCheckout = () => {
         return (
@@ -115,15 +118,33 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     return (
         <BundleByCountryPageStyled className="bg-transparent text-white  z-20">
             <PageHeader
+                classNameWrapperTitle="relative md:absolute"
                 title={currentCountry?.name}
+                customerCenter={
+                    <div className="flex-center-y flex-1 md:justify-center ml-3 md:ml-0 gap-2 md:gap-3">
+                        <div className="text-xl text-gold-light font-semibold">
+                            {currentCountry?.name}
+                        </div>
+                        <Image
+                            alt="flag"
+                            className="w-[30px] h-[30px] md:h-[40px] md:w-[40px] rounded-full border bundle-by-country-page__flag"
+                            src={convertBase64ToImgSource(currentCountry?.flag)}
+                        />
+                    </div>
+                }
+                className="md:mb-5"
                 customerRight={
-                    <Image
-                        alt="flag"
-                        className="w-12 h-auto rounded border bundle-by-country-page__flag"
-                        src={convertBase64ToImgSource(currentCountry?.flag)}
-                    />
+                    <div className="flex-center-y gap-4">
+                        <SelectCurrency />
+                        {/* <Image
+                            alt="flag"
+                            className="w-[30px] h-[30px] md:h-[40px] md:w-[40px] rounded-full border bundle-by-country-page__flag"
+                            src={convertBase64ToImgSource(currentCountry?.flag)}
+                        /> */}
+                    </div>
                 }
             />
+
             <div className="px-4 container md:flex flex-col items-center">
                 {map(bundles, (item, index: any) => {
                     const isSelected =
@@ -259,11 +280,14 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         />
                     </div>
                 </div>
-                <div className="w-full ml-3 px-3 flex justify-between items-center  text-gray-300 mt-2">
+                <div className="w-full ml-3 flex justify-between items-center  text-gray-300 mt-3">
                     <Button
                         size="auto"
                         variant="outline"
-                        className="px-3 bundle-item__button-detail"
+                        className={ClassNames(
+                            "px-3 bundle-item__button-detail",
+                            { "ml-3": showRadio }
+                        )}
                         onClick={() => setOpenDetailModal(true)}
                     >
                         <div>
@@ -277,7 +301,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         <div className="ml-1 text">{Messages.seeDetail}</div>
                     </Button>
                     <div
-                        className="flex-center-y w-full justify-end"
+                        className="flex-center-y w-full justify-end pr-3"
                         onClick={onClick}
                     >
                         <Icon

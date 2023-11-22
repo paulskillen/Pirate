@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
+import classNames from "classnames";
 import { Button, ButtonProps } from "d-react-components";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { CSSProperties } from "react";
 
 export interface IPageHeaderProps {
     title?: string;
+    style?: CSSProperties;
     className?: string;
+    classNameTitle?: string;
+    classNameWrapperTitle?: string;
     leftButtonProps?: ButtonProps;
     showLeftButton?: boolean;
     onLeftClick?: () => void;
@@ -16,7 +20,10 @@ export interface IPageHeaderProps {
 
 const PageHeader: React.FC<IPageHeaderProps> = ({
     title,
+    style,
     className,
+    classNameTitle,
+    classNameWrapperTitle,
     leftButtonProps = {},
     showLeftButton = true,
     onLeftClick,
@@ -37,7 +44,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
                 }}
                 variant="trans"
                 iconName="arrow_back_ios_new"
-                className="px-0 page-header__left-button"
+                className="px-0 page-header__left-button z-20"
                 color="light"
                 {...leftButtonProps}
             />
@@ -54,19 +61,27 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
     };
 
     const renderCenter = () => {
+        let content: any = (
+            <div
+                className={`text-xl text-gold-light flex-1 text-center  font-semibold ${classNames()} ${classNameTitle}`}
+            >
+                {title}
+            </div>
+        );
         if (customerCenter) {
-            return typeof customerCenter === "function"
-                ? customerCenter()
-                : customerCenter;
+            content =
+                typeof customerCenter === "function"
+                    ? customerCenter()
+                    : customerCenter;
         }
-        if (title) {
-            return (
-                <div className="text-xl text-gold-light flex-1 text-center font-semibold">
-                    {title}
-                </div>
-            );
-        }
-        return <div />;
+
+        return (
+            <div
+                className={`absolute right-0 left-0 top-0 bottom-0 flex-center-y ${classNameWrapperTitle}`}
+            >
+                {content}
+            </div>
+        );
     };
 
     const renderRight = () => {
@@ -82,10 +97,11 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
 
     return (
         <PageHeaderStyled
-            className={`page-header container  w-full flex flex-row items-center justify-between py-2 px-4 bg-black ${className}`}
+            style={style}
+            className={`page-header mt-2 container relative w-full flex flex-row items-center justify-between py-2 px-4 bg-black ${className}`}
         >
             {renderLeft()}
-            {renderCenter()}
+            <div className="w-100 ">{renderCenter() as any}</div>
             {renderRight()}
         </PageHeaderStyled>
     );

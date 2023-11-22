@@ -34,35 +34,35 @@ const initialOptions = {
 function App({ Component, pageProps }: MattressAppProps) {
     const Layout: ComponentType = Component.Layout || DefaultLayout;
 
-    useEffect(() => {
-        const preloader = document.querySelector(".site-preloader");
+    // useEffect(() => {
+    //     const preloader = document.querySelector(".site-preloader");
 
-        if (!preloader) {
-            return;
-        }
+    //     if (!preloader) {
+    //         return;
+    //     }
 
-        setTimeout(() => {
-            const onTransitionEnd = (event: Event) => {
-                if (
-                    event instanceof TransitionEvent &&
-                    event.propertyName === "opacity" &&
-                    preloader.parentNode
-                ) {
-                    preloader.parentNode.removeChild(preloader);
-                }
-            };
+    //     setTimeout(() => {
+    //         const onTransitionEnd = (event: Event) => {
+    //             if (
+    //                 event instanceof TransitionEvent &&
+    //                 event.propertyName === "opacity" &&
+    //                 preloader.parentNode
+    //             ) {
+    //                 preloader.parentNode.removeChild(preloader);
+    //             }
+    //         };
 
-            preloader.addEventListener("transitionend", onTransitionEnd);
-            preloader.classList.add("site-preloader__fade");
+    //         preloader.addEventListener("transitionend", onTransitionEnd);
+    //         preloader.classList.add("site-preloader__fade");
 
-            if (
-                getComputedStyle(preloader).opacity === "0" &&
-                preloader.parentNode
-            ) {
-                preloader.parentNode.removeChild(preloader);
-            }
-        }, 100);
-    }, []);
+    //         if (
+    //             getComputedStyle(preloader).opacity === "0" &&
+    //             preloader.parentNode
+    //         ) {
+    //             preloader.parentNode.removeChild(preloader);
+    //         }
+    //     }, 100);
+    // }, []);
 
     const renderMainContent = () => {
         const getLayout = Component.getLayout;

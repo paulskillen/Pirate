@@ -13,7 +13,7 @@ export interface ISiteFooterProps {
 
 const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
     return (
-        <SiteFooterStyled className="text-white container relative z-10 mt-5">
+        <SiteFooterStyled className="text-white container relative z-10 mt-[160px]">
             <div className="flex flex-col sm:flex-row sm:justify-between mb-5 ">
                 <div className="flex-1 sm:pr-20 max-sm:flex flex-col items-center max-sm:w-full">
                     <Image
@@ -29,7 +29,7 @@ const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
                     </div>
                     <div className="bg-gold-light h-[2px] w-full max-w-[100px]" />
                 </div>
-                <div className="flex flex-col items-center md:items-start flex-1">
+                <div className="flex flex-col items-center md:items-end flex-1">
                     <h5 className="text-white max-sm:hidden">CONTACT US</h5>
 
                     <div className="flex flex-row my-4">

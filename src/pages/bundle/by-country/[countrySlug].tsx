@@ -2,7 +2,7 @@ import BundleApi from "@/apis/bundle/BundleApi";
 import { IBundle } from "@/common/interface/bundle";
 import BundleByCountryPage from "@/container/bundle/BundleByCountryPage";
 import { LayoutClean } from "@/container/shared/layout/Layout";
-import React, { Fragment } from "react";
+import React from "react";
 
 export interface IBundlesByCountryProps {
     bundles: IBundle[];

@@ -14,14 +14,39 @@ import AppLink from "@/components/link/AppLink";
 import ClassNames from "classnames";
 import SelectCurrency from "../items/SelectCurrency";
 
+export interface IShowHideDesktopHeaderConfig {
+    hideLogo?: boolean;
+    hideMenuProfile?: boolean;
+    hideSelectCurrency?: boolean;
+    hideMenuHistory?: boolean;
+    hideMenuHome?: boolean;
+    hideListCountry?: boolean;
+}
+
+export const DESKTOP_HEADER_CURRENCY_CONFIG: IShowHideDesktopHeaderConfig = {
+    hideMenuProfile: true,
+    hideMenuHistory: true,
+    hideMenuHome: true,
+    hideListCountry: true,
+    hideLogo: true,
+};
 export interface IDesktopHeaderProps {
+    showHideConfig?: IShowHideDesktopHeaderConfig;
     [key: string]: any;
 }
 
 const ICON_SIZE = 28;
 
-const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
+const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
     const router = useRouter();
+    const {
+        hideLogo,
+        hideMenuHistory,
+        hideMenuHome,
+        hideMenuProfile,
+        hideSelectCurrency,
+        hideListCountry,
+    } = showHideConfig || {};
     const classItem = "p-3 rounded-full";
     const { pathname, query } = router || {};
     const activeClass = (isActive?: boolean) => {
@@ -40,7 +65,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
     const renderMenus = useMemo(() => {
         return (
             <div className="flex-center-y pointer-events-auto">
-                {!isHome && (
+                {!isHome && !hideListCountry ? (
                     <AppLink href={Path.listCountry().href}>
                         <div
                             className={`${activeClass(
@@ -56,25 +81,29 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                             />
                         </div>
                     </AppLink>
+                ) : null}
+                {hideMenuHome ? null : (
+                    <AppLink href={Path.home()}>
+                        <div
+                            className={`ml-2 ${classItem} ${activeClass(
+                                pathname === Path.home().href
+                            )}`}
+                        >
+                            {Messages.home}
+                        </div>
+                    </AppLink>
                 )}
-                <AppLink href={Path.home()}>
-                    <div
-                        className={`ml-2 ${classItem} ${activeClass(
-                            pathname === Path.home().href
-                        )}`}
-                    >
-                        {Messages.home}
-                    </div>
-                </AppLink>
-                <AppLink href={Path.esimsHistory()}>
-                    <div
-                        className={`${classItem} ${activeClass(
-                            pathname === Path.esimsHistory().href
-                        )}`}
-                    >
-                        {Messages.orderHistory}
-                    </div>
-                </AppLink>
+                {hideMenuHistory ? null : (
+                    <AppLink href={Path.esimsHistory()}>
+                        <div
+                            className={`${classItem} ${activeClass(
+                                pathname === Path.esimsHistory().href
+                            )}`}
+                        >
+                            {Messages.orderHistory}
+                        </div>
+                    </AppLink>
+                )}
                 {/* <AppLink
                     target="_blank"
                     href="https://rhq.6db.myftpupload.com/blogs/"
@@ -90,26 +119,28 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
                         {Messages.information}
                     </div>
                 </AppLink> */}
-                <SelectCurrency />
+                {hideSelectCurrency ? null : <SelectCurrency />}
 
-                <AppLink href={Path.profile()}>
-                    <div
-                        className={`mr-2 ${classItem} ${activeClass(
-                            pathname === Path.profile().href
-                        )}`}
-                    >
-                        <Icon
-                            icon="person-circle"
-                            className={`${iconClass(
+                {hideMenuProfile ? null : (
+                    <AppLink href={Path.profile()}>
+                        <div
+                            className={`mr-2 ${classItem} ${activeClass(
                                 pathname === Path.profile().href
                             )}`}
-                            size={ICON_SIZE}
-                        />
-                    </div>
-                </AppLink>
+                        >
+                            <Icon
+                                icon="person-circle"
+                                className={`${iconClass(
+                                    pathname === Path.profile().href
+                                )}`}
+                                size={ICON_SIZE}
+                            />
+                        </div>
+                    </AppLink>
+                )}
             </div>
         );
-    }, [pathname, isHome]);
+    }, [pathname, isHome, showHideConfig]);
 
     const renderLogo = useMemo(() => {
         return (
@@ -132,7 +163,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ id }) => {
 
     return (
         <section className="display-none md:flex container flex-row justify-between items-center px-3 pt-4 z-20">
-            {renderLogo}
+            {!hideLogo ? renderLogo : null}
             {renderMenus}
         </section>
     );

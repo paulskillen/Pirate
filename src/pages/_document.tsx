@@ -156,7 +156,9 @@ export default function Document() {
                         document.body.appendChild(papScriptHeader);
                     }}
                 />
-                <Script src="https://www.googletagmanager.com/gtag/js?id=AW-660949335" />
+
+                {/* Scripts for google tags  */}
+                {/* <Script src="https://www.googletagmanager.com/gtag/js?id=AW-660949335" />
                 <Script id="gtm-script-id" strategy="afterInteractive">
                     {`window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
@@ -173,7 +175,7 @@ export default function Document() {
                         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                         })(window,document,'script','dataLayer','GTM-5RPL9TJ6');`,
                     }}
-                ></Script>
+                ></Script> */}
             </Head>
             <body>
                 <noscript
@@ -182,10 +184,9 @@ export default function Document() {
 height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
                     }}
                 ></noscript>
-                {renderPreLoader()}
+                {/* {renderPreLoader()} */}
                 <Main />
                 <NextScript />
-
                 {/* {addAPAScriptFunc()} */}
             </body>
         </Html>
