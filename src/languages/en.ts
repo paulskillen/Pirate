@@ -116,6 +116,7 @@ const translations = {
     byContinueYouAgree: "By continue you agree with our",
     popularDestinations: "Popular destinations",
     yourOrder: "Your Order",
+    shareToYourFriend: "Share To Your Friend",
 };
 
 export default translations;
