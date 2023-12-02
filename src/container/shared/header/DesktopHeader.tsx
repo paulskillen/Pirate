@@ -110,7 +110,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
                 >
                     <div className={`${classItem}`}>{Messages.blogs}</div>
                 </AppLink> */}
-                {/* <AppLink href={Path.landing()}>
+                <AppLink href={Path.landing()}>
                     <div
                         className={`${classItem} ${activeClass(
                             pathname === Path.landing().href
@@ -118,7 +118,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
                     >
                         {Messages.information}
                     </div>
-                </AppLink> */}
+                </AppLink>
                 {hideSelectCurrency ? null : <SelectCurrency />}
 
                 {hideMenuProfile ? null : (

@@ -6,6 +6,8 @@ export const F_BLOG = gql`
         id
         status
         title
+        cover
+        thumbnail
         fullDesc
         shortDesc
         category
