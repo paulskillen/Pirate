@@ -3,6 +3,7 @@ import {
     COLOR_GOLD,
     COLOR_GOLD_TRANS,
     COLOR_INPUT_CONTENT,
+    COLOR_PRIMARY,
 } from "@/common/constant/app-style";
 import styled from "@emotion/styled";
 import ClassNames from "classnames";
@@ -99,5 +100,9 @@ const DropdownStyled = styled.div`
 
     .ant-select-item-option-active {
         background-color: ${COLOR_GOLD_TRANS} !important;
+    }
+
+    .ant-select-item-option-selected {
+        background-color: ${COLOR_GOLD} !important;
     }
 `;

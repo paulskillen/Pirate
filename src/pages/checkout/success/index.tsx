@@ -1,4 +1,5 @@
 import CheckoutPage from "@/container/checkout/CheckoutPage";
+import CheckoutSuccessPage from "@/container/checkout/CheckoutSuccessPage";
 import { LayoutClean } from "@/container/shared/layout/Layout";
 import React from "react";
 
@@ -7,7 +8,7 @@ export interface ICheckoutSuccessProps {
 }
 
 const CheckoutSuccess: React.FC<ICheckoutSuccessProps> = ({ id }) => {
-    return <CheckoutPage />;
+    return <CheckoutSuccessPage />;
 };
 
 export default CheckoutSuccess;

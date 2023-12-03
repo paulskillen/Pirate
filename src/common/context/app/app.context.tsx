@@ -34,11 +34,13 @@ export interface IAppState {
     siteConfig?: ISiteConfig;
     userCart: IBundle[];
     activeOrder: IOrder;
+    successOrder?: IOrder;
     setSiteConfig?: (values: any) => any;
     setMetaData: Dispatch<IMetaData>;
     setUserCart: Dispatch<IBundle[]>;
     setUserData: Dispatch<IUserData>;
     setActiveOrder: Dispatch<IOrder>;
+    setSuccessOrder: Dispatch<IOrder>;
     setOpenSelectCountry: Dispatch<boolean | undefined>;
 }
 
@@ -53,6 +55,7 @@ export const appStateDefault: IAppState = {
     setUserCart: () => {},
     setUserData: () => {},
     setActiveOrder: () => {},
+    setSuccessOrder: () => {},
     setOpenSelectCountry: () => {},
 };
 
@@ -78,6 +81,7 @@ export default function AppSateProvider({ children }: any) {
     const [metaData, setMetaData] = useState<IAppState["metaData"]>({});
     const [userCart, setUserCart] = useState<any>({});
     const [activeOrder, setActiveOrder] = useState<any>({});
+    const [successOrder, setSuccessOrder] = useState<IOrder>();
     const [userData, setUserData] = useState<IUserData>({});
     const [openSelectCountry, setOpenSelectCountry] = useState<
         boolean | undefined
@@ -113,6 +117,8 @@ export default function AppSateProvider({ children }: any) {
                 setOpenSelectCountry,
                 userData,
                 setUserData,
+                successOrder,
+                setSuccessOrder,
             }}
         >
             {children}

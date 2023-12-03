@@ -103,3 +103,9 @@ input:-webkit-autofill {
         }
     }
 }
+
+.ant-modal-close-x:focus-visible,
+.ant-modal-close {
+    outline: none !important;
+    border: none !important;
+}
