@@ -1,7 +1,7 @@
 import React from "react";
 import AppLink, { AppLinkProps } from "../link/AppLink";
 import styled from "@emotion/styled";
-import { COLOR_GOLD, COLOR_GOLD_LIGHT } from "@/common/constant/app-style";
+import { COLOR_GOLD, COLOR_GOLD_LIGHT, COLOR_GOLD_TRANS } from "@/common/constant/app-style";
 import { ILinkProps } from "@/common/interface/link";
 
 export interface IButtonLinkProps extends Partial<AppLinkProps> {
@@ -16,7 +16,7 @@ const ButtonLink: React.FC<IButtonLinkProps> = ({
 }) => {
     return (
         <AppLink className="z-10" {...rest}>
-            <ButtonLinkStyled className={className}>
+            <ButtonLinkStyled className={`button-link ${className}`}>
                 {children}
             </ButtonLinkStyled>
         </AppLink>
@@ -33,7 +33,7 @@ const ButtonLinkStyled = styled.button`
     padding-left: 10px;
     padding-right: 10px;
     :hover {
-        background-color: ${COLOR_GOLD};
+        background-color: ${COLOR_GOLD_TRANS} !important;
         color: white !important;
     }
     :focus {
