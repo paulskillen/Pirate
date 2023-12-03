@@ -36,6 +36,7 @@ export interface IDesktopHeaderProps {
 }
 
 const ICON_SIZE = 28;
+const LOGO_SIZE = 84;
 
 const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
     const router = useRouter();
@@ -47,7 +48,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
         hideSelectCurrency,
         hideListCountry,
     } = showHideConfig || {};
-    const classItem = "p-3 rounded-full";
+    const classItem = "py-3 rounded-full text-lg";
     const { pathname, query } = router || {};
     const activeClass = (isActive?: boolean) => {
         return ClassNames({
@@ -64,7 +65,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
 
     const renderMenus = useMemo(() => {
         return (
-            <div className="flex-center-y pointer-events-auto">
+            <div className="flex-center-y pointer-events-auto gap-4">
                 {!isHome && !hideListCountry ? (
                     <AppLink href={Path.listCountry().href}>
                         <div
@@ -104,13 +105,16 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
                         </div>
                     </AppLink>
                 )}
-                {/* <AppLink
-                    target="_blank"
-                    href="https://rhq.6db.myftpupload.com/blogs/"
-                >
-                    <div className={`${classItem}`}>{Messages.blogs}</div>
-                </AppLink> */}
-                <AppLink href={Path.landing()}>
+                <AppLink href={Path.blogs()}>
+                    <div
+                        className={`${classItem} ${activeClass(
+                            pathname === Path.blogs().href
+                        )}`}
+                    >
+                        {Messages.blogs}
+                    </div>
+                </AppLink>
+                {/* <AppLink href={Path.landing()}>
                     <div
                         className={`${classItem} ${activeClass(
                             pathname === Path.landing().href
@@ -118,8 +122,8 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
                     >
                         {Messages.information}
                     </div>
-                </AppLink>
-                {hideSelectCurrency ? null : <SelectCurrency />}
+                </AppLink> */}
+                {hideSelectCurrency ? null : <SelectCurrency className="" />}
 
                 {hideMenuProfile ? null : (
                     <AppLink href={Path.profile()}>
@@ -150,8 +154,8 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
                         alt="logo"
                         src="/images/logo/logo.png"
                         style={{ objectFit: "cover" }}
-                        width={100}
-                        height={100}
+                        width={LOGO_SIZE}
+                        height={LOGO_SIZE}
                     />
                     {/* <h4 className="text-white  font-semibold ml-3">
                         Pirate <span className="text-gold">Mobile</span>

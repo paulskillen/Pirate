@@ -148,7 +148,12 @@ const Path = {
     }),
 
     blogs: (): ILinkProps => ({
-        href: "/blogs",
+        href: "/blog",
+    }),
+
+    blogDetail: (blog: any): ILinkProps => ({
+        href: "/blog/[blogSlug]",
+        as: `/blog/${blog?.id}`,
     }),
 
     affiliatePage: (): ILinkProps => ({

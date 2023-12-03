@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import API from "../API";
-import { F_BLOGS, F_BLOG } from "./BlogFragment";
+import { F_BLOGS, F_BLOG, F_BLOG_ITEM } from "./BlogFragment";
 
 const BlogApi = {
     list: async (paginate: any) =>
@@ -17,19 +17,18 @@ const BlogApi = {
             fetchPolicy: "no-cache",
         }),
 
-    homepageList: async (paginate: any) =>
+    homepageBlogs: async () =>
         API.instance.query({
             query: gql`
-                ${F_BLOGS}
-                query getHomePageBlogForCustomer(
-                    $paginate: BlogPaginateRequest!
-                ) {
-                    data: getHomePageBlogForCustomer(paginate: $paginate) {
-                        ...F_BLOGS
+                ${F_BLOG_ITEM}
+                query getHomePageBlogForCustomer {
+                    data: getHomepageBlogsForCustomer {
+                        data {
+                            ...F_BLOG_ITEM
+                        }
                     }
                 }
             `,
-            variables: { paginate },
             fetchPolicy: "no-cache",
         }),
 

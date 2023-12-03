@@ -7,14 +7,15 @@ import { AppStateContext } from "@/common/context/app/app.context";
 import { useUpdateCurrency } from "@/common/context/app/hooks.context";
 import Image from "@/components/image/Image";
 import Select from "@/components/select/Select";
+import styled from "@emotion/styled";
 import { find } from "lodash";
 import React, { useContext, useMemo } from "react";
 
 export interface ISelectCurrencyProps {
-    [key: string]: any;
+    className?: string;
 }
 
-const SelectCurrency: React.FC<ISelectCurrencyProps> = ({ id }) => {
+const SelectCurrency: React.FC<ISelectCurrencyProps> = ({ className }) => {
     const { updateCurrency } = useUpdateCurrency();
     const { metaData, userData } = useContext(AppStateContext);
     const { countryList } = metaData || {};
@@ -53,37 +54,62 @@ const SelectCurrency: React.FC<ISelectCurrencyProps> = ({ id }) => {
     }, [currency]);
 
     return (
-        <Select
-            dataSource={currencySources}
-            value={value}
-            onChange={(id) => {
-                const value = find(
-                    currencySources,
-                    (i) => i?.id === id
-                )?.currency;
-                updateCurrency(value as any);
-            }}
-            allowClear={false}
-            getLabel={(item) => {
-                return (
-                    <div className="flex-center-y">
-                        <Image
-                            className="w-8 rounded border"
-                            alt="flag"
-                            src={
-                                item?.id === CurrencyType.EUR
-                                    ? item?.flag
-                                    : `data:image/png;base64, ${item?.flag}`
-                            }
-                        />
-                        <div className="text-base font-semibold ml-3 max-w-xs ">
-                            {item?.id}
+        <SelectCurrencyStyled className={`${className}`}>
+            <Select
+                dataSource={currencySources}
+                value={value}
+                onChange={(id) => {
+                    const value = find(
+                        currencySources,
+                        (i) => i?.id === id
+                    )?.currency;
+                    updateCurrency(value as any);
+                }}
+                allowClear={false}
+                getLabel={(item) => {
+                    return (
+                        <div className="flex-center-y">
+                            <Image
+                                className="w-8 rounded border"
+                                alt="flag"
+                                src={
+                                    item?.id === CurrencyType.EUR
+                                        ? item?.flag
+                                        : `data:image/png;base64, ${item?.flag}`
+                                }
+                            />
+                            <div className="text-base font-semibold ml-3 max-w-xs ">
+                                {item?.id}
+                            </div>
                         </div>
-                    </div>
-                );
-            }}
-        />
+                    );
+                }}
+            />
+        </SelectCurrencyStyled>
     );
 };
 
 export default SelectCurrency;
+
+const SelectCurrencyStyled = styled.div`
+    .d-select__select .ant-select-selector {
+        min-height: 30px !important;
+        height: 35px !important;
+        .ant-select-item-option-selected {
+        }
+    }
+    .d-select__container
+        .ant-select-single
+        .ant-select-selector
+        .ant-select-selection-item,
+    .d-select__container
+        .ant-select-single
+        .ant-select-selector
+        .ant-select-selection-placeholder {
+        height: 35px !important;
+    }
+
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+        background-color: rgba(192, 157, 94, 1) !important;
+    }
+`;

@@ -5,6 +5,7 @@ import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import React from "react";
 
 export interface ISiteFooterProps {
@@ -12,16 +13,25 @@ export interface ISiteFooterProps {
 }
 
 const SiteFooter: React.FC<ISiteFooterProps> = ({ id }) => {
+    const router = useRouter();
     return (
         <SiteFooterStyled className="text-white container relative z-10 mt-[160px]">
             <div className="flex flex-col sm:flex-row sm:justify-between mb-5 ">
                 <div className="flex-1 sm:pr-20 max-sm:flex flex-col items-center max-sm:w-full">
-                    <Image
-                        alt="logo"
-                        className="site-footer__logo"
-                        src="/images/logo/logo.png"
-                        nextImageProps={{ width: 150, height: 150 }}
-                    />
+                    <div
+                        className="hover-pointer"
+                        onClick={() => {
+                            router.push(Path.home().href);
+                        }}
+                    >
+                        <Image
+                            alt="logo"
+                            className="site-footer__logo z-10 relative"
+                            src="/images/logo/logo.png"
+                            nextImageProps={{ width: 150, height: 150 }}
+                        />
+                    </div>
+
                     <h5 className="my-4 text-white">PIRATE MOBILE LIMITED</h5>
                     <div className="my-4 max-sm:text-center">
                         Pirate Mobile provides eSIM data packages to ensure

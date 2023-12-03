@@ -29,9 +29,10 @@ import BlockLatestNews from "../shared/block/BlockLatestNews";
 import BlockBoxByBox from "../shared/block/BlockBoxByBox";
 import MobileHeader from "../shared/header/MobileHeader";
 import AppLink from "@/components/link/AppLink";
+import { IBlog } from "@/common/interface/blog";
 
 export interface IHomePageProps {
-    [key: string]: any;
+    latestNews?: IBlog[];
 }
 
 const HOME_PAGE_DISPLAY_REGIONS = [
@@ -67,7 +68,7 @@ const HOME_PAGE_COVERS = [
     },
 ];
 
-const HomePage: React.FC<IHomePageProps> = ({ id }) => {
+const HomePage: React.FC<IHomePageProps> = ({ latestNews }) => {
     const router = useRouter();
     const { metaData, setOpenSelectCountry } = useContext(AppStateContext);
     const { countryList } = metaData || {};
@@ -173,13 +174,16 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
     }, []);
 
     const blockLatestNews = useMemo(() => {
+        if (!latestNews?.length) {
+            return null;
+        }
         return (
             <BlockLatestNews
-                blockData={BLOCK_ABOUT_LATEST_NEWS}
+                blockData={{ dataSource: latestNews }}
                 className="py-20 px-3"
             />
         );
-    }, []);
+    }, [latestNews]);
 
     return (
         <MainStyled
@@ -245,15 +249,8 @@ const HomePage: React.FC<IHomePageProps> = ({ id }) => {
             }, [])}
             {blockWhyUs}
             {blockBySteps}
-            {/* {blockLatestNews} */}
+            {blockLatestNews}
             {/* {renderGrids()} */}
-            <div
-                onClick={() =>
-                    setOpenSelectCountry && setOpenSelectCountry(true)
-                }
-                className="logo-click-mask"
-                id="logo-click-mask"
-            />
         </MainStyled>
     );
 };

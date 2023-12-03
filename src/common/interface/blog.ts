@@ -35,9 +35,11 @@ export interface IBlog extends IBase {
 
     fullDesc: string;
 
-    shortDesc: string;
+    shortDesc?: string;
 
-    cover: string;
+    cover?: string;
+
+    thumbnail?: string;
 
     category: string;
 
