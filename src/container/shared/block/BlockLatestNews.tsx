@@ -1,18 +1,16 @@
+import Path from "@/common/constant/path";
 import {
     IBlockBaseProps,
     IBlockComponentBaseProps,
 } from "@/common/interface/block";
+import { IBlog } from "@/common/interface/blog";
 import ButtonLink from "@/components/button/ButtonLink";
-import Slick, { Settings } from "react-slick";
-import Image from "@/components/image/Image";
+import SlickSlider from "@/components/slider/SlickSlider";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { map } from "lodash";
-import React, { useRef } from "react";
-import Icon from "@/components/icon/Icon";
-import Path from "@/common/constant/path";
-import { IBlog } from "@/common/interface/blog";
-import SlickSlider from "@/components/slider/SlickSlider";
+import React from "react";
+import { Settings } from "react-slick";
 
 export interface IBlockLatestNewsProps
     extends IBlockComponentBaseProps<IBlockBaseProps<any>> {
@@ -29,7 +27,6 @@ const settings: Settings = {
     adaptiveHeight: true,
     infinite: true,
     variableWidth: false,
-
     responsive: [
         {
             breakpoint: 576,
@@ -47,9 +44,7 @@ const BlockLatestNews: React.FC<IBlockLatestNewsProps> = ({
 }) => {
     const title = "Latest News";
     const subTitle = "Check out some of our news";
-    const stickRef = useRef<Slick>(null);
-    const { buttonText, description, imageDesktop, dataSource } =
-        blockData || {};
+    const { dataSource } = blockData || {};
     return (
         <BlockLatestNewsStyled className={`${className}`}>
             <h2 className="text-white block-title font-mont text-center">
@@ -77,6 +72,14 @@ const BlockLatestNews: React.FC<IBlockLatestNewsProps> = ({
                     })}
                 </SlickSlider>
             )}
+            <div className="w-100 flex justify-center items-center">
+                <ButtonLink
+                    className="rounded-full h-[60px] px-[30px] mt-5"
+                    href={Path.blogs().href}
+                >
+                    {Messages.allBlogs}
+                </ButtonLink>
+            </div>
         </BlockLatestNewsStyled>
     );
 };

@@ -1,35 +1,33 @@
 /* eslint-disable react/no-unescaped-entities */
 // @ts-ignore
-import Path from "@/common/constant/path";
-import { AppStateContext } from "@/common/context/app/app.context";
-import { CountryRegion } from "@/common/interface/location";
-import Messages from "@/languages/Messages";
-import styled from "@emotion/styled";
-import { Button } from "d-react-components";
-import { useRouter } from "next/router";
-import React, { useContext, useEffect, useMemo } from "react";
-import SelectCountry from "../shared/input/SelectCountry";
 import {
     IDS_OPEN_SELECT_COUNTRY,
     POPULAR_COUNTRIES,
 } from "@/common/constant/app";
-import DesktopHeader from "../shared/header/DesktopHeader";
-import BlockPopularCountries from "../shared/block/BlockPopularCountries";
-import { filter, map } from "lodash";
-import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
-import { SwiperSlide } from "swiper/react";
-import Image from "@/components/image/Image";
-import BlockWhyChooseUs from "../shared/block/BlockWhyChooseUs";
 import {
-    BLOCK_ABOUT_LATEST_NEWS,
     BLOCK_BOX_BY_BOX_STEPS,
     BLOCK_WHY_CHOOSE_US,
 } from "@/common/constant/block";
-import BlockLatestNews from "../shared/block/BlockLatestNews";
-import BlockBoxByBox from "../shared/block/BlockBoxByBox";
-import MobileHeader from "../shared/header/MobileHeader";
-import AppLink from "@/components/link/AppLink";
+import Path from "@/common/constant/path";
+import { AppStateContext } from "@/common/context/app/app.context";
 import { IBlog } from "@/common/interface/blog";
+import { CountryRegion } from "@/common/interface/location";
+import Image from "@/components/image/Image";
+import AppLink from "@/components/link/AppLink";
+import Messages from "@/languages/Messages";
+import styled from "@emotion/styled";
+import { Button } from "d-react-components";
+import { filter, map } from "lodash";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useMemo } from "react";
+import { SwiperSlide } from "swiper/react";
+import BlockBoxByBox from "../shared/block/BlockBoxByBox";
+import BlockLatestNews from "../shared/block/BlockLatestNews";
+import BlockPopularCountries from "../shared/block/BlockPopularCountries";
+import BlockSwiperSlide from "../shared/block/BlockSwiperSlide";
+import BlockWhyChooseUs from "../shared/block/BlockWhyChooseUs";
+import MobileHeader from "../shared/header/MobileHeader";
+import SelectCountry from "../shared/input/SelectCountry";
 
 export interface IHomePageProps {
     latestNews?: IBlog[];
