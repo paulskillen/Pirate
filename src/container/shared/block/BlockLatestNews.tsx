@@ -12,37 +12,12 @@ import React, { useRef } from "react";
 import Icon from "@/components/icon/Icon";
 import Path from "@/common/constant/path";
 import { IBlog } from "@/common/interface/blog";
+import SlickSlider from "@/components/slider/SlickSlider";
 
 export interface IBlockLatestNewsProps
     extends IBlockComponentBaseProps<IBlockBaseProps<any>> {
     [key: string]: any;
 }
-
-const SamplePrevArrow = (props: any) => {
-    const { onClick } = props;
-    return (
-        <button
-            onClick={onClick}
-            className="block-header__arrow block-header__arrow-left"
-            type="button"
-        >
-            <Icon icon="arrow-left-circle" useIconSet="bootstrap" />
-        </button>
-    );
-};
-
-export const SampleNextArrow = (props: any) => {
-    const { onClick } = props;
-    return (
-        <button
-            onClick={onClick}
-            className="block-header__arrow block-header__arrow-right"
-            type="button"
-        >
-            <Icon icon="arrow-right-circle" useIconSet="bootstrap" />
-        </button>
-    );
-};
 
 const settings: Settings = {
     dots: true,
@@ -53,19 +28,11 @@ const settings: Settings = {
     slidesToScroll: 1,
     adaptiveHeight: true,
     infinite: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    lazyLoad: "ondemand",
+    variableWidth: false,
+
     responsive: [
         {
-            breakpoint: 767,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-            },
-        },
-        {
-            breakpoint: 479,
+            breakpoint: 576,
             settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
@@ -94,11 +61,11 @@ const BlockLatestNews: React.FC<IBlockLatestNewsProps> = ({
                 </div>
             )}
             {dataSource?.length && (
-                <Slick
-                    {...settings}
-                    ref={stickRef}
+                <SlickSlider
+                    // ref={stickRef}
                     className="mt-4"
                     key="hotspot-slider"
+                    setting={settings}
                 >
                     {map(dataSource, (item, index) => {
                         return (
@@ -108,7 +75,7 @@ const BlockLatestNews: React.FC<IBlockLatestNewsProps> = ({
                             />
                         );
                     })}
-                </Slick>
+                </SlickSlider>
             )}
         </BlockLatestNewsStyled>
     );
@@ -136,7 +103,7 @@ const NewsItem: React.FC<any> = ({ className, data }) => {
                 <div className="flex-1">
                     {title && (
                         <h4
-                            className="text-white text-wrap min-h-fit overflow-hidden break-all text-ellipsis"
+                            className="text-white text-nowrap min-h-fit overflow-hidden break-all text-ellipsis"
                             style={{}}
                         >
                             {title}
@@ -169,24 +136,23 @@ const BlockLatestNewsStyled = styled.div`
             .slick-track {
                 display: flex;
                 gap: 8px;
+                @media (max-width: 576px) {
+                    display: flex;
+                    gap: 4px;
+                }
             }
         }
         .slick-slide {
         }
-        .block-header__arrow {
-            position: absolute;
-            z-index: 10;
-        }
-        .block-header__arrow-left {
-            left: 0;
-            top: 0%;
-            opacity: 100% !important;
-        }
-        .block-header__arrow-right {
-            right: 0;
-            top: 0%;
-            opacity: 100% !important;
+    }
+`;
+const NewsItemStyled = styled.div`
+    .button-link {
+        display: none;
+    }
+    &:hover {
+        .button-link {
+            display: block;
         }
     }
 `;
-const NewsItemStyled = styled.div``;
