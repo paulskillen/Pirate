@@ -6,9 +6,16 @@ import React, { useContext, useMemo } from "react";
 export interface IPriceTagProps {
     price: any;
     className?: string;
+    classNameText?: string;
+    colorText?: string;
 }
 
-const PriceTag: React.FC<IPriceTagProps> = ({ price, className }) => {
+const PriceTag: React.FC<IPriceTagProps> = ({
+    price,
+    className,
+    classNameText,
+    colorText = "light",
+}) => {
     const { metaData, userData } = useContext(AppStateContext);
     const { currencyRates } = metaData || {};
     const { currency: userCurrency } = userData || {};
@@ -28,7 +35,7 @@ const PriceTag: React.FC<IPriceTagProps> = ({ price, className }) => {
         <div className={className}>
             <CurrencyFormat
                 thousandSeparator
-                className="label text-white"
+                className={`label text-${colorText} ${classNameText}`}
                 value={displayPrice}
                 displayType="text"
                 prefix={`${symbol} `}

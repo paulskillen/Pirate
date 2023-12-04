@@ -119,6 +119,8 @@ const translations = {
     shareToYourFriend: "Share To Your Friend",
     seeAllBlogs: "See All Blogs",
     allBlogs: "All Blogs",
+    bundles: "Bundles",
+    desc: "Desc",
 };
 
 export default translations;

@@ -4,7 +4,7 @@ import { AppStateContext } from "@/common/context/app/app.context";
 import { IBundle, isValidEsimIccId } from "@/common/interface/bundle";
 import { ProviderName } from "@/common/interface/provider";
 import { convertBase64ToImgSource } from "@/common/utils/image";
-import Icon from "@/components/icon/Icon";
+import Icon, { IconProps } from "@/components/icon/Icon";
 import Image from "@/components/image/Image";
 import AppLink from "@/components/link/AppLink";
 import Modal, { IModalProps } from "@/components/modal/Modal";
@@ -204,6 +204,19 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
     }, [dataAmount, provider]);
     const [openDetailModal, setOpenDetailModal] = useState(false);
 
+    const renderRow = (
+        iconProps: IconProps,
+        label: string | null,
+        className?: string
+    ) => {
+        return (
+            <div className={`flex flex-row items-center ${className}`}>
+                <Icon size={50} className="text-gold-light" {...iconProps} />
+                {label && <div className="h3 text-gold-light">{label}</div>}
+            </div>
+        );
+    };
+
     return (
         <Fragment>
             <BundleItemStyled
@@ -235,37 +248,29 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                             onChange={() => {}}
                             checked={selected}
                             variant="radio"
-                            className="h-fit text-white border-white mt-1"
+                            className="h-fit text-white border-white mt-3"
                         />
                     )}
                     <div className="w-full ml-3">
-                        <div className="flex-center-y text-lg text-gold font-semibold">
-                            <div className="ml-1">{id}</div>
+                        {renderRow(
+                            { icon: "data", useIconSet: "atisa" },
+                            dataDisplay,
+                            "gap-3"
+                        )}
+                        {/* {speed?.length &&
+                            renderRow(
+                                {
+                                    icon: "speedometer",
+                                    useIconSet: "bootstrap",
+                                    className: "mr-3 text-gold-light",
+                                },
+                                join(speed, ","),
+                                "my-2"
+                            )} */}
+                        <div className={`${rowClass} h4 gap-3 text-gold`}>
+                            <div className="">{`${duration}   ${Messages.days}`}</div>
+                            <span className=" ">{Messages.bundles}</span>
                         </div>
-                        <div className={rowClass}>
-                            <div className="mr-1 text-gold text-base">
-                                {Messages.data} :{" "}
-                            </div>
-                            <div className="font-medium text text-gray-300">
-                                {dataDisplay}
-                            </div>
-                        </div>
-                        <div className={rowClass}>
-                            <div className="mr-1 text-gold  text-base">
-                                {Messages.duration} :{" "}
-                            </div>
-                            <div className="font-medium text text-gray-300">{`${duration}  ${Messages.days}`}</div>
-                        </div>
-                        {/* {speed?.length && (
-                        <div className={rowClass}>
-                            <div className="mr-1 text-gold  text-base">
-                                {Messages.speed} :{" "}
-                            </div>
-                            <div className="font-semibold text-gray-300">
-                                {join(speed, ",")}
-                            </div>
-                        </div>
-                    )} */}
                     </div>
                     <div className="rounded-full">
                         <Image
@@ -280,7 +285,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         />
                     </div>
                 </div>
-                <div className="w-full ml-3 flex justify-between items-center  text-gray-300 mt-3">
+                <div className="w-full ml-3 flex justify-between items-center  text-gold-light mt-3">
                     <Button
                         size="auto"
                         variant="outline"
@@ -307,11 +312,13 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         <Icon
                             icon="md-pricetags"
                             useIconSet="ion"
-                            size={16}
-                            className="mr-2 text-gold"
+                            size={30}
+                            className="mr-2 text-gold-light"
                         />
                         <PriceTag
-                            className="font-medium text"
+                            colorText="gold-light"
+                            className=""
+                            classNameText="h4 !text-gold-light"
                             price={salePrice}
                         />
                     </div>
@@ -347,8 +354,13 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
         bundleData,
         id,
     } = bundle || {};
-    const { speed, countries } = bundleData || {};
-    const rowClass = ClassNames("flex flex-row items-start text-lg mt-2");
+
+    console.log(
+        "🚀 >>>>>> file: BundleByCountryPage.tsx:358 >>>>>> bundle:",
+        bundle
+    );
+    const { speed, countries, imageUrl } = bundleData || {};
+    const rowClass = ClassNames("flex flex-row items-start gap-2 h4 mt-2");
     const dataDisplay = useMemo(() => {
         if (provider === ProviderName.ESIM_GO) {
             return `${Math.floor(dataAmount / 1000)}GB`;
@@ -356,49 +368,62 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
         return null;
     }, [dataAmount, provider]);
 
+    const renderRow = (
+        iconProps: IconProps,
+        label: string | null,
+        className?: string
+    ) => {
+        return (
+            <div className={`flex flex-row items-center ${className}`}>
+                <Icon size={50} className="text-gold-light" {...iconProps} />
+                {label && <div className="h3 text-gold-light">{label}</div>}
+            </div>
+        );
+    };
+
     const renderContent = () => {
         return (
             <div className="flex flex-row">
                 <div className="w-full ml-3">
+                    {renderRow(
+                        { icon: "data", useIconSet: "atisa" },
+                        dataDisplay,
+                        "gap-2"
+                    )}
                     <div className={rowClass}>
-                        <div className="mr-1 text-gold text-base">
-                            {Messages.data} :{" "}
-                        </div>
-                        <div className="font-semibold text-gray-300">
-                            {dataDisplay}
-                        </div>
-                    </div>
-                    <div className={rowClass}>
-                        <div className="mr-1 text-gold  text-base">
+                        <div className="mr-1 text-gold">
                             {Messages.duration} :{" "}
                         </div>
-                        <div className="font-semibold text-gray-300">{`${duration}  ${Messages.days}`}</div>
+                        <div className="font-semibold text-gold-light">{`${duration}  ${Messages.days}`}</div>
                     </div>
                     <div className={`${rowClass} w-full`}>
-                        <div className="mr-1 text-gold  text-base">
-                            {Messages.description}:
-                        </div>
-                        <div className="font-semibold text-gray-300 w-full">{`${description}`}</div>
-                    </div>
-                    <div className="flex-center-y text-white">
-                        <Icon
-                            icon="md-pricetags"
-                            useIconSet="ion"
-                            size={16}
-                            className="mr-2 text-gold"
-                        />
-                        <PriceTag price={salePrice} />
+                        <div className="mr-1 text-gold">{Messages.desc}:</div>
+                        <div className="font-semibold text-gold-light text-nowrap">{`${description}`}</div>
                     </div>
                     {speed?.length && (
                         <div className={rowClass}>
-                            <div className="mr-1 text-gold  text-base">
+                            <div className="mr-1 text-gold">
                                 {Messages.speed} :{" "}
                             </div>
-                            <div className="font-semibold text-gray-300">
+                            <div className="font-semibold text-gold-light">
                                 {join(speed, ",")}
                             </div>
                         </div>
                     )}
+                    <div className="flex-center-y text-white mt-3">
+                        <Icon
+                            icon="md-pricetags"
+                            useIconSet="ion"
+                            size={30}
+                            className="mr-2 text-gold"
+                        />
+                        <PriceTag
+                            price={salePrice}
+                            colorText="gold-light"
+                            className=""
+                            classNameText="h4 !text-gold-light"
+                        />
+                    </div>
                 </div>
                 {/* <div className="rounded-full">
                     <Image
@@ -420,9 +445,9 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
         <Modal
             open={open}
             onClose={onClose}
-            title={description}
             closable
             maskClosable
+            size="medium"
         >
             {renderContent()}
         </Modal>
