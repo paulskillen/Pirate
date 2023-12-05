@@ -354,11 +354,6 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
         bundleData,
         id,
     } = bundle || {};
-
-    console.log(
-        "🚀 >>>>>> file: BundleByCountryPage.tsx:358 >>>>>> bundle:",
-        bundle
-    );
     const { speed, countries, imageUrl } = bundleData || {};
     const rowClass = ClassNames("flex flex-row items-start gap-2 h4 mt-2");
     const dataDisplay = useMemo(() => {
@@ -375,16 +370,29 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
     ) => {
         return (
             <div className={`flex flex-row items-center ${className}`}>
-                <Icon size={50} className="text-gold-light" {...iconProps} />
+                <Icon size={50} className="text-gold" {...iconProps} />
                 {label && <div className="h3 text-gold-light">{label}</div>}
             </div>
         );
     };
 
+    const imageView = useMemo(() => {
+        return (
+            <div className="relative">
+                <img
+                    src={imageUrl}
+                    className="h-[150px] w-100 md:w-[150px] h-100 mt-3 rounded-md"
+                    alt="bundle_image"
+                />
+            </div>
+        );
+    }, [imageUrl]);
+
     const renderContent = () => {
         return (
-            <div className="flex flex-row">
-                <div className="w-full ml-3">
+            <div className="flex flex-col md:flex-row mt-[10px]">
+                {imageView}
+                <div className="w-full mt-3 md:mt-0 md:ml-3">
                     {renderRow(
                         { icon: "data", useIconSet: "atisa" },
                         dataDisplay,
@@ -398,7 +406,7 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
                     </div>
                     <div className={`${rowClass} w-full`}>
                         <div className="mr-1 text-gold">{Messages.desc}:</div>
-                        <div className="font-semibold text-gold-light text-nowrap">{`${description}`}</div>
+                        <div className="font-semibold text-gold-light md:max-w-[60%]">{`${description}`}</div>
                     </div>
                     {speed?.length && (
                         <div className={rowClass}>
@@ -425,18 +433,6 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
                         />
                     </div>
                 </div>
-                {/* <div className="rounded-full">
-                    <Image
-                        alt="pirate_logo"
-                        className="rounded-full"
-                        src="/images/logo/logo.png"
-                        nextImageProps={{
-                            width: 48,
-                            height: 48,
-                            style: { objectFit: "contain" },
-                        }}
-                    />
-                </div> */}
             </div>
         );
     };
