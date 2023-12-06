@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 import OrderApi from "@/apis/order/OrderApi";
 import { AppStateContext } from "@/common/context/app/app.context";
 import ThankYouAnimation from "@/common/assets/animation/thankyou.json";
+import ThankYou1Animation from "@/common/assets/animation/thankyou-1.json";
 import { TEST_ORDER } from "./CheckoutPage";
 
 export interface ICheckoutSuccessPageProps {}
@@ -120,11 +121,11 @@ const CheckoutSuccessPage: React.FC<ICheckoutSuccessPageProps> = ({}) => {
     const renderThankyou = useMemo(() => {
         return (
             <div className="flex flex-col items-center justify-between mt-[100px] mb-[30px] text-gold">
-                <div className="lottie-wrapper h-[150px] w-[150px]">
+                <div className="lottie-wrapper h-[250px] w-[250px]">
                     <Lottie
                         style={{ backgroundColor: "black", flex: 1 }}
                         options={{
-                            animationData: ThankYouAnimation,
+                            animationData: ThankYou1Animation,
                             loop: true,
                             autoplay: true,
                             rendererSettings: {
