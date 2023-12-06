@@ -75,6 +75,7 @@ const translations = {
     save: "Save",
     viewOrder: "View Order",
     requiredField: "Required field !",
+    pleaseInputTheEmailFirst: "Please input your email first !",
     emailIsNotValid: "Email is not valid !",
     send: "Send",
     sent: "Sent",

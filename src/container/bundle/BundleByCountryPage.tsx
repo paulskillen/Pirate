@@ -363,7 +363,7 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
 
     const imageView = useMemo(() => {
         return (
-            <div className="relative bg-red-200 h-[125px] w-full mt-[15px] md:w-[200px] rounded-xl">
+            <div className="relative h-[125px] w-full mt-[15px] md:w-[200px] rounded-xl">
                 <img
                     src={imageUrl}
                     className="absolute w-100 h-100 object-cove rounded-xl"
@@ -385,7 +385,6 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
                 <PriceTag
                     price={salePrice}
                     colorText="gold-light"
-                    d
                     className=""
                     classNameText="h4 !text-gold-light"
                 />
