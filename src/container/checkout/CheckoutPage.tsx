@@ -154,7 +154,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
     const renderAgreement = () => {
         return (
             <div className="bg-black mt-4 p-4 rounded-2xl border border-gold checkout-page__agreement">
-                <div className="flex-center-y">
+                {/* <div className="flex-center-y">
                     <Checkbox
                         onChange={() =>
                             setUserAgreement({
@@ -180,8 +180,8 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                             <span>{Messages.thePrivacyPolicy}</span>
                         </AppLink>
                     </div>
-                </div>
-                <div className="flex-center-y mt-3">
+                </div> */}
+                <div className="flex-center-y">
                     <Checkbox
                         onChange={() =>
                             setUserAgreement({
@@ -194,7 +194,7 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                     <div className="ml-3 text text-white">
                         {Messages.myDeviceIsCompatibleWithEsim}
                         <AppLink
-                            className="inline ml-1 underline italic text-white"
+                            className="inline ml-1 underline text-gold"
                             href={Path.compatibleDevice().href}
                         >
                             <span>{Messages.seeCompatibleDeviceList}</span>
@@ -211,14 +211,14 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 <div className="text-center text-white w-full">
                     <span>{Messages.byContinueYouAgree}</span>
                     <AppLink
-                        className="inline ml-1 underline italic "
+                        className="inline ml-1 underline"
                         href={Path.termConditions().href}
                     >
                         <span>{Messages.termAndCondition}</span>
                     </AppLink>
                     <span className="mx-1">&</span>
                     <AppLink
-                        className="inline ml-1 underline italic"
+                        className="inline ml-1 underline"
                         href={Path.policy().href}
                     >
                         <span>{Messages.thePrivacyPolicy}</span>
@@ -255,22 +255,8 @@ const CheckoutPage: React.FC<ICheckoutPageProps> = ({ id }) => {
                 {map(userCart, (item, index) => {
                     return <BundleItem bundle={item} showRadio={false} />;
                 })}
-                {/* {renderAgreement()} */}
-                {/* {totalAmount > 0 && (
-                    <SelectPaymentButton
-                        totalAmount={totalAmount}
-                        onSuccess={(orderRes, orderSer) => {
-                            if (orderRes?.status === "COMPLETED") {
-                                // onSuccessPaymentHandler(orderRes, orderSer);
-                                setPaymentOrder(orderRes);
-                            }
-                        }}
-                        onError={(error: any) => {}}
-                        customerId={customerId}
-                        purchasingItems={userCart}
-                    />
-                )} */}
-                {totalAmount > 0 && (
+                {renderAgreement()}
+                {totalAmount > 0 && userAgreement?.compatible && (
                     <SelectPaymentView
                         totalAmount={totalAmount}
                         onSuccess={(orderRes, orderSer) => {

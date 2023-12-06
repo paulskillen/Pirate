@@ -210,8 +210,10 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
         className?: string
     ) => {
         return (
-            <div className={`flex flex-row items-center ${className}`}>
-                <Icon size={50} className="text-gold-light" {...iconProps} />
+            <div
+                className={`flex flex-row items-center ml-[-5px] ${className}`}
+            >
+                <Icon size={40} className="text-gold-light" {...iconProps} />
                 {label && <div className="h3 text-gold-light">{label}</div>}
             </div>
         );
@@ -257,17 +259,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                             dataDisplay,
                             "gap-3"
                         )}
-                        {/* {speed?.length &&
-                            renderRow(
-                                {
-                                    icon: "speedometer",
-                                    useIconSet: "bootstrap",
-                                    className: "mr-3 text-gold-light",
-                                },
-                                join(speed, ","),
-                                "my-2"
-                            )} */}
-                        <div className={`${rowClass} h4 gap-3 text-gold`}>
+                        <div className={`${rowClass} h4 gap-3 text-gold py-2`}>
                             <div className="">{`${duration}   ${Messages.days}`}</div>
                             <span className=" ">{Messages.bundles}</span>
                         </div>
@@ -312,7 +304,7 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
                         <Icon
                             icon="md-pricetags"
                             useIconSet="ion"
-                            size={30}
+                            size={20}
                             className="mr-2 text-gold-light"
                         />
                         <PriceTag
@@ -343,19 +335,12 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
     open,
     onClose,
 }) => {
-    const {
-        provider,
-        name,
-        dataAmount,
-        duration,
-        description,
-        price,
-        salePrice,
-        bundleData,
-        id,
-    } = bundle || {};
+    const { provider, dataAmount, duration, salePrice, bundleData } =
+        bundle || {};
     const { speed, countries, imageUrl } = bundleData || {};
-    const rowClass = ClassNames("flex flex-row items-start gap-2 h4 mt-2");
+    const rowClass = ClassNames(
+        "flex flex-row items-start gap-2 h5 md:h4 mt-2"
+    );
     const dataDisplay = useMemo(() => {
         if (provider === ProviderName.ESIM_GO) {
             return `${Math.floor(dataAmount / 1000)}GB`;
@@ -370,7 +355,7 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
     ) => {
         return (
             <div className={`flex flex-row items-center ${className}`}>
-                <Icon size={50} className="text-gold" {...iconProps} />
+                <Icon size={50} className="text-gold-light" {...iconProps} />
                 {label && <div className="h3 text-gold-light">{label}</div>}
             </div>
         );
@@ -378,60 +363,62 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
 
     const imageView = useMemo(() => {
         return (
-            <div className="relative">
+            <div className="relative bg-red-200 h-[125px] w-full mt-[15px] md:w-[200px] rounded-xl">
                 <img
                     src={imageUrl}
-                    className="h-[150px] w-100 md:w-[150px] h-100 mt-3 rounded-md"
+                    className="absolute w-100 h-100 object-cove rounded-xl"
                     alt="bundle_image"
                 />
             </div>
         );
     }, [imageUrl]);
 
+    const priceTag = useMemo(() => {
+        return (
+            <div className="flex-center-y text-white mt-3">
+                <Icon
+                    icon="md-pricetags"
+                    useIconSet="ion"
+                    size={30}
+                    className="mr-2 text-gold-light"
+                />
+                <PriceTag
+                    price={salePrice}
+                    colorText="gold-light"
+                    d
+                    className=""
+                    classNameText="h4 !text-gold-light"
+                />
+            </div>
+        );
+    }, [salePrice]);
+
     const renderContent = () => {
         return (
-            <div className="flex flex-col md:flex-row mt-[10px]">
+            <div className="flex flex-col md:flex-row md:items-stretch mt-[10px] md:gap-3">
                 {imageView}
-                <div className="w-full mt-3 md:mt-0 md:ml-3">
+                <div className="w-full mt-3 md:mt-0 md:ml-3 h-100">
                     {renderRow(
                         { icon: "data", useIconSet: "atisa" },
                         dataDisplay,
-                        "gap-2"
+                        "gap-2 ml-[-5px]"
                     )}
-                    <div className={rowClass}>
-                        <div className="mr-1 text-gold">
-                            {Messages.duration} :{" "}
-                        </div>
-                        <div className="font-semibold text-gold-light">{`${duration}  ${Messages.days}`}</div>
-                    </div>
-                    <div className={`${rowClass} w-full`}>
-                        <div className="mr-1 text-gold">{Messages.desc}:</div>
-                        <div className="font-semibold text-gold-light md:max-w-[60%]">{`${description}`}</div>
+                    <div className={`${rowClass}  gap-3 text-gold`}>
+                        <h3 className="text-gold">
+                            {`${duration}   ${Messages.days}`}
+                            <span className="ml-2">{Messages.bundles}</span>
+                        </h3>
                     </div>
                     {speed?.length && (
                         <div className={rowClass}>
-                            <div className="mr-1 text-gold">
+                            <div className="mr-1 h3 text-gold">
                                 {Messages.speed} :{" "}
                             </div>
-                            <div className="font-semibold text-gold-light">
+                            <div className="font-semibold h3 text-gold">
                                 {join(speed, ",")}
                             </div>
                         </div>
                     )}
-                    <div className="flex-center-y text-white mt-3">
-                        <Icon
-                            icon="md-pricetags"
-                            useIconSet="ion"
-                            size={30}
-                            className="mr-2 text-gold"
-                        />
-                        <PriceTag
-                            price={salePrice}
-                            colorText="gold-light"
-                            className=""
-                            classNameText="h4 !text-gold-light"
-                        />
-                    </div>
                 </div>
             </div>
         );
@@ -446,6 +433,9 @@ export const BundleDetailModal: React.FC<IBundleDetailModalProps> = ({
             size="medium"
         >
             {renderContent()}
+            <div className="flex flex-row  justify-end md:mt-[8px]">
+                {priceTag}
+            </div>
         </Modal>
     );
 };
