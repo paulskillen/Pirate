@@ -74,7 +74,7 @@ const BlockLatestNews: React.FC<IBlockLatestNewsProps> = ({
             )}
             <div className="w-100 flex justify-center items-center">
                 <ButtonLink
-                    className="rounded-full h-[60px] px-[30px] mt-5"
+                    className="rounded-full h-[60px] w-[150px] md:w-[300px] mt-5"
                     href={Path.blogs().href}
                 >
                     {Messages.allBlogs}

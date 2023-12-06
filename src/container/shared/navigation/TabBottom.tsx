@@ -75,15 +75,15 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                 </div>
                 <div className={textClass}>{Messages.yourEsim}</div>
             </AppLink>
-            <AppLink className={classWrapper} href={Path.landing()}>
+            <AppLink className={classWrapper} href={Path.blogs()}>
                 <div
                     className={`${classItem} ${activeClass(
-                        pathname === Path.landing().href
+                        pathname === Path.blogs().href
                     )}`}
                 >
                     <Square
                         fill={
-                            pathname === Path.landing().href
+                            pathname === Path.blogs().href
                                 ? COLOR_GOLD_LIGHT
                                 : COLOR_GOLD
                         }
@@ -91,7 +91,7 @@ const TabBottom: React.FC<ITabBottomProps> = ({ id }) => {
                         height={ICON_SIZE}
                     />
                 </div>
-                <div className={textClass}>{Messages.information}</div>
+                <div className={`${textClass} text-center`}>{Messages.blogs}</div>
             </AppLink>
 
             <AppLink className={classWrapper} href={Path.profile()}>
