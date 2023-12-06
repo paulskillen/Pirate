@@ -26,6 +26,8 @@ import { AppStateContext } from "@/common/context/app/app.context";
 import ThankYouAnimation from "@/common/assets/animation/thankyou.json";
 import ThankYou1Animation from "@/common/assets/animation/thankyou-1.json";
 import { TEST_ORDER } from "./CheckoutPage";
+import MobileHeader from "../shared/header/MobileHeader";
+import DesktopHeader from "../shared/header/DesktopHeader";
 
 export interface ICheckoutSuccessPageProps {}
 
@@ -307,6 +309,8 @@ const CheckoutSuccessPage: React.FC<ICheckoutSuccessPageProps> = ({}) => {
 
     return (
         <CheckoutSuccessPageStyled className="relative z-20 bg-black">
+            <MobileHeader />
+            <DesktopHeader />
             {renderThankyou}
             {orderType === OrderType.BUY_NEW && renderEmailForm()}
             {orderType === OrderType.TOP_UP && renderButton()}
