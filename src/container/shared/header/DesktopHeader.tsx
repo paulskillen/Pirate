@@ -65,7 +65,7 @@ const DesktopHeader: React.FC<IDesktopHeaderProps> = ({ showHideConfig }) => {
 
     const renderMenus = useMemo(() => {
         return (
-            <div className="flex-center-y pointer-events-auto gap-4">
+            <div className="flex-center-y pointer-events-auto gap-6">
                 {!isHome && !hideListCountry ? (
                     <AppLink href={Path.listCountry().href}>
                         <div

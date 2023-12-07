@@ -19,7 +19,7 @@ const PriceTag: React.FC<IPriceTagProps> = ({
     const { metaData, userData } = useContext(AppStateContext);
     const { currencyRates } = metaData || {};
     const { currency: userCurrency } = userData || {};
-    const { code: codeCurrency, symbol } = userCurrency || {};
+    const { code: codeCurrency, symbol = "$" } = userCurrency || {};
     const displayPrice = useMemo(() => {
         if (!codeCurrency || codeCurrency === CurrencyType.USD) {
             return price?.toLocaleString?.();
@@ -31,6 +31,7 @@ const PriceTag: React.FC<IPriceTagProps> = ({
         }
         return price?.toLocaleString?.();
     }, [price, userCurrency, currencyRates]);
+
     return (
         <div className={className}>
             <CurrencyFormat

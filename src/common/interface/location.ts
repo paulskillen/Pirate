@@ -67,4 +67,5 @@ export interface ICountry {
     flag?: string;
     iso?: string;
     region?: string;
+    shortName?: string[];
 }

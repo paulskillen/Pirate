@@ -78,30 +78,36 @@ const BlogDetail: React.FC<IBlogDetailProps> = ({ blog }) => {
         );
     };
 
+    const breadcrumb = useMemo(() => {
+        return (
+            <div className="text-primary-light text-lg flex-center-y gap-2 mb-3  z-20">
+                <div
+                    className="flex-center-y gap-1 cursor-pointer font-semibold"
+                    onClick={() => {
+                        router.push(Path.home().href);
+                    }}
+                >
+                    <Icon name="home" />
+                    <div>{Messages.home}</div>
+                </div>
+                <div className="text-white"> • </div>
+                <div
+                    className="flex-center-y gap-1 cursor-pointer"
+                    onClick={() => {
+                        router.push(Path.blogs().href);
+                    }}
+                >
+                    <div>{Messages.blogs}</div>
+                </div>
+            </div>
+        );
+    }, []);
+
     const renderBlogHeader = useMemo(() => {
         return (
             <BlogHeaderStyled className="w-100 relative h-[250px] md:h-[450px] flex flex-col justify-end bg-red-200">
                 <div className="relative container z-10 ">
-                    <div className="text-primary-light text-lg flex-center-y gap-2 mb-3  z-20">
-                        <div
-                            className="flex-center-y gap-1 cursor-pointer"
-                            onClick={() => {
-                                router.push(Path.home().href);
-                            }}
-                        >
-                            <Icon name="home" />
-                            <div>{Messages.home}</div>
-                        </div>
-                        <div className="text-white"> • </div>
-                        <div
-                            className="flex-center-y gap-1 cursor-pointer"
-                            onClick={() => {
-                                router.push(Path.blogs().href);
-                            }}
-                        >
-                            <div>{Messages.blogs}</div>
-                        </div>
-                    </div>
+                    {breadcrumb}
                     <h1 className="z-10 h1 display-none md:block  text-primary-light">
                         {title}
                     </h1>
@@ -123,7 +129,7 @@ const BlogDetail: React.FC<IBlogDetailProps> = ({ blog }) => {
                     src={cover || "/images/information/cover_1.jpeg"}
                     style={{ objectFit: "cover" }}
                 />
-                <div className="bg-gradient-to-b from-gray-300  to-black to-100  ... h-[250px] md:h-[450px] z-11 opacity-50 absolute bottom-0 left-0 right-0" />
+                <div className="bg-gradient-to-b from-gray-500  to-black to-100  ... h-[250px] md:h-[450px] z-11 opacity-50 absolute bottom-0 left-0 right-0" />
             </BlogHeaderStyled>
         );
     }, [cover, title, shortDesc]);
@@ -135,7 +141,7 @@ const BlogDetail: React.FC<IBlogDetailProps> = ({ blog }) => {
                     dangerouslySetInnerHTML={{ __html: fullDesc ?? "" }}
                     className="typography"
                 />
-                <div className="p-3 flex items-center justify-between bg-gray-800 rounded-md mt-3 md:mt-5">
+                <div className="p-3 flex items-center justify-between bg-gray-950 rounded-md mt-3 md:mt-5">
                     <div className="flex-center-y w-50">
                         <Icon name="share" className="text-primary" />
                         <h5 className="mb-0 ml-3 post-detail__share-social-text text-primary">
@@ -148,7 +154,7 @@ const BlogDetail: React.FC<IBlogDetailProps> = ({ blog }) => {
         );
     }, [fullDesc]);
     return (
-        <div className="relative z-10">
+        <div className="relative z-10 bg-black">
             {renderBlogHeader}
             {renderBlogContent}
         </div>

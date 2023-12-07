@@ -13,9 +13,10 @@ import InputText from "@/components/input/InputText";
 import AppLink from "@/components/link/AppLink";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
-import { map } from "lodash";
+import { map, some } from "lodash";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import CountryItem from "@/container/list-country/CountryItem";
+import { ICountry } from "@/common/interface/location";
 
 export interface ISelectCountryProps {
     className?: string;
@@ -109,11 +110,19 @@ const placeholder = [
 // };
 
 const filterCountry = (text: string, country: any) => {
-    const { name, iso } = country;
+    const { name, iso, shortName } = country || {};
     return (
         name?.toLocaleLowerCase?.().indexOf(text?.toLocaleLowerCase?.()) !==
             -1 ||
-        iso?.toLocaleLowerCase?.().indexOf(text?.toLocaleLowerCase?.()) !== -1
+        iso?.toLocaleLowerCase?.().indexOf(text?.toLocaleLowerCase?.()) !==
+            -1 ||
+        some(
+            shortName,
+            (sn) =>
+                sn
+                    ?.toLocaleLowerCase?.()
+                    .indexOf(text?.toLocaleLowerCase?.()) !== -1
+        )
     );
 };
 

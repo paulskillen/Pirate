@@ -116,18 +116,19 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
     }
 
     return (
-        <BundleByCountryPageStyled className="bg-transparent text-white  z-20">
+        <BundleByCountryPageStyled className="text-white bg-black  z-20">
             <PageHeader
                 classNameWrapperTitle="relative md:absolute"
+                classNameTitle="text-nowrap flex-1"
                 title={currentCountry?.name}
                 customerCenter={
                     <div className="flex-center-y flex-1 md:justify-center ml-3 md:ml-0 gap-2 md:gap-3">
-                        <div className="text-xl text-gold-light font-semibold">
+                        <div className="text-xl text-gold-light font-semibold text-nowrap">
                             {currentCountry?.name}
                         </div>
                         <Image
                             alt="flag"
-                            className="w-[30px] h-[30px] md:h-[40px] md:w-[40px] rounded-full border bundle-by-country-page__flag"
+                            className="w-[30px] h-[30px] md:h-[40px] md:w-[40px] rounded-full border bundle-by-country-page__flag mr-3"
                             src={convertBase64ToImgSource(currentCountry?.flag)}
                         />
                     </div>
@@ -145,7 +146,7 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                 }
             />
 
-            <div className="px-4 container md:flex flex-col items-center">
+            <div className="px-4 container md:flex flex-col items-center bg-black">
                 {map(bundles, (item, index: any) => {
                     const isSelected =
                         !!selectedBundle?.name &&
@@ -163,12 +164,12 @@ const BundleByCountryPage: React.FC<IBundleByCountryPageProps> = ({
                         />
                     );
                 })}
-                <div className="text-center mt-3 w-100 z-20">
+                <div className="relative text-center mt-3 w-100 z-20">
                     <span className="text-white">
                         Not sure your device is compatible with eSim ?
                     </span>
                     <AppLink
-                        className="inline ml-1 underline italic z-20"
+                        className="inline ml-1 underline  z-20"
                         href={Path.compatibleDevice().href}
                     >
                         <span>{Messages.seeCompatibleDeviceList}</span>
@@ -223,9 +224,9 @@ export const BundleItem: React.FC<IBundleItemProps> = ({
         <Fragment>
             <BundleItemStyled
                 className={ClassNames(
-                    "mt-4 text-white border-gold  rounded-2xl p-3 text-xl z-10 relative",
+                    "mt-4 text-white border-gold  rounded-2xl p-3 text-xl z-10 relative hover:bg-gold-trans",
                     {
-                        "border-2 bg-darken": selected,
+                        "border-2 !bg-darken": selected,
                         "border bg-black": !selected,
                     },
                     className
