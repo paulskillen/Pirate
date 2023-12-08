@@ -7,6 +7,7 @@ import ion from "./collection/ion.json";
 import feather from "./collection/feather.json";
 import fontisto from "./collection/fontisto.json";
 import fluentUI from "./collection/fluent-ui.json";
+import atisa from "./collection/atisa.json";
 import googleMaterial from "./collection/google-material.json";
 
 declare const ICON_SET: readonly [
@@ -17,6 +18,7 @@ declare const ICON_SET: readonly [
     "ion",
     "fontisto",
     "fluent-ui",
+    "atisa",
     "feather"
 ];
 
@@ -48,6 +50,8 @@ const Icon = ({
                 return fontisto;
             case "fluent-ui":
                 return fluentUI;
+            case "atisa":
+                return atisa;
 
             default:
                 return bootstrap;

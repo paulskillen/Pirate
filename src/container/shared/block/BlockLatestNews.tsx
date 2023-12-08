@@ -9,6 +9,7 @@ import SlickSlider from "@/components/slider/SlickSlider";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import { map } from "lodash";
+import Link from "next/link";
 import React from "react";
 import { Settings } from "react-slick";
 
@@ -74,7 +75,7 @@ const BlockLatestNews: React.FC<IBlockLatestNewsProps> = ({
             )}
             <div className="w-100 flex justify-center items-center">
                 <ButtonLink
-                    className="rounded-full h-[60px] px-[30px] mt-5"
+                    className="rounded-full h-[60px] w-[150px] md:w-[300px] mt-5"
                     href={Path.blogs().href}
                 >
                     {Messages.allBlogs}
@@ -90,45 +91,47 @@ const NewsItem: React.FC<any> = ({ className, data }) => {
     const { title, shortDesc, thumbnail, cover } = (data as IBlog) || {};
 
     return (
-        <NewsItemStyled
-            className={`bg-blackTrans  border-[0.5px] border-gray-700 hover:bg-darken hover:border hover:border-gold-light ${className}`}
-        >
-            {thumbnail && (
-                <div className="relative pb-[100%]">
-                    <img
-                        alt="news_image"
-                        className="absolute top-0 bottom-0 right-0 left-0 w-full h-full"
-                        src={thumbnail}
-                    />
-                </div>
-            )}
-            <div className="p-4 lg:p-5 flex flex-col h-[250px] relative">
-                <div className="flex-1">
-                    {title && (
-                        <h4
-                            className="text-white text-nowrap min-h-fit overflow-hidden break-all text-ellipsis"
-                            style={{}}
-                        >
-                            {title}
-                        </h4>
-                    )}
-                    {shortDesc && (
-                        <div
-                            className="text-white text-lg   overflow-hidden text-ellipsis max-h-[100px]"
-                            dangerouslySetInnerHTML={{ __html: shortDesc }}
+        <Link href={Path.blogDetail(data).as as any}>
+            <NewsItemStyled
+                className={`bg-blackTrans  border-[0.5px] border-gray-700 hover:bg-darken hover:border hover:border-gold-light cursor-pointer ${className}`}
+            >
+                {thumbnail && (
+                    <div className="relative pb-[100%]">
+                        <img
+                            alt="news_image"
+                            className="absolute top-0 bottom-0 right-0 left-0 w-full h-full"
+                            src={thumbnail}
                         />
-                    )}
-                </div>
+                    </div>
+                )}
+                <div className="p-4 lg:p-5 flex flex-col h-[250px] relative">
+                    <div className="flex-1">
+                        {title && (
+                            <h4
+                                className="text-white text-nowrap min-h-fit overflow-hidden break-all text-ellipsis"
+                                style={{}}
+                            >
+                                {title}
+                            </h4>
+                        )}
+                        {shortDesc && (
+                            <div
+                                className="text-white text-lg   overflow-hidden text-ellipsis max-h-[100px]"
+                                dangerouslySetInnerHTML={{ __html: shortDesc }}
+                            />
+                        )}
+                    </div>
 
-                <ButtonLink
+                    {/* <ButtonLink
                     href={Path.blogDetail(data).as as any}
                     target="_blank"
                     className="mt-4 bg-transparent w-full"
                 >
                     {Messages.readMore}
-                </ButtonLink>
-            </div>
-        </NewsItemStyled>
+                </ButtonLink> */}
+                </div>
+            </NewsItemStyled>
+        </Link>
     );
 };
 

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Path from "@/common/constant/path";
 import { BlogTimestamp } from "./BlogDetail";
+import MobileHeader from "../shared/header/MobileHeader";
 
 export interface IBlogsProps {
     [key: string]: any;
@@ -26,7 +27,7 @@ const Blogs: React.FC<IBlogsProps> = ({ id }) => {
     };
 
     const loadingView = (
-        <div>
+        <div className="h-screen w-screen flex flex-col justify-center items-center">
             <Loading />
         </div>
     );
@@ -34,28 +35,27 @@ const Blogs: React.FC<IBlogsProps> = ({ id }) => {
         if (loading) {
             return loadingView;
         }
-        return (
-            <div className="container py-[100px]">
-                <h1 className="text-white text-center">404 - Page Not Found</h1>
-            </div>
-        );
+        return loadingView;
     }
     return (
-        <div className="container py-[100px]">
-            <h1 className="text-primary mb-5 text-center">Blogs</h1>
-            <ResponsiveMasonry
-                columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-            >
-                <Masonry className="" gutter="8px">
-                    {listBlogs.map((blog, i) => (
-                        <BlogItem
-                            key={`${blog?.id}_${i}`}
-                            blog={blog}
-                            index={i}
-                        />
-                    ))}
-                </Masonry>
-            </ResponsiveMasonry>
+        <div>
+            <MobileHeader />
+            <div className="container">
+                <h1 className="text-primary mb-3 mt-3 md:mt-5 text-center">Blogs</h1>
+                <ResponsiveMasonry
+                    columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                >
+                    <Masonry className="" gutter="8px">
+                        {listBlogs.map((blog, i) => (
+                            <BlogItem
+                                key={`${blog?.id}_${i}`}
+                                blog={blog}
+                                index={i}
+                            />
+                        ))}
+                    </Masonry>
+                </ResponsiveMasonry>
+            </div>
         </div>
     );
 };
@@ -85,7 +85,10 @@ const BlogItem: React.FC<IBlogItemProps> = ({ blog }) => {
             />
             <div className="absolute z-30 bottom-0 px-3 py-3">
                 <h3 className=" text-primary-light pb-2">{title}</h3>
-                <BlogTimestamp createdAt={createdAt} className="text-start pb-3" />
+                <BlogTimestamp
+                    createdAt={createdAt}
+                    className="text-start pb-3"
+                />
                 <div
                     dangerouslySetInnerHTML={{ __html: shortDesc! }}
                     className="max-h-[50px] overflow-hidden text-ellipsis typography"

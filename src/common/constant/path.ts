@@ -30,6 +30,10 @@ const Path = {
         href: "/checkout",
     }),
 
+    checkoutSuccess: (): ILinkProps => ({
+        href: "/checkout/success",
+    }),
+
     checkoutPayment: (
         orderStatus?: string,
         orderId?: string,

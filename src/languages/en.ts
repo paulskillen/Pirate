@@ -75,6 +75,7 @@ const translations = {
     save: "Save",
     viewOrder: "View Order",
     requiredField: "Required field !",
+    pleaseInputTheEmailFirst: "Please input your email first !",
     emailIsNotValid: "Email is not valid !",
     send: "Send",
     sent: "Sent",
@@ -119,6 +120,8 @@ const translations = {
     shareToYourFriend: "Share To Your Friend",
     seeAllBlogs: "See All Blogs",
     allBlogs: "All Blogs",
+    bundles: "Bundles",
+    desc: "Desc",
 };
 
 export default translations;

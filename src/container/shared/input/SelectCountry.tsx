@@ -4,6 +4,7 @@ import {
     COLOR_GOLD_TRANS,
     COLOR_INPUT_CONTENT,
 } from "@/common/constant/app-style";
+
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app.context";
 import InputSearch from "@/components/input/InputSearch";
@@ -12,7 +13,7 @@ import CountryItem from "@/container/list-country/CountryItem";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
 import ClassNames from "classnames";
-import { map } from "lodash";
+import { map, some } from "lodash";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 export interface ISelectCountryProps {
@@ -107,11 +108,19 @@ const placeholder = [
 // };
 
 const filterCountry = (text: string, country: any) => {
-    const { name, iso } = country;
+    const { name, iso, shortName } = country || {};
     return (
         name?.toLocaleLowerCase?.().indexOf(text?.toLocaleLowerCase?.()) !==
             -1 ||
-        iso?.toLocaleLowerCase?.().indexOf(text?.toLocaleLowerCase?.()) !== -1
+        iso?.toLocaleLowerCase?.().indexOf(text?.toLocaleLowerCase?.()) !==
+            -1 ||
+        some(
+            shortName,
+            (sn) =>
+                sn
+                    ?.toLocaleLowerCase?.()
+                    .indexOf(text?.toLocaleLowerCase?.()) !== -1
+        )
     );
 };
 

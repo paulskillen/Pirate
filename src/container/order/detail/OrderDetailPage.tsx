@@ -150,7 +150,7 @@ const OrderDetailPage: React.FC<IOrderDetailPageProps> = ({ orderId }) => {
             <PageHeader title={`# ${orderNo}`} />
             {renderContent()}
         </div>
-    );
+);
 };
 
 export default OrderDetailPage;
