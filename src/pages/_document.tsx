@@ -158,14 +158,14 @@ export default function Document() {
                 />
 
                 {/* Scripts for google tags  */}
-                {/* <Script src="https://www.googletagmanager.com/gtag/js?id=AW-660949335" />
-                <Script id="gtm-script-id" strategy="afterInteractive">
+                {/* <Script src="https://www.googletagmanager.com/gtag/js?id=AW-660949335" /> */}
+                {/* <Script id="gtm-script-id" strategy="afterInteractive">
                     {`window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());
                         gtag('config', 'AW-660949335');`}
-                </Script>
-                <Script
+                </Script> */}
+                {/* <Script
                     id="google-tag-manger"
                     strategy="afterInteractive"
                     dangerouslySetInnerHTML={{

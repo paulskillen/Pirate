@@ -10,14 +10,12 @@ import {
     CreateOrderActions,
 } from "@paypal/paypal-js/types/components/buttons";
 import Icon from "@/components/icon/Icon";
-import Messages from "@/languages/Messages";
 import { map } from "lodash";
 import React, { useContext, useState } from "react";
 import { IBundle, isValidEsimIccId } from "@/common/interface/bundle";
 import OrderApi from "@/apis/order/OrderApi";
 import { IOrder } from "@/common/interface/order";
 import { AppStateContext } from "@/common/context/app/app.context";
-import Modal from "@/components/modal/Modal";
 import styled from "@emotion/styled";
 
 export interface IPayPalOrderResponse extends OrderResponseBody {}
@@ -162,5 +160,4 @@ const SelectPaymentView: React.FC<ISelectPaymentViewProps> = ({
 
 export default SelectPaymentView;
 
-const SelectPaymentViewStyled = styled.div`
-`;
+const SelectPaymentViewStyled = styled.div``;

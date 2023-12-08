@@ -4,18 +4,16 @@ import {
     COLOR_GOLD_TRANS,
     COLOR_INPUT_CONTENT,
 } from "@/common/constant/app-style";
-import ClassNames from "classnames";
 import Path from "@/common/constant/path";
 import { AppStateContext } from "@/common/context/app/app.context";
-import Icon from "@/components/icon/Icon";
 import InputSearch from "@/components/input/InputSearch";
-import InputText from "@/components/input/InputText";
 import AppLink from "@/components/link/AppLink";
+import CountryItem from "@/container/list-country/CountryItem";
 import Messages from "@/languages/Messages";
 import styled from "@emotion/styled";
+import ClassNames from "classnames";
 import { map } from "lodash";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import CountryItem from "@/container/list-country/CountryItem";
 
 export interface ISelectCountryProps {
     className?: string;
